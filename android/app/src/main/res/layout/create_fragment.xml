@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="create"
-        android:textSize="40sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            android:text="make photo card"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <ImageButton
+            android:id="@+id/imageButtonPrivate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/privatecard"/>
+
+        <ImageButton
+            android:id="@+id/imageButtonPublic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/publiccard"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <Button
+                android:id="@+id/btn_previous"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_margin="25dp"
+                android:layout_weight="1"
+                android:radius="20dp"
+                android:text="previous"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/brown"
+                app:cornerRadius="10dp" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_margin="25dp"
+                android:layout_weight="1"
+                android:text="next"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/brown"
+                app:cornerRadius="10dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
