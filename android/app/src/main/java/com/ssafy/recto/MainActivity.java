@@ -1,13 +1,12 @@
 package com.ssafy.recto;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -17,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fm;
     private FragmentTransaction ft;
     private HomeFragment homeFragment;
-    private CreateFragment createFragment;
+    private CreateFragment_1_SelectOpen createFragment1SelectOpen;
+    private CreateFragment_2_SelectDesign createFragment2SelectDesign;
     private ScanFragment scanFragment;
     private PublicFragment publicFragment;
     private ProfileFragment profileFragment;
@@ -33,19 +33,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
-                        setFragment(0);
+                        setFragment("home");
                         break;
                     case R.id.nav_create:
-                        setFragment(1);
+                        setFragment("create");
                         break;
                     case R.id.nav_scan:
-                        setFragment(2);
+                        setFragment("scan");
                         break;
                     case R.id.nav_public:
-                        setFragment(3);
+                        setFragment("public");
                         break;
                     case R.id.nav_profile:
-                        setFragment(4);
+                        setFragment("profile");
                         break;
                 }
                 return true;
@@ -53,37 +53,42 @@ public class MainActivity extends AppCompatActivity {
         });
 
         homeFragment = new HomeFragment();
-        createFragment = new CreateFragment();
+        createFragment1SelectOpen = new CreateFragment_1_SelectOpen();
+        createFragment2SelectDesign = new CreateFragment_2_SelectDesign();
         scanFragment = new ScanFragment();
         publicFragment = new PublicFragment();
         profileFragment = new ProfileFragment();
 
-        setFragment(0);
+        setFragment("home");
     }
     
     // fragment 교체
-    private void setFragment(int n) {
+    protected void setFragment(String str) {
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
-        switch (n) {
-            case 0:
+        switch (str) {
+            case "home":
                 ft.replace(R.id.main_frame, homeFragment);
                 ft.commit();
                 break;
-            case 1:
-                ft.replace(R.id.main_frame, createFragment);
+            case "create":
+                ft.replace(R.id.main_frame, createFragment1SelectOpen);
                 ft.commit();
                 break;
-            case 2:
+            case "scan":
                 ft.replace(R.id.main_frame, scanFragment);
                 ft.commit();
                 break;
-            case 3:
+            case "public":
                 ft.replace(R.id.main_frame, publicFragment);
                 ft.commit();
                 break;
-            case 4:
+            case "profile":
                 ft.replace(R.id.main_frame, profileFragment);
+                ft.commit();
+                break;
+            case "":
+                ft.replace(R.id.main_frame, createFragment2SelectDesign);
                 ft.commit();
                 break;
         }
