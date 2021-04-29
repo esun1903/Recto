@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         setFragment("home");
                         break;
                     case R.id.nav_create:
-                        setFragment("create");
+                        setFragment("create_selectopen");
                         break;
                     case R.id.nav_scan:
                         setFragment("scan");
@@ -71,8 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.main_frame, homeFragment);
                 ft.commit();
                 break;
-            case "create":
+            case "create_selectopen":
                 ft.replace(R.id.main_frame, createFragment1SelectOpen);
+                ft.commit();
+                break;
+            case "create_selectdesign":
+                ft.replace(R.id.main_frame, createFragment2SelectDesign);
                 ft.commit();
                 break;
             case "scan":
@@ -85,10 +89,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "profile":
                 ft.replace(R.id.main_frame, profileFragment);
-                ft.commit();
-                break;
-            case "":
-                ft.replace(R.id.main_frame, createFragment2SelectDesign);
                 ft.commit();
                 break;
         }
