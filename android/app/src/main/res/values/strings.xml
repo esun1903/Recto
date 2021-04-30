@@ -1,11 +1,15 @@
 <resources>
     <string name="app_name">RECTO</string>
     <string name="make_photo_card">make photo card</string>
-    <string name="previous">previous</string>
-    <string name="next">next</string>
+    <string name="previous_btn">previous</string>
+    <string name="next_btn">next</string>
     <string name="private_card">private_card</string>
     <string name="public_card">public_card</string>
     <string name="choose_frame">원하는 모양을 선택해주세요.</string>
     <string name="onlyphoto_frame">확장형</string>
     <string name="phrases_frame">문구형</string>
+    <string name="select_video">영상을 등록해주세요</string>
+    <string name="select_video_btn">영상 등록</string>
+    <string name="select_photo">사진을 등록해주세요</string>
+    <string name="select_photo_btn">사진 등록</string>
 </resources>

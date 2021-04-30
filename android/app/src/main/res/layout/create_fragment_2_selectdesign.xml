@@ -101,7 +101,7 @@
                 android:layout_margin="25dp"
                 android:layout_weight="1"
                 android:radius="20dp"
-                android:text="@string/previous"
+                android:text="@string/previous_btn"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/brown"
                 app:cornerRadius="10dp" />
@@ -112,7 +112,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="25dp"
                 android:layout_weight="1"
-                android:text="@string/next"
+                android:text="@string/next_btn"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/brown"
                 app:cornerRadius="10dp" />
