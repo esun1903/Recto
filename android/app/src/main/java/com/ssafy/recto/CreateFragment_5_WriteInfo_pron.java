@@ -64,12 +64,12 @@ public class CreateFragment_5_WriteInfo_pron extends Fragment {
             }
         });
 
-//        btn_next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mainActivity.setFragment("");
-//            }
-//        });
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.setFragment("create_success");
+            }
+        });
 
         tv_date.setOnClickListener(new View.OnClickListener(){
             @Override

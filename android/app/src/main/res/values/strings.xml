@@ -22,4 +22,7 @@
     <string name="password">비밀번호</string>
     <string name="date">날짜</string>
     <string name="text">문구</string>
+    <string name="photocard_success">나만의 포토카드가 완성되었어요\n. 이대로 제작할까요?</string>
+    <string name="accept">accept</string>
+    <string name="tempdate">2021.04.30</string>
 </resources>
