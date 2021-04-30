@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 제주 명조 -->
+    <font
+        android:font="@font/jeju_myeongjo" />
+
+    <!-- 을유1945 Regular -->
+    <font
+        android:font="@font/eulyoo1945_regular" />
+
+    <!-- 을유1945 Semi Bold -->
+    <font
+        android:font="@font/eulyoo1945_semibold" />
+
+</font-family>
