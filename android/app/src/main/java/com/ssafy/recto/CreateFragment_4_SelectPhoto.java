@@ -65,21 +65,21 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
             }
         });
 
-//        btn_next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mainActivity.setFragment("create_selectvideo");
-//            }
-//        });
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.setFragment("create_writeinfo_prph");
+            }
+        });
 
         btn_selectphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                //기기 기본 갤러리 접근
+                //기기 기본 갤러리
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
                 //intent.setType("image/*");
-                //구글 갤러리 접근
+                //구글 갤러리
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent,101);
             }
@@ -88,10 +88,9 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         return view;
     }
 
-    //권한에 대한 응답이 있을때 작동하는 함수
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        // 권한을 허용 했을 경우
+        // 권한 허용
         if(requestCode == 1){
             int length = permissions.length;
             for (int i = 0; i < length; i++) {
