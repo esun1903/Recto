@@ -1,12 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- 프로필 -->
+    <RelativeLayout
+        android:id="@+id/linearLayoutPublicProfile"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="public"
-        android:textSize="40sp" />
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+        <!-- 프로필 이미지 -->
+        <ImageView
+            android:id="@+id/iv_publicProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/profile"
+            android:src="@drawable/profile" />
+
+        <!-- hello_user -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="3dp"
+            android:layout_toEndOf="@+id/iv_publicProfile"
+            android:layout_toRightOf="@+id/iv_publicProfile"
+            android:text="@string/hello_user"
+            android:textSize="20sp"
+            tools:ignore="RelativeOverlap" />
+
+        <!-- edit button -->
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/edit"
+            android:textColor="@color/white"
+            android:textSize="10sp"
+            app:backgroundTint="@color/brown"
+            tools:ignore="SmallSp" />
+
+    </RelativeLayout>
+
+    <!-- for free -->
+    <TextView
+        android:id="@+id/forFree"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/for_free"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutPublicProfile"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPublicProfile"
+        tools:ignore="MissingConstraints" />
+
+    <!-- 구분선 -->
+    <View
+        android:id="@+id/forFree_line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/brown"
+        android:layout_marginHorizontal="15dp"
+        app:layout_constraintStart_toStartOf="@+id/forFree"
+        app:layout_constraintTop_toBottomOf="@+id/forFree"/>
+
+
+    <!-- 카드 목록 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forFree_line" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
