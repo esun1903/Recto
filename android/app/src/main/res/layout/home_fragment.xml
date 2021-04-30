@@ -2,12 +2,35 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="home"
-        android:textSize="40sp" />
+        android:text="&quot;당신의 모먼트를 기록해보세요.&quot;"
+        android:textSize="20sp"
+        android:gravity="center" />
 
+    <View
+        android:layout_width="280dp"
+        android:layout_height="2dp"
+        android:background="@color/brown"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"/>
+
+    <View
+        android:layout_width="280dp"
+        android:layout_height="2dp"
+        android:background="@color/brown"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        android:layout_marginTop="35dp"/>
 </LinearLayout>
