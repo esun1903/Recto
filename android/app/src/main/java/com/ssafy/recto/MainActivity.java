@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
     private CreateFragment_2_SelectDesign createFragment2SelectDesign;
     private CreateFragment_3_SelectVideo createFragment3SelectVideo;
     private CreateFragment_4_SelectPhoto createFragment4SelectPhoto;
+    private CreateFragment_5_WriteInfo_prph createFragment5WriteInfoPrph;
+    private CreateFragment_5_WriteInfo_pron createFragment5WriteInfoPron;
+    private CreateFragment_5_WriteInfo_puph createFragment5WriteInfoPuph;
+    private CreateFragment_5_WriteInfo_puon createFragment5WriteInfoPuon;
     private ScanFragment scanFragment;
     private PublicFragment publicFragment;
     private ProfileFragment profileFragment;
@@ -59,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         createFragment2SelectDesign = new CreateFragment_2_SelectDesign();
         createFragment3SelectVideo = new CreateFragment_3_SelectVideo();
         createFragment4SelectPhoto = new CreateFragment_4_SelectPhoto();
+        createFragment5WriteInfoPrph = new CreateFragment_5_WriteInfo_prph();
+        createFragment5WriteInfoPron = new CreateFragment_5_WriteInfo_pron();
+        createFragment5WriteInfoPuph = new CreateFragment_5_WriteInfo_puph();
+        createFragment5WriteInfoPuon = new CreateFragment_5_WriteInfo_puon();
         scanFragment = new ScanFragment();
         publicFragment = new PublicFragment();
         profileFragment = new ProfileFragment();
@@ -89,6 +97,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "create_selectphoto":
                 ft.replace(R.id.main_frame, createFragment4SelectPhoto);
+                ft.commit();
+                break;
+            case "create_writeinfo_prph":
+                ft.replace(R.id.main_frame, createFragment5WriteInfoPrph);
+                ft.commit();
+                break;
+            case "create_writeinfo_pron":
+                ft.replace(R.id.main_frame, createFragment5WriteInfoPron);
+                ft.commit();
+                break;
+            case "create_writeinfo_puph":
+                ft.replace(R.id.main_frame, createFragment5WriteInfoPuph);
+                ft.commit();
+                break;
+            case "create_writeinfo_puon":
+                ft.replace(R.id.main_frame, createFragment5WriteInfoPuon);
                 ft.commit();
                 break;
             case "scan":
