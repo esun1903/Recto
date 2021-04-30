@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">RECTO</string>
+    <string name="profile">profile</string>
+    <string name="hello_user">가린지선다님, 반갑습니다.</string>
+    <string name="edit">EDIT</string>
+    <string name="for_free">for free</string>
     <string name="make_photo_card">make photo card</string>
     <string name="previous_btn">previous</string>
     <string name="next_btn">next</string>
