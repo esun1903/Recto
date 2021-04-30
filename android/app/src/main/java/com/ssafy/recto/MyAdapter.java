@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,16 +16,16 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private ArrayList<String> itemList;
+    private int itemList[];
+//    private ArrayList<String> itemList;
     private Context context;
     private View.OnClickListener onClickItem;
 
-    public MyAdapter(Context context, ArrayList<String> itemList, View.OnClickListener onClickItem) {
+    public MyAdapter(Context context, int itemList[], View.OnClickListener onClickItem) {
         this.context = context;
         this.itemList = itemList;
         this.onClickItem = onClickItem;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,25 +39,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String item = itemList.get(position);
+//        String item = itemList.get(position);
 
-        holder.textview.setText(item);
-        holder.textview.setTag(item);
-        holder.textview.setOnClickListener(onClickItem);
+        holder.imageView.setImageResource(itemList[position]);
+        holder.imageView.setOnClickListener(onClickItem);
+//        holder.textview.setText(item);
+//        holder.textview.setTag(item);
     }
 
     @Override
     public int getItemCount() {
-        return itemList.size();
+//        return itemList.size();
+        return itemList.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textview;
+        public ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            textview = itemView.findViewById(R.id.card_tv);
+            imageView = itemView.findViewById(R.id.card_tv);
         }
     }
 }

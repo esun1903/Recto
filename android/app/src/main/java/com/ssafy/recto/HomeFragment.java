@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,11 @@ public class HomeFragment extends Fragment {
     private RecyclerView listview;
     private LinearLayoutManager linearLayoutManager;
 
+    int itemList[] = {R.drawable.free1, R.drawable.free2, R.drawable.free3,
+            R.drawable.free4, R.drawable.free5, R.drawable.free6,
+            R.drawable.free7, R.drawable.free8, R.drawable.free9,
+    };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,13 +43,13 @@ public class HomeFragment extends Fragment {
         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         listview.setLayoutManager(linearLayoutManager);
 
-        ArrayList<String> itemList = new ArrayList<>();
-        itemList.add("첫 번째 카드");
-        itemList.add("두 번째 카드");
-        itemList.add("세 번째 카드");
-        itemList.add("네 번째 카드");
-        itemList.add("다섯 번째 카드");
-        itemList.add("여섯 번째 카드");
+//        ArrayList<String> itemList = new ArrayList<>();
+//        itemList.add("첫 번째 카드");
+//        itemList.add("두 번째 카드");
+//        itemList.add("세 번째 카드");
+//        itemList.add("네 번째 카드");
+//        itemList.add("다섯 번째 카드");
+//        itemList.add("여섯 번째 카드");
 
         adapter = new MyAdapter(getActivity(), itemList, onClickItem);
         listview.setAdapter(adapter);
