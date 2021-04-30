@@ -33,6 +33,7 @@ public class CreateFragment_1_SelectOpen extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.create_fragment_1_selectopen, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);

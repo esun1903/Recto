@@ -33,6 +33,7 @@ public class CreateFragment_2_SelectDesign extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.create_fragment_2_selectdesign, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
@@ -41,6 +42,13 @@ public class CreateFragment_2_SelectDesign extends Fragment {
             @Override
             public void onClick(View v) {
                 mainActivity.setFragment("create_selectopen");
+            }
+        });
+
+        btn_next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivity.setFragment("create_selectvideo");
             }
         });
 
