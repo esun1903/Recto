@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private CreateFragment_1_SelectOpen createFragment1SelectOpen;
     private CreateFragment_2_SelectDesign createFragment2SelectDesign;
+    private CreateFragment_3_SelectVideo createFragment3SelectVideo;
+    private CreateFragment_4_SelectPhoto createFragment4SelectPhoto;
     private ScanFragment scanFragment;
     private PublicFragment publicFragment;
     private ProfileFragment profileFragment;
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         homeFragment = new HomeFragment();
         createFragment1SelectOpen = new CreateFragment_1_SelectOpen();
         createFragment2SelectDesign = new CreateFragment_2_SelectDesign();
+        createFragment3SelectVideo = new CreateFragment_3_SelectVideo();
+        createFragment4SelectPhoto = new CreateFragment_4_SelectPhoto();
         scanFragment = new ScanFragment();
         publicFragment = new PublicFragment();
         profileFragment = new ProfileFragment();
@@ -77,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "create_selectdesign":
                 ft.replace(R.id.main_frame, createFragment2SelectDesign);
+                ft.commit();
+                break;
+            case "create_selectvideo":
+                ft.replace(R.id.main_frame, createFragment3SelectVideo);
+                ft.commit();
+                break;
+            case "create_selectphoto":
+                ft.replace(R.id.main_frame, createFragment4SelectPhoto);
                 ft.commit();
                 break;
             case "scan":
