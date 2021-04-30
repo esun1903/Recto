@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -93,7 +92,6 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
         public void onDateSet(DatePicker view, int year, int month, int day) {
             String date = year + "년 " + (month+1) + "월 " + day + "일";
             tv_date.setText(date);
-            Toast.makeText(getActivity(), date, Toast.LENGTH_SHORT).show();
         }
     }
 }
