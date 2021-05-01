@@ -1,6 +1,5 @@
 package com.ssafy.recto.model;
 
-
 public class ResponseData {
 	private String message;
 	private Object data;

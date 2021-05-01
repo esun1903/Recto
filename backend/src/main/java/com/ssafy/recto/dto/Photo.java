@@ -7,7 +7,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@ApiModel(value = "Photo : 사진 정보")
+@ApiModel(value = "Photo : 포토카드 정보")
 public class Photo {
 
     @ApiModelProperty(value = "사진 seq")
@@ -16,7 +16,7 @@ public class Photo {
     public static int user_seq;
     @ApiModelProperty(value = "사진 식별 ID")
     public static String photo_id;
-    @ApiModelProperty(value = "촬영 시간")
+    @ApiModelProperty(value = "사진 촬영 시간")
     public static LocalDateTime photo_date;
     @ApiModelProperty(value = "사진 주소")
     public static String photo_url;
@@ -26,7 +26,7 @@ public class Photo {
     public static String pharse;
     @ApiModelProperty(value = "사진 비밀번호")
     public static String photo_pwd;
-    @ApiModelProperty(value = "사진 디자인")
+    @ApiModelProperty(value = "포토카드 디자인")
     public static int design;
     @ApiModelProperty(value = "공개/비공개")
     public static boolean close;
