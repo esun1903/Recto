@@ -92,7 +92,8 @@ public class UserController {
 
         Map<String, Object> resultMap = new HashMap<>();
 		try {
-			if (userService.login(user) == 1) {
+			if (userService.login(user)) {
+				System.out.println("여기 왔어여 ");
 				String token = jwtService.create("user_id", user.getUser_id(), "access-token");// key, data, subject
 				logger.info("로그인 토큰정보 : {}", token);
 				resultMap.put("access-token", token);
