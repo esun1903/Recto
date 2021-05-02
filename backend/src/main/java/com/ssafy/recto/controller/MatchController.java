@@ -1,7 +1,6 @@
 package com.ssafy.recto.controller;
 
 import com.ssafy.recto.service.MatchService;
-import com.ssafy.recto.service.PhotoService;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +19,5 @@ public class MatchController {
 	private static final String SUCCESS = "success";
 	private static final String FAIL = "fail";
 
-	@Autowired
-	private MatchService matchService;
 
 }

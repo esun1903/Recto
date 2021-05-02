@@ -7,33 +7,37 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PhotoService {
+
 	private final SqlSession sqlSession;
 
-	@Autowired
-	public PhotoService(SqlSession sqlSession) {
+	public final PhotoDao photoDao;
+
+	public PhotoService(SqlSession sqlSession, PhotoDao photoDao) {
 		this.sqlSession = sqlSession;
+		this.photoDao = photoDao;
 	}
 	
-	public int InsertPhoto(Photo photo){
-		System.out.println("여기는 서비스야");
-		PhotoDao.InsertPhoto(photo);
-		System.out.println(photo.user_seq);
-        return 0;
+	public boolean InsertPhoto(Photo photo){
+		return sqlSession.getMapper(PhotoDao.class).InsertPhoto(photo) == 1;
 	}
 
 	public Photo getPhoto(int photo_seq) throws Exception{
-		return sqlSession.getMapper(PhotoDao.class).getPhoto(photo_seq);
+		Photo photo = photoDao.getPhoto(photo_seq);
+		return photo;
 	}
 	
-	public Photo getPhotoList(int user_seq) throws Exception{
-		return sqlSession.getMapper(PhotoDao.class).getPhotoList(user_seq);
+	public List<Photo> getPhotoList(int user_seq) throws Exception{
+		System.out.println("여기는 서비스야" + user_seq+"을 체크하려고해");
+
+		List<Photo> photo = photoDao.getPhotoList(user_seq);
+		System.out.println(photo.toString());
+		return photo;
 	}
-	
-	public boolean insertPhoto(Photo photo) throws Exception{
-        return sqlSession.getMapper(PhotoDao.class).insertPhoto(photo) == 1;
-    }
+
 
 	public boolean modifyPhoto(Photo photo) throws Exception {
 		return sqlSession.getMapper(PhotoDao.class).modifyPhoto(photo) == 1;

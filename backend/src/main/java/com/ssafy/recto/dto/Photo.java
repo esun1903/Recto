@@ -11,24 +11,24 @@ import java.time.LocalDateTime;
 public class Photo {
 
     @ApiModelProperty(value = "사진 seq")
-    public static int photo_seq;
+    public  int photo_seq;
     @ApiModelProperty(value = "사용자 seq")
-    public static int user_seq;
+    public  int user_seq;
     @ApiModelProperty(value = "사진 식별 ID")
-    public static String photo_id;
+    public  String photo_id;
     @ApiModelProperty(value = "사진 촬영 시간")
-    public static LocalDateTime photo_date;
+    public LocalDateTime photo_date;
     @ApiModelProperty(value = "사진 주소")
-    public static String photo_url;
+    public  String photo_url;
     @ApiModelProperty(value = "동영상 주소")
-    public static String video_url;
+    public  String video_url;
     @ApiModelProperty(value = "문구")
-    public static String pharse;
+    public  String pharse;
     @ApiModelProperty(value = "사진 비밀번호")
-    public static String photo_pwd;
+    public  String photo_pwd;
     @ApiModelProperty(value = "포토카드 디자인")
-    public static int design;
+    public  int design;
     @ApiModelProperty(value = "공개/비공개")
-    public static boolean close;
+    public  boolean publication;
 
 }

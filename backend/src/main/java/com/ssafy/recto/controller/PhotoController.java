@@ -15,7 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Api("PhotoController")
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/photo")
@@ -28,35 +29,22 @@ public class PhotoController {
 	@Autowired
 	private PhotoService photoService;
 
-	@PostMapping("/Insert")
-	public int PhotoInsert(@RequestBody Photo photo) {
-		System.out.println("여기는 conroller야 !");
-		System.out.println("사진이 들어왔다" + photo.photo_seq + " " + photo.user_seq + " " + photo.photo_pwd);
-		int result = 0;
-		HttpStatus status = null;
-		try {
-			result = photoService.InsertPhoto(photo);
-		} catch (Exception e) {
-			logger.error("사진 등록 실패 : {}", e);
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-		return result;
-	}
-
-	@ApiOperation(value = "포토카드 정보", notes = "포토카드 정보를 반환한다.", response = Photo.class)
-	@GetMapping
+	@ApiOperation(value = "포토카드 검색", notes = "포토카드 검색", response = Photo.class)
+	@GetMapping("/{photo_seq}")
 	public ResponseEntity<Photo> getPhoto(
-			@RequestParam("photo_seq") @ApiParam(value = "포토카드 식별자", required = true) int photo_seq) throws Exception {
+			@PathVariable(value= "photo_seq") int photo_seq) throws Exception {
 		logger.info("getPhoto - 호출");
 		return new ResponseEntity<Photo>(photoService.getPhoto(photo_seq), HttpStatus.OK);
 	}
-	
+
+
 	@ApiOperation(value = "포토카드 목록", notes = "포토카드 목록을 반환한다.", response = Photo.class)
 	@GetMapping("/list")
-	public ResponseEntity<Photo> getPhotoList(
+	public List<Photo> getPhotoList(
 			@RequestParam("user_seq") @ApiParam(value = "회원 식별자", required = true) int user_seq) throws Exception {
 		logger.info("getPhotoList - 호출");
-		return new ResponseEntity<Photo>(photoService.getPhotoList(user_seq), HttpStatus.OK);
+		List<Photo> list = photoService.getPhotoList(user_seq);
+		return list ;
 	}
 
 	@ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
@@ -65,7 +53,7 @@ public class PhotoController {
 			throws Exception {
 		logger.info("insertPhoto - 호출");
 
-		if (photoService.insertPhoto(photo)) {
+		if (photoService.InsertPhoto(photo)) {
 			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(FAIL, HttpStatus.OK);
