@@ -14,7 +14,7 @@ public interface PhotoDao {
     @Insert("Insert INTO photo ( photo_seq, user_seq, photo_id, photo_date, video_url, pharse, photo_pwd, design, publication) \n" +
             "VALUES ( #{photo.photo_seq},#{photo.user_seq},#{photo.photo_id},#{photo.photo_date},#{photo.video_url},#{photo.pharse},#{photo.photo_pwd},#{photo.design},#{photo.publication})")
     @Options(useGeneratedKeys = true)
-    int InsertPhoto(@Param("photo") Photo photo) ;
+    int insertPhoto(@Param("photo") Photo photo) ;
 
 
     @Select("SELECT * FROM photo WHERE photo_seq = #{photo_seq}")

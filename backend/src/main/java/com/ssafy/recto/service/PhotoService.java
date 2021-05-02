@@ -22,7 +22,7 @@ public class PhotoService {
 	}
 	
 	public boolean InsertPhoto(Photo photo){
-		return sqlSession.getMapper(PhotoDao.class).InsertPhoto(photo) == 1;
+		return sqlSession.getMapper(PhotoDao.class).insertPhoto(photo) == 1;
 	}
 
 	public Photo getPhoto(int photo_seq) throws Exception{
@@ -40,10 +40,10 @@ public class PhotoService {
 
 
 	public boolean modifyPhoto(Photo photo) throws Exception {
-		return sqlSession.getMapper(PhotoDao.class).modifyPhoto(photo) == 1;
+		return photoDao.modifyPhoto(photo) == 1;
 	}
 
 	public boolean deletePhoto(int photo_seq) throws Exception {
-		return sqlSession.getMapper(PhotoDao.class).deletePhoto(photo_seq) == 1 ;
+		return photoDao.deletePhoto(photo_seq) == 1 ;
 	}
 }
