@@ -38,7 +38,7 @@ public class UserController {
 
 	@ApiOperation(value = "회원 정보", notes = "회원 정보를 반환한다.", response = User.class)
 	@GetMapping
-	public ResponseEntity<User> getUser(@RequestParam("user_seq") @ApiParam(value = "회원 ID", required = true) int user_seq) throws Exception {
+	public ResponseEntity<User> getUser(@RequestParam("user_seq") @ApiParam(value = "회원 seq", required = true) int user_seq) throws Exception {
 		logger.info("getUser - 호출");
 		return new ResponseEntity<User>(userService.getUser(user_seq), HttpStatus.OK);
 	}
@@ -46,7 +46,7 @@ public class UserController {
 	@ApiOperation(value = "회원 인증", notes = "회원 정보를 담은 Token을 반환한다.", response = Map.class)
 	@GetMapping("/{user_id}")
 	public ResponseEntity<Map<String, Object>> getInfo(
-		@PathVariable("user_id") @ApiParam(value = "인증할 회원의 아이디.", required = true) String user_id, HttpServletRequest request) {
+		@PathVariable("user_id") @ApiParam(value = "인증할 회원 ID.", required = true) String user_id, HttpServletRequest request) {
 		logger.info("getInfo - 호출");
 		Map<String, Object> resultMap = new HashMap<>();
 		
@@ -91,25 +91,17 @@ public class UserController {
         logger.info("login - 호출");
 
         Map<String, Object> resultMap = new HashMap<>();
-		try {
-			if (userService.login(user)) {
-				System.out.println("여기 왔어여 ");
-				String token = jwtService.create("user_id", user.getUser_id(), "access-token");// key, data, subject
-				logger.info("로그인 토큰정보 : {}", token);
-				resultMap.put("access-token", token);
-				resultMap.put("message", SUCCESS);
-				
-				return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
-			}
-			else {
-				resultMap.put("message", FAIL);
-				
-				return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-		} catch (Exception e) {
-			logger.error("로그인 실패 : {}", e);
-			resultMap.put("message", e.getMessage());
+		if (userService.login(user)) {
+			String token = jwtService.create("user_id", user.getUser_id(), "access-token");// key, data, subject
+			logger.info("로그인 토큰정보 : {}", token);
+			resultMap.put("access-token", token);
+			resultMap.put("message", SUCCESS);
 			
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+		}
+		else {
+			resultMap.put("message", FAIL);
+			System.out.println(userService.login(user));
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 

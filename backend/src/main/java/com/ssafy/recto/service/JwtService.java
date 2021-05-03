@@ -24,7 +24,7 @@ public class JwtService {
 
 	public static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
-	private static final String TK = "ssafySecret";
+	private static final String TK = "rectoSecret";
 	private static final int EXPIRE_MINUTES = 60;
 
 	public <T> String create(String key, T data, String subject) {
