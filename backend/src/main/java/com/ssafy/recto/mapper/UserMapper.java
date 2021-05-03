@@ -1,10 +1,10 @@
-package com.ssafy.recto.dao;
+package com.ssafy.recto.mapper;
 
 import org.apache.ibatis.annotations.*;
 import com.ssafy.recto.dto.User;
 
 @Mapper
-public interface UserDao {
+public interface UserMapper {
 
 	@Select("select * from user where user_seq = #{user_seq}")
 	public User getUser(@Param("user_seq") int user_seq);
