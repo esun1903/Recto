@@ -7,9 +7,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    android:id="@+id/PublicLayout">
+    android:id="@+id/publicCardLayout">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/freeCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
