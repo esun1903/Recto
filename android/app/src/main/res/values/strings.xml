@@ -25,4 +25,6 @@
     <string name="photocard_success">나만의 포토카드가 완성되었어요\n. 이대로 제작할까요?</string>
     <string name="accept">accept</string>
     <string name="tempdate">2021.04.30</string>
+    <string name="iv_recto">iv_recto</string>
+    <string name="iv_info">iv_info</string>
 </resources>
