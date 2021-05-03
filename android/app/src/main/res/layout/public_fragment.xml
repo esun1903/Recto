@@ -5,86 +5,93 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 프로필 -->
-    <RelativeLayout
-        android:id="@+id/linearLayoutPublicProfile"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- 프로필 이미지 -->
-        <ImageView
-            android:id="@+id/iv_publicProfile"
+        <!-- 프로필 -->
+        <RelativeLayout
+            android:id="@+id/linearLayoutPublicProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/profile"
-            android:src="@drawable/profile" />
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!-- hello_user -->
+            <!-- 프로필 이미지 -->
+            <ImageView
+                android:id="@+id/iv_publicProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/profile"
+                android:src="@drawable/profile" />
+
+            <!-- hello_user -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="3dp"
+                android:layout_toEndOf="@+id/iv_publicProfile"
+                android:layout_toRightOf="@+id/iv_publicProfile"
+                android:text="@string/hello_user"
+                android:textSize="20sp"
+                tools:ignore="RelativeOverlap" />
+
+            <!-- edit button -->
+            <Button
+                android:layout_width="60dp"
+                android:layout_height="35dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/edit"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                app:backgroundTint="@color/brown"
+                tools:ignore="SmallSp" />
+
+        </RelativeLayout>
+
+        <!-- for free -->
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/forFree"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_margin="3dp"
-            android:layout_toEndOf="@+id/iv_publicProfile"
-            android:layout_toRightOf="@+id/iv_publicProfile"
-            android:text="@string/hello_user"
+            android:gravity="center"
+            android:text="@string/for_free"
             android:textSize="20sp"
-            tools:ignore="RelativeOverlap" />
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutPublicProfile"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutPublicProfile"
+            tools:ignore="MissingConstraints" />
 
-        <!-- edit button -->
-        <Button
-            android:layout_width="60dp"
-            android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="@string/edit"
-            android:textColor="@color/white"
-            android:textSize="10sp"
-            app:backgroundTint="@color/brown"
-            tools:ignore="SmallSp" />
-
-    </RelativeLayout>
-
-    <!-- for free -->
-    <TextView
-        android:id="@+id/forFree"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/for_free"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/linearLayoutPublicProfile"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPublicProfile"
-        tools:ignore="MissingConstraints" />
-
-    <!-- 구분선 -->
-    <View
-        android:id="@+id/forFree_line"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/brown"
-        android:layout_marginHorizontal="15dp"
-        app:layout_constraintStart_toStartOf="@+id/forFree"
-        app:layout_constraintTop_toBottomOf="@+id/forFree"/>
+        <!-- 구분선 -->
+        <View
+            android:id="@+id/forFree_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/brown"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintStart_toStartOf="@+id/forFree"
+            app:layout_constraintTop_toBottomOf="@+id/forFree"/>
 
 
-    <!-- 카드 목록 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/public_fragment_card_row"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forFree_line" />
+        <!-- 카드 목록 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/public_fragment_card_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/forFree_line" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
