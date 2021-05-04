@@ -2,9 +2,13 @@ package com.ssafy.recto;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+    private ImageView iv_info;
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
     private FragmentTransaction ft;
@@ -29,11 +35,26 @@ public class MainActivity extends AppCompatActivity {
     private PublicFragment publicFragment;
     private PublicFragmentCardDetail publicFragmentCardDetail;
     private ProfileFragment profileFragment;
+    private InfoFragment infoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        iv_info = findViewById(R.id.iv_info);
+        iv_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment("information");
+            }
+        });
 
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
         publicFragment = new PublicFragment();
         publicFragmentCardDetail = new PublicFragmentCardDetail();
         profileFragment = new ProfileFragment();
+        infoFragment = new InfoFragment();
 
         setFragment("home");
     }
@@ -137,6 +159,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "profile":
                 ft.replace(R.id.main_frame, profileFragment);
+                ft.commit();
+                break;
+            case "information":
+                ft.replace(R.id.main_frame, infoFragment);
                 ft.commit();
                 break;
         }

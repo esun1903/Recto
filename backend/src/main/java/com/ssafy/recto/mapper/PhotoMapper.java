@@ -1,4 +1,4 @@
-package com.ssafy.recto.dao;
+package com.ssafy.recto.mapper;
 
 import com.ssafy.recto.dto.Photo;
 
@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
-public interface PhotoDao {
+public interface PhotoMapper {
 
 	@Insert("Insert INTO photo ( photo_seq, user_seq, photo_id, photo_date, video_url, pharse, photo_pwd, design, publication) \n"
 			+ "VALUES ( #{photo.photo_seq},#{photo.user_seq},#{photo.photo_id},#{photo.photo_date},#{photo.video_url},#{photo.pharse},#{photo.photo_pwd},#{photo.design},#{photo.publication})")
