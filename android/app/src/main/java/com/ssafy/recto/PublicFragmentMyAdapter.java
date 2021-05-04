@@ -8,17 +8,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragmentMyAdapter.MyViewHolder> {
 
     int images[];
     Context context;
+    private static OnItemClickListener iListener = null;
 
-    public PublicFragmentMyAdapter(Context ct, int img[]) {
+    public PublicFragmentMyAdapter(Context ct, int img[]){
         context = ct;
         images = img;
+    }
+
+    public interface OnItemClickListener
+    {
+        void onItemClick(View v, int pos);
+    }
+
+    public static void setOnItemClickListener(OnItemClickListener listener)
+    {
+        iListener = listener;
     }
 
     @NonNull
@@ -39,13 +49,24 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
         return images.length;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
-        ConstraintLayout PublicLayout;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
-            PublicLayout = itemView.findViewById(R.id.PublicLayout);
+            imageView.setClickable(true);
+
+            imageView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION){
+                        iListener.onItemClick(v, pos);
+                    }
+                }
+            });
+
         }
     }
 }

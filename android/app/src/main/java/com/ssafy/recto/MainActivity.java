@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private CreateFragment_6_Success createFragment6Success;
     private ScanFragment scanFragment;
     private PublicFragment publicFragment;
+    private PublicFragmentCardDetail publicFragmentCardDetail;
     private ProfileFragment profileFragment;
     private InfoFragment infoFragment;
 
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         createFragment6Success = new CreateFragment_6_Success();
         scanFragment = new ScanFragment();
         publicFragment = new PublicFragment();
+        publicFragmentCardDetail = new PublicFragmentCardDetail();
         profileFragment = new ProfileFragment();
         infoFragment = new InfoFragment();
 
@@ -149,6 +151,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "public":
                 ft.replace(R.id.main_frame, publicFragment);
+                ft.commit();
+                break;
+            case "public_card_detail":
+                ft.replace(R.id.main_frame, publicFragmentCardDetail);
                 ft.commit();
                 break;
             case "profile":
