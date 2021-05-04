@@ -23,7 +23,7 @@
 
             <!-- list button -->
             <Button
-                android:id="@+id/free_photo_card_btn"
+                android:id="@+id/free_photo_card_list_btn"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -58,8 +58,9 @@
 
             </LinearLayout>
 
-            <!-- question button -->
+            <!-- information (dialog) -->
             <ImageView
+                android:id="@+id/info_dialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
