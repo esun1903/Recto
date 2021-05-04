@@ -7,18 +7,75 @@
     tools:context=".PublicFragmentCardDetail">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/free_photo_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- list button -->
+            <Button
+                android:id="@+id/free_photo_card_btn"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="@string/list"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/brown"
+                app:cornerRadius="10dp"
+                tools:ignore="RelativeOverlap" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                tools:ignore="RelativeOverlap,UseCompoundDrawables">
+
+                <!-- private or public -->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:src="@drawable/lock_open"
+                    android:contentDescription="@string/lock_open" />
+
+                <TextView
+                    android:id="@+id/free_photo_card_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/photo_card"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+            <!-- question button -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/question"
+                android:contentDescription="@string/question" />
+
+        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
+            android:layout_gravity="center"
             app:cardCornerRadius="20dp"
             app:cardElevation="8dp">
 
@@ -26,8 +83,19 @@
                 android:id="@+id/card_image_detail"
                 android:layout_width="300dp"
                 android:layout_height="400dp"
-                app:srcCompat="@drawable/free1" />
+                app:srcCompat="@drawable/free1"
+                android:contentDescription="@string/photo_card" />
         </androidx.cardview.widget.CardView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:text="@string/download"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/brown"
+            app:cornerRadius="10dp" />
 
     </LinearLayout>
 

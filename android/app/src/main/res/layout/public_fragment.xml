@@ -53,6 +53,7 @@
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 app:backgroundTint="@color/brown"
+                app:cornerRadius="10dp"
                 tools:ignore="SmallSp" />
 
         </RelativeLayout>
