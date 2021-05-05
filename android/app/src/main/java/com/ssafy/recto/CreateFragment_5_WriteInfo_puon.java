@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import androidx.fragment.app.Fragment;
 public class CreateFragment_5_WriteInfo_puon extends Fragment {
 
     MainActivity mainActivity;
+    MyApplication myApp;
     private View view;
     private Button btn_previous;
     private Button btn_next;
@@ -46,6 +48,7 @@ public class CreateFragment_5_WriteInfo_puon extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        myApp = (MyApplication) getActivity().getApplication();
         view = inflater.inflate(R.layout.create_fragment_5_writeinfo_puon, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
@@ -66,7 +69,13 @@ public class CreateFragment_5_WriteInfo_puon extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.setFragment("create_success");
+                if (String.valueOf(tv_date.getText()).equals("")) {
+                    Toast.makeText(getActivity(), "빠진 항목이 없는지 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    myApp.setCardDate(String.valueOf(tv_date.getText()));
+                    mainActivity.setFragment("create_success");
+                }
             }
         });
 

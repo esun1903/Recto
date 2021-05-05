@@ -5,6 +5,9 @@ import android.app.Application;
 public class MyApplication extends Application {
     private Boolean cardPrivate;
     private Boolean cardOnlyPhoto;
+    private String cardPhrases;
+    private String cardDate;
+    private String cardPassword;
 
     public Boolean getCardPrivate()
     {
@@ -24,5 +27,35 @@ public class MyApplication extends Application {
     public void setCardOnlyPhoto(Boolean cardOnlyPhoto)
     {
         this.cardOnlyPhoto = cardOnlyPhoto;
+    }
+
+    public String getCardPhrases()
+    {
+        return cardPhrases;
+    }
+
+    public void setCardPhrases(String cardPhrases)
+    {
+        this.cardPhrases = cardPhrases;
+    }
+
+    public String getCardDate()
+    {
+        return cardDate;
+    }
+
+    public void setCardDate(String cardDate)
+    {
+        this.cardDate = cardDate;
+    }
+
+    public String getCardPassword()
+    {
+        return cardPassword;
+    }
+
+    public void setCardPassword(String cardPassword)
+    {
+        this.cardPassword = cardPassword;
     }
 }

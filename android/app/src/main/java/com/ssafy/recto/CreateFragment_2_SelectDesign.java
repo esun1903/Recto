@@ -2,7 +2,6 @@ package com.ssafy.recto;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +80,6 @@ public class CreateFragment_2_SelectDesign extends Fragment {
                     Toast.makeText(getActivity(), "옵션을 하나 선택해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
                     myApp.setCardOnlyPhoto(cardOnlyPhoto);
-                    Log.e("CardOnlyPhoto", myApp.getCardOnlyPhoto().toString());
                     mainActivity.setFragment("create_selectvideo");
                 }
             }

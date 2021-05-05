@@ -2,7 +2,6 @@ package com.ssafy.recto;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +81,6 @@ public class CreateFragment_1_SelectOpen extends Fragment {
                 }
                 else {
                     myApp.setCardPrivate(cardPrivate);
-                    Log.e("CardPrivate", myApp.getCardPrivate().toString());
                     mainActivity.setFragment("create_selectdesign");
                 }
             }
