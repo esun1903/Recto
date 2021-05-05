@@ -74,7 +74,7 @@ public class CreateFragment_5_WriteInfo_puon extends Fragment {
                 }
                 else {
                     myApp.setCardDate(String.valueOf(tv_date.getText()));
-                    mainActivity.setFragment("create_success");
+                    mainActivity.setFragment("create_success_onlyphoto");
                 }
             }
         });

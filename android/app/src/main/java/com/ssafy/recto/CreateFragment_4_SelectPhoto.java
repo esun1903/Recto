@@ -23,6 +23,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class CreateFragment_4_SelectPhoto extends Fragment {
@@ -34,6 +36,7 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
     private Button btn_next;
     private ImageView imageView;
     private Button btn_selectphoto;
+    private Bitmap bm;
 
     @Override
     public void onAttach(Context context) {
@@ -57,6 +60,7 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         btn_next = view.findViewById(R.id.btn_next);
         imageView = view.findViewById(R.id.imageView);
         btn_selectphoto = view.findViewById(R.id.btn_selectphoto);
+        bm = null;
 
         checkSelfPermission();
 
@@ -70,19 +74,22 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Boolean cardPrivate = myApp.getCardPrivate();
-                Boolean cardOnlyPhoto = myApp.getCardOnlyPhoto();
-                if (cardPrivate && cardOnlyPhoto) {
-                    mainActivity.setFragment("create_writeinfo_pron");
+                if (bm == null){
+                    Toast.makeText(getActivity(), "사진을 업로드 해주세요", Toast.LENGTH_SHORT).show();
                 }
-                else if (cardPrivate && !cardOnlyPhoto) {
-                    mainActivity.setFragment("create_writeinfo_prph");
-                }
-                else if (!cardPrivate && cardOnlyPhoto) {
-                    mainActivity.setFragment("create_writeinfo_puon");
-                }
-                else if (!cardPrivate && !cardOnlyPhoto) {
-                    mainActivity.setFragment("create_writeinfo_puph");
+                else {
+                    Boolean cardPrivate = myApp.getCardPrivate();
+                    Boolean cardOnlyPhoto = myApp.getCardOnlyPhoto();
+
+                    if (cardPrivate && cardOnlyPhoto) {
+                        mainActivity.setFragment("create_writeinfo_pron");
+                    } else if (cardPrivate && !cardOnlyPhoto) {
+                        mainActivity.setFragment("create_writeinfo_prph");
+                    } else if (!cardPrivate && cardOnlyPhoto) {
+                        mainActivity.setFragment("create_writeinfo_puon");
+                    } else if (!cardPrivate && !cardOnlyPhoto) {
+                        mainActivity.setFragment("create_writeinfo_puph");
+                    }
                 }
             }
         });
@@ -145,14 +152,29 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
             try{
                 InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
-                Bitmap bm = BitmapFactory.decodeStream(inputStream);
+                bm = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
                 imageView.setImageBitmap(bm);
+                inputStream.close();
+                saveBitmapToJpeg(bm);
             } catch (Exception e){
                 e.printStackTrace();
             }
         } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
             Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void saveBitmapToJpeg(Bitmap bitmap) {
+        File tempFile = new File(getActivity().getCacheDir(), "photo");
+        try {
+            tempFile.createNewFile();
+            FileOutputStream out = new FileOutputStream(tempFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.close();
+            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
         }
     }
 }

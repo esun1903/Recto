@@ -26,11 +26,13 @@ import androidx.fragment.app.Fragment;
 public class CreateFragment_3_SelectVideo extends Fragment {
 
     MainActivity mainActivity;
+    MyApplication myApp;
     private View view;
     private Button btn_previous;
     private Button btn_next;
     private VideoView videoView;
     private Button btn_selectvideo;
+    private Uri fileUri;
 
     @Override
     public void onAttach(Context context) {
@@ -48,11 +50,13 @@ public class CreateFragment_3_SelectVideo extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        myApp = (MyApplication) getActivity().getApplication();
         view = inflater.inflate(R.layout.create_fragment_3_selectvideo, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
         videoView = view.findViewById(R.id.videoView);
         btn_selectvideo = view.findViewById(R.id.btn_selectvideo);
+        fileUri = null;
 
         checkSelfPermission();
 
@@ -66,7 +70,12 @@ public class CreateFragment_3_SelectVideo extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.setFragment("create_selectphoto");
+                if (fileUri == null) {
+                    Toast.makeText(getActivity(), "동영상을 업로드해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    mainActivity.setFragment("create_selectphoto");
+                }
             }
         });
 
@@ -129,7 +138,7 @@ public class CreateFragment_3_SelectVideo extends Fragment {
             try{
                 MediaController mc = new MediaController(getActivity());
                 videoView.setMediaController(mc);
-                Uri fileUri = data.getData();
+                fileUri = data.getData();
                 videoView.setVideoPath(String.valueOf(fileUri));
                 videoView.start();
             } catch (Exception e){

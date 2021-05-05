@@ -81,7 +81,7 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
                     myApp.setCardPhrases(String.valueOf(et_text.getText()));
                     myApp.setCardDate(String.valueOf(tv_date.getText()));
                     myApp.setCardPassword(String.valueOf(et_password.getText()));
-                    mainActivity.setFragment("create_success");
+                    mainActivity.setFragment("create_success_phrases");
                 }
             }
         });

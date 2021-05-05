@@ -78,7 +78,7 @@ public class CreateFragment_5_WriteInfo_pron extends Fragment {
                 else {
                     myApp.setCardDate(String.valueOf(tv_date.getText()));
                     myApp.setCardPassword(String.valueOf(et_password.getText()));
-                    mainActivity.setFragment("create_success");
+                    mainActivity.setFragment("create_success_onlyphoto");
                 }
             }
         });

@@ -78,7 +78,7 @@ public class CreateFragment_5_WriteInfo_puph extends Fragment {
                 else {
                     myApp.setCardPhrases(String.valueOf(et_text.getText()));
                     myApp.setCardDate(String.valueOf(tv_date.getText()));
-                    mainActivity.setFragment("create_success");
+                    mainActivity.setFragment("create_success_phrases");
                 }
             }
         });

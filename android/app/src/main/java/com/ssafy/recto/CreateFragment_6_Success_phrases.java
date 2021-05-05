@@ -1,23 +1,31 @@
 package com.ssafy.recto;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class CreateFragment_6_Success extends Fragment {
+public class CreateFragment_6_Success_phrases extends Fragment {
 
     MainActivity mainActivity;
     MyApplication myApp;
     private View view;
     private Button btn_previous;
     private Button btn_next;
+    private TextView tv_date;
+    private TextView tv_phrases;
+    private ImageView iv_photo;
 
     @Override
     public void onAttach(Context context) {
@@ -36,13 +44,23 @@ public class CreateFragment_6_Success extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         myApp = (MyApplication) getActivity().getApplication();
-        view = inflater.inflate(R.layout.create_fragment_6_success, container, false);
+        view = inflater.inflate(R.layout.create_fragment_6_success_phrases, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
+        tv_date = view.findViewById(R.id.tv_date);
+        tv_phrases = view.findViewById(R.id.tv_phrases);
+        iv_photo = view.findViewById(R.id.iv_photo);
 
-//        Log.e("d", myApp.getCardDate());
-//        Log.e("d", myApp.getCardPassword());
-//        Log.e("d", myApp.getCardPhrases());
+        tv_date.setText(myApp.getCardDate());
+        tv_phrases.setText(myApp.getCardPhrases());
+
+        try {
+            String imgpath = getActivity().getCacheDir() + "/photo";   // 내부 저장소에 저장되어 있는 이미지 경로
+            Bitmap bm = BitmapFactory.decodeFile(imgpath);
+            iv_photo.setImageBitmap(bm);
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "사진 로드 실패", Toast.LENGTH_SHORT).show();
+        }
 
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override

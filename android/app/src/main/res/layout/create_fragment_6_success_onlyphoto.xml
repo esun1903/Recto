@@ -28,19 +28,39 @@
             android:textSize="15sp"/>
 
         <TextView
+            android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tempdate"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
-        <ImageButton
-            android:id="@+id/imageButtonPrivate"
+        <FrameLayout
+            android:id="@+id/FrameLayout01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/empty_frame"
-            android:contentDescription="@string/private_card" />
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_success"
+                android:layout_width="183dp"
+                android:layout_height="288dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/success_card"
+                android:contentDescription="@string/private_card" />
+
+            <ImageView
+                android:id="@+id/iv_photo"
+                android:layout_width="183dp"
+                android:layout_height="243dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/success_card_photo"
+                android:contentDescription="@string/private_card"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"/>
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

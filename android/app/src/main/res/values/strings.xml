@@ -24,7 +24,7 @@
     <string name="text">문구</string>
     <string name="photocard_success">나만의 포토카드가 완성되었어요\n. 이대로 제작할까요?</string>
     <string name="accept">accept</string>
-    <string name="tempdate">2021.04.30</string>
+    <string name="tempdate">0000.00.00</string>
     <string name="list">list</string>
     <string name="photo_card">photo card</string>
     <string name="lock_open">lock open</string>
@@ -36,4 +36,5 @@
     <string name="iv_web">Website : www.recto.co.kr</string>
     <string name="iv_developers">김현지, 박예린, 신가영, 최다애, 최은선</string>
     <string name="iv_contact">Contact us : 010 - xxxx - xxxx</string>
+    <string name="for_phrases">for phrases</string>
 </resources>
