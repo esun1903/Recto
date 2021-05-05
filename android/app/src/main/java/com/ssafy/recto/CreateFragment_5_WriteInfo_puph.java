@@ -46,7 +46,7 @@ public class CreateFragment_5_WriteInfo_puph extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.create_fragment_5_writeinfo_prph, container, false);
+        view = inflater.inflate(R.layout.create_fragment_5_writeinfo_puph, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
         tv_date = view.findViewById(R.id.tv_date);

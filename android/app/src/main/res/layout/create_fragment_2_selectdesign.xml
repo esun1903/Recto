@@ -40,7 +40,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
@@ -54,8 +54,8 @@
                     android:textSize="18sp" />
 
                 <ImageButton
-                    android:id="@+id/imageButtonPrivate"
-                    android:layout_width="120dp"
+                    android:id="@+id/ib_onlyphoto"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/onlyphoto_frame"
@@ -64,7 +64,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
@@ -78,8 +78,8 @@
                     android:textSize="18sp" />
 
                 <ImageButton
-                    android:id="@+id/imageButtonPublic"
-                    android:layout_width="120dp"
+                    android:id="@+id/ib_phrases"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/phrases_frame"

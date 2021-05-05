@@ -28,6 +28,7 @@ import java.io.InputStream;
 public class CreateFragment_4_SelectPhoto extends Fragment {
 
     MainActivity mainActivity;
+    MyApplication myApp;
     private View view;
     private Button btn_previous;
     private Button btn_next;
@@ -50,6 +51,7 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        myApp = (MyApplication) getActivity().getApplication();
         view = inflater.inflate(R.layout.create_fragment_4_selectphoto, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
@@ -68,7 +70,20 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.setFragment("create_writeinfo_prph");
+                Boolean cardPrivate = myApp.getCardPrivate();
+                Boolean cardOnlyPhoto = myApp.getCardOnlyPhoto();
+                if (cardPrivate && cardOnlyPhoto) {
+                    mainActivity.setFragment("create_writeinfo_pron");
+                }
+                else if (cardPrivate && !cardOnlyPhoto) {
+                    mainActivity.setFragment("create_writeinfo_prph");
+                }
+                else if (!cardPrivate && cardOnlyPhoto) {
+                    mainActivity.setFragment("create_writeinfo_puon");
+                }
+                else if (!cardPrivate && !cardOnlyPhoto) {
+                    mainActivity.setFragment("create_writeinfo_puph");
+                }
             }
         });
 
