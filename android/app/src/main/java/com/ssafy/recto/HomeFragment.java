@@ -85,21 +85,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        mFirebaseAuth = FirebaseAuth.getInstance();
-
-        Button btn_logout = view.findViewById(R.id.btn_logout);
-        btn_logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 로그아웃 하기
-                mFirebaseAuth.signOut();
-
-                // 로그아웃 후 로그인 페이지로 이동하기
-                Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
