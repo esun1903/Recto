@@ -29,22 +29,20 @@ public class PhotoController {
 	@Autowired
 	private PhotoService photoService;
 
-	@ApiOperation(value = "포토카드 검색", notes = "포토카드 검색", response = Photo.class)
-	@GetMapping("/{photo_seq}")
+	@ApiOperation(value = "포토카드 ID로 검색", notes = "포토카드 ID로 검색", response = Photo.class)
+	@GetMapping("/{photo_id}")
 	public ResponseEntity<Photo> getPhoto(
-			@PathVariable(value= "photo_seq") int photo_seq) throws Exception {
+			@PathVariable(value= "photo_id") String photo_id) throws Exception {
 		logger.info("getPhoto - 호출");
-		return new ResponseEntity<Photo>(photoService.getPhoto(photo_seq), HttpStatus.OK);
+		return new ResponseEntity<Photo>(photoService.getPhoto(photo_id), HttpStatus.OK);
 	}
-
 
 	@ApiOperation(value = "포토카드 목록", notes = "포토카드 목록을 반환한다.", response = Photo.class)
 	@GetMapping("/list")
 	public List<Photo> getPhotoList(
 			@RequestParam("user_seq") @ApiParam(value = "회원 식별자", required = true) int user_seq) throws Exception {
 		logger.info("getPhotoList - 호출");
-		List<Photo> list = photoService.getPhotoList(user_seq);
-		return list ;
+		return photoService.getPhotoList(user_seq);
 	}
 
 	@ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
@@ -53,7 +51,7 @@ public class PhotoController {
 			throws Exception {
 		logger.info("insertPhoto - 호출");
 
-		if (photoService.InsertPhoto(photo)) {
+		if (photoService.insertPhoto(photo)) {
 			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(FAIL, HttpStatus.OK);

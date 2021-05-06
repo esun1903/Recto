@@ -2,9 +2,13 @@ package com.ssafy.recto;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -12,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Toolbar toolbar;
+    private ImageView iv_info;
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
     private FragmentTransaction ft;
@@ -24,15 +30,32 @@ public class MainActivity extends AppCompatActivity {
     private CreateFragment_5_WriteInfo_pron createFragment5WriteInfoPron;
     private CreateFragment_5_WriteInfo_puph createFragment5WriteInfoPuph;
     private CreateFragment_5_WriteInfo_puon createFragment5WriteInfoPuon;
-    private CreateFragment_6_Success createFragment6Success;
+    private CreateFragment_6_Success_onlyphoto createFragment6SuccessOnlyPhoto;
+    private CreateFragment_6_Success_phrases createFragment6SuccessPhrases;
     private ScanFragment scanFragment;
     private PublicFragment publicFragment;
+    private PublicFragmentCardDetail publicFragmentCardDetail;
     private ProfileFragment profileFragment;
+    private InfoFragment infoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        iv_info = findViewById(R.id.iv_info);
+        iv_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment("information");
+            }
+        });
 
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -68,10 +91,13 @@ public class MainActivity extends AppCompatActivity {
         createFragment5WriteInfoPron = new CreateFragment_5_WriteInfo_pron();
         createFragment5WriteInfoPuph = new CreateFragment_5_WriteInfo_puph();
         createFragment5WriteInfoPuon = new CreateFragment_5_WriteInfo_puon();
-        createFragment6Success = new CreateFragment_6_Success();
+        createFragment6SuccessOnlyPhoto = new CreateFragment_6_Success_onlyphoto();
+        createFragment6SuccessPhrases = new CreateFragment_6_Success_phrases();
         scanFragment = new ScanFragment();
         publicFragment = new PublicFragment();
+        publicFragmentCardDetail = new PublicFragmentCardDetail();
         profileFragment = new ProfileFragment();
+        infoFragment = new InfoFragment();
 
         setFragment("home");
     }
@@ -117,8 +143,12 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.main_frame, createFragment5WriteInfoPuon);
                 ft.commit();
                 break;
-            case "create_success":
-                ft.replace(R.id.main_frame, createFragment6Success);
+            case "create_success_onlyphoto":
+                ft.replace(R.id.main_frame, createFragment6SuccessOnlyPhoto);
+                ft.commit();
+                break;
+            case "create_success_phrases":
+                ft.replace(R.id.main_frame, createFragment6SuccessPhrases);
                 ft.commit();
                 break;
             case "scan":
@@ -129,8 +159,16 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.main_frame, publicFragment);
                 ft.commit();
                 break;
+            case "public_card_detail":
+                ft.replace(R.id.main_frame, publicFragmentCardDetail);
+                ft.commit();
+                break;
             case "profile":
                 ft.replace(R.id.main_frame, profileFragment);
+                ft.commit();
+                break;
+            case "information":
+                ft.replace(R.id.main_frame, infoFragment);
                 ft.commit();
                 break;
         }

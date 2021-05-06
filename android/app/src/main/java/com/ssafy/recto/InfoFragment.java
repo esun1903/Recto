@@ -5,18 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class CreateFragment_6_Success extends Fragment {
+public class InfoFragment extends Fragment {
 
     MainActivity mainActivity;
     private View view;
-    private Button btn_previous;
-    private Button btn_next;
 
     @Override
     public void onAttach(Context context) {
@@ -34,24 +31,7 @@ public class CreateFragment_6_Success extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.create_fragment_6_success, container, false);
-        btn_previous = view.findViewById(R.id.btn_previous);
-        btn_next = view.findViewById(R.id.btn_next);
-
-        btn_previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivity.setFragment("create_writeinfo_prph");
-            }
-        });
-
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivity.setFragment("home");
-            }
-        });
-
+        view = inflater.inflate(R.layout.info_fragment, container, false);
         return view;
     }
 }

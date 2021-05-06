@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,11 +25,14 @@ import androidx.fragment.app.Fragment;
 public class CreateFragment_5_WriteInfo_prph extends Fragment {
 
     MainActivity mainActivity;
+    MyApplication myApp;
     private View view;
     private Button btn_previous;
     private Button btn_next;
+    private EditText et_text;
     private static TextView tv_date;
     public static int year, month, day;
+    private EditText et_password;
 
     @Override
     public void onAttach(Context context) {
@@ -46,10 +51,13 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        myApp = (MyApplication) getActivity().getApplication();
         view = inflater.inflate(R.layout.create_fragment_5_writeinfo_prph, container, false);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
+        et_text = view.findViewById(R.id.et_text);
         tv_date = view.findViewById(R.id.tv_date);
+        et_password = view.findViewById(R.id.et_password);
 
         Calendar calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -66,7 +74,15 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.setFragment("create_success");
+                if (String.valueOf(et_text.getText()).equals("") || String.valueOf(tv_date.getText()).equals("") || String.valueOf(et_password.getText()).equals("")) {
+                    Toast.makeText(getActivity(), "빠진 항목이 없는지 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    myApp.setCardPhrases(String.valueOf(et_text.getText()));
+                    myApp.setCardDate(String.valueOf(tv_date.getText()));
+                    myApp.setCardPassword(String.valueOf(et_password.getText()));
+                    mainActivity.setFragment("create_success_phrases");
+                }
             }
         });
 
