@@ -36,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private PublicFragment publicFragment;
     private PublicFragmentCardDetail publicFragmentCardDetail;
     private ProfileFragment profileFragment;
+    private ProfileFragmentMine profileFragmentMine;
+    private ProfileFragmentMineDetail profileFragmentMineDetail;
+    private ProfileFragmentGift profileFragmentGift;
+    private ProfileFragmentGiftDetail profileFragmentGiftDetail;
     private InfoFragment infoFragment;
 
     @Override
@@ -97,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
         publicFragment = new PublicFragment();
         publicFragmentCardDetail = new PublicFragmentCardDetail();
         profileFragment = new ProfileFragment();
+        profileFragmentMine = new ProfileFragmentMine();
+        profileFragmentMineDetail = new ProfileFragmentMineDetail();
+        profileFragmentGift = new ProfileFragmentGift();
+        profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
         infoFragment = new InfoFragment();
 
         setFragment("home");
@@ -165,6 +173,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "profile":
                 ft.replace(R.id.main_frame, profileFragment);
+                ft.commit();
+                break;
+            case "profile_mine":
+                ft.replace(R.id.main_frame, profileFragmentMine);
+                ft.commit();
+                break;
+            case "profile_mine_detail":
+                ft.replace(R.id.main_frame, profileFragmentMineDetail);
+                ft.commit();
+                break;
+            case "profile_gift":
+                ft.replace(R.id.main_frame, profileFragmentGift);
+                ft.commit();
+                break;
+            case "profile_gift_detail":
+                ft.replace(R.id.main_frame, profileFragmentGiftDetail);
                 ft.commit();
                 break;
             case "information":

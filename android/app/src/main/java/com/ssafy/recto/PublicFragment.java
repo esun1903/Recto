@@ -15,14 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PublicFragment extends Fragment{
 
-    private View view;
     RecyclerView recyclerView;
+    private View view;
     private GridLayoutManager mGridLayoutManager;
 
     MainActivity mainActivity;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity)getActivity();
     }
@@ -33,7 +33,7 @@ public class PublicFragment extends Fragment{
         mainActivity = null;
     }
 
-    int images[] = {R.drawable.free1, R.drawable.free2, R.drawable.free3,
+    int[] images = {R.drawable.free1, R.drawable.free2, R.drawable.free3,
             R.drawable.free4, R.drawable.free5, R.drawable.free6,
             R.drawable.free7, R.drawable.free8, R.drawable.free9,
             R.drawable.free1, R.drawable.free2, R.drawable.free3,
@@ -45,7 +45,7 @@ public class PublicFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.public_fragment, container, false);
 
-        recyclerView = view.findViewById(R.id.recycleView);
+        recyclerView = view.findViewById(R.id.recyclerView);
 
         PublicFragmentMyAdapter publicFragmentMyAdapter = new PublicFragmentMyAdapter(getActivity(), images);
         recyclerView.setAdapter(publicFragmentMyAdapter);
@@ -54,8 +54,7 @@ public class PublicFragment extends Fragment{
         mGridLayoutManager = new GridLayoutManager(getActivity(), numberOfColumns);
         recyclerView.setLayoutManager(mGridLayoutManager);
 
-        PublicFragmentMyAdapter.setOnItemClickListener(new PublicFragmentMyAdapter.OnItemClickListener()
-        {
+        PublicFragmentMyAdapter.setOnItemClickListener(new PublicFragmentMyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos)
             {

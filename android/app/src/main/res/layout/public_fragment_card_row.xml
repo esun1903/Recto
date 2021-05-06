@@ -34,7 +34,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@mipmap/ic_launcher" />
+                app:srcCompat="@mipmap/ic_launcher"
+                android:contentDescription="@string/for_free" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

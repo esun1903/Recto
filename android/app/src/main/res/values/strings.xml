@@ -36,5 +36,10 @@
     <string name="iv_web">Website : www.recto.co.kr</string>
     <string name="iv_developers">김현지, 박예린, 신가영, 최다애, 최은선</string>
     <string name="iv_contact">Contact us : 010 - xxxx - xxxx</string>
+    <string name="you_made_it">you made it!</string>
+    <string name="someone_gave_you">someone gave you!</string>
+    <string name="lock">lock</string>
+    <string name="delete">delete</string>
+    <string name="from_ex">from. 동탄핵주먹</string>
     <string name="for_phrases">for phrases</string>
 </resources>

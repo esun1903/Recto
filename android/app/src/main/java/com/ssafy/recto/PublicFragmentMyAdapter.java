@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragmentMyAdapter.MyViewHolder> {
 
-    int images[];
+    int[] images;
     Context context;
     private static OnItemClickListener iListener = null;
 
-    public PublicFragmentMyAdapter(Context ct, int img[]){
+    public PublicFragmentMyAdapter(Context ct, int[] img){
         context = ct;
         images = img;
     }
@@ -49,7 +49,7 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
         return images.length;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
 
         public MyViewHolder(@NonNull View itemView) {

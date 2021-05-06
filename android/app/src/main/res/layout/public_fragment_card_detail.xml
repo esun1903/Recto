@@ -54,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/photo_card"
+                    android:textColor="@color/brown"
                     android:textSize="30sp" />
 
             </LinearLayout>
@@ -89,8 +90,8 @@
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
             android:layout_margin="5dp"
             android:layout_gravity="center"
             android:text="@string/download"

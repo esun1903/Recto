@@ -21,14 +21,14 @@ public class PublicFragmentCardDetail extends Fragment {
     MainActivity mainActivity;
     ImageView cardImageView;
     ImageView info_dialog;
+    Button free_photo_card_list_btn;
     private View view;
-    private Button free_photo_card_list_btn;
     private Context mContext;
 
 //    int cardImage;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity)getActivity();
         mContext = context;
