@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private CreateFragment_5_WriteInfo_pron createFragment5WriteInfoPron;
     private CreateFragment_5_WriteInfo_puph createFragment5WriteInfoPuph;
     private CreateFragment_5_WriteInfo_puon createFragment5WriteInfoPuon;
-    private CreateFragment_6_Success createFragment6Success;
+    private CreateFragment_6_Success_onlyphoto createFragment6SuccessOnlyPhoto;
+    private CreateFragment_6_Success_phrases createFragment6SuccessPhrases;
     private ScanFragment scanFragment;
     private PublicFragment publicFragment;
     private PublicFragmentCardDetail publicFragmentCardDetail;
@@ -94,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
         createFragment5WriteInfoPron = new CreateFragment_5_WriteInfo_pron();
         createFragment5WriteInfoPuph = new CreateFragment_5_WriteInfo_puph();
         createFragment5WriteInfoPuon = new CreateFragment_5_WriteInfo_puon();
-        createFragment6Success = new CreateFragment_6_Success();
+        createFragment6SuccessOnlyPhoto = new CreateFragment_6_Success_onlyphoto();
+        createFragment6SuccessPhrases = new CreateFragment_6_Success_phrases();
         scanFragment = new ScanFragment();
         publicFragment = new PublicFragment();
         publicFragmentCardDetail = new PublicFragmentCardDetail();
@@ -149,8 +151,12 @@ public class MainActivity extends AppCompatActivity {
                 ft.replace(R.id.main_frame, createFragment5WriteInfoPuon);
                 ft.commit();
                 break;
-            case "create_success":
-                ft.replace(R.id.main_frame, createFragment6Success);
+            case "create_success_onlyphoto":
+                ft.replace(R.id.main_frame, createFragment6SuccessOnlyPhoto);
+                ft.commit();
+                break;
+            case "create_success_phrases":
+                ft.replace(R.id.main_frame, createFragment6SuccessPhrases);
                 ft.commit();
                 break;
             case "scan":

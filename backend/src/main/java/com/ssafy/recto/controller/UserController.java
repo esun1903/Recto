@@ -54,10 +54,10 @@ public class UserController {
 			logger.info("사용 가능한 토큰!!!");
 			try {
 				// 로그인 사용자 정보.
-				User user = userService.userInfo(user_id);
+User user = userService.userInfo(user_id);
 				resultMap.put("userInfo", user);
 				resultMap.put("message", SUCCESS);
-				
+
 				return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 			} catch (Exception e) {
 				logger.error("정보조회 실패 : {}", e);

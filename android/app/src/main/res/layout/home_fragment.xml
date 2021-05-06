@@ -7,6 +7,19 @@
     android:layout_gravity="center_vertical">
 
     <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="ID"
+        android:textSize="24sp"
+        android:fontFamily="@font/jeju_myeongjo" />
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="&quot;당신의 모먼트를 기록해보세요.&quot;"
@@ -33,4 +46,26 @@
         android:layout_height="wrap_content"
         android:scrollbars="horizontal"
         android:layout_marginTop="35dp"/>
+
+    <!-- 로그인, 회원가입 전용 임시 버튼 -->
+    <Button
+        android:id="@+id/btn_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="로그인 페이지 임시버튼"/>
+
+    <Button
+        android:id="@+id/btn_regi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="회원가입 페이지 임시버튼"/>
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="로그아웃 버튼"/>
 </LinearLayout>
