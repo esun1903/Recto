@@ -17,7 +17,7 @@ public class User {
 	@ApiModelProperty(value = "사용자 닉네임")
 	private String user_nickname;
 	@ApiModelProperty(value = "관리자/유저")
-	private String manager;
+	private String admin;
 	@ApiModelProperty(value = "사용자 프로필 사진")
 	private String user_image;
 }

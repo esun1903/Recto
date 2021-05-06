@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,7 +18,7 @@ public class Photo {
     @ApiModelProperty(value = "사진 식별 ID")
     public  String photo_id;
     @ApiModelProperty(value = "사진 촬영 시간")
-    public LocalDateTime photo_date;
+    public LocalDate photo_date;
     @ApiModelProperty(value = "사진 주소")
     public  String photo_url;
     @ApiModelProperty(value = "동영상 주소")
