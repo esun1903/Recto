@@ -7,10 +7,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_margin="10dp"
-    android:id="@+id/publicCardLayout">
+    android:id="@+id/profileCardLayout">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/freeCardView"
+        android:id="@+id/mineCardView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher"
-                android:contentDescription="@string/for_free" />
+                android:contentDescription="@string/you_made_it" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

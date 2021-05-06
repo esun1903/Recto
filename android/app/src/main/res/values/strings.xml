@@ -38,4 +38,6 @@
     <string name="iv_contact">Contact us : 010 - xxxx - xxxx</string>
     <string name="you_made_it">you made it!</string>
     <string name="someone_gave_you">someone gave you!</string>
+    <string name="lock">lock</string>
+    <string name="delete">delete</string>
 </resources>

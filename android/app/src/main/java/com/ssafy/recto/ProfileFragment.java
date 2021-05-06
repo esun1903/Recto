@@ -28,7 +28,8 @@ public class ProfileFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.tab_layout);
 
-        fragmentPagerAdapter = new ProfileViewPagerAdapter(getActivity().getSupportFragmentManager());
+        // getActivity().getSupportFragmentManager()를 쓰면 에러가 나므로 getChildFragmentManager()를 써줘야 함
+        fragmentPagerAdapter = new ProfileViewPagerAdapter(getChildFragmentManager());
 
         viewPager.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

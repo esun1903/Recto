@@ -1,6 +1,5 @@
 package com.ssafy.recto;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +9,13 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragmentMyAdapter.MyViewHolder> {
+public class ProfileFragmentMineAdapter extends RecyclerView.Adapter<ProfileFragmentMineAdapter.MyViewHolder> {
 
     int[] images;
     Context context;
     private static OnItemClickListener iListener = null;
 
-    public PublicFragmentMyAdapter(Context ct, int[] img){
+    public ProfileFragmentMineAdapter(Context ct, int[] img) {
         context = ct;
         images = img;
     }
@@ -35,7 +34,7 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.public_fragment_card_row, parent, false);
+        View view = inflater.inflate(R.layout.profile_fragment_mine_card, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -49,7 +48,7 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
         return images.length;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -66,7 +65,6 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
                     }
                 }
             });
-
         }
     }
 }

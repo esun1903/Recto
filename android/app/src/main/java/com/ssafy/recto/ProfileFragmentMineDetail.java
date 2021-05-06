@@ -1,31 +1,26 @@
 package com.ssafy.recto;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class PublicFragmentCardDetail extends Fragment {
+public class ProfileFragmentMineDetail extends Fragment {
 
     MainActivity mainActivity;
     ImageView cardImageView;
     ImageView info_dialog;
-    Button free_photo_card_list_btn;
+    Button mine_photo_card_list_btn;
     private View view;
     private Context mContext;
-
-//    int cardImage;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -43,16 +38,16 @@ public class PublicFragmentCardDetail extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.public_fragment_card_detail, container, false);
+        view = inflater.inflate(R.layout.profile_fragment_mine_card_detail, container, false);
 
         cardImageView = view.findViewById(R.id.card_image_detail);
-        free_photo_card_list_btn = view.findViewById(R.id.free_photo_card_list_btn);
+        mine_photo_card_list_btn = view.findViewById(R.id.mine_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
 
-        free_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
+        mine_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.setFragment("public");
+                mainActivity.setFragment("profile");
             }
         });
 
@@ -67,21 +62,7 @@ public class PublicFragmentCardDetail extends Fragment {
             }
         });
 
-//        getData();
-//        setData();
-
         return view;
     }
 
-//    private void getData() {
-//        if(getActivity().getIntent().hasExtra("images")) {
-//            cardImage = getActivity().getIntent().getIntExtra("images", 1);
-//        } else {
-//            Toast.makeText(getActivity(), "No data", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    private void setData() {
-//        cardImageView.setImageResource(cardImage);
-//    }
 }

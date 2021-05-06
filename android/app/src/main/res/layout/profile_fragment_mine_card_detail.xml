@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PublicFragmentCardDetail">
+    tools:context=".ProfileFragmentMineDetail">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:id="@+id/free_photo_card"
+            android:id="@+id/mine_photo_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -23,7 +23,7 @@
 
             <!-- list button -->
             <Button
-                android:id="@+id/free_photo_card_list_btn"
+                android:id="@+id/mine_photo_card_list_btn"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -46,11 +46,11 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="2dp"
-                    android:src="@drawable/lock_open"
-                    android:contentDescription="@string/lock_open" />
+                    android:src="@drawable/lock"
+                    android:contentDescription="@string/lock" />
 
                 <TextView
-                    android:id="@+id/free_photo_card_text"
+                    android:id="@+id/mine_photo_card_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/photo_card"
@@ -73,6 +73,14 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/tempdate"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,19 +93,40 @@
                 android:id="@+id/card_image_detail"
                 android:layout_width="300dp"
                 android:layout_height="400dp"
-                app:srcCompat="@drawable/free1"
+                app:srcCompat="@drawable/user4"
                 android:contentDescription="@string/photo_card" />
         </androidx.cardview.widget.CardView>
 
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center"
-            android:text="@string/download"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/brown"
-            app:cornerRadius="10dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="25dp"
+                android:text="@string/download"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/brown"
+                app:cornerRadius="10dp" />
+
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="25dp"
+                android:text="@string/delete"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/red"
+                app:cornerRadius="10dp" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

@@ -83,7 +83,7 @@
 
         <!-- 카드 목록 -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleView"
+            android:id="@+id/recyclerView"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/public_fragment_card_row"
             android:layout_width="match_parent"
