@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/beige">
 
     <EditText
         android:id="@+id/et_email"
@@ -14,7 +15,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="10"
+        android:ems="12"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:fontFamily="@font/jeju_myeongjo"
@@ -28,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:ems="10"
+        android:ems="12"
         android:hint="Password"
         android:inputType="textPassword"
         android:fontFamily="@font/jeju_myeongjo"
@@ -43,6 +44,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Login"
+        android:fontFamily="@font/eulyoo1945_semibold"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brown"
         app:layout_constraintEnd_toEndOf="@+id/et_pwd"
         app:layout_constraintStart_toStartOf="@+id/et_pwd"
         app:layout_constraintTop_toBottomOf="@+id/et_pwd" />
@@ -53,6 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Join"
+        android:fontFamily="@font/eulyoo1945_semibold"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="@+id/btn_login"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
