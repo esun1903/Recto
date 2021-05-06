@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragmentMine profileFragmentMine;
     private ProfileFragmentMineDetail profileFragmentMineDetail;
     private ProfileFragmentGift profileFragmentGift;
+    private ProfileFragmentGiftDetail profileFragmentGiftDetail;
     private InfoFragment infoFragment;
 
     @Override
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         profileFragmentMine = new ProfileFragmentMine();
         profileFragmentMineDetail = new ProfileFragmentMineDetail();
         profileFragmentGift = new ProfileFragmentGift();
+        profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
         infoFragment = new InfoFragment();
 
         setFragment("home");
@@ -177,6 +179,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "profile_gift":
                 ft.replace(R.id.main_frame, profileFragmentGift);
+                ft.commit();
+                break;
+            case "profile_gift_detail":
+                ft.replace(R.id.main_frame, profileFragmentGiftDetail);
                 ft.commit();
                 break;
             case "information":
