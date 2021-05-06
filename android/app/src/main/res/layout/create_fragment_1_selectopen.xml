@@ -20,7 +20,7 @@
             android:textSize="30sp" />
 
         <ImageButton
-            android:id="@+id/imageButtonPrivate"
+            android:id="@+id/ib_private"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -28,7 +28,7 @@
             android:contentDescription="@string/private_card" />
 
         <ImageButton
-            android:id="@+id/imageButtonPublic"
+            android:id="@+id/ib_public"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

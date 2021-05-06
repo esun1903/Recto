@@ -50,7 +50,7 @@
             android:id="@+id/tv_date"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:text="@string/date"
+            android:hint="@string/date"
             android:textSize="18sp"
             android:gravity="center_horizontal" />
 
