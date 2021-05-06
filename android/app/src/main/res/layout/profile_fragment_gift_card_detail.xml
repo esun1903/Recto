@@ -6,115 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".ProfileFragmentGiftDetail">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/gift_photo_card"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
-            <!-- list button -->
-            <Button
-                android:id="@+id/gift_photo_card_list_btn"
-                android:layout_width="70dp"
+            <RelativeLayout
+                android:id="@+id/gift_photo_card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="@string/list"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/brown"
-                app:cornerRadius="10dp"
-                tools:ignore="RelativeOverlap" />
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                tools:ignore="RelativeOverlap,UseCompoundDrawables">
+                <!-- list button -->
+                <Button
+                    android:id="@+id/gift_photo_card_list_btn"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@string/list"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/eulyoo1945_semibold"
+                    app:backgroundTint="@color/brown"
+                    app:cornerRadius="10dp"
+                    tools:ignore="RelativeOverlap" />
 
-                <!-- private or public -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    tools:ignore="RelativeOverlap,UseCompoundDrawables">
+
+                    <!-- private or public -->
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="2dp"
+                        android:src="@drawable/lock"
+                        android:contentDescription="@string/lock" />
+
+                    <TextView
+                        android:id="@+id/gift_photo_card_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/photo_card"
+                        android:textColor="@color/brown"
+                        android:textSize="30sp"
+                        android:fontFamily="@font/eulyoo1945_semibold"/>
+
+                </LinearLayout>
+
+                <!-- information (dialog) -->
                 <ImageView
+                    android:id="@+id/info_dialog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="2dp"
-                    android:src="@drawable/lock"
-                    android:contentDescription="@string/lock" />
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/question"
+                    android:contentDescription="@string/question" />
 
-                <TextView
-                    android:id="@+id/gift_photo_card_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/photo_card"
-                    android:textColor="@color/brown"
-                    android:textSize="30sp" />
+            </RelativeLayout>
 
-            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/eulyoo1945_semibold"
+                android:text="@string/from_ex"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:fontFamily="@font/eulyoo1945_semibold"
+                android:text="@string/tempdate"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
-            <!-- information (dialog) -->
-            <ImageView
-                android:id="@+id/info_dialog"
+            <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp">
+
+                <ImageView
+                    android:id="@+id/card_image_detail"
+                    android:layout_width="300dp"
+                    android:layout_height="400dp"
+                    app:srcCompat="@drawable/gift1"
+                    android:contentDescription="@string/photo_card" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="60dp"
                 android:layout_margin="5dp"
-                android:src="@drawable/question"
-                android:contentDescription="@string/question" />
+                android:layout_gravity="center"
+                android:text="@string/delete"
+                android:textColor="@color/white"
+                android:fontFamily="@font/eulyoo1945_semibold"
+                app:backgroundTint="@color/red"
+                app:cornerRadius="10dp" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/from_ex"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/tempdate"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp">
-
-            <ImageView
-                android:id="@+id/card_image_detail"
-                android:layout_width="300dp"
-                android:layout_height="400dp"
-                app:srcCompat="@drawable/gift1"
-                android:contentDescription="@string/photo_card" />
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:layout_width="120dp"
-            android:layout_height="60dp"
-            android:layout_margin="5dp"
-            android:layout_gravity="center"
-            android:text="@string/delete"
-            android:textColor="@color/white"
-            app:backgroundTint="@color/red"
-            app:cornerRadius="10dp" />
-
-    </LinearLayout>
-
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

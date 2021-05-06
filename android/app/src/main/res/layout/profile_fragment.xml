@@ -43,6 +43,7 @@
                 android:layout_toRightOf="@+id/iv_publicProfile"
                 android:text="@string/hello_user"
                 android:textSize="20sp"
+                android:fontFamily="@font/eulyoo1945_semibold"
                 tools:ignore="RelativeOverlap" />
 
             <!-- edit button -->
