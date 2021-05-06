@@ -24,7 +24,7 @@ public class Photo {
     @ApiModelProperty(value = "동영상 주소")
     public  String video_url;
     @ApiModelProperty(value = "문구")
-    public  String pharse;
+    public  String phrase;
     @ApiModelProperty(value = "사진 비밀번호")
     public  String photo_pwd;
     @ApiModelProperty(value = "포토카드 디자인")
