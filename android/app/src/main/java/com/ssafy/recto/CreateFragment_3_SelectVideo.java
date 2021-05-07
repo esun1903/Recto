@@ -141,6 +141,7 @@ public class CreateFragment_3_SelectVideo extends Fragment {
                 fileUri = data.getData();
                 videoView.setVideoPath(String.valueOf(fileUri));
                 videoView.start();
+                myApp.setCardVideo(String.valueOf(fileUri));
             } catch (Exception e){
                 e.printStackTrace();
             }

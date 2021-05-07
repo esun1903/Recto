@@ -79,15 +79,15 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
                 }
                 else {
                     Boolean cardPrivate = myApp.getCardPrivate();
-                    Boolean cardOnlyPhoto = myApp.getCardOnlyPhoto();
+                    Integer cardDesign = myApp.getCardDesign();
 
-                    if (cardPrivate && cardOnlyPhoto) {
+                    if (cardPrivate && (cardDesign == 1)) {
                         mainActivity.setFragment("create_writeinfo_pron");
-                    } else if (cardPrivate && !cardOnlyPhoto) {
+                    } else if (cardPrivate && (cardDesign == 2)) {
                         mainActivity.setFragment("create_writeinfo_prph");
-                    } else if (!cardPrivate && cardOnlyPhoto) {
+                    } else if (!cardPrivate && (cardDesign == 1)) {
                         mainActivity.setFragment("create_writeinfo_puon");
-                    } else if (!cardPrivate && !cardOnlyPhoto) {
+                    } else if (!cardPrivate && (cardDesign == 2)) {
                         mainActivity.setFragment("create_writeinfo_puph");
                     }
                 }

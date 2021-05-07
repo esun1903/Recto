@@ -22,7 +22,7 @@ public class CreateFragment_2_SelectDesign extends Fragment {
     private ImageButton ib_phrases;
     private Button btn_previous;
     private Button btn_next;
-    private Boolean cardOnlyPhoto;
+    private Integer cardDesign;
 
     @Override
     public void onAttach(Context context) {
@@ -46,12 +46,12 @@ public class CreateFragment_2_SelectDesign extends Fragment {
         ib_phrases = view.findViewById(R.id.ib_phrases);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
-        cardOnlyPhoto = null;
+        cardDesign = 0;
 
         ib_onlyphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardOnlyPhoto = Boolean.TRUE;
+                cardDesign = 1;
                 ib_onlyphoto.setImageResource(R.drawable.onlyphoto_frame_clicked);
                 ib_phrases.setImageResource(R.drawable.phrases_frame);
             }
@@ -60,7 +60,7 @@ public class CreateFragment_2_SelectDesign extends Fragment {
         ib_phrases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardOnlyPhoto = Boolean.FALSE;
+                cardDesign = 2;
                 ib_onlyphoto.setImageResource(R.drawable.onlyphoto_frame);
                 ib_phrases.setImageResource(R.drawable.phrases_frame_clicked);
             }
@@ -76,10 +76,10 @@ public class CreateFragment_2_SelectDesign extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cardOnlyPhoto == null) {
+                if (cardDesign == 0) {
                     Toast.makeText(getActivity(), "옵션을 하나 선택해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    myApp.setCardOnlyPhoto(cardOnlyPhoto);
+                    myApp.setCardDesign(cardDesign);
                     mainActivity.setFragment("create_selectvideo");
                 }
             }
