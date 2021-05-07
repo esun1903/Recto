@@ -23,7 +23,7 @@ public class MattermostSender {
 
     @Value("${notification.mattermost.enabled}")
     private boolean mmEnabled;
-    @Value("https://meeting.ssafy.com/hooks/3sgeyo5mtinjuy1p3hy8gjo68a")
+    @Value("https://meeting.ssafy.com/hooks/eu6us6pjbt8978736w9t9iu9pr")
     private String webhookUrl;
 
     @Autowired
