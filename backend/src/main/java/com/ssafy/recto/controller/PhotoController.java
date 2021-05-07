@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -50,24 +52,29 @@ public class PhotoController {
 	public ResponseEntity<String> insertPhoto(@RequestBody @ApiParam(value = "포토카드 정보", required = true) Photo photo)
 			throws Exception {
 		logger.info("insertPhoto - 호출");
-
-		if (photoService.insertPhoto(photo)) {
+		String year = photo.photo_date.substring(0,4);
+		String month = photo.photo_date.substring(4,6);
+		String day = photo.photo_date.substring(6,8);
+		String sum = year+"-"+month+"-"+day;
+		System.out.println(sum);
+		LocalDate date = LocalDate.parse(sum, DateTimeFormatter.ISO_DATE);
+		if (photoService.insertPhoto(photo,date)) {
 			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(FAIL, HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "포토카드 정보 수정", notes = "포토카드 정보를 수정한다.", response = Photo.class)
-	@PutMapping
-	public ResponseEntity<String> modifyPhoto(@RequestBody Photo photo) throws Exception {
-		logger.info("updateQuestion - 호출");
-
-		if (photoService.modifyPhoto(photo)) {
-			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
-		}
-
-		return new ResponseEntity<>(FAIL, HttpStatus.OK);
-	}
+//	@ApiOperation(value = "포토카드 정보 수정", notes = "포토카드 정보를 수정한다.", response = Photo.class)
+//	@PutMapping
+//	public ResponseEntity<String> modifyPhoto(@RequestBody Photo photo) throws Exception {
+//		logger.info("updateQuestion - 호출");
+//
+//		if (photoService.modifyPhoto(photo)) {
+//			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+//		}
+//
+//		return new ResponseEntity<>(FAIL, HttpStatus.OK);
+//	}
 
 	@ApiOperation(value = "포토카드 삭제", notes = "포토카드 정보를 삭제한다.", response = Photo.class)
 	@DeleteMapping

@@ -18,7 +18,7 @@ public class Photo {
     @ApiModelProperty(value = "사진 식별 ID")
     public  String photo_id;
     @ApiModelProperty(value = "사진 촬영 시간")
-    public LocalDate photo_date;
+    public String photo_date;
     @ApiModelProperty(value = "사진 주소")
     public  String photo_url;
     @ApiModelProperty(value = "동영상 주소")
@@ -31,5 +31,4 @@ public class Photo {
     public  int design;
     @ApiModelProperty(value = "공개/비공개")
     public  boolean publication;
-
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -19,8 +20,8 @@ public class PhotoService {
 		this.sqlSession = sqlSession;
 	}
 	
-	public boolean insertPhoto(Photo photo){
-		return sqlSession.getMapper(PhotoMapper.class).insertPhoto(photo) == 1;
+	public boolean insertPhoto(Photo photo, LocalDate date){
+		return sqlSession.getMapper(PhotoMapper.class).insertPhoto(photo,date) == 1;
 	}
 
 	public Photo getPhoto(String photo_id) throws Exception{
@@ -33,9 +34,9 @@ public class PhotoService {
 		return sqlSession.getMapper(PhotoMapper.class).getPhotoList(user_seq);
 	}
 
-	public boolean modifyPhoto(Photo photo) throws Exception {
-		return sqlSession.getMapper(PhotoMapper.class).modifyPhoto(photo) == 1;
-	}
+//	public boolean modifyPhoto(Photo photo) throws Exception {
+//		return sqlSession.getMapper(PhotoMapper.class).modifyPhoto(photo) == 1;
+//	}
 
 	public boolean deletePhoto(int photo_seq) throws Exception {
 		return sqlSession.getMapper(PhotoMapper.class).deletePhoto(photo_seq) == 1 ;
