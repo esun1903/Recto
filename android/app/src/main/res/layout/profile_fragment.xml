@@ -35,13 +35,13 @@
 
             <!-- hello_user -->
             <TextView
+                android:id="@+id/tv_hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_margin="3dp"
+                android:layout_margin="8dp"
                 android:layout_toEndOf="@+id/iv_publicProfile"
                 android:layout_toRightOf="@+id/iv_publicProfile"
-                android:text="@string/hello_user"
                 android:textSize="20sp"
                 tools:ignore="RelativeOverlap" />
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,17 +18,24 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Objects;
 
 public class ProfileFragment extends Fragment {
 
     MainActivity mainActivity;
-    private View view;
-    private FragmentPagerAdapter fragmentPagerAdapter;
     ViewPager viewPager;
     TabLayout tabLayout;
+    private View view;
+    private FragmentPagerAdapter fragmentPagerAdapter;
     private FirebaseAuth mFirebaseAuth;
+    private DatabaseReference mDatabaseRef; // 실시간 데이터베이스
+    private TextView tv_hello;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -56,7 +64,26 @@ public class ProfileFragment extends Fragment {
         viewPager.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance(); // 유저 계정 정보 가져오기
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
+        UserAccount account = new UserAccount();
+        String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
+        DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
+//            Log.e("닉네임", String.valueOf(UserNickname));
+
+        UserNickname.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tv_hello = view.findViewById(R.id.tv_hello);
+                String nickname = snapshot.getValue(String.class);
+                tv_hello.setText(nickname + "님, 반갑습니다.");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
         // 로그아웃 버튼
         Button btn_logout = view.findViewById(R.id.btn_logout);
