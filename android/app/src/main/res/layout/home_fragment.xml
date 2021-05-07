@@ -10,23 +10,17 @@
         android:id="@+id/tv_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="ID"
         android:textSize="24sp"
         android:fontFamily="@font/jeju_myeongjo" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="&quot;당신의 모먼트를 기록해보세요.&quot;"
-        android:textSize="20sp"
-        android:gravity="center" />
-
     <View
+        android:id="@+id/upline"
         android:layout_width="280dp"
         android:layout_height="2dp"
         android:background="@color/brown"

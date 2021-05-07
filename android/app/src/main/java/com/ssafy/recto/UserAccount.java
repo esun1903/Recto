@@ -48,7 +48,8 @@ public class UserAccount {
         return nickname;
     }
 
-    public void setNickname(String nickname) {
+    public String setNickname(String nickname) {
         this.nickname = nickname;
+        return nickname;
     }
 }
