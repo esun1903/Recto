@@ -1,6 +1,8 @@
 package com.ssafy.recto;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragmentGift profileFragmentGift;
     private ProfileFragmentGiftDetail profileFragmentGiftDetail;
     private InfoFragment infoFragment;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -70,7 +78,15 @@ public class MainActivity extends AppCompatActivity {
                         setFragment("home");
                         break;
                     case R.id.nav_create:
-                        setFragment("create_selectopen");
+                        try {
+                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+                            UserAccount account = new UserAccount();
+                            String UserUid = account.setIdToken(firebaseUser.getUid());
+                            setFragment("create_selectopen");
+                        } catch (Exception e) {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.nav_scan:
                         setFragment("scan");
@@ -79,7 +95,15 @@ public class MainActivity extends AppCompatActivity {
                         setFragment("public");
                         break;
                     case R.id.nav_profile:
-                        setFragment("profile");
+                        try {
+                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+                            UserAccount account = new UserAccount();
+                            String UserUid = account.setIdToken(firebaseUser.getUid());
+                            setFragment("profile");
+                        } catch (Exception e) {
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                 }
                 return true;

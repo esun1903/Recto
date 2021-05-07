@@ -67,26 +67,7 @@ public class HomeFragment extends Fragment {
 
         MyListDecoration decoration = new MyListDecoration();
         listview.addItemDecoration(decoration);
-
-        Button btn_log = view.findViewById(R.id.btn_log);
-        btn_log.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btn_regi = view.findViewById(R.id.btn_regi);
-        btn_regi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
     }
-
 
     private View.OnClickListener onClickItem = new View.OnClickListener() {
         @Override
