@@ -47,6 +47,7 @@ public class PhotoController {
 		return photoService.getPhotoList(user_seq);
 	}
 
+
 	@ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
 	@PostMapping
 	public ResponseEntity<String> insertPhoto(@RequestBody @ApiParam(value = "포토카드 정보", required = true) Photo photo)
