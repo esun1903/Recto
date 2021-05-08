@@ -21,6 +21,9 @@ public interface PhotoMapper {
 	@Select("SELECT * FROM photo WHERE user_seq = #{user_seq}")
 	public List<Photo> getPhotoList(@Param("user_seq") int user_seq);
 
+	@Select("SELECT COUNT(*) FROM photo WHERE photo_id LIKE CONCAT(#{nowDay}, '%')")
+	public int allPhoto(@Param("nowDay")String nowDay);
+//	CONCAT(‘%’, #{searchKeyword},
 //	@Update("update photo set " + "photo_date = #{photo.photo_date}, " + "photo_url = #{photo.photo_url}, "
 //			+ "video_url = #{photo.video_url}, " + "phrase = #{photo.phrase}, "
 //			+ "photo_pwd = #{photo.photo_pwd}, " + "design =  #{photo.design}, " + "publication = #{photo.publication}"
@@ -29,4 +32,6 @@ public interface PhotoMapper {
 
 	@Delete("delete from photo where photo_seq = #{photo_seq}")
 	public int deletePhoto(@Param("photo_seq") int photo_seq);
+
+
 }
