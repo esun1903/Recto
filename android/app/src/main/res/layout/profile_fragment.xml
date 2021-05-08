@@ -35,25 +35,27 @@
 
             <!-- hello_user -->
             <TextView
+                android:id="@+id/tv_hello"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_margin="3dp"
+                android:layout_margin="8dp"
                 android:layout_toEndOf="@+id/iv_publicProfile"
                 android:layout_toRightOf="@+id/iv_publicProfile"
-                android:text="@string/hello_user"
                 android:textSize="20sp"
                 android:fontFamily="@font/eulyoo1945_semibold"
                 tools:ignore="RelativeOverlap" />
 
             <!-- edit button -->
             <Button
-                android:layout_width="60dp"
+                android:id="@+id/btn_logout"
+                android:layout_width="70dp"
                 android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="@string/edit"
+                android:text="LOGOUT"
+                android:fontFamily="@font/eulyoo1945_semibold"
                 android:textColor="@color/white"
                 android:textSize="10sp"
                 app:backgroundTint="@color/brown"

@@ -17,44 +17,32 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="10dp"
+            android:layout_gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- 프로필 이미지 -->
+            <!-- 카메라 이미지 -->
             <ImageView
                 android:id="@+id/iv_publicProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/profile"
-                android:src="@drawable/profile" />
+                android:src="@drawable/recto_red_lens" />
 
-            <!-- hello_user -->
+            <!-- 자료실 설명 멘트 -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_margin="3dp"
+                android:layout_margin="8dp"
                 android:layout_toEndOf="@+id/iv_publicProfile"
                 android:layout_toRightOf="@+id/iv_publicProfile"
-                android:text="@string/hello_user"
+                android:text="무료 제공 포토카드를 즐기세요!"
                 android:textSize="20sp"
+                android:fontFamily="@font/jeju_myeongjo"
                 tools:ignore="RelativeOverlap" />
-
-            <!-- edit button -->
-            <Button
-                android:layout_width="60dp"
-                android:layout_height="35dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="@string/edit"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                app:backgroundTint="@color/brown"
-                app:cornerRadius="10dp"
-                tools:ignore="SmallSp" />
 
         </RelativeLayout>
 
@@ -66,6 +54,7 @@
             android:gravity="center"
             android:text="@string/for_free"
             android:textSize="20sp"
+            android:fontFamily="@font/eulyoo1945_semibold"
             app:layout_constraintStart_toStartOf="@+id/linearLayoutPublicProfile"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutPublicProfile"
             tools:ignore="MissingConstraints" />
