@@ -69,4 +69,8 @@ public class PhotoService {
 	public boolean deletePhoto(int photo_seq) throws Exception {
 		return sqlSession.getMapper(PhotoMapper.class).deletePhoto(photo_seq) == 1 ;
 	}
+
+	public List<Photo> getSamplePhotoList() {
+		return sqlSession.getMapper(PhotoMapper.class).getSamplePhotoList() ;
+	}
 }

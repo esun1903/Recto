@@ -65,6 +65,13 @@ public class PhotoController {
 		return new ResponseEntity<>(FAIL, HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "포토카드 샘플 목록", notes = "포토카드 샘플 목록을 반환한다.", response = Photo.class)
+	@GetMapping("/samplePhotolist")
+	public List<Photo> getPhotoList() throws Exception {
+		logger.info("getSamplePhotoList - 호출");
+		return photoService.getSamplePhotoList();
+	}
+
 //	@ApiOperation(value = "포토카드 정보 수정", notes = "포토카드 정보를 수정한다.", response = Photo.class)
 //	@PutMapping
 //	public ResponseEntity<String> modifyPhoto(@RequestBody Photo photo) throws Exception {
