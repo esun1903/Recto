@@ -42,7 +42,7 @@
                 android:layout_margin="8dp"
                 android:layout_toEndOf="@+id/iv_publicProfile"
                 android:layout_toRightOf="@+id/iv_publicProfile"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:fontFamily="@font/eulyoo1945_semibold"
                 tools:ignore="RelativeOverlap" />
 
