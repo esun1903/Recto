@@ -22,7 +22,7 @@ public class CreateFragment_1_SelectOpen extends Fragment {
     private ImageButton ib_public;
     private Button btn_previous;
     private Button btn_next;
-    private Boolean cardPrivate;
+    private Boolean cardPublic;
 
     @Override
     public void onAttach(Context context) {
@@ -46,12 +46,12 @@ public class CreateFragment_1_SelectOpen extends Fragment {
         ib_public = view.findViewById(R.id.ib_public);
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
-        cardPrivate = null;
+        cardPublic = null;
 
         ib_private.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardPrivate = Boolean.TRUE;
+                cardPublic = Boolean.FALSE;
                 ib_private.setImageResource(R.drawable.private_card_clicked);
                 ib_public.setImageResource(R.drawable.public_card);
             }
@@ -60,7 +60,7 @@ public class CreateFragment_1_SelectOpen extends Fragment {
         ib_public.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cardPrivate = Boolean.FALSE;
+                cardPublic = Boolean.TRUE;
                 ib_private.setImageResource(R.drawable.private_card);
                 ib_public.setImageResource(R.drawable.public_card_clicked);
             }
@@ -76,11 +76,11 @@ public class CreateFragment_1_SelectOpen extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cardPrivate == null) {
+                if (cardPublic == null) {
                     Toast.makeText(getActivity(), "옵션을 하나 선택해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    myApp.setCardPrivate(cardPrivate);
+                    myApp.setCardPublic(cardPublic);
                     mainActivity.setFragment("create_selectdesign");
                 }
             }
