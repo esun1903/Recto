@@ -93,22 +93,9 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-                Boolean cardPrivate = myApp.getCardPrivate();
-                Integer cardDesign = myApp.getCardDesign();
-
-                if (cardPrivate && (cardDesign == 1)) {
-                    mainActivity.setFragment("create_writeinfo_pron");
-                } else if (cardPrivate && (cardDesign == 2)) {
-                    mainActivity.setFragment("create_writeinfo_prph");
-                } else if (!cardPrivate && (cardDesign == 1)) {
-                    mainActivity.setFragment("create_writeinfo_puon");
-                } else if (!cardPrivate && (cardDesign == 2)) {
-=======
                 if (cardPublic && (cardDesign == 1)) {
                     mainActivity.setFragment("create_writeinfo_puon");
                 } else if (cardPublic && (cardDesign == 2)) {
->>>>>>> 03ea468 (feat: ✨ APP 사진형 카드 제작 API 연결)
                     mainActivity.setFragment("create_writeinfo_puph");
                 } else if (!cardPublic && (cardDesign == 1)) {
                     mainActivity.setFragment("create_writeinfo_pron");
