@@ -2,7 +2,6 @@ package com.ssafy.recto;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,9 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ssafy.recto.arcore.ArMainActivity;
 
@@ -38,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private CreateFragment_5_WriteInfo_puon createFragment5WriteInfoPuon;
     private CreateFragment_6_Success_onlyphoto createFragment6SuccessOnlyPhoto;
     private CreateFragment_6_Success_phrases createFragment6SuccessPhrases;
-    private ScanFragment scanFragment;
     private PublicFragment publicFragment;
     private PublicFragmentCardDetail publicFragmentCardDetail;
     private ProfileFragment profileFragment;
@@ -90,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.nav_scan:
-//                        setFragment("scan");
                         Intent intentScan = new Intent(MainActivity.this, ArMainActivity.class);
                         startActivity(intentScan);
                         break;
@@ -124,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         createFragment5WriteInfoPuon = new CreateFragment_5_WriteInfo_puon();
         createFragment6SuccessOnlyPhoto = new CreateFragment_6_Success_onlyphoto();
         createFragment6SuccessPhrases = new CreateFragment_6_Success_phrases();
-        scanFragment = new ScanFragment();
         publicFragment = new PublicFragment();
         publicFragmentCardDetail = new PublicFragmentCardDetail();
         profileFragment = new ProfileFragment();
@@ -184,10 +179,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "create_success_phrases":
                 ft.replace(R.id.main_frame, createFragment6SuccessPhrases);
-                ft.commit();
-                break;
-            case "scan":
-                ft.replace(R.id.main_frame, scanFragment);
                 ft.commit();
                 break;
             case "public":

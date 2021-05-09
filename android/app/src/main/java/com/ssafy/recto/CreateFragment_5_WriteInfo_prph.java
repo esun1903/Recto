@@ -31,7 +31,7 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
     private Button btn_next;
     private EditText et_text;
     private static TextView tv_date;
-    public static int year, month, day;
+    public static int cyear, cmonth, cday;
     private EditText et_password;
 
     @Override
@@ -60,9 +60,9 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
         et_password = view.findViewById(R.id.et_password);
 
         Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
+        cyear = calendar.get(Calendar.YEAR);
+        cmonth = calendar.get(Calendar.MONTH);
+        cday = calendar.get(Calendar.DAY_OF_MONTH);
 
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +80,16 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
                 else {
                     myApp.setCardPhrases(String.valueOf(et_text.getText()));
                     myApp.setCardDate(String.valueOf(tv_date.getText()));
+                    String y = String.valueOf(cyear);
+                    String m = String.valueOf(cmonth);
+                    String d = String.valueOf(cday);
+                    if (cmonth < 10) {
+                        m = "0" + cmonth;
+                    }
+                    if (cday < 10) {
+                        d = "0" + cday;
+                    }
+                    myApp.setCardDateNum(y + m + d);
                     myApp.setCardPassword(String.valueOf(et_password.getText()));
                     mainActivity.setFragment("create_success_phrases");
                 }
@@ -101,12 +111,15 @@ public class CreateFragment_5_WriteInfo_prph extends Fragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            DatePickerDialog theme_holo_light = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, this, year, month, day);
+            DatePickerDialog theme_holo_light = new DatePickerDialog(getActivity(), AlertDialog.THEME_HOLO_LIGHT, this, cyear, cmonth, cday);
             return theme_holo_light;
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             String date = year + "년 " + (month+1) + "월 " + day + "일";
+            cyear = year;
+            cmonth = month+1;
+            cday = day;
             tv_date.setText(date);
         }
     }

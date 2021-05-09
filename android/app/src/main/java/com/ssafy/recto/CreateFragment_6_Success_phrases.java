@@ -31,17 +31,20 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     MyApplication myApp;
     ApiInterface api;
     private View view;
+
     private Button btn_previous;
     private Button btn_next;
+    private ImageView iv_photo;
     private TextView tv_date;
     private TextView tv_phrases;
-    private ImageView iv_photo;
-    private Boolean cardPrivate;
+
+    private Boolean cardPublic;
     private Integer cardDesign;
     private String cardVideo;
     private String cardPhoto;
     private String cardPhrases;
     private String cardDate;
+    private String cardDateNum;
     private String cardPassword;
 
     @Override
@@ -62,35 +65,28 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         myApp = (MyApplication) getActivity().getApplication();
-        view = inflater.inflate(R.layout.create_fragment_6_success_phrases, container, false);
         api = HttpClient.getRetrofit().create( ApiInterface.class );
+        view = inflater.inflate(R.layout.create_fragment_6_success_phrases, container, false);
+
+        cardPublic = myApp.getCardPublic();
+        cardDesign = myApp.getCardDesign();
+        cardVideo = myApp.getCardVideo();
+        cardPhrases = myApp.getCardPhrases();
+        cardDateNum = myApp.getCardDateNum();
+        cardPassword = myApp.getCardPassword();
+
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
         tv_date = view.findViewById(R.id.tv_date);
         tv_phrases = view.findViewById(R.id.tv_phrases);
         iv_photo = view.findViewById(R.id.iv_photo);
 
-        tv_date.setText(myApp.getCardDate());
-        tv_phrases.setText(myApp.getCardPhrases());
-
-        cardPrivate = myApp.getCardPrivate();
-        cardDesign = myApp.getCardDesign();
-        cardVideo = myApp.getCardVideo();
-        cardPhoto = myApp.getCardPhoto();
-        cardPhrases = myApp.getCardPhrases();
-        cardDate = myApp.getCardDate();
-        cardPassword = myApp.getCardPassword();
-
-//        Log.e("private", String.valueOf(cardPrivate));
-//        Log.e("des", String.valueOf(cardDesign));
-//        Log.e("vi", cardVideo);
-//        Log.e("ph", cardPhoto);
-//        Log.e("pr", cardPhrases);
-//        Log.e("da", cardDate);
-//        Log.e("pwd", cardPassword);
+        tv_date.setText(cardDate);
+        tv_phrases.setText(cardPhrases);
 
         try {
             String imgpath = getActivity().getCacheDir() + "/photo";   // 내부 저장소에 저장되어 있는 이미지 경로
+            myApp.setCardPhoto(imgpath);
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             iv_photo.setImageBitmap(bm);
         } catch (Exception e) {
@@ -100,14 +96,14 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cardPrivate && (cardDesign == 1)) {
-                    mainActivity.setFragment("create_writeinfo_pron");
-                } else if (cardPrivate && (cardDesign == 2)) {
-                    mainActivity.setFragment("create_writeinfo_prph");
-                } else if (!cardPrivate && (cardDesign == 1)) {
+                if (cardPublic && (cardDesign == 1)) {
                     mainActivity.setFragment("create_writeinfo_puon");
-                } else if (!cardPrivate && (cardDesign == 2)) {
+                } else if (cardPublic && (cardDesign == 2)) {
                     mainActivity.setFragment("create_writeinfo_puph");
+                } else if (!cardPublic && (cardDesign == 1)) {
+                    mainActivity.setFragment("create_writeinfo_pron");
+                } else if (!cardPublic && (cardDesign == 2)) {
+                    mainActivity.setFragment("create_writeinfo_prph");
                 }
             }
         });
@@ -117,10 +113,11 @@ public class CreateFragment_6_Success_phrases extends Fragment {
             public void onClick(View v) {
                 try {
                     requestPost();
+                    Toast.makeText(getContext(), "포토카드 생성에 성공하셨습니다:>", Toast.LENGTH_SHORT).show();
+                    mainActivity.setFragment("home");
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                // mainActivity.setFragment("home");
             }
         });
 
@@ -128,16 +125,15 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     }
 
     public void requestPost() throws ParseException {
-        //  cardVideo, cardPhoto
-        //  ReqCreateCardData reqCreateCardData = new ReqCreateCardData(1, cardPrivate, cardDesign, "/video", "/photo", cardPhrases, "20200203", cardPassword, "500000001", 501);
-        ReqCreateCardData reqCreateCardData = new ReqCreateCardData(1, false, 1, "/video", "/photo", "galinjisunda", "20200203", "2580", "500000015", 515);
+        cardPhoto = myApp.getCardPhoto();
+        ReqCreateCardData reqCreateCardData = new ReqCreateCardData(1, cardPublic, cardDesign, cardVideo, cardPhoto, cardPhrases, cardDateNum, cardPassword);
 
         Call<String> call = api.requestCreateCard(reqCreateCardData);
 
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.e("success", "success yeeeeee :>" + response);
+                Log.e("success", "yeeeeee :>" + response);
             }
 
             @Override
