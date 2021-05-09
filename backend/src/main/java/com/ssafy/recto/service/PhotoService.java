@@ -38,11 +38,11 @@ public class PhotoService {
 		System.out.println("Date: "+str);
 		int count = sqlSession.getMapper(PhotoMapper.class).allPhoto(str);
 
-		if(count<10){
+		if(count<9){
 			photo.photo_id = str + "00"+Integer.toString(count+1);
-		}else if(10<=count&& count<100){
+		}else if(9<=count&& count<98){
 			photo.photo_id = str + "0"+Integer.toString(count+1);
-		}else if(100<=count&& count<1000){
+		}else if(99<=count&& count<999){
 			photo.photo_id = str +Integer.toString(count+1);
 		}
 

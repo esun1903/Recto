@@ -3,6 +3,7 @@ package com.ssafy.recto.controller;
 import com.ssafy.recto.dto.Photo;
 import com.ssafy.recto.dto.User;
 import com.ssafy.recto.service.PhotoService;
+import com.ssafy.recto.service.S3FileUploadService;
 import com.ssafy.recto.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -30,6 +32,9 @@ public class PhotoController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private S3FileUploadService fileUploadService;
 
 	@ApiOperation(value = "포토카드 ID로 검색", notes = "포토카드 ID로 검색", response = Photo.class)
 	@GetMapping("/{photo_id}")
@@ -50,7 +55,7 @@ public class PhotoController {
 
 	@ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
 	@PostMapping
-	public ResponseEntity<String> insertPhoto(@RequestBody @ApiParam(value = "포토카드 정보", required = true) Photo photo)
+	public ResponseEntity<String> insertPhoto(@ApiParam(value = "포토카드 정보", required = false) Photo photo)
 			throws Exception {
 		logger.info("insertPhoto - 호출");
 		String year = photo.photo_date.substring(0,4);
@@ -59,6 +64,15 @@ public class PhotoController {
 		String sum = year+"-"+month+"-"+day;
 		System.out.println(sum);
 		LocalDate date = LocalDate.parse(sum, DateTimeFormatter.ISO_DATE);
+		try{
+			if(photo.photo_url!= null && photo.video_url!= null){
+				photo.setPhoto_str(fileUploadService.upload(photo.getPhoto_url()));
+				photo.setVideo_str(fileUploadService.upload(photo.getVideo_url()));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		if (photoService.insertPhoto(photo,date)) {
 			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
 		}
