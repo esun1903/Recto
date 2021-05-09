@@ -2,13 +2,9 @@ package com.ssafy.recto;
 
 import android.app.Application;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-@AllArgsConstructor
 public class MyApplication extends Application {
     private Boolean cardPublic;
     private Integer cardDesign;
