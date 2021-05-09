@@ -33,5 +33,6 @@ public interface PhotoMapper {
 	@Delete("delete from photo where photo_seq = #{photo_seq}")
 	public int deletePhoto(@Param("photo_seq") int photo_seq);
 
-
+	@Select("SELECT * FROM photo WHERE photo_seq >= 1 AND photo_seq <= 30")
+	List<Photo> getSamplePhotoList();
 }
