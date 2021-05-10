@@ -12,8 +12,8 @@ public interface UserMapper {
 	@Select("select * from User where user_id = #{user_id}")
 	public User userInfo(@Param("user_id") String user_id);
 
-	@Insert("insert INTO User ( user_seq, user_id, user_pwd, user_nickname, admin, user_image ) "
-			+ "VALUES ( #{user.user_seq}, #{user.user_id},#{user.user_pwd}, #{user.user_nickname}, #{user.admin}, #{user.user_image})")
+	@Insert("insert INTO User ( user_seq, user_id, user_pwd, user_nickname, admin ) "
+			+ "VALUES ( #{user.user_seq}, #{user.user_id},#{user.user_pwd}, #{user.user_nickname}, #{user.admin})")
 	@Options(useGeneratedKeys = true)
 	public int signUp(@Param("user") User user);
 
