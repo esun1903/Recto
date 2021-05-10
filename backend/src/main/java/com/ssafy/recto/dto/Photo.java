@@ -24,10 +24,8 @@ public class Photo {
     @ApiModelProperty(value = "사진 촬영 시간")
     public String photo_date;
 
-    @ApiModelProperty(value = "사진 주소")
     public MultipartFile photo_str;
 
-    @ApiModelProperty(value = "동영상 주소 ")
     public MultipartFile video_str;
 
     //DB에 넣어질 photo, video url

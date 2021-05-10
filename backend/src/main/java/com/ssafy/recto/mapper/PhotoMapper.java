@@ -10,8 +10,8 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface PhotoMapper {
 
-    @Insert("Insert INTO photo ( photo_seq, user_uid, photo_id, photo_date, photo_url, video_url, pharse, photo_pwd, design, publication) \n"
-            + "VALUES ( #{photo.photo_seq},#{photo.user_uid},#{photo.photo_id},#{date},#{photo.photo_url},#{photo.video_url},#{photo.pharse}," +
+    @Insert("Insert INTO photo (  user_uid, photo_id, photo_date, photo_url, video_url, pharse, photo_pwd, design, publication) \n"
+            + "VALUES ( #{photo.user_uid},#{photo.photo_id},#{date},#{photo.photo_url},#{photo.video_url},#{photo.pharse}," +
             " #{photo.photo_pwd},#{photo.design},#{photo.publication})")
     @Options(useGeneratedKeys = true)
     public int insertPhoto(@Param("photo") Photo photo, @Param("date") LocalDate date);

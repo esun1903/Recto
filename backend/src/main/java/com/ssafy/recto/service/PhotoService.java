@@ -48,7 +48,6 @@ public class PhotoService {
 
 		//만약 3자리면 넘어가고 ->
 		//만약 2자리면
-
 		return sqlSession.getMapper(PhotoMapper.class).insertPhoto(photo,date) == 1;
 	}
 
