@@ -47,9 +47,9 @@ public class PhotoController {
 	@ApiOperation(value = "포토카드 목록", notes = "포토카드 목록을 반환한다.", response = Photo.class)
 	@GetMapping("/list")
 	public List<Photo> getPhotoList(
-			@RequestParam("user_seq") @ApiParam(value = "회원 식별자", required = true) int user_seq) throws Exception {
+			@RequestParam("user_uid") @ApiParam(value = "회원 식별자", required = true) String user_uid) throws Exception {
 		logger.info("getPhotoList - 호출");
-		return photoService.getPhotoList(user_seq);
+		return photoService.getPhotoList(user_uid);
 	}
 
 
