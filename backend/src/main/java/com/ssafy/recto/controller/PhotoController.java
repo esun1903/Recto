@@ -65,13 +65,16 @@ public class PhotoController {
 		System.out.println(sum);
 		LocalDate date = LocalDate.parse(sum, DateTimeFormatter.ISO_DATE);
 		try{
-			if(photo.photo_url!= null && photo.video_url!= null){
-				photo.setPhoto_url(fileUploadService.upload(photo.getPhoto_str()));
-				photo.setVideo_url(fileUploadService.upload(photo.getVideo_str()));
-			}
+
+			photo.setVideo_url(fileUploadService.upload(photo.getVideo_str()));
+			photo.setPhoto_url(fileUploadService.upload(photo.getPhoto_str()));
+
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+
 
 		if (photoService.insertPhoto(photo,date)) {
 			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
