@@ -27,15 +27,16 @@ public class Photo {
     @ApiModelProperty(value = "사진 주소")
     public MultipartFile photo_str;
 
-    @ApiModelProperty(value = "동영상 ")
+    @ApiModelProperty(value = "동영상 주소 ")
     public MultipartFile video_str;
 
     //DB에 넣어질 photo, video url
     @ApiModelProperty(value = "사진 주소")
     public String photo_url;
+
     @ApiModelProperty(value = "동영상 주소")
     public String video_url;
-    
+
     @ApiModelProperty(value = "문구")
     public String phrase;
 
