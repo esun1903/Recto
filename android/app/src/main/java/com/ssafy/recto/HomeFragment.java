@@ -92,6 +92,13 @@ public class HomeFragment extends Fragment {
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
+            // 구글 로그인 시 닉네임 받아오기!
+//            try {
+//                Intent intent = Intent.getIntent();
+//                String nickName = intent.getStringExtra("nickName")
+//                tv_id
+//            } finally {
+//            }
         } catch (Exception e) {
             tv_id = view.findViewById(R.id.tv_id);
             tv_id.setText("당신의 Moment를 기록해보세요.");

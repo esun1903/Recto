@@ -15,7 +15,7 @@
         android:layout_marginTop="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:ems="12"
+        android:ems="15"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:fontFamily="@font/jeju_myeongjo"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:ems="12"
+        android:ems="15"
         android:hint="Password"
         android:inputType="textPassword"
         android:fontFamily="@font/jeju_myeongjo"
@@ -51,6 +51,39 @@
         app:layout_constraintStart_toStartOf="@+id/et_pwd"
         app:layout_constraintTop_toBottomOf="@+id/et_pwd" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/btn_google"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@color/brown"
+        app:layout_constraintEnd_toEndOf="@+id/btn_google"
+        app:layout_constraintStart_toStartOf="@+id/btn_google"
+        app:layout_constraintTop_toBottomOf="@+id/btn_google" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="아직 회원이 아니신가요?"
+        android:textSize="16sp"
+        android:fontFamily="@font/eulyoo1945_regular"
+        app:layout_constraintEnd_toStartOf="@+id/btn_register"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
     <Button
         android:id="@+id/btn_register"
         android:layout_width="0dp"
@@ -58,8 +91,8 @@
         android:layout_marginTop="16dp"
         android:text="Join"
         android:fontFamily="@font/eulyoo1945_semibold"
-        android:backgroundTint="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/btn_login"
-        app:layout_constraintStart_toStartOf="@+id/btn_login"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        android:textColor="@color/white"
+        android:backgroundTint="@color/brown"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 </androidx.constraintlayout.widget.ConstraintLayout>
