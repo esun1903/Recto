@@ -17,6 +17,27 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ssafy.recto.arcore.ArMainActivity;
+import com.ssafy.recto.createcard.CreateFragment_1_SelectOpen;
+import com.ssafy.recto.createcard.CreateFragment_2_SelectDesign;
+import com.ssafy.recto.createcard.CreateFragment_3_SelectVideo;
+import com.ssafy.recto.createcard.CreateFragment_4_SelectPhoto;
+import com.ssafy.recto.createcard.CreateFragment_5_WriteInfo_pron;
+import com.ssafy.recto.createcard.CreateFragment_5_WriteInfo_prph;
+import com.ssafy.recto.createcard.CreateFragment_5_WriteInfo_puon;
+import com.ssafy.recto.createcard.CreateFragment_5_WriteInfo_puph;
+import com.ssafy.recto.createcard.CreateFragment_6_Success_onlyphoto;
+import com.ssafy.recto.createcard.CreateFragment_6_Success_phrases;
+import com.ssafy.recto.home.HomeFragment;
+import com.ssafy.recto.home.InfoFragment;
+import com.ssafy.recto.mypage.ProfileFragment;
+import com.ssafy.recto.mypage.ProfileFragmentGift;
+import com.ssafy.recto.mypage.ProfileFragmentGiftDetail;
+import com.ssafy.recto.mypage.ProfileFragmentMine;
+import com.ssafy.recto.mypage.ProfileFragmentMineDetail;
+import com.ssafy.recto.publiccard.PublicFragment;
+import com.ssafy.recto.publiccard.PublicFragmentCardDetail;
+import com.ssafy.recto.user.LoginActivity;
+import com.ssafy.recto.user.UserAccount;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -133,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // fragment 교체
-    protected void setFragment(String str) {
+    public void setFragment(String str) {
         fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         switch (str) {
