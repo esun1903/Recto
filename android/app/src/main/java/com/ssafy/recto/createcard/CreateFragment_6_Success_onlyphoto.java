@@ -19,12 +19,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.ssafy.recto.ApiInterface;
-import com.ssafy.recto.HttpClient;
+import com.ssafy.recto.api.ApiInterface;
+import com.ssafy.recto.api.HttpClient;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.R;
-import com.ssafy.recto.CardData;
+import com.ssafy.recto.api.CardData;
 
 import java.text.ParseException;
 
