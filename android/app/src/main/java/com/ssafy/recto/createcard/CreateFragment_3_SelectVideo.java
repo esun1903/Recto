@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +23,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.ssafy.recto.MainActivity;
-import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.R;
+import com.ssafy.recto.config.MyApplication;
 
 public class CreateFragment_3_SelectVideo extends Fragment {
 
@@ -74,25 +73,22 @@ public class CreateFragment_3_SelectVideo extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fileUri == null) {
-                    Toast.makeText(getActivity(), "동영상을 업로드해주세요", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    mainActivity.setFragment("create_selectphoto");
-                }
+//                if (fileUri == null) {
+//                    Toast.makeText(getActivity(), "동영상을 업로드해주세요", Toast.LENGTH_SHORT).show();
+//                }
+//                else {
+//                    mainActivity.setFragment("create_selectphoto");
+//                }
+                mainActivity.setFragment("create_selectphoto");
             }
         });
 
         btn_selectvideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                //기기 기본 갤러리
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                //intent.setType("image/*");
-                //구글 갤러리
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent,101);
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(android.provider.MediaStore.Video.Media.CONTENT_TYPE);
+                startActivityForResult(intent, 101);
             }
         });
 

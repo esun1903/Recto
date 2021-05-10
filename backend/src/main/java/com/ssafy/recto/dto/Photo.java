@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -46,6 +47,7 @@ public class Photo {
 
     @ApiModelProperty(value = "공개/비공개")
     public boolean publication;
+
 
     public MultipartFile getPhoto_str() {
         return photo_str;
@@ -140,6 +142,16 @@ public class Photo {
     }
 
     public void setPublication(boolean publication) {
+    }
+
+    public Photo(String user_uid,   String video_url, String photo_url,String phrase, String photo_pwd, int design, boolean publication) {
+
+        this.user_uid = user_uid;
+        this.photo_url = photo_url;
+        this.video_url = video_url;
+        this.phrase = phrase;
+        this.photo_pwd = photo_pwd;
+        this.design = design;
         this.publication = publication;
     }
 }

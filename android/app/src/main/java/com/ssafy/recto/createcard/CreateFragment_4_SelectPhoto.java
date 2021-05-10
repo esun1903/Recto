@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -24,9 +25,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.ssafy.recto.MainActivity;
-import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.R;
+import com.ssafy.recto.config.MyApplication;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -101,13 +103,9 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         btn_selectphoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                //기기 기본 갤러리
-                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                //intent.setType("image/*");
-                //구글 갤러리
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent,101);
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+                startActivityForResult(intent, 101);
             }
         });
 
@@ -151,24 +149,46 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
-            try{
-                InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
-                bm = BitmapFactory.decodeStream(inputStream);
-                inputStream.close();
-                imageView.setImageBitmap(bm);
-                inputStream.close();
-                saveBitmapToJpeg(bm);
-            } catch (Exception e){
-                e.printStackTrace();
-            }
-        } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
-            Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
+//            try{
+//                InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+//                bm = BitmapFactory.decodeStream(inputStream);
+//                inputStream.close();
+//                imageView.setImageBitmap(bm);
+//                inputStream.close();
+//                saveBitmapToJpeg(bm);
+//            } catch (Exception e){
+//                e.printStackTrace();
+//            }
+//        } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
+//            Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
+//        }
+//    }
+@Override
+public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
+        try{
+            InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+            bm = BitmapFactory.decodeStream(inputStream);
+            inputStream.close();
+            imageView.setImageBitmap(bm);
+            inputStream.close();
+            saveBitmapToJpeg(bm);
 
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
+            myApp.setCardPhoto(String.valueOf(Uri.parse(path)));
+//                myApp.setCardPhoto(String.valueOf(data.getData()));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
+        Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
+    }
+}
     public void saveBitmapToJpeg(Bitmap bitmap) {
         File tempFile = new File(getActivity().getCacheDir(), "photo");
         try {

@@ -1,10 +1,13 @@
 package com.ssafy.recto.createcard;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +21,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.loader.content.CursorLoader;
 
 import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.HttpClient;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.R;
-import com.ssafy.recto.api.CardData;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
+
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -55,11 +61,12 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
     private String cardDate;
     private String cardDateNum;
     private String cardPassword;
+    String filePath = "";
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
+        mainActivity = (MainActivity) getActivity();
     }
 
     @Override
@@ -74,7 +81,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         myApp = (MyApplication) getActivity().getApplication();
-        api = HttpClient.getRetrofit().create( ApiInterface.class );
+        api = HttpClient.getRetrofit().create(ApiInterface.class);
         view = inflater.inflate(R.layout.create_fragment_6_success_onlyphoto, container, false);
 
         cardPublic = myApp.getCardPublic();
@@ -93,7 +100,6 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
 
         try {
             String imgpath = getActivity().getCacheDir() + "/photo";   // 내부 저장소에 저장되어 있는 이미지 경로
-            myApp.setCardPhoto(imgpath);
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             iv_photo.setImageBitmap(bm);
         } catch (Exception e) {
@@ -122,7 +128,9 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
                     requestPost();
                     Toast.makeText(getContext(), "포토카드 생성에 성공하셨습니다:>", Toast.LENGTH_SHORT).show();
                     mainActivity.setFragment("home");
-                } catch (ParseException e) {
+                } catch (ParseException | IOException e) {
+                    e.printStackTrace();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -131,18 +139,26 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         return view;
     }
 
-    public void requestPost() throws ParseException {
-        RequestBody videoBody = RequestBody.create(MediaType.parse("image/jpeg"), cardVideo);
-        MultipartBody.Part videoPart = MultipartBody.Part.createFormData("photo", "내맴", videoBody);
+
+    public void requestPost() throws Exception {
+
+        Uri videoUri = Uri.parse(cardVideo);
+        String str2 = getRealPathFromUri(videoUri);
+        File file2 = new File(str2);
+        RequestBody videoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file2);
+        MultipartBody.Part videoPart = MultipartBody.Part.createFormData("video", file2.getName(), videoBody);
+
 
         cardPhoto = myApp.getCardPhoto();
-        RequestBody photoBody = RequestBody.create(MediaType.parse("image/jpeg"), cardPhoto);
-        MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo", "내맴", photoBody);
+        Uri imageUri = Uri.parse(cardPhoto);
+        String str = getRealPathFromUri(imageUri);
+        File file = new File(str);
 
-        CardData cardData = new CardData("1", cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
+        RequestBody photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo", file.getName(), photoBody);
 
-        Call<String> call = api.requestCreateCard(cardData);
 
+        Call<String> call = api.requestCreateCard("1", cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -154,5 +170,18 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
                 Log.e("nooooo", "failed :<" + t);
             }
         });
+    }
+
+
+    //Uri -- > 절대경로로 바꿔서 리턴시켜주는 메소드
+    String getRealPathFromUri(Uri uri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getContext(), uri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
     }
 }
