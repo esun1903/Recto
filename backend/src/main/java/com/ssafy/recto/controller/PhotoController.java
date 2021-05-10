@@ -66,8 +66,8 @@ public class PhotoController {
 		LocalDate date = LocalDate.parse(sum, DateTimeFormatter.ISO_DATE);
 		try{
 			if(photo.photo_url!= null && photo.video_url!= null){
-				photo.setPhoto_str(fileUploadService.upload(photo.getPhoto_url()));
-				photo.setVideo_str(fileUploadService.upload(photo.getVideo_url()));
+				photo.setPhoto_url(fileUploadService.upload(photo.getPhoto_str()));
+				photo.setVideo_url(fileUploadService.upload(photo.getVideo_str()));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
