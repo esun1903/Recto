@@ -15,8 +15,8 @@ public class Photo {
     @ApiModelProperty(value = "사진 seq")
     public int photo_seq;
 
-    @ApiModelProperty(value = "사용자 seq")
-    public int user_seq;
+    @ApiModelProperty(value = "사용자 uid")
+    public String user_uid;
 
     @ApiModelProperty(value = "사진 식별 ID")
     public String photo_id;
@@ -38,7 +38,7 @@ public class Photo {
     public String video_url;
 
     @ApiModelProperty(value = "문구")
-    public String phrase;
+    public String pharse;
 
     @ApiModelProperty(value = "사진 비밀번호")
     public String photo_pwd;

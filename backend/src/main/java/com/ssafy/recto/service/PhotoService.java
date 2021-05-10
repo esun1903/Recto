@@ -56,10 +56,10 @@ public class PhotoService {
 		return sqlSession.getMapper(PhotoMapper.class).getPhoto(photo_id);
 	}
 
-	public List<Photo> getPhotoList(int user_seq) throws Exception{
-		System.out.println("여기는 서비스야" + user_seq+"을 체크하려고해");
+	public List<Photo> getPhotoList(String user_uid) throws Exception{
+		System.out.println("여기는 서비스야" + user_uid+"을 체크하려고해");
 
-		return sqlSession.getMapper(PhotoMapper.class).getPhotoList(user_seq);
+		return sqlSession.getMapper(PhotoMapper.class).getPhotoList(user_uid);
 	}
 
 //	public boolean modifyPhoto(Photo photo) throws Exception {
