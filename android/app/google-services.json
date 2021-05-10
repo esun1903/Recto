@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "148360455436",
+    "firebase_url": "https://recto-58a1f-default-rtdb.firebaseio.com",
     "project_id": "recto-58a1f",
     "storage_bucket": "recto-58a1f.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "148360455436-u5pcjjbpq2u1pbgcna11eu3880bgf182.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssafy.recto",
+            "certificate_hash": "cc1931460c640ee091372ddc4e000f226d9dd526"
+          }
+        },
         {
           "client_id": "148360455436-bs0iml8g15f4brkml6l9qi2m10pb33tm.apps.googleusercontent.com",
           "client_type": 3
