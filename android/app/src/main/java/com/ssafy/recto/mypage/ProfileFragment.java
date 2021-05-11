@@ -2,6 +2,7 @@ package com.ssafy.recto.mypage;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
+import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.user.UserAccount;
 
 public class ProfileFragment extends Fragment {
@@ -30,6 +32,7 @@ public class ProfileFragment extends Fragment {
     MainActivity mainActivity;
     ViewPager viewPager;
     TabLayout tabLayout;
+    MyApplication myApplication;
     private View view;
     private FragmentPagerAdapter fragmentPagerAdapter;
     private FirebaseAuth mFirebaseAuth;
@@ -91,7 +94,12 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 // 로그아웃 하기
                 mFirebaseAuth.signOut();
-//                Log.e("로그아웃", "로그아웃");
+                Log.e("로그", "아웃");
+
+                myApplication = null;
+                Log.e("초기화", "합니다");
+//                myApplication.setUserUid("null");
+//                myApplication.setUserNickname("null");
 
                 // 로그아웃 후 Home Fragment로 이동
                 mainActivity.setFragment("home");

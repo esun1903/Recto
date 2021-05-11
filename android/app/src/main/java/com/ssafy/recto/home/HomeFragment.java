@@ -71,14 +71,27 @@ public class HomeFragment extends Fragment {
     }
 
     private void init() {
-//        mFirebaseAuth = FirebaseAuth.getInstance();
-//        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-        String userNick = myApplication.getUserNickname();
-        Log.e("닉네임2", String.valueOf(userNick));
-        if (userNick != null) {
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser current = mFirebaseAuth.getCurrentUser();
+        if (current != null) {
+            String userNick = myApplication.getUserNickname();
+            Log.e("닉네임2", String.valueOf(userNick));
             tv_id = view.findViewById(R.id.tv_id);
             tv_id.setText(userNick + "님의 Moment");
         }
+
+        else {
+            Log.e("당신은", "null에 빠졌다,,");
+            // 비 로그인 사용자를 위한 문구
+            tv_id = view.findViewById(R.id.tv_id);
+            tv_id.setText("당신의 Moment를 기록해보세요.");
+        }
+
+
+//        if (userNick != null) {
+//            tv_id = view.findViewById(R.id.tv_id);
+//            tv_id.setText(userNick + "님의 Moment");
+//        }
 
 
 //        if (myApplication.getGoogleNickname() != null) {
@@ -127,12 +140,6 @@ public class HomeFragment extends Fragment {
 //                });
 //            }
 //        }
-        else {
-            Log.e("당신은", "null에 빠졌다,,");
-            // 비 로그인 사용자를 위한 문구
-            tv_id = view.findViewById(R.id.tv_id);
-            tv_id.setText("당신의 Moment를 기록해보세요.");
-        }
 
 //        upline = view.findViewById(R.id.upline);
 //        upline.getMeasuredWidth();
@@ -148,26 +155,26 @@ public class HomeFragment extends Fragment {
         listview.addItemDecoration(decoration);
     }
 
-    @Override
-    // 중지되어 있던 Fragment가 재개/재실행 됐을 때 내부 구문 실행
-    public void onResume() {
-        super.onResume();
-        Log.e("이게 되나?3-1", String.valueOf(myApplication));
-        if (myApplication == null) {
-            myApplication = (MyApplication) getActivity().getApplication();
-        }
-        Log.e("이게 되나?3-2", String.valueOf(myApplication));
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.e("이게 되나?4-1", String.valueOf(myApplication));
-        if (myApplication == null) {
-            myApplication = (MyApplication) getActivity().getApplication();
-        }
-        Log.e("이게 되나?4-2", String.valueOf(myApplication));
-    }
+//    @Override
+//    // 중지되어 있던 Fragment가 재개/재실행 됐을 때 내부 구문 실행
+//    public void onResume() {
+//        super.onResume();
+//        Log.e("이게 되나?3-1", String.valueOf(myApplication));
+//        if (myApplication == null) {
+//            myApplication = (MyApplication) getActivity().getApplication();
+//        }
+//        Log.e("이게 되나?3-2", String.valueOf(myApplication));
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        Log.e("이게 되나?4-1", String.valueOf(myApplication));
+//        if (myApplication == null) {
+//            myApplication = (MyApplication) getActivity().getApplication();
+//        }
+//        Log.e("이게 되나?4-2", String.valueOf(myApplication));
+//    }
 
     private View.OnClickListener onClickItem = new View.OnClickListener() {
         @Override

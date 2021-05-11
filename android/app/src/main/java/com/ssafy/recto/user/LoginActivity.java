@@ -73,20 +73,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        // 이메일 로그인 성공 시
                         if (task.isSuccessful()) {
 //                            mFirebaseAuth = FirebaseAuth.getInstance(); // 유저 계정 정보 가져오기
 //                            mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
                             UserAccount account = new UserAccount();
                             String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
+//                            Log.e("UID 확인", UserUid);
+                            myApplication.setUserUid(UserUid);
+                            Log.e("잘 불러와졌나?", myApplication.getUserUid());
                             DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
-                            Log.e("닉네임1", String.valueOf(UserNickname));
+//                            Log.e("닉네임 확인", String.valueOf(UserNickname));
 
                             UserNickname.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String nickname = snapshot.getValue(String.class);
-                                    Log.e("닉네임2", String.valueOf(nickname));
+                                    Log.e("닉네임 저장", String.valueOf(nickname));
                                     myApplication.setUserNickname(nickname);
                                     Log.e("잘 불러와졌나?", myApplication.getUserNickname());
                                 }
@@ -183,9 +187,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         // 구글 로그인 성공 시
                         if (task.isSuccessful()) {
                             // My Application에 구글 닉네임 저장
-//                            String googleNickname = account.getDisplayName();
-//                            myApplication.setGoogleNickname(googleNickname);
-//                            Log.e("닉네임 잘 들어갔는지 확인", myApplication.getGoogleNickname());
+                            String googleNickname = account.getDisplayName();
+                            myApplication.setUserNickname(googleNickname);
+                            Log.e("닉네임 잘 들어갔는지 확인", myApplication.getUserNickname());
 
                             // Database에 구글 로그인 사용자 관련 정보 insert
 //                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();

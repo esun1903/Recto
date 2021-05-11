@@ -14,6 +14,7 @@ public class MyApplication extends Application {
     private String cardDate;
     private String cardDateNum;
     private String cardPassword;
+    private String userUid;
     private String userNickname;
     private String googleNickname;
 
@@ -87,6 +88,14 @@ public class MyApplication extends Application {
 
     public void setCardPassword(String cardPassword) {
         this.cardPassword = cardPassword;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
     }
 
     public String getUserNickname() {
