@@ -2,6 +2,7 @@ package com.ssafy.recto;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ssafy.recto.arcore.ArMainActivity;
+import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.createcard.CreateFragment_1_SelectOpen;
 import com.ssafy.recto.createcard.CreateFragment_2_SelectDesign;
 import com.ssafy.recto.createcard.CreateFragment_3_SelectVideo;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragmentGiftDetail profileFragmentGiftDetail;
     private InfoFragment infoFragment;
     private FirebaseAuth mFirebaseAuth;
+    MyApplication myApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+
+//        myApplication = new MyApplication();
+////        myApplication.setGoogleNickname(null);
+//        try {
+//            myApplication.getGoogleNickname();
+//        } catch (Exception e) {
+//            myApplication.setGoogleNickname("null");
+//        }
 
         bottomNavigationView = findViewById(R.id.bottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
