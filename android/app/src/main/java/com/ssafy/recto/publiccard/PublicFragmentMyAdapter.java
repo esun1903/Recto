@@ -23,16 +23,12 @@ import java.util.List;
 public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragmentMyAdapter.MyViewHolder> {
 
     List<CardData> photoCards = new ArrayList<>();
-//    int[] images;
     Context context;
-    RequestManager requestManager;
     private static OnItemClickListener iListener = null;
 
-    public PublicFragmentMyAdapter(Context ct, List<CardData> img, RequestManager rm){
+    public PublicFragmentMyAdapter(Context ct, List<CardData> img){
         context = ct;
         photoCards = img;
-//        images = img;
-        requestManager = rm;
     }
 
     public interface OnItemClickListener
@@ -51,34 +47,17 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.public_fragment_card_row, parent, false);
         return new MyViewHolder(view);
-//        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.public_fragment_card_row, parent, false);
-//        MyViewHolder viewHolder = new MyViewHolder(itemView);
-//
-//        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//        CardData photoCard = photoCards.get(position);
-//        holder.imageView.setImageResource(images[position]);
-//        holder.imageView.setImageResource(photoCards.get(position).getPhoto_url());
-//        Glide.with(this.context).load(photoCards.get(position).getPhoto_url()).into(holder.imageView);
-        requestManager.load(photoCards.get(position).getPhoto_url()).into(holder.imageView);
-//        Log.d("success", photoCards.get(position).toString());
-
-//        Glide.with(holder.itemView.getContext()).load("https://project-recto.s3.ap-northeast-2.amazonaws.com/samplephoto3.png").into(holder.imageView);
-
+        Glide.with(this.context).load(photoCards.get(position).getPhoto_url()).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
         return photoCards.size();
-//        return images.length;
     }
-
-//    public void setItems(List<CardData> items) {
-//        this.photoCards = items;
-//    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
@@ -97,7 +76,7 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
                     }
                 }
             });
-            Log.d("제발..", photoCards.toString());
+            Log.d("어댑터", photoCards.toString());
         }
     }
 }

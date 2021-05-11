@@ -62,16 +62,6 @@ public class PublicFragment extends Fragment{
         requestManager = Glide.with(this);
     }
 
-//    int[] images = {R.drawable.free1, R.drawable.free2, R.drawable.free3,
-//            R.drawable.free4, R.drawable.free5, R.drawable.free6,
-//            R.drawable.free7, R.drawable.free8, R.drawable.free9,
-//            R.drawable.free1, R.drawable.free2, R.drawable.free3,
-//            R.drawable.free4, R.drawable.free5, R.drawable.free6,
-//            R.drawable.free7, R.drawable.free8, R.drawable.free9};
-
-//    List<CardData> cardData = new ArrayList<>();
-
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
     @Override
@@ -83,14 +73,11 @@ public class PublicFragment extends Fragment{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        initData();
-
 
         recyclerView = view.findViewById(R.id.recyclerView);
 
-
-//        publicFragmentMyAdapter = new PublicFragmentMyAdapter(getActivity(), photoCards, requestManager);
-//        recyclerView.setAdapter(publicFragmentMyAdapter);
+        publicFragmentMyAdapter = new PublicFragmentMyAdapter(getActivity(), photoCards);
+        recyclerView.setAdapter(publicFragmentMyAdapter);
 
         int numberOfColumns = 3;
         mGridLayoutManager = new GridLayoutManager(getActivity(), numberOfColumns);
@@ -105,31 +92,10 @@ public class PublicFragment extends Fragment{
             }
         });
 
-//        cardData.add(0, "https://project-recto.s3.ap-northeast-2.amazonaws.com/samplephoto3.png");
-
-
         return view;
     }
 
-//    @RequiresApi(api = Build.VERSION_CODES.O)
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        api = HttpClient.getRetrofit().create( ApiInterface.class );
-//        try {
-//            requestGet();
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private void initData() {
-//        photoCards.clear();
-//        photoCards.add(new CardData("asdf", true, 1, "https://s3.ap-northeast-2.amazonaws.com/project-recto/8fcfca005cb24e1c80ee24b06bffc574.mp4", "https://project-recto.s3.ap-northeast-2.amazonaws.com/samplephoto3.png", "dd", "210511", "password"));
-//        photoCards.add(new CardData("asdf", true, 1, "https://s3.ap-northeast-2.amazonaws.com/project-recto/8fcfca005cb24e1c80ee24b06bffc574.mp4", "https://project-recto.s3.ap-northeast-2.amazonaws.com/samplephoto2.png", "dd", "210511", "password"));
-//    }
-
     public void requestGet()  throws ParseException {
-//        CardData cardData = new CardData();
         Call<List<CardData>> call = api.getPublicCard();
 
         call.enqueue(new Callback<List<CardData>>() {
@@ -152,17 +118,12 @@ public class PublicFragment extends Fragment{
 
                     photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
 
-                    Log.d("sssss", response.body().get(i).getPhoto_url());
                 }
 
-                publicFragmentMyAdapter = new PublicFragmentMyAdapter(getActivity(), photoCards, requestManager);
+                publicFragmentMyAdapter = new PublicFragmentMyAdapter(getActivity(), photoCards);
                 publicFragmentMyAdapter.notifyDataSetChanged();
                 recyclerView.setAdapter(publicFragmentMyAdapter);
 
-                Log.d("sssss", String.valueOf(response.body().size()));
-//                publicFragmentMyAdapter.setItems(photoCards);
-//                Log.d("dddd", photoCards.toString());
-//                Log.e("success", "success yeeeeee :>" + response.body().toString());
             }
 
             @Override
