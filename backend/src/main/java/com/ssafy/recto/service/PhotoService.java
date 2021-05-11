@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PhotoService {
@@ -55,9 +56,20 @@ public class PhotoService {
 		return sqlSession.getMapper(PhotoMapper.class).getPhoto(photo_id);
 	}
 
-	public List<Photo> getPhotoList(String user_uid) throws Exception{
-		System.out.println("여기는 서비스야" + user_uid+"을 체크하려고해");
+	public Photo getPhotoDetail(int photo_seq) throws Exception{
+		return sqlSession.getMapper(PhotoMapper.class).getPhotoDetail(photo_seq);
+	}
 
+	public boolean getPhotoPwd(Map<String, Object> map) throws Exception{
+		int seq = (int) map.get("photo_seq");
+		String pwd = (String) map.get("photo_pwd");
+		if(getPhotoDetail(seq).getPhoto_pwd().equals(pwd))
+			return true;
+		else
+			return false;
+	}
+
+	public List<Photo> getPhotoList(String user_uid) throws Exception{
 		return sqlSession.getMapper(PhotoMapper.class).getPhotoList(user_uid);
 	}
 

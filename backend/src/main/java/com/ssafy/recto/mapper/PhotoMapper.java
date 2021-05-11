@@ -19,6 +19,9 @@ public interface PhotoMapper {
     @Select("SELECT * FROM photo WHERE photo_id like #{photo_id}")
     public Photo getPhoto(@Param("photo_id") String photo_id);
 
+    @Select("SELECT * FROM photo WHERE photo_seq = #{photo_seq}")
+    public Photo getPhotoDetail(@Param("photo_seq") int photo_seq);
+
     @Select("SELECT * FROM photo WHERE user_uid = #{user_uid}")
     public List<Photo> getPhotoList(@Param("user_uid") String user_uid);
 
