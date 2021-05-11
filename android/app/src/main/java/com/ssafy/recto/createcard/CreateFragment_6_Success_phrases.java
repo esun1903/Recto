@@ -19,15 +19,18 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import com.ssafy.recto.api.ApiInterface;
-import com.ssafy.recto.api.HttpClient;
 import com.ssafy.recto.MainActivity;
-import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.R;
+import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.CardData;
+import com.ssafy.recto.api.HttpClient;
+import com.ssafy.recto.config.MyApplication;
 
 import java.text.ParseException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -132,8 +135,14 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     }
 
     public void requestPost() throws ParseException {
+        RequestBody videoBody = RequestBody.create(MediaType.parse("image/jpeg"), cardVideo);
+        MultipartBody.Part videoPart = MultipartBody.Part.createFormData("photo", "내맴", videoBody);
+
         cardPhoto = myApp.getCardPhoto();
-        CardData cardData = new CardData(1, cardPublic, cardDesign, cardVideo, cardPhoto, cardPhrases, cardDateNum, cardPassword);
+        RequestBody photoBody = RequestBody.create(MediaType.parse("image/jpeg"), cardPhoto);
+        MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo", "내맴", photoBody);
+
+        CardData cardData = new CardData("1", cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
 
         Call<String> call = api.requestCreateCard(cardData);
 

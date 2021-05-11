@@ -2,6 +2,8 @@ package com.ssafy.recto.publiccard;
 
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +12,23 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.ssafy.recto.R;
+import com.ssafy.recto.api.CardData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragmentMyAdapter.MyViewHolder> {
 
-    int[] images;
+    List<CardData> photoCards = new ArrayList<>();
     Context context;
     private static OnItemClickListener iListener = null;
 
-    public PublicFragmentMyAdapter(Context ct, int[] img){
+    public PublicFragmentMyAdapter(Context ct, List<CardData> img){
         context = ct;
-        images = img;
+        photoCards = img;
     }
 
     public interface OnItemClickListener
@@ -43,15 +51,15 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.imageView.setImageResource(images[position]);
+        Glide.with(this.context).load(photoCards.get(position).getPhoto_url()).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return photoCards.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -68,7 +76,7 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
                     }
                 }
             });
-
+            Log.d("어댑터", photoCards.toString());
         }
     }
 }
