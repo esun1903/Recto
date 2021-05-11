@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -44,6 +46,29 @@ public class PhotoController {
 		return new ResponseEntity<Photo>(photoService.getPhoto(photo_id), HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "포토카드 SEQ로 검색", notes = "포토카드 SEQ로 검색", response = Photo.class)
+	@GetMapping
+	public ResponseEntity<Photo> getPhotoDetail(
+			@RequestParam(value= "photo_seq") int photo_seq) throws Exception {
+		logger.info("getPhotoDetail - 호출");
+		return new ResponseEntity<Photo>(photoService.getPhotoDetail(photo_seq), HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "포토카드 비밀번호 일치여부", notes = "포토카드 비밀번호 일치여부", response = Photo.class)
+	@GetMapping("/pwdCheck")
+	public ResponseEntity<String> getPhotoPwd(
+			@RequestParam(value= "photo_pwd") String photo_pwd, @RequestParam(value= "photo_seq") int photo_seq) throws Exception {
+		logger.info("getPhotoPwd - 호출");
+		Map<String, Object> map = new HashMap<>();
+		map.put("photo_seq", photo_seq);
+		map.put("photo_pwd", photo_pwd);
+
+		if (photoService.getPhotoPwd(map)) {
+			return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(FAIL, HttpStatus.OK);
+	}
+
 	@ApiOperation(value = "포토카드 목록", notes = "포토카드 목록을 반환한다.", response = Photo.class)
 	@GetMapping("/list")
 	public List<Photo> getPhotoList(
@@ -51,7 +76,6 @@ public class PhotoController {
 		logger.info("getPhotoList - 호출");
 		return photoService.getPhotoList(user_uid);
 	}
-
 
 	@ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
 	@PostMapping
