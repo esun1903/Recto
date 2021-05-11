@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.CardData;
 
@@ -24,12 +25,14 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
     List<CardData> photoCards = new ArrayList<>();
 //    int[] images;
     Context context;
+    RequestManager requestManager;
     private static OnItemClickListener iListener = null;
 
-    public PublicFragmentMyAdapter(Context ct, List<CardData> img){
+    public PublicFragmentMyAdapter(Context ct, List<CardData> img, RequestManager rm){
         context = ct;
         photoCards = img;
 //        images = img;
+        requestManager = rm;
     }
 
     public interface OnItemClickListener
@@ -59,7 +62,8 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
 //        CardData photoCard = photoCards.get(position);
 //        holder.imageView.setImageResource(images[position]);
 //        holder.imageView.setImageResource(photoCards.get(position).getPhoto_url());
-        Glide.with(holder.itemView.getContext()).load(photoCards.get(position).getPhoto_url()).into(holder.imageView);
+//        Glide.with(this.context).load(photoCards.get(position).getPhoto_url()).into(holder.imageView);
+        requestManager.load(photoCards.get(position).getPhoto_url()).into(holder.imageView);
 //        Log.d("success", photoCards.get(position).toString());
 
 //        Glide.with(holder.itemView.getContext()).load("https://project-recto.s3.ap-northeast-2.amazonaws.com/samplephoto3.png").into(holder.imageView);
