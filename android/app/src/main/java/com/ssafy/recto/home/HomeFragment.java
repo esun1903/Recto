@@ -71,66 +71,62 @@ public class HomeFragment extends Fragment {
     }
 
     private void init() {
-        UserAccount account = new UserAccount();
-        String nick = account.getNickname();
-        Log.e("닉네임", String.valueOf(nick));
-        
-//        Log.e("이게 되나?3-1", String.valueOf(myApplication));
-//        if (myApplication == null) {
-//            myApplication = (MyApplication) getActivity().getApplication();
-//        }
-//        Log.e("이게 되나?3-2", String.valueOf(myApplication));
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+//        mFirebaseAuth = FirebaseAuth.getInstance();
+//        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         String userNick = myApplication.getUserNickname();
-        Log.e("닉네임", String.valueOf(userNick));
-
-        if (myApplication.getGoogleNickname() != null) {
-
-            if (firebaseUser != null) {
-                Log.e("유저", "존재");
-//                myApplication = new MyApplication();
-                myApplication = (MyApplication) getContext().getApplicationContext();
-                Log.e("이게 되나?", String.valueOf(myApplication));
-            }
-            Log.e("try문 진입 성공!", "제발 돌아라~");
-//            myApplication = new MyApplication();
-//            myApplication = (MyApplication) getContext().getApplicationContext();
-//            myApplication = (MyApplication) getActivity().getApplication();
-            Log.e("이게 되나?1", String.valueOf(myApplication)); // 여기까지는 찍힙니다
-//            String googleNickname = myApplication.getGoogleNickname();
-            String googleNickname = myApplication.getGoogleNickname();
-//            Log.e("google", googleNickname);
-
-            if (!googleNickname.equals(null)) {
-                Log.e("google", googleNickname);
-                tv_id = view.findViewById(R.id.tv_id);
-                tv_id.setText(googleNickname + "님의 Moment");
-            }
-            else {
-                Log.e("else에", "왜 안 들어와?");
-                mFirebaseAuth = FirebaseAuth.getInstance(); // 유저 계정 정보 가져오기
-                mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
-//                FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
-//                UserAccount account = new UserAccount();
-                String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
-                DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
-                //            Log.e("닉네임", String.valueOf(UserNickname));
-
-                UserNickname.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        tv_id = view.findViewById(R.id.tv_id);
-                        String nickname = snapshot.getValue(String.class);
-                        tv_id.setText(nickname + "님의 Moment");
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-            }
+        Log.e("닉네임2", String.valueOf(userNick));
+        if (userNick != null) {
+            tv_id = view.findViewById(R.id.tv_id);
+            tv_id.setText(userNick + "님의 Moment");
         }
+
+
+//        if (myApplication.getGoogleNickname() != null) {
+//
+//            if (firebaseUser != null) {
+//                Log.e("유저", "존재");
+////                myApplication = new MyApplication();
+//                myApplication = (MyApplication) getContext().getApplicationContext();
+//                Log.e("이게 되나?", String.valueOf(myApplication));
+//            }
+//            Log.e("try문 진입 성공!", "제발 돌아라~");
+////            myApplication = new MyApplication();
+////            myApplication = (MyApplication) getContext().getApplicationContext();
+////            myApplication = (MyApplication) getActivity().getApplication();
+//            Log.e("이게 되나?1", String.valueOf(myApplication)); // 여기까지는 찍힙니다
+////            String googleNickname = myApplication.getGoogleNickname();
+//            String googleNickname = myApplication.getGoogleNickname();
+////            Log.e("google", googleNickname);
+
+//            if (!googleNickname.equals(null)) {
+//                Log.e("google", googleNickname);
+//                tv_id = view.findViewById(R.id.tv_id);
+//                tv_id.setText(googleNickname + "님의 Moment");
+//            }
+//            else {
+//                Log.e("else에", "왜 안 들어와?");
+//                mFirebaseAuth = FirebaseAuth.getInstance(); // 유저 계정 정보 가져오기
+//                mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
+////                FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
+////                UserAccount account = new UserAccount();
+//                String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
+//                DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
+//                //            Log.e("닉네임", String.valueOf(UserNickname));
+//
+//                UserNickname.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        tv_id = view.findViewById(R.id.tv_id);
+//                        String nickname = snapshot.getValue(String.class);
+//                        tv_id.setText(nickname + "님의 Moment");
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//                    }
+//                });
+//            }
+//        }
         else {
             Log.e("당신은", "null에 빠졌다,,");
             // 비 로그인 사용자를 위한 문구
