@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,8 @@ public class PublicFragment extends Fragment{
     MainActivity mainActivity;
     PublicFragmentMyAdapter publicFragmentMyAdapter;
     public RequestManager requestManager;
+
+    int[] seq;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -87,8 +90,36 @@ public class PublicFragment extends Fragment{
             @Override
             public void onItemClick(View v, int pos)
             {
-                Log.i("this is", String.valueOf(pos));
-                mainActivity.setFragment("public_card_detail");
+//                Log.i("this is", String.valueOf(pos));
+//                Log.d("포토 시퀀스 가져오나?", String.valueOf(seq[pos]));
+
+//                Call<CardData> call = api.getCard(seq[pos]);
+//                call.enqueue(new Callback<CardData>() {
+//                    @Override
+//                    public void onResponse(Call<CardData> call, Response<CardData> response) {
+//                        String uid, video, photo, phrase, date, pwd;
+//                        boolean publication;
+//                        int design;
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<CardData> call, Throwable t) {
+//                        Log.e("nooooo", "failed :<" + t.toString());
+//                    }
+//                });
+
+
+                // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
+                Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                bundle.putInt("seq", seq[pos]);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                PublicFragmentCardDetail publicFragmentCardDetail = new PublicFragmentCardDetail();
+                publicFragmentCardDetail.setArguments(bundle);
+                transaction.replace(R.id.main_frame, publicFragmentCardDetail);
+                transaction.commit();
+
+                // 밑에 코드 지우고 위에서 해줘야 seq값이 전달 됨
+//                mainActivity.setFragment("public_card_detail");
             }
         });
 
@@ -104,6 +135,7 @@ public class PublicFragment extends Fragment{
                 String uid, video, photo, phrase, date, pwd;
                 boolean publication;
                 int design;
+                seq = new int[response.body().size()];
 
                 photoCards.clear();
                 for (int i = 0; i < response.body().size(); i++) {
@@ -117,7 +149,8 @@ public class PublicFragment extends Fragment{
                     pwd = response.body().get(i).getPhoto_pwd();
 
                     photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
-
+                    Log.e("photo_seq", String.valueOf(response.body().get(i).getPhoto_seq()));
+                    seq[i] = response.body().get(i).getPhoto_seq();
                 }
 
                 publicFragmentMyAdapter = new PublicFragmentMyAdapter(getActivity(), photoCards);

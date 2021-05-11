@@ -3,6 +3,7 @@ package com.ssafy.recto.publiccard;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
+
+import java.text.ParseException;
 
 public class PublicFragmentCardDetail extends Fragment {
 
@@ -24,8 +28,7 @@ public class PublicFragmentCardDetail extends Fragment {
     Button free_photo_card_list_btn;
     private View view;
     private Context mContext;
-
-//    int cardImage;
+    int seq;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -67,21 +70,15 @@ public class PublicFragmentCardDetail extends Fragment {
             }
         });
 
-//        getData();
-//        setData();
+        // 카드 목록에서 photo_seq 값 (sep[pos]) 가져오기
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            seq = bundle.getInt("seq");
+        }
+        Log.d("seq 값을 가져올까", String.valueOf(seq));
+
+
 
         return view;
     }
-
-//    private void getData() {
-//        if(getActivity().getIntent().hasExtra("images")) {
-//            cardImage = getActivity().getIntent().getIntExtra("images", 1);
-//        } else {
-//            Toast.makeText(getActivity(), "No data", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    private void setData() {
-//        cardImageView.setImageResource(cardImage);
-//    }
 }
