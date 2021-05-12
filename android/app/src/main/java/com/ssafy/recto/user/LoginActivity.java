@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private EditText mEtEmail, mEtPwd;       // 로그인 입력 필드
     private SignInButton btn_google;         // 구글 로그인 버튼
     private GoogleApiClient googleApiClient; // 구글 API 클라이언트 객체
-    private GoogleSignInClient mGoogleSignInClient;
     private static final int REQ_SIGN_GOOGLE = 100; // 구글 로그인 결과 코드
     MyApplication myApplication;
 
@@ -54,14 +53,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mFirebaseAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto");
+        mFirebaseAuth = FirebaseAuth.getInstance(); // Firebase 인증 객체 초기화 - 유저 계정 정보 가져오기
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
 
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
 
         // 데이터가 있다면 myApplication을 매번 새로 불러오지 않는다!
-        // 없을 때만 한 번 불러온다..?
         if (myApplication == null) {
             myApplication = (MyApplication) getApplication();
         }
@@ -79,24 +77,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         // 이메일 로그인 성공 시
                         if (task.isSuccessful()) {
-//                            mFirebaseAuth = FirebaseAuth.getInstance(); // 유저 계정 정보 가져오기
-//                            mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
                             UserAccount account = new UserAccount();
-                            String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
-//                            Log.e("UID 확인", UserUid);
-                            myApplication.setUserUid(UserUid);
-                            Log.e("잘 불러와졌나?", myApplication.getUserUid());
-                            DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
-//                            Log.e("닉네임 확인", String.valueOf(UserNickname));
 
+                            // My Application에 emailID 저장
+                            String emailId = account.setEmailId(firebaseUser.getEmail());
+                            myApplication.setUserEmail(emailId);
+//                            Log.e("이메일 확인", myApplication.getUserEmail());
+
+                            // My Application에 idToken 저장
+                            String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
+                            myApplication.setUserUid(UserUid);
+//                            Log.e("UID 확인", myApplication.getUserUid());
+
+                            // My Application에 닉네임 저장
+                            DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
                             UserNickname.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String nickname = snapshot.getValue(String.class);
-                                    Log.e("닉네임 저장", String.valueOf(nickname));
                                     myApplication.setUserNickname(nickname);
-                                    Log.e("잘 불러와졌나?", myApplication.getUserNickname());
+//                                    Log.e("닉네임 확인", myApplication.getUserNickname());
                                 }
 
                                 @Override
@@ -104,32 +105,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 }
                             });
 
-
-//                            // My Application에 닉네임 저장
-//                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
-//                            UserAccount account = new UserAccount();
-//                            String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
-//                            DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
-//                            UserNickname.addValueEventListener(new ValueEventListener() {
-//                                @Override
-//                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                                    String nickname = snapshot.getValue(String.class);
-//                                    myApplication.setUserNickname(String.valueOf(UserNickname));
-//                                    Log.e("닉네임 잘 들어갔는지 확인", myApplication.getUserNickname());
-//                                }
-//
-//                                @Override
-//                                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                }
-//                            });
-
                             // 로그인 성공 시 메인으로 이동
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish(); // 현재 액티비티 파괴
                         } else {
-                            Toast.makeText(LoginActivity.this, "로그인에 실패했습니다!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -157,8 +138,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
 
         btn_google = findViewById(R.id.btn_google);
         btn_google.setOnClickListener(new View.OnClickListener() {
@@ -195,33 +174,38 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             // My Application에 emailID 저장
                             String emailId = account.getEmail();
                             myApplication.setUserEmail(emailId);
-                            Log.e("이메일 잘 들어갔는지 확인", myApplication.getUserEmail());
+//                            Log.e("이메일 확인", myApplication.getUserEmail());
 
                             // My Application에 idToken 저장
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                             String idToken = firebaseUser.getUid();
                             myApplication.setUserUid(idToken);
-                            Log.e("UID 잘 들어갔는지 확인", myApplication.getUserUid());
+//                            Log.e("UID 확인", myApplication.getUserUid());
 
                             // My Application에 구글 닉네임 저장
                             String googleNickname = account.getDisplayName();
                             myApplication.setUserNickname(googleNickname);
-                            Log.e("닉네임 잘 들어갔는지 확인", myApplication.getUserNickname());
+//                            Log.e("닉네임 확인", myApplication.getUserNickname());
 
                             // Database에 구글 로그인 사용자 관련 정보 insert
-                            mDatabaseRef.child("UserAccount").child(idToken).child("emailId").setValue(emailId);
-                            mDatabaseRef.child("UserAccount").child(idToken).child("idToken").setValue(idToken);
-                            mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(googleNickname);
+                            if (String.valueOf(mDatabaseRef.child("UserAccount").child(idToken)) == null) {
+                                Log.e("구글 로그인", "최초 사용자");
+                                mDatabaseRef.child("UserAccount").child(idToken).child("emailId").setValue(emailId);
+                                mDatabaseRef.child("UserAccount").child(idToken).child("idToken").setValue(idToken);
+                                mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(googleNickname);
+                            } else {
+                                Log.e("구글 로그인", "기존 사용자");
+                            }
 
                             // 성공 토스트 메시지 출력
-                            Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "구글 로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
 
                             // 메인 화면으로 이동
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(LoginActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "구글 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

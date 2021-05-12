@@ -24,8 +24,9 @@ public class UserAccount {
         return emailId;
     }
 
-    public void setEmailId(String emailId) {
+    public String setEmailId(String emailId) {
         this.emailId = emailId;
+        return emailId;
     }
 
     public String getPassword() {

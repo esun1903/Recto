@@ -36,7 +36,6 @@ public class ProfileFragment extends Fragment {
     private View view;
     private FragmentPagerAdapter fragmentPagerAdapter;
     private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mDatabaseRef; // 실시간 데이터베이스
     private TextView tv_hello;
 
     @Override
@@ -66,12 +65,12 @@ public class ProfileFragment extends Fragment {
         viewPager.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
         // Greeting 문구
         myApplication = (MyApplication) getActivity().getApplication();
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser current = mFirebaseAuth.getCurrentUser();
         String userNick = myApplication.getUserNickname();
-        Log.e("닉네임2", String.valueOf(userNick));
+        Log.e("프로필 닉네임", String.valueOf(userNick));
         tv_hello = view.findViewById(R.id.tv_hello);
         tv_hello.setText(userNick + "님, 반갑습니다.");
 
@@ -82,12 +81,9 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 // 로그아웃 하기
                 mFirebaseAuth.signOut();
-                Log.e("로그", "아웃");
 
+                // My Application 초기화
                 myApplication = null;
-                Log.e("초기화", "합니다");
-//                myApplication.setUserUid("null");
-//                myApplication.setUserNickname("null");
 
                 // 로그아웃 후 Home Fragment로 이동
                 mainActivity.setFragment("home");
