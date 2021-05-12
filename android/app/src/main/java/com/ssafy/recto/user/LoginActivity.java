@@ -13,11 +13,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -42,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private EditText mEtEmail, mEtPwd;       // 로그인 입력 필드
     private SignInButton btn_google;         // 구글 로그인 버튼
     private GoogleApiClient googleApiClient; // 구글 API 클라이언트 객체
+    private GoogleSignInClient mGoogleSignInClient;
     private static final int REQ_SIGN_GOOGLE = 100; // 구글 로그인 결과 코드
     MyApplication myApplication;
 
@@ -154,6 +158,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build();
 
+        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+
         btn_google = findViewById(R.id.btn_google);
         btn_google.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,23 +192,32 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                         // 구글 로그인 성공 시
                         if (task.isSuccessful()) {
+                            // My Application에 emailID 저장
+                            String emailId = account.getEmail();
+                            myApplication.setUserEmail(emailId);
+                            Log.e("이메일 잘 들어갔는지 확인", myApplication.getUserEmail());
+
+                            // My Application에 idToken 저장
+                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+                            String idToken = firebaseUser.getUid();
+                            myApplication.setUserUid(idToken);
+                            Log.e("UID 잘 들어갔는지 확인", myApplication.getUserUid());
+
                             // My Application에 구글 닉네임 저장
                             String googleNickname = account.getDisplayName();
                             myApplication.setUserNickname(googleNickname);
                             Log.e("닉네임 잘 들어갔는지 확인", myApplication.getUserNickname());
 
                             // Database에 구글 로그인 사용자 관련 정보 insert
-//                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-//                            mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
+                            mDatabaseRef.child("UserAccount").child(idToken).child("emailId").setValue(emailId);
+                            mDatabaseRef.child("UserAccount").child(idToken).child("idToken").setValue(idToken);
+                            mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(googleNickname);
 
                             // 성공 토스트 메시지 출력
                             Toast.makeText(LoginActivity.this, "로그인 성공", Toast.LENGTH_SHORT).show();
 
                             // 메인 화면으로 이동
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                            // 구글 닉네임 함께 전달
-//                            intent.putExtra("nickName", account.getDisplayName());
-//                            intent.putExtra("photoUrl", String.valueOf(account.getPhotoUrl()));
                             startActivity(intent);
                             finish();
                         } else {
