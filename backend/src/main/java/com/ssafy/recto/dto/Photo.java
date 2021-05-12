@@ -36,7 +36,7 @@ public class Photo {
     public String video_url;
 
     @ApiModelProperty(value = "문구")
-    public String pharse;
+    public String phrase;
 
     @ApiModelProperty(value = "사진 비밀번호")
     public String photo_pwd;
@@ -111,12 +111,12 @@ public class Photo {
         this.photo_date = photo_date;
     }
 
-    public String getPharse() {
-        return pharse;
+    public String getPhrase() {
+        return phrase;
     }
 
-    public void setPharse(String pharse) {
-        this.pharse = pharse;
+    public void setPhrase(String phrase) {
+        this.phrase = phrase;
     }
 
     public String getPhoto_pwd() {
