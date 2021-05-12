@@ -18,7 +18,6 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.google.ar.sceneform.utilities.LoadHelper;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
@@ -31,13 +30,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PublicFragmentCardDetail extends Fragment {
+public class PublicFragmentCardDetail2 extends Fragment {
 
     ApiInterface api;
     MainActivity mainActivity;
     ImageView cardImageView;
     ImageView info_dialog;
     Button free_photo_card_list_btn;
+    TextView tv_phrases;
     TextView card_id;
     private View view;
     private Context mContext;
@@ -61,7 +61,7 @@ public class PublicFragmentCardDetail extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.public_fragment_card_detail, container, false);
+        view = inflater.inflate(R.layout.public_fragment_card_detail2, container, false);
         api = HttpClient.getRetrofit().create( ApiInterface.class );
 
         // 카드 목록에서 photo_seq 값 (sep[pos]) 가져오기
@@ -77,6 +77,7 @@ public class PublicFragmentCardDetail extends Fragment {
             e.printStackTrace();
         }
 
+        tv_phrases = view.findViewById(R.id.tv_phrases);
         card_id = view.findViewById(R.id.card_id);
         cardImageView = view.findViewById(R.id.card_image_detail);
         free_photo_card_list_btn = view.findViewById(R.id.free_photo_card_list_btn);
@@ -116,24 +117,21 @@ public class PublicFragmentCardDetail extends Fragment {
                 boolean publication;
                 int photo_seq, design;
 
-//                photo_seq = response.body().getPhoto_seq();
-//                uid = response.body().getUser_uid();
                 id = response.body().getPhoto_id();
-//                publication = response.body().isPublication();
-//                design = response.body().getDesign();
-//                video = response.body().getVideo_url();
-//                photo = response.body().getPhoto_url();
-//                phrase = response.body().getPhrase();
-//                date = response.body().getPhoto_date();
-//                pwd = response.body().getPhoto_pwd();
+                phrase = response.body().getPhrase();
 
-                // 이미지 넣어주기
+//                Log.d("아이디랑 어쩌구", id + " "+ phrase+ " "+ response.body().toString());
+
                 photo_url = response.body().getPhoto_url();
-                Log.d("photo url", photo_url);
+
+                // 문구 넣어주기
+                tv_phrases.setText(phrase);
+//                Log.d("문구", String.valueOf(phrase));
 
                 // 아이디 넣어주기
                 card_id.setText(id);
 
+                // 이미지 불러오기
                 Glide.with(getContext()).load(photo_url).into(cardImageView);
             }
 
