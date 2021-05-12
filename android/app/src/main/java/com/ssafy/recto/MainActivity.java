@@ -38,6 +38,7 @@ import com.ssafy.recto.mypage.ProfileFragmentMine;
 import com.ssafy.recto.mypage.ProfileFragmentMineDetail;
 import com.ssafy.recto.publiccard.PublicFragment;
 import com.ssafy.recto.publiccard.PublicFragmentCardDetail;
+import com.ssafy.recto.publiccard.PublicFragmentCardDetail2;
 import com.ssafy.recto.user.LoginActivity;
 import com.ssafy.recto.user.UserAccount;
 
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private CreateFragment_6_Success_phrases createFragment6SuccessPhrases;
     private PublicFragment publicFragment;
     private PublicFragmentCardDetail publicFragmentCardDetail;
+    private PublicFragmentCardDetail2 publicFragmentCardDetail2;
     private ProfileFragment profileFragment;
     private ProfileFragmentMine profileFragmentMine;
     private ProfileFragmentMineDetail profileFragmentMineDetail;
@@ -154,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
         createFragment6SuccessPhrases = new CreateFragment_6_Success_phrases();
         publicFragment = new PublicFragment();
         publicFragmentCardDetail = new PublicFragmentCardDetail();
+        publicFragmentCardDetail2 = new PublicFragmentCardDetail2();
         profileFragment = new ProfileFragment();
         profileFragmentMine = new ProfileFragmentMine();
         profileFragmentMineDetail = new ProfileFragmentMineDetail();
@@ -219,6 +222,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "public_card_detail":
                 ft.replace(R.id.main_frame, publicFragmentCardDetail);
+                ft.commit();
+                break;
+            case "public_card_detail2":
+                ft.replace(R.id.main_frame, publicFragmentCardDetail2);
                 ft.commit();
                 break;
             case "profile":
