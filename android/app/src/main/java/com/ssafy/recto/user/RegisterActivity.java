@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,9 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
                 String strConfirmPwd = mEtConfirmPwd.getText().toString();
                 String strNickmame = mEtNickname.getText().toString();
 
+                // 비밀번호와 비밀번호 확인이 불일치하는 경우
                 if (!strPwd.equals(strConfirmPwd)) {
                     Toast.makeText(RegisterActivity.this,"비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-//                    Log.e("비밀번호 틀림!", "비밀번호 틀림!");
+//                    Log.e("비밀번호 일치 여부", "불일치!");
                     return;
                 }
 

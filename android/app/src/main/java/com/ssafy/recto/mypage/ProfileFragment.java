@@ -2,6 +2,7 @@ package com.ssafy.recto.mypage;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
+import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.user.UserAccount;
 
 public class ProfileFragment extends Fragment {
@@ -30,10 +32,10 @@ public class ProfileFragment extends Fragment {
     MainActivity mainActivity;
     ViewPager viewPager;
     TabLayout tabLayout;
+    MyApplication myApplication;
     private View view;
     private FragmentPagerAdapter fragmentPagerAdapter;
     private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mDatabaseRef; // 실시간 데이터베이스
     private TextView tv_hello;
 
     @Override
@@ -63,26 +65,14 @@ public class ProfileFragment extends Fragment {
         viewPager.setAdapter(fragmentPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
-        mFirebaseAuth = FirebaseAuth.getInstance(); // 유저 계정 정보 가져오기
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
-        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
-        UserAccount account = new UserAccount();
-        String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
-        DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
-//            Log.e("닉네임", String.valueOf(UserNickname));
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
-        UserNickname.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                tv_hello = view.findViewById(R.id.tv_hello);
-                String nickname = snapshot.getValue(String.class);
-                tv_hello.setText(nickname + "님, 반갑습니다.");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+        // Greeting 문구
+        myApplication = (MyApplication) getActivity().getApplication();
+        String userNick = myApplication.getUserNickname();
+        Log.e("프로필 닉네임", String.valueOf(userNick));
+        tv_hello = view.findViewById(R.id.tv_hello);
+        tv_hello.setText(userNick + "님, 반갑습니다.");
 
         // 로그아웃 버튼
         Button btn_logout = view.findViewById(R.id.btn_logout);
@@ -91,7 +81,9 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 // 로그아웃 하기
                 mFirebaseAuth.signOut();
-//                Log.e("로그아웃", "로그아웃");
+
+                // My Application 초기화
+                myApplication = null;
 
                 // 로그아웃 후 Home Fragment로 이동
                 mainActivity.setFragment("home");

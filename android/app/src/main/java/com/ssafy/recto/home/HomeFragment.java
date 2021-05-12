@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
+import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.user.UserAccount;
 
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     MainActivity mainActivity;
+    MyApplication myApplication;
     private View view;
     private ArrayList<String> arrayList;
     private MyAdapter adapter;
@@ -49,7 +52,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mainActivity = (MainActivity)getActivity();
     }
 
     @Override
@@ -60,42 +62,27 @@ public class HomeFragment extends Fragment {
 
     @Nullable
     @Override
+    // Fragment가 처음 생성됐을 때 내부 구문 실행
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        myApplication = (MyApplication) getActivity().getApplication();
         view = inflater.inflate(R.layout.home_fragment, container, false);
         init();
         return view;
     }
 
     private void init() {
-        try {
-            mFirebaseAuth = FirebaseAuth.getInstance(); // 유저 계정 정보 가져오기
-            mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
-            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
-            UserAccount account = new UserAccount();
-            String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
-            DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
-//            Log.e("닉네임", String.valueOf(UserNickname));
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser current = mFirebaseAuth.getCurrentUser();
+        // 메인 화면 문구 - 로그인 사용자
+        if (current != null) {
+            String userNick = myApplication.getUserNickname();
+            Log.e("홈 닉네임", String.valueOf(userNick));
+            tv_id = view.findViewById(R.id.tv_id);
+            tv_id.setText(userNick + "님의 Moment");
+        }
 
-            UserNickname.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    tv_id = view.findViewById(R.id.tv_id);
-                    String nickname = snapshot.getValue(String.class);
-                    tv_id.setText(nickname + "님의 Moment");
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-            // 구글 로그인 시 닉네임 받아오기!
-//            try {
-//                Intent intent = Intent.getIntent();
-//                String nickName = intent.getStringExtra("nickName")
-//                tv_id
-//            } finally {
-//            }
-        } catch (Exception e) {
+        // 메인 화면 문구 - 비 로그인 사용자
+        else {
             tv_id = view.findViewById(R.id.tv_id);
             tv_id.setText("당신의 Moment를 기록해보세요.");
         }

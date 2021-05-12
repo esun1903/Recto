@@ -4,8 +4,8 @@ import android.app.Application;
 
 import lombok.Data;
 
-@Data
 public class MyApplication extends Application {
+    private MyApplication myApplication = null;
     private Boolean cardPublic;
     private Integer cardDesign;
     private String cardVideo;
@@ -14,4 +14,109 @@ public class MyApplication extends Application {
     private String cardDate;
     private String cardDateNum;
     private String cardPassword;
+    private String userEmail;
+    private String userUid;
+    private String userNickname;
+
+    public MyApplication getMyApplication() {
+        return myApplication;
+    }
+
+    public void setMyApplication(MyApplication myApplication) {
+        this.myApplication = myApplication;
+    }
+
+    public Boolean getCardPublic() {
+        return cardPublic;
+    }
+
+    public void setCardPublic(Boolean cardPublic) {
+        this.cardPublic = cardPublic;
+    }
+
+    public Integer getCardDesign() {
+        return cardDesign;
+    }
+
+    public void setCardDesign(Integer cardDesign) {
+        this.cardDesign = cardDesign;
+    }
+
+    public String getCardVideo() {
+        return cardVideo;
+    }
+
+    public void setCardVideo(String cardVideo) {
+        this.cardVideo = cardVideo;
+    }
+
+    public String getCardPhoto() {
+        return cardPhoto;
+    }
+
+    public void setCardPhoto(String cardPhoto) {
+        this.cardPhoto = cardPhoto;
+    }
+
+    public String getCardPhrases() {
+        return cardPhrases;
+    }
+
+    public void setCardPhrases(String cardPhrases) {
+        this.cardPhrases = cardPhrases;
+    }
+
+    public String getCardDate() {
+        return cardDate;
+    }
+
+    public void setCardDate(String cardDate) {
+        this.cardDate = cardDate;
+    }
+
+    public String getCardDateNum() {
+        return cardDateNum;
+    }
+
+    public void setCardDateNum(String cardDateNum) {
+        this.cardDateNum = cardDateNum;
+    }
+
+    public String getCardPassword() {
+        return cardPassword;
+    }
+
+    public void setCardPassword(String cardPassword) {
+        this.cardPassword = cardPassword;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
+    }
+
+    public String getUserNickname() {
+        return userNickname;
+    }
+
+    public void setUserNickname(String userNickname) {
+        this.userNickname = userNickname;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        myApplication = (MyApplication) getApplicationContext();
+    }
 }
