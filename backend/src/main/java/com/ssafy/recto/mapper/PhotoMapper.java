@@ -40,4 +40,8 @@ public interface PhotoMapper {
 
     @Select("SELECT * FROM photo WHERE photo_seq >= 1 AND photo_seq <= 30")
     List<Photo> getSamplePhotoList();
+
+//    @Insert("Insert INTO photo (  user_uid, photo_id, photo_date, photo_url, video_url, phrase, photo_pwd, design, publication) \n"
+//            + "VALUES ( #{url})")
+//    int insertPhoto2(@Param("url")String url);
 }

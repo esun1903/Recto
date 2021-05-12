@@ -79,17 +79,4 @@ public class CardData {
         this.photo_date = photo_date;
         this.photo_pwd = photo_pwd;
     }
-
-    public CardData(String user_uid, int photo_seq, String photo_id, boolean publication, int design, String video_url, String photo_url,  String phrase, String photo_date, String photo_pwd) {
-        this.user_uid = user_uid;
-        this.photo_seq = photo_seq;
-        this.photo_id = photo_id;
-        this.publication = publication;
-        this.design = design;
-        this.video_url = video_url;
-        this.photo_url = photo_url;
-        this.phrase = phrase;
-        this.photo_date = photo_date;
-        this.photo_pwd = photo_pwd;
-    }
 }

@@ -25,18 +25,13 @@ public class PhotoService {
 	}
 
 	public boolean insertPhoto(Photo photo, LocalDate date){
-		//여기서 photo_id를 알려줄거임
 
 		Date today = new Date();
 		System.out.println(today);
 
 		SimpleDateFormat date2 = new SimpleDateFormat("yyyyMMdd");
-
 		String str = date2.format(today);
-		System.out.println("Date: "+date2.format(today));
-
 		str = str.substring(2,8);
-		System.out.println("Date: "+str);
 		int count = sqlSession.getMapper(PhotoMapper.class).allPhoto(str);
 
 		if(count<9){
@@ -47,8 +42,6 @@ public class PhotoService {
 			photo.photo_id = str +Integer.toString(count+1);
 		}
 
-		//만약 3자리면 넘어가고 ->
-		//만약 2자리면
 		return sqlSession.getMapper(PhotoMapper.class).insertPhoto(photo,date) == 1;
 	}
 
@@ -84,4 +77,8 @@ public class PhotoService {
 	public List<Photo> getSamplePhotoList() {
 		return sqlSession.getMapper(PhotoMapper.class).getSamplePhotoList() ;
 	}
+
+//    public boolean insertPhoto2(String url) {
+//		return sqlSession.getMapper(PhotoMapper.class).insertPhoto2(url) == 1;
+//    }
 }
