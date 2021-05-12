@@ -119,7 +119,7 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
             int length = permissions.length;
             for (int i = 0; i < length; i++) {
                 if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                 Log.d("MainActivity","권한 허용 : " + permissions[i]);
+                    Log.d("MainActivity","권한 허용 : " + permissions[i]);
                 }
             }
         }
@@ -130,13 +130,13 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
 
         //파일 읽기 권한 확인
         if (ContextCompat.checkSelfPermission(getActivity(),
-            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             temp += Manifest.permission.READ_EXTERNAL_STORAGE + " ";
         }
 
         //파일 쓰기 권한 확인
         if (ContextCompat.checkSelfPermission(getActivity(),
-            Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
         }
 
@@ -149,7 +149,7 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         }
     }
 
-//    @Override
+    //    @Override
 //    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 //        if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
 //            try{
@@ -166,29 +166,28 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
 //            Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
 //        }
 //    }
-@Override
-public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-    if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
-        try{
-            InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
-            bm = BitmapFactory.decodeStream(inputStream);
-            inputStream.close();
-            imageView.setImageBitmap(bm);
-            inputStream.close();
-            saveBitmapToJpeg(bm);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
+            try{
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+                bm = BitmapFactory.decodeStream(inputStream);
+                inputStream.close();
+                imageView.setImageBitmap(bm);
+                inputStream.close();
+                saveBitmapToJpeg(bm);
 
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-            String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
-            myApp.setCardPhoto(String.valueOf(Uri.parse(path)));
-//                myApp.setCardPhoto(String.valueOf(data.getData()));
-        } catch (Exception e){
-            e.printStackTrace();
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
+                myApp.setCardPhoto(String.valueOf(Uri.parse(path)));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
+            Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
         }
-    } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
-        Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
     }
-}
     public void saveBitmapToJpeg(Bitmap bitmap) {
         File tempFile = new File(getActivity().getCacheDir(), "photo");
         try {

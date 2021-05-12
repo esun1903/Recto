@@ -26,7 +26,6 @@ import androidx.loader.content.CursorLoader;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
-import com.ssafy.recto.api.Photo;
 import com.ssafy.recto.api.HttpClient;
 import com.ssafy.recto.config.MyApplication;
 
@@ -172,7 +171,6 @@ public class CreateFragment_6_Success_phrases extends Fragment {
             }
         });
     }
-
 
     //Uri -- > 절대경로로 바꿔서 리턴시켜주는 메소드
     String getRealPathFromUri(Uri uri) {

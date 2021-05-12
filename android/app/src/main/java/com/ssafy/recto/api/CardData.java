@@ -18,11 +18,9 @@ public class CardData {
     @Expose
     int photo_seq;
 
-
     @SerializedName("photo_id")
     @Expose
     String photo_id;
-
 
     @SerializedName("publication")
     @Expose

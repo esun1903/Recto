@@ -172,7 +172,6 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         });
     }
 
-
     //Uri -- > 절대경로로 바꿔서 리턴시켜주는 메소드
     String getRealPathFromUri(Uri uri) {
         String[] proj = {MediaStore.Images.Media.DATA};
