@@ -20,12 +20,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ssafy.recto.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseAuth mFirebaseAuth;        // Firebase 인증 처리
     private DatabaseReference mDatabaseRef;   // 실시간 데이터베이스
     private EditText mEtEmail, mEtPwd, mEtConfirmPwd, mEtNickname;     // 회원가입 입력 필드
     private Button mBtnRegister;            // 회원가입 버튼
+
+    // 이메일 형식 체크
+    public static boolean isEmail(String email){
+        boolean returnValue = false;
+        String regex = "^[_a-zA-Z0-9-\\.]+@[\\.a-zA-Z0-9-]+\\.[a-zA-Z]+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        if(m.matches()){
+            returnValue = true;
+        }
+        return returnValue;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +66,40 @@ public class RegisterActivity extends AppCompatActivity {
                 String strConfirmPwd = mEtConfirmPwd.getText().toString();
                 String strNickmame = mEtNickname.getText().toString();
 
+                // 회원가입 유효성 검사
+                // 이메일을 입력하지 않은 경우
+                if (strEmail.equals("")) {
+                    Toast.makeText(RegisterActivity.this,"이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 이메일 형식이 틀린 경우
+                if (!isEmail(strEmail)) {
+                    Toast.makeText(RegisterActivity.this,"이메일 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 비밀번호를 입력하지 않은 경우
+                if (strPwd.equals("")) {
+                    Toast.makeText(RegisterActivity.this,"비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 비밀번호 확인을 입력하지 않은 경우
+                if (strConfirmPwd.equals("")) {
+                    Toast.makeText(RegisterActivity.this,"비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // 비밀번호와 비밀번호 확인이 불일치하는 경우
                 if (!strPwd.equals(strConfirmPwd)) {
                     Toast.makeText(RegisterActivity.this,"비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
-//                    Log.e("비밀번호 일치 여부", "불일치!");
+                    return;
+                }
+
+                // 닉네임을 입력하지 않은 경우
+                if (strNickmame.equals("")) {
+                    Toast.makeText(RegisterActivity.this,"닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -63,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        // 정상 처리 (가입 성공 시)
+                        // 회원가입 성공 - 정상 처리
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
 
@@ -85,8 +130,10 @@ public class RegisterActivity extends AppCompatActivity {
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish(); // 현재 액티비티 파괴
-                        } else {
-                            Toast.makeText(RegisterActivity.this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        // 회원가입 실패 - 이미 동일한 계정이 존재하는 경우
+                        else {
+                            Toast.makeText(RegisterActivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
