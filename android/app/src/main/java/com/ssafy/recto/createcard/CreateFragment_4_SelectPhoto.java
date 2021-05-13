@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,9 +26,6 @@ import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.config.MyApplication;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class CreateFragment_4_SelectPhoto extends Fragment {
@@ -135,10 +130,10 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         }
 
         //파일 쓰기 권한 확인
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
-        }
+//        if (ContextCompat.checkSelfPermission(getActivity(),
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
+//        }
 
         if (TextUtils.isEmpty(temp) == false) {
             // 권한 요청
@@ -149,23 +144,6 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         }
     }
 
-    //    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
-//            try{
-//                InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
-//                bm = BitmapFactory.decodeStream(inputStream);
-//                inputStream.close();
-//                imageView.setImageBitmap(bm);
-//                inputStream.close();
-//                saveBitmapToJpeg(bm);
-//            } catch (Exception e){
-//                e.printStackTrace();
-//            }
-//        } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
-//            Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
-//        }
-//    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == 101 && resultCode == getActivity().RESULT_OK){
@@ -175,12 +153,8 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
                 inputStream.close();
                 imageView.setImageBitmap(bm);
                 inputStream.close();
-                saveBitmapToJpeg(bm);
-
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
-                myApp.setCardPhoto(String.valueOf(Uri.parse(path)));
+                myApp.setCardPhoto(String.valueOf(data.getData()));
+//                saveBitmapToJpeg(bm);
             } catch (Exception e){
                 e.printStackTrace();
             }
@@ -188,16 +162,17 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
             Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
         }
     }
-    public void saveBitmapToJpeg(Bitmap bitmap) {
-        File tempFile = new File(getActivity().getCacheDir(), "photo");
-        try {
-            tempFile.createNewFile();
-            FileOutputStream out = new FileOutputStream(tempFile);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-            out.close();
-            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
-        }
-    }
+
+//    public void saveBitmapToJpeg(Bitmap bitmap) {
+//        File tempFile = new File(getActivity().getCacheDir(), "photo");
+//        try {
+//            tempFile.createNewFile();
+//            FileOutputStream out = new FileOutputStream(tempFile);
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+//            out.close();
+//            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
+//        } catch (Exception e) {
+//            Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
+//        }
+//    }
 }
