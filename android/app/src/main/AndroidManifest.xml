@@ -28,17 +28,14 @@
         <meta-data android:name="com.google.ar.core" android:value="required" />
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".user.LoginActivity" />
-<!--        <activity android:name=".home.SplashActivity">-->
         <activity android:name=".home.SplashActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".arcore.ArMainActivity" />
         <activity android:name=".MainActivity" />
-<!--        <activity android:name=".createcard.GalleryActivity" />-->
     </application>
 
 </manifest>
