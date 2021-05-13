@@ -28,6 +28,9 @@ public interface PhotoMapper {
     @Select("SELECT COUNT(*) FROM photo WHERE photo_id LIKE CONCAT(#{nowDay}, '%')")
     public int allPhoto(@Param("nowDay") String nowDay);
 
+
+
+
 //	CONCAT(‘%’, #{searchKeyword},
 //	@Update("update photo set " + "photo_date = #{photo.photo_date}, " + "photo_url = #{photo.photo_url}, "
 //			+ "video_url = #{photo.video_url}, " + "phrase = #{photo.phrase}, "

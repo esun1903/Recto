@@ -154,4 +154,20 @@ public class Photo {
         this.design = design;
         this.publication = publication;
     }
+
+    public Photo() {
+    }
+
+    public Photo(int photo_seq, String user_uid, String photo_id, String photo_date,  String photo_url, String video_url, String phrase, String photo_pwd, int design, boolean publication) {
+        this.photo_seq = photo_seq;
+        this.user_uid = user_uid;
+        this.photo_id = photo_id;
+        this.photo_date = photo_date;
+        this.photo_url = photo_url;
+        this.video_url = video_url;
+        this.phrase = phrase;
+        this.photo_pwd = photo_pwd;
+        this.design = design;
+        this.publication = publication;
+    }
 }
