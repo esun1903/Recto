@@ -22,6 +22,9 @@ public interface ApiInterface {
     @GET("photo")
     Call<CardData> getCard(@Query("photo_seq") int photo_seq);
 
+    @GET("photo/list")
+    Call<List<CardData>> getMineCard(@Query("user_uid") String user_uid);
+
     Call<String> getUpdateProfileInfo(@Part MultipartBody.Part file, @PartMap Map<String, RequestBody> info);
 
     @Multipart
