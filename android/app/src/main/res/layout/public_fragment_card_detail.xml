@@ -93,7 +93,7 @@
                     android:id="@+id/iv_success"
                     android:layout_width="183dp"
                     android:layout_height="288dp"
-                    android:contentDescription="@string/private_card"
+                    android:contentDescription="@string/public_card"
                     android:src="@drawable/card_layout" />
 
                 <ImageView
@@ -120,7 +120,7 @@
                     android:layout_gravity="right|bottom"
                     android:layout_marginHorizontal="7dp"
                     android:layout_marginVertical="16dp"
-                    android:text="000000000"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="10dp" />
 

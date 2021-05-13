@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,8 @@ import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.CardData;
 import com.ssafy.recto.api.HttpClient;
+import com.ssafy.recto.publiccard.PublicFragmentCardDetail;
+import com.ssafy.recto.publiccard.PublicFragmentCardDetail2;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -40,6 +43,9 @@ public class ProfileFragmentMine extends Fragment {
     private GridLayoutManager mGridLayoutManager;
     String userId = "1";
 
+    int[] seq;
+    int[] design_num;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -58,9 +64,6 @@ public class ProfileFragmentMine extends Fragment {
         return profileFragmentMine;
     }
 
-//    int[] images = {R.drawable.user1,R.drawable.user2, R.drawable.user3,
-//            R.drawable.user4, R.drawable.user5, R.drawable.user1,R.drawable.user2, R.drawable.user3,
-//            R.drawable.user4, R.drawable.user5 };
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Nullable
@@ -87,8 +90,30 @@ public class ProfileFragmentMine extends Fragment {
             @Override
             public void onItemClick(View v, int pos)
             {
-                Log.i("this is", String.valueOf(pos));
-                mainActivity.setFragment("profile_mine_detail");
+                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
+
+                if (design_num[pos] == 1) {
+                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    ProfileFragmentMineDetail profileFragmentMineDetail = new ProfileFragmentMineDetail();
+                    profileFragmentMineDetail.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, profileFragmentMineDetail);
+                    transaction.commit();
+                } else {
+                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    ProfileFragmentMineDetail2 profileFragmentMineDetail2 = new ProfileFragmentMineDetail2();
+                    profileFragmentMineDetail2.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, profileFragmentMineDetail2);
+                    transaction.commit();
+                }
+
+                // 밑에 코드 지우고 위에서 해줘야 seq값이 전달 됨
+//                mainActivity.setFragment("profile_mine_detail");
             }
         });
 
@@ -104,6 +129,8 @@ public class ProfileFragmentMine extends Fragment {
                 String uid, video, photo, phrase, date, pwd;
                 boolean publication;
                 int design;
+                seq = new int[response.body().size()];
+                design_num = new int[response.body().size()];
 
                 photoCards.clear();
                 for (int i = 0; i < response.body().size(); i++) {
@@ -117,7 +144,9 @@ public class ProfileFragmentMine extends Fragment {
                     pwd = response.body().get(i).getPhoto_pwd();
 
                     photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
-                    Log.d("api 잘 불러오나", String.valueOf(response.body().get(i)));
+//                    Log.d("api 잘 불러오나", String.valueOf(response.body().get(i)));
+                    seq[i] = response.body().get(i).getPhoto_seq();
+                    design_num[i] = design;
                 }
 
                 profileFragmentMineAdapter = new ProfileFragmentMineAdapter(getActivity(), photoCards);

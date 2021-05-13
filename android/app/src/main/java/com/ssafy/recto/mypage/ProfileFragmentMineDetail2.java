@@ -1,4 +1,4 @@
-package com.ssafy.recto.publiccard;
+package com.ssafy.recto.mypage;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -47,15 +47,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PublicFragmentCardDetail2 extends Fragment {
+public class ProfileFragmentMineDetail2 extends Fragment {
 
     ApiInterface api;
     MainActivity mainActivity;
     ImageView cardImageView;
     ImageView info_dialog;
-    Button free_photo_card_list_btn;
+    Button mine_photo_card_list_btn;
     TextView tv_phrases;
     TextView card_id;
+    TextView card_date;
     Button download_button;
     private View view;
     private Context mContext;
@@ -79,7 +80,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.public_fragment_card_detail2, container, false);
+        view = inflater.inflate(R.layout.profile_fragment_mine_card_detail2, container, false);
         api = HttpClient.getRetrofit().create( ApiInterface.class );
 
         // 카드 목록에서 photo_seq 값 (sep[pos]) 가져오기
@@ -95,18 +96,19 @@ public class PublicFragmentCardDetail2 extends Fragment {
             e.printStackTrace();
         }
 
+        card_date = view.findViewById(R.id.card_date);
         tv_phrases = view.findViewById(R.id.tv_phrases);
         card_id = view.findViewById(R.id.card_id);
         cardImageView = view.findViewById(R.id.card_image_detail);
-        free_photo_card_list_btn = view.findViewById(R.id.free_photo_card_list_btn);
+        mine_photo_card_list_btn = view.findViewById(R.id.mine_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
         download_button = view.findViewById(R.id.download_button);
 
         // 목록보기 버튼
-        free_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
+        mine_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainActivity.setFragment("public");
+                mainActivity.setFragment("profile");
             }
         });
 
@@ -149,7 +151,6 @@ public class PublicFragmentCardDetail2 extends Fragment {
                     fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".jpeg");
                     captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/RECTO" + day.format(date) + ".JPEG")));
-//                    mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,Uri.parse("file://"+Environment.getExternalStorageDirectory()+"/RECTO")));
                     Toast.makeText(getContext(), "저장완료", Toast.LENGTH_SHORT).show();
                     fos.flush();
                     fos.close();
@@ -165,7 +166,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
         return view;
     }
 
-    public void requestGet() throws ParseException {
+    private void requestGet() throws ParseException {
         // photo_seq 값으로 포토카드 검색
         Call<CardData> call = api.getCard(seq);
         call.enqueue(new Callback<CardData>() {
@@ -176,9 +177,14 @@ public class PublicFragmentCardDetail2 extends Fragment {
                 boolean publication;
                 int photo_seq, design;
 
+                date = response.body().getPhoto_date();
                 id = response.body().getPhoto_id();
                 phrase = response.body().getPhrase();
 
+                // 날짜 넣어주기
+                card_date.setText(date);
+
+                // 이미지 넣어주기
                 photo_url = response.body().getPhoto_url();
 
                 // 문구 넣어주기

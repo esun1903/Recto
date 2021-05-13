@@ -35,6 +35,7 @@ import com.ssafy.recto.mypage.ProfileFragmentGift;
 import com.ssafy.recto.mypage.ProfileFragmentGiftDetail;
 import com.ssafy.recto.mypage.ProfileFragmentMine;
 import com.ssafy.recto.mypage.ProfileFragmentMineDetail;
+import com.ssafy.recto.mypage.ProfileFragmentMineDetail2;
 import com.ssafy.recto.publiccard.PublicFragment;
 import com.ssafy.recto.publiccard.PublicFragmentCardDetail;
 import com.ssafy.recto.publiccard.PublicFragmentCardDetail2;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragment profileFragment;
     private ProfileFragmentMine profileFragmentMine;
     private ProfileFragmentMineDetail profileFragmentMineDetail;
+    private ProfileFragmentMineDetail2 profileFragmentMineDetail2;
     private ProfileFragmentGift profileFragmentGift;
     private ProfileFragmentGiftDetail profileFragmentGiftDetail;
     private InfoFragment infoFragment;
@@ -159,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
         profileFragmentMine = new ProfileFragmentMine();
         profileFragmentMineDetail = new ProfileFragmentMineDetail();
+        profileFragmentMineDetail2 = new ProfileFragmentMineDetail2();
         profileFragmentGift = new ProfileFragmentGift();
         profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
         infoFragment = new InfoFragment();
@@ -237,6 +240,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "profile_mine_detail":
                 ft.replace(R.id.main_frame, profileFragmentMineDetail);
+                ft.commit();
+                break;
+            case "profile_mine_detail2":
+                ft.replace(R.id.main_frame, profileFragmentMineDetail2);
                 ft.commit();
                 break;
             case "profile_gift":

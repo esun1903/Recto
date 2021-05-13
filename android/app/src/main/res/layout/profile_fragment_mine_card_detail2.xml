@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".publiccard.PublicFragmentCardDetail">
+    tools:context=".mypage.ProfileFragmentMineDetail">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/free_photo_card"
+                android:id="@+id/mine_photo_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -27,7 +27,7 @@
 
                 <!-- list button -->
                 <Button
-                    android:id="@+id/free_photo_card_list_btn"
+                    android:id="@+id/mine_photo_card_list_btn"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -51,11 +51,11 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="2dp"
-                        android:src="@drawable/lock_open"
-                        android:contentDescription="@string/lock_open" />
+                        android:src="@drawable/lock"
+                        android:contentDescription="@string/lock" />
 
                     <TextView
-                        android:id="@+id/free_photo_card_text"
+                        android:id="@+id/mine_photo_card_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/photo_card"
@@ -78,6 +78,16 @@
                     android:contentDescription="@string/question" />
 
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/card_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:fontFamily="@font/eulyoo1945_semibold" />
 
             <FrameLayout
                 android:id="@+id/card_frameLayout"
@@ -142,20 +152,43 @@
 
             </FrameLayout>
 
-            <Button
-                android:id="@+id/download_button"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:layout_gravity="center"
-                android:text="@string/download"
-                android:textColor="@color/white"
-                android:fontFamily="@font/eulyoo1945_semibold"
-                app:backgroundTint="@color/brown"
-                app:cornerRadius="10dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/download_button"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="25dp"
+                    android:text="@string/download"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/eulyoo1945_semibold"
+                    app:backgroundTint="@color/brown"
+                    app:cornerRadius="10dp" />
+
+                <Button
+                    android:id="@+id/delete_button"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="25dp"
+                    android:text="@string/delete"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/eulyoo1945_semibold"
+                    app:backgroundTint="@color/red"
+                    app:cornerRadius="10dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
