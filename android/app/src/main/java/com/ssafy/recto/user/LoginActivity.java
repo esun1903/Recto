@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,14 +15,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,7 +35,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
-import com.ssafy.recto.config.MyApplication;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -46,7 +44,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private SignInButton btn_google;         // 구글 로그인 버튼
     private GoogleApiClient googleApiClient; // 구글 API 클라이언트 객체
     private static final int REQ_SIGN_GOOGLE = 100; // 구글 로그인 결과 코드
-    MyApplication myApplication;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +58,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
 
-        // 데이터가 있다면 myApplication을 매번 새로 불러오지 않는다!
-        if (myApplication == null) {
-            myApplication = (MyApplication) getApplication();
-        }
+        // Shared Preferences 초기화
+        sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+        //sharedPreferences를 제어할 editor를 선언
+        editor = sharedPreferences.edit();
 
         Button btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -80,36 +79,43 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser(); // 로그인한 유저의 정보 가져오기
                             UserAccount account = new UserAccount();
 
-                            // My Application에 emailID 저장
+                            // Shared Preferences에 emailID 저장
                             String emailId = account.setEmailId(firebaseUser.getEmail());
-                            myApplication.setUserEmail(emailId);
-//                            Log.e("이메일 확인", myApplication.getUserEmail());
+                            editor.putString("emailId", emailId);
+                            editor.apply();
+                            String checkEmail = sharedPreferences.getString("emailId", "");
+                            Log.e("이메일 확인", checkEmail);
 
-                            // My Application에 idToken 저장
-                            String UserUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
-                            myApplication.setUserUid(UserUid);
-//                            Log.e("UID 확인", myApplication.getUserUid());
+                            // Shared Preferences에 idToken 저장
+                            String userUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
+                            editor.putString("userUid", userUid);
+                            editor.apply();
+                            String checkUid = sharedPreferences.getString("userUid", "");
+                            Log.e("Uid 확인", checkUid);
 
-                            // My Application에 닉네임 저장
-                            DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(UserUid).child("nickname");
+                            // Shared Preferences에 닉네임 저장
+                            DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(userUid).child("nickname");
                             UserNickname.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     String nickname = snapshot.getValue(String.class);
-                                    myApplication.setUserNickname(nickname);
-//                                    Log.e("닉네임 확인", myApplication.getUserNickname());
+                                    editor.putString("nickname", nickname);
+                                    editor.apply();
+                                    String checkNickname = sharedPreferences.getString("nickname", "");
+                                    Log.e("닉네임 확인", checkNickname);
 
-                                    finish(); // 현재 액티비티 파괴
                                     // 로그인 성공 시 메인으로 이동
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
+                                    if (nickname != null) {
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish(); // 현재 액티비티 파괴
+                                    }
                                 }
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError error) {
                                 }
                             });
-
                         } else {
                             Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_LONG).show();
                         }
@@ -172,28 +178,34 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                         // 구글 로그인 성공 시
                         if (task.isSuccessful()) {
-                            // My Application에 emailID 저장
+                            // Shared Preferences에 emailID 저장
                             String emailId = account.getEmail();
-                            myApplication.setUserEmail(emailId);
-//                            Log.e("이메일 확인", myApplication.getUserEmail());
+                            editor.putString("emailId", emailId);
+                            editor.apply();
+                            String checkEmail = sharedPreferences.getString("emailId", "");
+                            Log.e("구글 이메일 확인", checkEmail);
 
-                            // My Application에 idToken 저장
+                            // Shared Preferences에 idToken 저장
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
                             String idToken = firebaseUser.getUid();
-                            myApplication.setUserUid(idToken);
-//                            Log.e("UID 확인", myApplication.getUserUid());
+                            editor.putString("userUid", idToken);
+                            editor.apply();
+                            String checkUid = sharedPreferences.getString("userUid", "");
+                            Log.e("Uid 확인", checkUid);
 
-                            // My Application에 구글 닉네임 저장
-                            String googleNickname = account.getDisplayName();
-                            myApplication.setUserNickname(googleNickname);
-//                            Log.e("닉네임 확인", myApplication.getUserNickname());
+                            // Shared Preferences에 구글 닉네임 저장
+                            String nickname = account.getDisplayName();
+                            editor.putString("nickname", nickname);
+                            editor.apply();
+                            String checkNickname = sharedPreferences.getString("nickname", "");
+                            Log.e("닉네임 확인", checkNickname);
 
                             // Database에 구글 로그인 사용자 관련 정보 insert
                             if (String.valueOf(mDatabaseRef.child("UserAccount").child(idToken)) == null) {
                                 Log.e("구글 로그인", "최초 사용자");
                                 mDatabaseRef.child("UserAccount").child(idToken).child("emailId").setValue(emailId);
                                 mDatabaseRef.child("UserAccount").child(idToken).child("idToken").setValue(idToken);
-                                mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(googleNickname);
+                                mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(nickname);
                             } else {
                                 Log.e("구글 로그인", "기존 사용자");
                             }

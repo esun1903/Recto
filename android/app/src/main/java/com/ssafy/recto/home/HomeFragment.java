@@ -3,11 +3,14 @@ package com.ssafy.recto.home;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
-import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.user.UserAccount;
 
 import java.util.ArrayList;
@@ -33,7 +35,6 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     MainActivity mainActivity;
-    MyApplication myApplication;
     private View view;
     private ArrayList<String> arrayList;
     private MyAdapter adapter;
@@ -43,6 +44,8 @@ public class HomeFragment extends Fragment {
     private DatabaseReference mDatabaseRef;   // 실시간 데이터베이스
     private TextView tv_id;
     private View upline;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     int itemList[] = {R.drawable.free1, R.drawable.free2, R.drawable.free3,
             R.drawable.free4, R.drawable.free5, R.drawable.free6,
@@ -64,7 +67,6 @@ public class HomeFragment extends Fragment {
     @Override
     // Fragment가 처음 생성됐을 때 내부 구문 실행
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        myApplication = (MyApplication) getActivity().getApplication();
         view = inflater.inflate(R.layout.home_fragment, container, false);
         init();
         return view;
@@ -73,12 +75,18 @@ public class HomeFragment extends Fragment {
     private void init() {
         mFirebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser current = mFirebaseAuth.getCurrentUser();
+
+        // Shared Preferences 초기화
+        sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+        //sharedPreferences를 제어할 editor를 선언
+        editor = sharedPreferences.edit();
+
         // 메인 화면 문구 - 로그인 사용자
         if (current != null) {
-            String userNick = myApplication.getUserNickname();
-            Log.e("홈 닉네임", String.valueOf(userNick));
+            String nickname = sharedPreferences.getString("nickname", "RECTO의 유저님");
+            Log.e("홈 닉네임 확인", nickname);
             tv_id = view.findViewById(R.id.tv_id);
-            tv_id.setText(userNick + "님의 Moment");
+            tv_id.setText(nickname + "님의 Moment");
         }
 
         // 메인 화면 문구 - 비 로그인 사용자

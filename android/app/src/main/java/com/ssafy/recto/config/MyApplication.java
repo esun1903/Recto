@@ -1,6 +1,7 @@
 package com.ssafy.recto.config;
 
 import android.app.Application;
+import android.util.Log;
 
 import lombok.Data;
 
@@ -13,9 +14,6 @@ public class MyApplication extends Application {
     private String cardDate;
     private String cardDateNum;
     private String cardPassword;
-    private String userEmail;
-    private String userUid;
-    private String userNickname;
 
     public Boolean getCardPublic() {
         return cardPublic;
@@ -81,29 +79,6 @@ public class MyApplication extends Application {
         this.cardPassword = cardPassword;
     }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public String getUserUid() {
-        return userUid;
-    }
-
-    public void setUserUid(String userUid) {
-        this.userUid = userUid;
-    }
-
-    public String getUserNickname() {
-        return userNickname;
-    }
-
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname;
-    }
 
     @Override
     public void onCreate() {

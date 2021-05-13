@@ -22,11 +22,6 @@ import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.user.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
-
-    MyApplication myApplication;
-    private FirebaseAuth mFirebaseAuth;
-    private DatabaseReference mDatabaseRef;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
