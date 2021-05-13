@@ -80,7 +80,7 @@
             </RelativeLayout>
 
             <FrameLayout
-                android:id="@+id/FrameLayout01"
+                android:id="@+id/card_frameLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -91,7 +91,15 @@
                     android:layout_width="183dp"
                     android:layout_height="288dp"
                     android:contentDescription="@string/private_card"
-                    android:src="@drawable/success_card" />
+                    android:src="@drawable/card_layout" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_marginVertical="13dp"
+                    android:src="@drawable/card_logo_sm"
+                    android:contentDescription="@string/card_logo" />
 
                 <TextView
                     android:id="@+id/card_id"
@@ -99,15 +107,16 @@
                     android:layout_height="15dp"
                     android:text="000000000"
                     android:textSize="10dp"
+                    android:textColor="@color/black"
                     android:layout_gravity="end"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="7dp"/>
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="18dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="vertical">
 
                     <ImageView
@@ -115,9 +124,9 @@
                         android:layout_width="152dp"
                         android:layout_height="203dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="20dp"
-                        android:contentDescription="@string/private_card"
-                        android:src="@drawable/success_card_phrases"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@string/photo_card"
+                        android:src="@drawable/card_image"
                         android:scaleType="centerCrop"/>
 
                     <TextView
@@ -125,13 +134,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="10dp" />
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/eulyoo1945_semibold"
+                        android:layout_marginBottom="15dp" />
 
                 </LinearLayout>
 
             </FrameLayout>
 
             <Button
+                android:id="@+id/download_button"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
