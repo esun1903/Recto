@@ -113,16 +113,6 @@ public class PublicFragment extends Fragment{
                     transaction.replace(R.id.main_frame, publicFragmentCardDetail2);
                     transaction.commit();
                 }
-
-//                // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
-//                Bundle bundle = new Bundle(); // 데이터를 담을 번들
-//                bundle.putInt("seq", seq[pos]);
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                PublicFragmentCardDetail publicFragmentCardDetail = new PublicFragmentCardDetail();
-//                publicFragmentCardDetail.setArguments(bundle);
-//                transaction.replace(R.id.main_frame, publicFragmentCardDetail);
-//                transaction.commit();
-
                 // 밑에 코드 지우고 위에서 해줘야 seq값이 전달 됨
 //                mainActivity.setFragment("public_card_detail");
             }
