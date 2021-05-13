@@ -19,7 +19,7 @@
     <string name="writeinfo_text">문구를 입력해주세요.</string>
     <string name="writeinfo_date">날짜를 입력해주세요.</string>
     <string name="writeinfo_password">비밀번호를 입력해주세요.</string>
-    <string name="password">비밀번호</string>
+    <string name="password">비밀번호는 숫자 4자리로 입력해주세요.</string>
     <string name="date">날짜</string>
     <string name="text">문구</string>
     <string name="photocard_success">나만의 포토카드가 완성되었어요\n. 이대로 제작할까요?</string>

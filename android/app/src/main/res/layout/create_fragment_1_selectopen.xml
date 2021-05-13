@@ -17,7 +17,7 @@
                 android:layout_margin="15dp"
                 android:text="@string/make_photo_card"
                 android:textColor="@color/black"
-                android:textSize="30sp" />
+                android:textSize="27sp" />
 
             <ImageButton
                 android:id="@+id/ib_private"
