@@ -1,6 +1,8 @@
 package com.ssafy.recto.mypage;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,19 +26,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
-import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.user.UserAccount;
+
+import java.util.Map;
 
 public class ProfileFragment extends Fragment {
 
     MainActivity mainActivity;
     ViewPager viewPager;
     TabLayout tabLayout;
-    MyApplication myApplication;
     private View view;
     private FragmentPagerAdapter fragmentPagerAdapter;
     private FirebaseAuth mFirebaseAuth;
     private TextView tv_hello;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -67,12 +71,16 @@ public class ProfileFragment extends Fragment {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
+        // Shared Preferences 초기화
+        sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+        //sharedPreferences를 제어할 editor를 선언
+        editor = sharedPreferences.edit();
+
         // Greeting 문구
-        myApplication = (MyApplication) getActivity().getApplication();
-        String userNick = myApplication.getUserNickname();
-        Log.e("프로필 닉네임", String.valueOf(userNick));
+        String nickname = sharedPreferences.getString("nickname", "RECTO 유저");
+        Log.e("프로필 닉네임 확인", nickname);
         tv_hello = view.findViewById(R.id.tv_hello);
-        tv_hello.setText(userNick + "님, 반갑습니다.");
+        tv_hello.setText(nickname + "님, 반갑습니다.");
 
         // 로그아웃 버튼
         Button btn_logout = view.findViewById(R.id.btn_logout);
@@ -82,8 +90,9 @@ public class ProfileFragment extends Fragment {
                 // 로그아웃 하기
                 mFirebaseAuth.signOut();
 
-                // My Application 초기화
-                myApplication = null;
+                // Shared Preferences 초기화
+                editor.clear();
+                editor.apply();
 
                 // 로그아웃 후 Home Fragment로 이동
                 mainActivity.setFragment("home");
