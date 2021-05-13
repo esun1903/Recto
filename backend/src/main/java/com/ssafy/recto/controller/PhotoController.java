@@ -62,6 +62,14 @@ public class PhotoController {
         return photoService.getPhotoList(user_uid);
     }
 
+    @ApiOperation(value = "포토카드 메인화면", notes = "포토카드 목록을 메인 화면에 반환한다.", response = Photo.class)
+    @GetMapping("/main")
+    public List<Photo> getPhotoMain(
+            @RequestParam("user_uid") @ApiParam(value = "회원 식별자", required = true) String user_uid) throws Exception {
+        logger.info("getPhotoMain - 호출");
+        return photoService.getPhotoMain(user_uid);
+    }
+
     @ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
     @RequestMapping(method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<String> insertPhoto(@RequestParam(value = "user_uid", required = false) String user_uid,

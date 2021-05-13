@@ -98,6 +98,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                     String nickname = snapshot.getValue(String.class);
                                     myApplication.setUserNickname(nickname);
 //                                    Log.e("닉네임 확인", myApplication.getUserNickname());
+
+                                    finish(); // 현재 액티비티 파괴
+                                    // 로그인 성공 시 메인으로 이동
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
                                 }
 
                                 @Override
@@ -105,10 +110,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 }
                             });
 
-                            // 로그인 성공 시 메인으로 이동
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish(); // 현재 액티비티 파괴
                         } else {
                             Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.", Toast.LENGTH_LONG).show();
                         }

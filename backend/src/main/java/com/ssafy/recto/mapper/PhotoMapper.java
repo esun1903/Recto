@@ -22,8 +22,11 @@ public interface PhotoMapper {
     @Select("SELECT * FROM photo WHERE photo_seq = #{photo_seq}")
     public Photo getPhotoDetail(@Param("photo_seq") int photo_seq);
 
-    @Select("SELECT * FROM photo WHERE user_uid = #{user_uid}")
+    @Select("SELECT * FROM photo WHERE user_uid like #{user_uid}")
     public List<Photo> getPhotoList(@Param("user_uid") String user_uid);
+
+    @Select("SELECT * FROM photo WHERE user_uid like #{user_uid} order by photo_seq desc limit 5")
+    public List<Photo> getPhotoMain(@Param("user_uid") String user_uid);
 
     @Select("SELECT COUNT(*) FROM photo WHERE photo_id LIKE CONCAT(#{nowDay}, '%')")
     public int allPhoto(@Param("nowDay") String nowDay);
