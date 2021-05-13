@@ -78,6 +78,10 @@ public class PhotoService {
 		return sqlSession.getMapper(PhotoMapper.class).getSamplePhotoList() ;
 	}
 
+
+
+
+
 //    public boolean insertPhoto2(String url) {
 //		return sqlSession.getMapper(PhotoMapper.class).insertPhoto2(url) == 1;
 //    }

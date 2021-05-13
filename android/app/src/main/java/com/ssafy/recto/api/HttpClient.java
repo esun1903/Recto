@@ -23,7 +23,7 @@ public class HttpClient {
 
         if(retrofit == null) {
             Retrofit.Builder builder = new Retrofit.Builder();
-           builder.baseUrl("http://k4a204.p.ssafy.io:8080/recto/");
+            builder.baseUrl("http://k4a204.p.ssafy.io:8080/recto/");
             builder.addConverterFactory(GsonConverterFactory.create(gson));  // 받아오는 Json 구조의 데이터를 객체 형태로 변환
 
             retrofit = builder.build();
