@@ -33,7 +33,8 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:hint="@string/date"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            android:padding="10dp"
             android:gravity="center_horizontal" />
 
         <LinearLayout
