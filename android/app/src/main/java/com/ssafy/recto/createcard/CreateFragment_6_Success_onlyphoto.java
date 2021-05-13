@@ -88,6 +88,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         cardDesign = myApp.getCardDesign();
         cardVideo = myApp.getCardVideo();
         cardPhrases = myApp.getCardPhrases();
+        cardDate = myApp.getCardDate();
         cardDateNum = myApp.getCardDateNum();
         cardPassword = myApp.getCardPassword();
 

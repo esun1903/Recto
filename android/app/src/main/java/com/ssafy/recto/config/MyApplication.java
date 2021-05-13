@@ -6,7 +6,6 @@ import android.util.Log;
 import lombok.Data;
 
 public class MyApplication extends Application {
-    private MyApplication myApplication = null;
     private Boolean cardPublic;
     private Integer cardDesign;
     private String cardVideo;
@@ -15,14 +14,6 @@ public class MyApplication extends Application {
     private String cardDate;
     private String cardDateNum;
     private String cardPassword;
-
-    public MyApplication getMyApplication() {
-        return myApplication;
-    }
-
-    public void setMyApplication(MyApplication myApplication) {
-        this.myApplication = myApplication;
-    }
 
     public Boolean getCardPublic() {
         return cardPublic;
@@ -92,6 +83,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        myApplication = (MyApplication) getApplicationContext();
     }
+
+    public MyApplication() { }
+
 }

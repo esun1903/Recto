@@ -73,13 +73,12 @@ public class CreateFragment_3_SelectVideo extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (fileUri == null) {
-//                    Toast.makeText(getActivity(), "동영상을 업로드해주세요", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    mainActivity.setFragment("create_selectphoto");
-//                }
-                mainActivity.setFragment("create_selectphoto");
+                if (fileUri == null) {
+                    Toast.makeText(getActivity(), "동영상을 업로드해주세요", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    mainActivity.setFragment("create_selectphoto");
+                }
             }
         });
 

@@ -14,15 +14,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="5dp"
             android:text="@string/make_photo_card"
             android:textColor="@color/black"
-            android:textSize="30sp" />
+            android:textSize="27sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
             android:labelFor="@+id/et_text"
             android:text="@string/writeinfo_text"
             android:textColor="@color/black"
@@ -51,7 +61,8 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:hint="@string/date"
-            android:textSize="18sp"
+            android:textSize="20sp"
+            android:padding="10dp"
             android:gravity="center_horizontal" />
 
         <TextView
@@ -67,11 +78,12 @@
             android:id="@+id/et_password"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
-            android:inputType="numberPassword"
-            android:importantForAutofill="no"
+            android:gravity="center_horizontal"
             android:hint="@string/password"
-            android:gravity="center_horizontal"  />
+            android:importantForAutofill="no"
+            android:inputType="numberPassword" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +94,9 @@
                 android:id="@+id/btn_previous"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_margin="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginEnd="25dp"
                 android:layout_weight="1"
                 android:radius="20dp"
                 android:text="@string/previous_btn"
@@ -94,7 +108,9 @@
                 android:id="@+id/btn_next"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_margin="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginRight="25dp"
                 android:layout_weight="1"
                 android:text="@string/next_btn"
                 android:textColor="@color/white"

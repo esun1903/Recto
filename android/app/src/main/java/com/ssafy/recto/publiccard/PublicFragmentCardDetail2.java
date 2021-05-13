@@ -2,15 +2,21 @@ package com.ssafy.recto.publiccard;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +30,13 @@ import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.CardData;
 import com.ssafy.recto.api.HttpClient;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +51,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
     Button free_photo_card_list_btn;
     TextView tv_phrases;
     TextView card_id;
+    Button download_button;
     private View view;
     private Context mContext;
     int seq;
@@ -82,9 +95,9 @@ public class PublicFragmentCardDetail2 extends Fragment {
         cardImageView = view.findViewById(R.id.card_image_detail);
         free_photo_card_list_btn = view.findViewById(R.id.free_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
+        download_button = view.findViewById(R.id.download_button);
 
-//        Log.d("photo url 가져오는지 확인", photo_url);
-
+        // 목록보기 버튼
         free_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +105,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
             }
         });
 
+        // 다이얼로그
         info_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +114,41 @@ public class PublicFragmentCardDetail2 extends Fragment {
                 ad.setTitle("Information");
                 ad.setMessage("다운로드를 누르면 카드를 저장할 수 있습니다.");
                 ad.show();
+            }
+        });
+
+        // 버튼 눌렀을 때 카드 갤러리에 저장하기
+        download_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/RECTO";
+                final FrameLayout capture = view.findViewById(R.id.card_frameLayout);
+
+                File file = new File(path);
+                if (!file.exists()) {
+                    file.mkdirs();
+                    Toast.makeText(getContext(), "폴더가 생성되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+
+                SimpleDateFormat day = new SimpleDateFormat("yyyyMMddmmss");
+                Date date = new Date();
+                capture.buildDrawingCache();
+                Bitmap captureview = capture.getDrawingCache();
+
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".jpeg");
+                    captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                    mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/Capture" + day.format(date) + ".JPEG")));
+                    Toast.makeText(getContext(), "저장완료", Toast.LENGTH_SHORT).show();
+                    fos.flush();
+                    fos.close();
+                    capture.destroyDrawingCache();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -120,13 +169,10 @@ public class PublicFragmentCardDetail2 extends Fragment {
                 id = response.body().getPhoto_id();
                 phrase = response.body().getPhrase();
 
-//                Log.d("아이디랑 어쩌구", id + " "+ phrase+ " "+ response.body().toString());
-
                 photo_url = response.body().getPhoto_url();
 
                 // 문구 넣어주기
                 tv_phrases.setText(phrase);
-//                Log.d("문구", String.valueOf(phrase));
 
                 // 아이디 넣어주기
                 card_id.setText(id);

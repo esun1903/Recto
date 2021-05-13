@@ -88,7 +88,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // 로그아웃 하기
-                mFirebaseAuth.signOut();
+                mFirebaseAuth.getInstance().signOut();
 
                 // Shared Preferences 초기화
                 editor.clear();
