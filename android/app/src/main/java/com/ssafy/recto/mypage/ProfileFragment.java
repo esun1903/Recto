@@ -80,10 +80,10 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // 로그아웃 하기
-                mFirebaseAuth.signOut();
+                mFirebaseAuth.getInstance().signOut();
 
                 // My Application 초기화
-                myApplication = null;
+                myApplication = new MyApplication();
 
                 // 로그아웃 후 Home Fragment로 이동
                 mainActivity.setFragment("home");

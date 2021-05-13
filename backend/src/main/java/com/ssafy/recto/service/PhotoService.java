@@ -66,6 +66,10 @@ public class PhotoService {
 		return sqlSession.getMapper(PhotoMapper.class).getPhotoList(user_uid);
 	}
 
+	public List<Photo> getPhotoMain(String user_uid) throws Exception{
+		return sqlSession.getMapper(PhotoMapper.class).getPhotoMain(user_uid);
+	}
+
 //	public boolean modifyPhoto(Photo photo) throws Exception {
 //		return sqlSession.getMapper(PhotoMapper.class).modifyPhoto(photo) == 1;
 //	}
@@ -77,7 +81,6 @@ public class PhotoService {
 	public List<Photo> getSamplePhotoList() {
 		return sqlSession.getMapper(PhotoMapper.class).getSamplePhotoList() ;
 	}
-
 
 
 
