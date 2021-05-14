@@ -34,4 +34,10 @@ public interface ApiInterface {
 
     @DELETE("photo")
     Call<String> deleteCard(@Query("photo_seq") int photo_seq);
+
+    @GET("gift/list")
+    Call<List<GiftData>> getGiftList(@Query("gift_to") String gift_to);
+
+    @GET("gift")
+    Call<GiftData> getGift(@Query("gift_seq") int gift_seq);
 }

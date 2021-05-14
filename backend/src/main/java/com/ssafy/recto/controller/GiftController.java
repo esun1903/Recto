@@ -39,17 +39,17 @@ public class GiftController {
     @ApiOperation(value = "선물 목록", notes = "선물 목록을 반환한다.", response = Gift.class)
     @GetMapping("/list")
     public List<Gift> getGiftList(
-            @RequestParam("photo_from") @ApiParam(value = "회원 식별자", required = true) int photo_from) throws Exception {
+            @RequestParam("gift_to") @ApiParam(value = "수신인 식별자", required = true) String gift_to) throws Exception {
         logger.info("getGiftList - 호출");
-        return giftService.getGiftList(photo_from);
+        return giftService.getGiftList(gift_to);
     }
 
     @ApiOperation(value = "선물 seq로 검색", notes = "선물 seq로 검색", response = Photo.class)
     @GetMapping
     public ResponseEntity<Gift> getGift(
-            @RequestParam(value= "photo_seq") int photo_seq) throws Exception {
+            @RequestParam(value= "gift_seq") int gift_seq) throws Exception {
         logger.info("getGift - 호출");
-        return new ResponseEntity<Gift>( giftService.getGift(photo_seq), HttpStatus.OK);
+        return new ResponseEntity<Gift>( giftService.getGift(gift_seq), HttpStatus.OK);
     }
 
     @ApiOperation(value = "선물 등록", notes = "선물 정보를 등록한다.", response = Gift.class)

@@ -32,6 +32,7 @@ public class PhotoService {
 		SimpleDateFormat date2 = new SimpleDateFormat("yyyyMMdd");
 		String str = date2.format(today);
 		str = str.substring(2,8);
+
 		int count = sqlSession.getMapper(PhotoMapper.class).allPhoto(str);
 
 		if(count<9){
