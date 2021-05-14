@@ -135,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/black"
-                        android:fontFamily="@font/eulyoo1945_semibold"
+                        android:fontFamily="@font/kyobo_handwriting"
                         android:layout_marginBottom="15dp" />
 
                 </LinearLayout>

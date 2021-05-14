@@ -21,8 +21,9 @@
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/eulyoo1945_semibold"
             android:text="@string/make_photo_card"
-            android:textColor="@color/black"
+            android:textColor="@color/brown"
             android:textSize="27sp" />
 
         <TextView
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/eulyoo1945_regular"
             android:text="@string/choose_frame"
             android:textColor="@color/black"
             android:textSize="18sp" />
@@ -49,6 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/eulyoo1945_semibold"
                     android:text="@string/onlyphoto_frame"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -73,6 +76,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/eulyoo1945_semibold"
                     android:text="@string/phrases_frame"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -102,6 +106,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginEnd="25dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/eulyoo1945_semibold"
                 android:radius="20dp"
                 android:text="@string/previous_btn"
                 android:textColor="@color/white"
@@ -116,6 +121,7 @@
                 android:layout_marginEnd="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/eulyoo1945_semibold"
                 android:text="@string/next_btn"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/brown"

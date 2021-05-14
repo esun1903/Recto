@@ -35,8 +35,10 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/eulyoo1945_regular"
             android:text="@string/a204"
-            android:textSize="30sp"
+            android:textColor="@color/brown"
+            android:textSize="20sp"
             android:layout_margin="10sp"/>
 
         <View
@@ -69,7 +71,9 @@
                 android:id="@+id/tv_developer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/iv_developers" />
+                android:fontFamily="@font/eulyoo1945_regular"
+                android:text="@string/iv_developers"
+                android:textColor="@color/brown"/>
 
         </LinearLayout>
 
@@ -93,7 +97,9 @@
                 android:id="@+id/tv_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/iv_contact" />
+                android:fontFamily="@font/eulyoo1945_regular"
+                android:text="@string/iv_contact"
+                android:textColor="@color/brown" />
 
         </LinearLayout>
 
@@ -117,7 +123,9 @@
                 android:id="@+id/tv_web"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/iv_web" />
+                android:fontFamily="@font/eulyoo1945_regular"
+                android:text="@string/iv_web"
+                android:textColor="@color/brown" />
 
         </LinearLayout>
 

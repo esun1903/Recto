@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ImageView iv_info;
+    private ImageView iv_recto;
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
     private FragmentTransaction ft;
@@ -89,6 +90,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setFragment("information");
+            }
+        });
+        iv_recto = findViewById(R.id.iv_recto);
+        iv_recto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment("home");
             }
         });
 

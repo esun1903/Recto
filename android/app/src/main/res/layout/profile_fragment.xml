@@ -43,6 +43,7 @@
                 android:layout_toEndOf="@+id/iv_publicProfile"
                 android:layout_toRightOf="@+id/iv_publicProfile"
                 android:textSize="15sp"
+                android:textColor="@color/brown"
                 android:fontFamily="@font/eulyoo1945_semibold"
                 tools:ignore="RelativeOverlap" />
 
@@ -68,6 +69,8 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabTextColor="@color/brown"
+            app:tabRippleColor="@color/brown"
             app:tabIndicatorColor="@color/brown"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
