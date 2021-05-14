@@ -3,9 +3,11 @@ package com.ssafy.recto.mypage;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -57,6 +59,7 @@ public class ProfileFragmentMineDetail extends Fragment {
     TextView card_id;
     TextView card_date;
     Button download_button;
+    Button delete_button;
     private View view;
     private Context mContext;
     int seq;
@@ -101,6 +104,7 @@ public class ProfileFragmentMineDetail extends Fragment {
         mine_photo_card_list_btn = view.findViewById(R.id.mine_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
         download_button = view.findViewById(R.id.download_button);
+        delete_button = view.findViewById(R.id.delete_button);
 
         // 목록보기 버튼
         mine_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +126,7 @@ public class ProfileFragmentMineDetail extends Fragment {
             }
         });
 
-        // 버튼 눌렀을 때 카드 갤러리에 저장하기
+        // 다운로드 버튼 눌렀을 때 카드 갤러리에 저장하기
         download_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,6 +162,56 @@ public class ProfileFragmentMineDetail extends Fragment {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        // 삭제 버튼 눌렀을 때 다이얼로그
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+//                ad.setIcon(R.drawable.question);
+                ad.setTitle("Delete card");
+                ad.setMessage("카드를 삭제하시겠습니까?");
+
+                // 삭제 버튼
+                ad.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 카드 삭제 api
+                        try {
+                            Call<String> call = api.deleteCard(seq);
+                            call.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    Log.e("success", "yeeeeee :>" + response);
+                                    Toast.makeText(getContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
+                                    mainActivity.setFragment("profile");
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+                                    Log.e("nooooo", "failed :<" + t);
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        // 다이얼로그 닫기
+                        dialog.dismiss();
+                    }
+                });
+
+                // 취소 버튼
+                ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 다이얼로그 닫기
+                        dialog.dismiss();
+                    }
+                });
+
+                ad.show();
             }
         });
 
