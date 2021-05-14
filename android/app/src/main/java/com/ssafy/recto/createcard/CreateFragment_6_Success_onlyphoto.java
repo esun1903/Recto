@@ -1,7 +1,6 @@
 package com.ssafy.recto.createcard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,30 +23,23 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
 
-import com.google.ar.core.AugmentedImageDatabase;
 import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.HttpClient;
 import com.ssafy.recto.MainActivity;
-import com.ssafy.recto.arcore.ArVideoFragment;
-import com.ssafy.recto.arcore.PhotoVO;
 import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.R;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.ParseException;
 
 
-import lombok.SneakyThrows;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.ContentValues.TAG;
 
 public class CreateFragment_6_Success_onlyphoto extends Fragment {
 
@@ -169,16 +161,9 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
 
         Call<String> call = api.requestCreateCard("1", cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
         call.enqueue(new Callback<String>() {
-            @SneakyThrows
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 Log.e("success", "yeeeeee :>" + response);
-//                PhotoVO photoVo = new PhotoVO("user_seq", "photo_id", str, str2, cardPassword, cardDesign, cardPublic);
-
-//                InputStream inputStream = requireContext().getAssets().open("example.imgdb");
-//                AugmentedImageDatabase imageDatabase = AugmentedImageDatabase.deserialize(session, inputStream);
-//                Bitmap bitmap = BitmapFactory.decodeFile(str);
-//                int index = imageDatabase.addImage("dog", bitmap);
             }
 
             @Override
