@@ -79,7 +79,7 @@ public class ProfileFragmentGiftDetail extends Fragment {
         from_id = view.findViewById(R.id.from_id);
         gift_date = view.findViewById(R.id.gift_date);
 
-        giftImageView = view.findViewById(R.id.card_image_detail);
+        giftImageView = view.findViewById(R.id.gift_image_detail);
         gift_photo_card_list_btn = view.findViewById(R.id.gift_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
 
@@ -123,6 +123,8 @@ public class ProfileFragmentGiftDetail extends Fragment {
                 // 아이디 넣어주기
                 from_id.setText(from);
                 gift_date.setText(date);
+
+                Log.e("여기", from + " " + date + " " + url + " " + seq);
 
                 Glide.with(getContext()).load(url).into(giftImageView);
             }

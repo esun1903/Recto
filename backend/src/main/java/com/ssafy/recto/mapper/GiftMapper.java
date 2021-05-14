@@ -14,7 +14,7 @@ public interface GiftMapper {
 	@Options(useGeneratedKeys = true)
 	public int sendGift(@Param("Gift") Gift Gift);
 
-	@Select("SELECT * FROM gift WHERE photo_seq = #{gift_seq}")
+	@Select("SELECT * FROM gift WHERE gift_seq = #{gift_seq}")
 	public Gift getGift(@Param("gift_seq") int gift_seq);
 	
 	@Select("SELECT * FROM gift WHERE gift_to = #{gift_to}")
