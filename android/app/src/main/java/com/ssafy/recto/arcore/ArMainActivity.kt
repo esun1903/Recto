@@ -41,21 +41,21 @@ class ArMainActivity : AppCompatActivity() {
         }
 
 
-        val gson = GsonBuilder().setLenient().create();
-        val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        val service = retrofit.create(PhotoService::class.java);
+//        val gson = GsonBuilder().setLenient().create();
+//        val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
+//                .addConverterFactory(GsonConverterFactory.create(gson))
+//                .build();
+//        val service = retrofit.create(PhotoService::class.java);
 
         //getPhoto
-        service.getPhoto("210509001")?.enqueue(object : Callback<PhotoVO> {
-            override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
-                Log.i("fail.TT", t.toString())
-            }
-            override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
-                Log.d("Response :: ", response?.body().toString())
-            }
-        })
+//        service.getPhoto("210509001")?.enqueue(object : Callback<PhotoVO> {
+//            override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
+//                Log.i("fail.TT", t.toString())
+//            }
+//            override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
+//                Log.d("Response :: ", response?.body().toString())
+//            }
+//        })
         
         //insertPhoto
 //        val photo = PhotoVO(101, 1, "500000015", "20200203", "/photo", "/video", "galinjisunda", "2580", 1, false);

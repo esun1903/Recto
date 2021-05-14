@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
@@ -43,7 +42,6 @@ public class PublicFragment extends Fragment{
 
     MainActivity mainActivity;
     PublicFragmentMyAdapter publicFragmentMyAdapter;
-    public RequestManager requestManager;
 
     int[] seq;
     int[] design_num;
@@ -63,7 +61,6 @@ public class PublicFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestManager = Glide.with(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
