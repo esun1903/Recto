@@ -108,7 +108,7 @@
                 app:cardElevation="8dp">
 
                 <ImageView
-                    android:id="@+id/card_image_detail"
+                    android:id="@+id/gift_image_detail"
                     android:layout_width="300dp"
                     android:layout_height="400dp"
                     app:srcCompat="@drawable/gift1"
