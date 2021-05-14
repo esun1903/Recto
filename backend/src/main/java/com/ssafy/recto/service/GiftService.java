@@ -24,12 +24,12 @@ public class GiftService {
         return sqlSession.getMapper(GiftMapper.class).sendGift(gift) == 1;
     }
 
-    public Gift getGift(int photo_seq) throws Exception{
-        return sqlSession.getMapper(GiftMapper.class).getGift(photo_seq);
+    public Gift getGift(int gift_seq) throws Exception{
+        return sqlSession.getMapper(GiftMapper.class).getGift(gift_seq);
     }
 
-    public List<Gift> getGiftList(int user_seq) throws Exception{
-        return sqlSession.getMapper(GiftMapper.class).getGiftList(user_seq);
+    public List<Gift> getGiftList(String gift_to) throws Exception{
+        return sqlSession.getMapper(GiftMapper.class).getGiftList(gift_to);
     }
 
 }

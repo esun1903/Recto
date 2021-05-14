@@ -80,18 +80,21 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/from_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:fontFamily="@font/eulyoo1945_semibold"
+                android:gravity="center_horizontal"
                 android:text="@string/from_ex"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+
             <TextView
+                android:id="@+id/gift_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:fontFamily="@font/eulyoo1945_semibold"
+                android:gravity="center_horizontal"
                 android:text="@string/tempdate"
                 android:textColor="@color/black"
                 android:textSize="20sp" />

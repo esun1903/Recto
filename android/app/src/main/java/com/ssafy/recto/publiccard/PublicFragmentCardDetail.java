@@ -29,7 +29,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.google.ar.sceneform.utilities.LoadHelper;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;

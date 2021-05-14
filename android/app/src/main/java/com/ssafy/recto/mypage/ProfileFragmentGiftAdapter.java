@@ -9,17 +9,22 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.ssafy.recto.R;
+import com.ssafy.recto.api.GiftData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileFragmentGiftAdapter extends RecyclerView.Adapter<ProfileFragmentGiftAdapter.MyViewHolder> {
 
-    int[] images;
+    List<GiftData> photoGifts = new ArrayList<>();
     Context context;
     private static OnItemClickListener iListener = null;
 
-    public ProfileFragmentGiftAdapter(Context ct, int[] img) {
+    public ProfileFragmentGiftAdapter(Context ct, List<GiftData> img) {
         context = ct;
-        images = img;
+        photoGifts = img;
     }
 
     public interface OnItemClickListener
@@ -42,12 +47,12 @@ public class ProfileFragmentGiftAdapter extends RecyclerView.Adapter<ProfileFrag
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.imageView.setImageResource(images[position]);
+        Glide.with(this.context).load(photoGifts.get(position).getPhoto_url()).into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return photoGifts.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
