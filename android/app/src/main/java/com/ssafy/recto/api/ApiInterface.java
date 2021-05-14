@@ -6,6 +6,7 @@ import java.util.Map;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -30,6 +31,9 @@ public interface ApiInterface {
     @Multipart
     @POST("photo")
     Call<String> requestCreateCard(@Part("user_uid") String user_uid, @Part("publication") boolean publication, @Part("design") int design, @Part  MultipartBody.Part video, @Part  MultipartBody.Part photo ,@Part("phrase") String phrase, @Part("photo_date") String photo_date, @Part("photo_pwd") String photo_pwd);
+
+    @DELETE("photo")
+    Call<String> deleteCard(@Query("photo_seq") int photo_seq);
 
     @GET("gift/list")
     Call<List<GiftData>> getGiftList(@Query("gift_to") String gift_to);
