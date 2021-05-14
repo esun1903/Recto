@@ -41,6 +41,7 @@
                 android:layout_toRightOf="@+id/iv_publicProfile"
                 android:text="무료 제공 포토카드를 즐기세요!"
                 android:textSize="20sp"
+                android:textColor="@color/brown"
                 android:fontFamily="@font/jeju_myeongjo"
                 tools:ignore="RelativeOverlap" />
 
