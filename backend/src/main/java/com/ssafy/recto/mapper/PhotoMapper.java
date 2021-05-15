@@ -22,7 +22,7 @@ public interface PhotoMapper {
     @Select("SELECT * FROM photo WHERE photo_seq = #{photo_seq}")
     public Photo getPhotoDetail(@Param("photo_seq") int photo_seq);
 
-    @Select("SELECT * FROM photo WHERE user_uid like #{user_uid}")
+    @Select("SELECT * FROM photo WHERE user_uid like #{user_uid} order by photo_seq desc")
     public List<Photo> getPhotoList(@Param("user_uid") String user_uid);
 
     @Select("SELECT * FROM photo WHERE user_uid like #{user_uid} order by photo_seq desc limit 5")
@@ -44,7 +44,7 @@ public interface PhotoMapper {
     @Delete("delete from photo where photo_seq = #{photo_seq}")
     public int deletePhoto(@Param("photo_seq") int photo_seq);
 
-    @Select("SELECT * FROM photo WHERE photo_seq >= 1 AND photo_seq <= 30")
+    @Select("SELECT * FROM photo WHERE photo_seq >= 1 AND photo_seq <= 30 order by photo_seq desc")
     List<Photo> getSamplePhotoList();
 
 //    @Insert("Insert INTO photo (  user_uid, photo_id, photo_date, photo_url, video_url, phrase, photo_pwd, design, publication) \n"
