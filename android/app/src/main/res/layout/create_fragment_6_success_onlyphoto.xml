@@ -44,29 +44,35 @@
             android:textSize="15sp" />
 
         <FrameLayout
-            android:id="@+id/FrameLayout01"
+            android:id="@+id/card_frameLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_margin="15dp">
 
             <ImageView
                 android:id="@+id/iv_success"
                 android:layout_width="183dp"
                 android:layout_height="288dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/success_card"
-                android:contentDescription="@string/private_card" />
+                android:contentDescription="@string/public_card"
+                android:src="@drawable/card_layout" />
 
             <ImageView
                 android:id="@+id/iv_photo"
                 android:layout_width="183dp"
                 android:layout_height="243dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/success_card_photo"
-                android:contentDescription="@string/private_card"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"/>
+                android:contentDescription="@string/photo_card"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/card_image" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="18dp"
+                android:src="@drawable/card_logo"
+                android:contentDescription="@string/card_logo" />
 
         </FrameLayout>
 

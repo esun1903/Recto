@@ -22,10 +22,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.config.MyApplication;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class CreateFragment_4_SelectPhoto extends Fragment {
@@ -130,10 +133,10 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         }
 
         //파일 쓰기 권한 확인
-//        if (ContextCompat.checkSelfPermission(getActivity(),
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
-//        }
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            temp += Manifest.permission.WRITE_EXTERNAL_STORAGE + " ";
+        }
 
         if (TextUtils.isEmpty(temp) == false) {
             // 권한 요청
@@ -151,10 +154,10 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
                 InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
                 bm = BitmapFactory.decodeStream(inputStream);
                 inputStream.close();
-                imageView.setImageBitmap(bm);
+                Glide.with(getContext()).load(data.getData()).into(imageView);
                 inputStream.close();
                 myApp.setCardPhoto(String.valueOf(data.getData()));
-//                saveBitmapToJpeg(bm);
+                saveBitmapToJpeg(bm);
             } catch (Exception e){
                 e.printStackTrace();
             }
@@ -163,16 +166,16 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
         }
     }
 
-//    public void saveBitmapToJpeg(Bitmap bitmap) {
-//        File tempFile = new File(getActivity().getCacheDir(), "photo");
-//        try {
-//            tempFile.createNewFile();
-//            FileOutputStream out = new FileOutputStream(tempFile);
-//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
-//            out.close();
-//            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
-//        } catch (Exception e) {
-//            Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    public void saveBitmapToJpeg(Bitmap bitmap) {
+        File tempFile = new File(getActivity().getCacheDir(), "photo");
+        try {
+            tempFile.createNewFile();
+            FileOutputStream out = new FileOutputStream(tempFile);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+            out.close();
+            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
