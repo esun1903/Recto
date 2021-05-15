@@ -1,6 +1,8 @@
 package com.ssafy.recto.createcard;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,6 +45,7 @@ public class CreateFragment_6_Success_phrases extends Fragment {
 
     MainActivity mainActivity;
     MyApplication myApp;
+    private SharedPreferences sharedPreferences;
     ApiInterface api;
     private View view;
 
@@ -81,6 +84,8 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         myApp = (MyApplication) getActivity().getApplication();
         api = HttpClient.getRetrofit().create( ApiInterface.class );
         view = inflater.inflate(R.layout.create_fragment_6_success_phrases, container, false);
+        sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+
 
         cardPublic = myApp.getCardPublic();
         cardDesign = myApp.getCardDesign();
@@ -101,7 +106,6 @@ public class CreateFragment_6_Success_phrases extends Fragment {
 
         try {
             String imgpath = getActivity().getCacheDir() + "/photo";   // 내부 저장소에 저장되어 있는 이미지 경로
-//            myApp.setCardPhoto(imgpath);
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             iv_photo.setImageBitmap(bm);
         } catch (Exception e) {
@@ -142,13 +146,13 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     }
 
     public void requestPost() throws Exception {
+        String userUid = sharedPreferences.getString("userUid", "");
 
         Uri videoUri = Uri.parse(cardVideo);
         String str2 = getRealPathFromUri(videoUri);
         File file2 = new File(str2);
         RequestBody videoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file2);
         MultipartBody.Part videoPart = MultipartBody.Part.createFormData("video", file2.getName(), videoBody);
-
 
         cardPhoto = myApp.getCardPhoto();
         Uri imageUri = Uri.parse(cardPhoto);
@@ -158,8 +162,7 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         RequestBody photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo", file.getName(), photoBody);
 
-
-        Call<String> call = api.requestCreateCard("1", cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
+        Call<String> call = api.requestCreateCard(userUid, cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

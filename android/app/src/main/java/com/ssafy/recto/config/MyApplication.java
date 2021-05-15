@@ -1,9 +1,8 @@
 package com.ssafy.recto.config;
 
 import android.app.Application;
-import android.util.Log;
 
-import lombok.Data;
+import lombok.SneakyThrows;
 
 public class MyApplication extends Application {
     private Boolean cardPublic;
@@ -80,11 +79,13 @@ public class MyApplication extends Application {
     }
 
 
+    @SneakyThrows
     @Override
     public void onCreate() {
         super.onCreate();
     }
 
     public MyApplication() { }
+
 
 }

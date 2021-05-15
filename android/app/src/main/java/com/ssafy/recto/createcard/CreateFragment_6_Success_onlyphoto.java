@@ -1,6 +1,8 @@
 package com.ssafy.recto.createcard;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,16 +25,16 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.loader.content.CursorLoader;
 
+import com.bumptech.glide.Glide;
+import com.ssafy.recto.MainActivity;
+import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.HttpClient;
-import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.config.MyApplication;
-import com.ssafy.recto.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -45,6 +47,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
 
     MainActivity mainActivity;
     MyApplication myApp;
+    private SharedPreferences sharedPreferences;
     ApiInterface api;
     private View view;
 
@@ -83,6 +86,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         myApp = (MyApplication) getActivity().getApplication();
         api = HttpClient.getRetrofit().create(ApiInterface.class);
         view = inflater.inflate(R.layout.create_fragment_6_success_onlyphoto, container, false);
+        sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
 
         cardPublic = myApp.getCardPublic();
         cardDesign = myApp.getCardDesign();
@@ -102,7 +106,8 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         try {
             String imgpath = getActivity().getCacheDir() + "/photo";   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
-            iv_photo.setImageBitmap(bm);
+//            iv_photo.setImageBitmap(bm);
+            Glide.with(getContext()).load(imgpath).into(iv_photo);
         } catch (Exception e) {
             Toast.makeText(getContext(), "사진 로드 실패", Toast.LENGTH_SHORT).show();
         }
@@ -142,13 +147,13 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
 
 
     public void requestPost() throws Exception {
+        String userUid = sharedPreferences.getString("userUid", "");
 
         Uri videoUri = Uri.parse(cardVideo);
         String str2 = getRealPathFromUri(videoUri);
         File file2 = new File(str2);
         RequestBody videoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file2);
         MultipartBody.Part videoPart = MultipartBody.Part.createFormData("video", file2.getName(), videoBody);
-
 
         cardPhoto = myApp.getCardPhoto();
         Uri imageUri = Uri.parse(cardPhoto);
@@ -158,8 +163,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         RequestBody photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo", file.getName(), photoBody);
 
-
-        Call<String> call = api.requestCreateCard("1", cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
+        Call<String> call = api.requestCreateCard(userUid, cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
