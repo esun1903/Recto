@@ -1,6 +1,8 @@
 package com.ssafy.recto.mypage;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,7 +43,8 @@ public class ProfileFragmentMine extends Fragment {
     List<CardData> photoCards = new ArrayList<>();
     private View view;
     private GridLayoutManager mGridLayoutManager;
-    String userId = "1";
+    private SharedPreferences sharedPreferences;
+    String userId;
 
     int[] seq;
     int[] design_num;
@@ -71,6 +74,14 @@ public class ProfileFragmentMine extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.profile_fragment_mine, container, false);
         api = HttpClient.getRetrofit().create( ApiInterface.class );
+
+        // Shared Preferences 초기화
+        sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+
+        // user_uid 받아오기
+        userId = sharedPreferences.getString("userUid", "");
+        Log.e("유저 아이디 확인", userId);
+
         try {
             requestGet();
         } catch (ParseException e) {
