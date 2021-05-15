@@ -25,7 +25,8 @@
             android:id="@+id/card_tv"
             android:layout_width="191dp"
             android:layout_height="295dp"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:scaleType="centerCrop"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
