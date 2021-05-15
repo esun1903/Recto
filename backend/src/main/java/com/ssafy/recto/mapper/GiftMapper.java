@@ -17,6 +17,6 @@ public interface GiftMapper {
 	@Select("SELECT * FROM gift WHERE gift_seq = #{gift_seq}")
 	public Gift getGift(@Param("gift_seq") int gift_seq);
 	
-	@Select("SELECT * FROM gift WHERE gift_to = #{gift_to}")
+	@Select("SELECT * FROM gift WHERE gift_to = #{gift_to} order by gift_seq desc")
 	public List<Gift> getGiftList(@Param("gift_to") String gift_to);
 }

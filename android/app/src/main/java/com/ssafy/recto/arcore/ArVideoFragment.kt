@@ -195,7 +195,7 @@ open class ArVideoFragment : ArFragment() {
     private fun playbackArVideo(augmentedImage: AugmentedImage) {
         Log.d(TAG, "playbackVideo = ${augmentedImage.name}")
 
-        requireContext().assets.openFd(augmentedImage.name) //해당하는 이름을 가진 동영상 가져오기
+        requireContext().assets.openFd("test_video_3.mp4") //해당하는 이름을 가진 동영상 가져오기
                 .use { descriptor ->
 
                     val metadataRetriever = MediaMetadataRetriever()
