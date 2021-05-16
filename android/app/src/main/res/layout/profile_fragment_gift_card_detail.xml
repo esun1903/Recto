@@ -85,37 +85,55 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/eulyoo1945_semibold"
                 android:gravity="center_horizontal"
-                android:text="@string/from_ex"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/gift_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/eulyoo1945_semibold"
-                android:gravity="center_horizontal"
-                android:text="@string/tempdate"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
-
-            <androidx.cardview.widget.CardView
+            <FrameLayout
+                android:id="@+id/card_frameLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
                 android:layout_gravity="center"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="8dp">
+                android:layout_margin="15dp">
 
                 <ImageView
-                    android:id="@+id/gift_image_detail"
-                    android:layout_width="300dp"
-                    android:layout_height="400dp"
-                    app:srcCompat="@drawable/gift1"
-                    android:contentDescription="@string/photo_card" />
-            </androidx.cardview.widget.CardView>
+                    android:id="@+id/iv_success"
+                    android:layout_width="183dp"
+                    android:layout_height="288dp"
+                    android:contentDescription="@string/private_card"
+                    android:src="@drawable/card_layout" />
+
+                <ImageView
+                    android:id="@+id/card_image_detail"
+                    android:layout_width="183dp"
+                    android:layout_height="243dp"
+                    android:contentDescription="@string/photo_card"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/card_image" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="18dp"
+                    android:src="@drawable/card_logo"
+                    android:contentDescription="@string/card_logo" />
+
+                <TextView
+                    android:id="@+id/card_id"
+                    android:layout_width="55dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="right|bottom"
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_marginVertical="16dp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="10dp" />
+            </FrameLayout>
 
             <Button
+                android:id="@+id/delete_button"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"

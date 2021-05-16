@@ -33,6 +33,7 @@ import com.ssafy.recto.home.InfoFragment;
 import com.ssafy.recto.mypage.ProfileFragment;
 import com.ssafy.recto.mypage.ProfileFragmentGift;
 import com.ssafy.recto.mypage.ProfileFragmentGiftDetail;
+import com.ssafy.recto.mypage.ProfileFragmentGiftDetail2;
 import com.ssafy.recto.mypage.ProfileFragmentMine;
 import com.ssafy.recto.mypage.ProfileFragmentMineDetail;
 import com.ssafy.recto.mypage.ProfileFragmentMineDetail2;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragmentMineDetail2 profileFragmentMineDetail2;
     private ProfileFragmentGift profileFragmentGift;
     private ProfileFragmentGiftDetail profileFragmentGiftDetail;
+    private ProfileFragmentGiftDetail2 profileFragmentGiftDetail2;
     private InfoFragment infoFragment;
     private FirebaseAuth mFirebaseAuth;
     MyApplication myApplication;
@@ -172,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         profileFragmentMineDetail2 = new ProfileFragmentMineDetail2();
         profileFragmentGift = new ProfileFragmentGift();
         profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
+        profileFragmentGiftDetail2 = new ProfileFragmentGiftDetail2();
         infoFragment = new InfoFragment();
 
         setFragment("home");
@@ -260,6 +263,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "profile_gift_detail":
                 ft.replace(R.id.main_frame, profileFragmentGiftDetail);
+                ft.commit();
+                break;
+            case "profile_gift_detail2":
+                ft.replace(R.id.main_frame, profileFragmentGiftDetail2);
                 ft.commit();
                 break;
             case "information":

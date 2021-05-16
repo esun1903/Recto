@@ -1,6 +1,8 @@
 package com.ssafy.recto.mypage;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,14 +38,15 @@ public class ProfileFragmentGift extends Fragment {
     RecyclerView recyclerView;
     MainActivity mainActivity;
     ProfileFragmentGiftAdapter profileFragmentGiftAdapter;
-
-    private View view;
-    private GridLayoutManager mGridLayoutManager;
-
     ApiInterface api;
     List<GiftData> photoGifts = new ArrayList<>();
-
+    private View view;
+    private GridLayoutManager mGridLayoutManager;
+    private SharedPreferences sharedPreferences;
+    String userId;
     int[] seq;
+    int[] design_num;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -69,6 +72,14 @@ public class ProfileFragmentGift extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.profile_fragment_gift, container, false);
         api = HttpClient.getRetrofit().create( ApiInterface.class );
+
+        // Shared Preferences 초기화
+        sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+
+        // user_uid 받아오기
+        userId = sharedPreferences.getString("userUid", "");
+        Log.e("유저 아이디 확인", userId);
+
         try {
             requestGet();
         } catch (ParseException e) {
@@ -88,15 +99,27 @@ public class ProfileFragmentGift extends Fragment {
             @Override
             public void onItemClick(View v, int pos)
             {
-                // 상세 페이지로 gift_seq 값 (sep[pos]) 보내주기
-                Bundle bundle = new Bundle(); // 데이터를 담을 번들
-                bundle.putInt("seq", seq[pos]);
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                ProfileFragmentGiftDetail profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
-                profileFragmentGiftDetail.setArguments(bundle);
-                transaction.replace(R.id.main_frame, profileFragmentGiftDetail);
-                transaction.commit();
+                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
 
+                if (design_num[pos] == 1) {
+                    // 상세 페이지로 gift_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    ProfileFragmentGiftDetail profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
+                    profileFragmentGiftDetail.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, profileFragmentGiftDetail);
+                    transaction.commit();
+                } else {
+                    // 상세 페이지로 gift_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    ProfileFragmentGiftDetail2 profileFragmentGiftDetail2 = new ProfileFragmentGiftDetail2();
+                    profileFragmentGiftDetail2.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, profileFragmentGiftDetail2);
+                    transaction.commit();
+                }
             }
         });
 
@@ -104,26 +127,34 @@ public class ProfileFragmentGift extends Fragment {
     }
 
     public void requestGet()  throws ParseException {
-        Call<List<GiftData>> call = api.getGiftList("1");
+        Call<List<GiftData>> call = api.getGiftList(userId);
 
         call.enqueue(new Callback<List<GiftData>>() {
             @Override
             public void onResponse(Call<List<GiftData>> call, Response<List<GiftData>> response) {
-                String from, date, url, to;
-                int photo;
+                String from, to, photo_id, photo_url, video_url, phrase, photo_pwd;
+                int photo, design, gift_seq;
+                boolean publication;
                 seq = new int[response.body().size()];
+                design_num = new int[response.body().size()];
 
                 photoGifts.clear();
                 for (int i = 0; i < response.body().size(); i++) {
                     from = response.body().get(i).getGift_from();
                     photo = response.body().get(i).getPhoto_seq();
-                    url = response.body().get(i).getPhoto_url();
-                    date = response.body().get(i).getGift_date();
                     to = response.body().get(i).getGift_to();
+                    photo_id = response.body().get(i).getPhoto_id();
+                    photo_url = response.body().get(i).getPhoto_url();
+                    video_url = response.body().get(i).getVideo_url();
+                    phrase = response.body().get(i).getPhrase();
+                    photo_pwd = response.body().get(i).getPhoto_pwd();
+                    design = response.body().get(i).getDesign();
+                    publication = response.body().get(i).isPublication();
 
-                    photoGifts.add(new GiftData(from, photo, date, url, to));
+                    photoGifts.add(new GiftData(from, photo, to, photo_id, photo_url, video_url, phrase, photo_pwd, design, publication));
                     Log.e("photo_seq", String.valueOf(response.body().get(i).getGift_seq()));
                     seq[i] = response.body().get(i).getGift_seq();
+                    design_num[i] = design;
                 }
 
                 profileFragmentGiftAdapter = new ProfileFragmentGiftAdapter(getActivity(), photoGifts);

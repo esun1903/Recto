@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".publiccard.PublicFragmentCardDetail2">
+    tools:context=".mypage.ProfileFragmentGiftDetail2">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/free_photo_card"
+                android:id="@+id/gift_photo_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -27,7 +27,7 @@
 
                 <!-- list button -->
                 <Button
-                    android:id="@+id/free_photo_card_list_btn"
+                    android:id="@+id/gift_photo_card_list_btn"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -51,17 +51,17 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="2dp"
-                        android:src="@drawable/lock_open"
-                        android:contentDescription="@string/lock_open" />
+                        android:src="@drawable/lock"
+                        android:contentDescription="@string/lock" />
 
                     <TextView
-                        android:id="@+id/free_photo_card_text"
+                        android:id="@+id/gift_photo_card_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/photo_card"
                         android:textColor="@color/brown"
                         android:textSize="30sp"
-                        android:fontFamily="@font/eulyoo1945_semibold" />
+                        android:fontFamily="@font/eulyoo1945_semibold"/>
 
                 </LinearLayout>
 
@@ -78,6 +78,16 @@
                     android:contentDescription="@string/question" />
 
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/from_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eulyoo1945_semibold"
+                android:gravity="center_horizontal"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <FrameLayout
                 android:id="@+id/card_frameLayout"
@@ -143,15 +153,15 @@
             </FrameLayout>
 
             <Button
-                android:id="@+id/download_button"
+                android:id="@+id/delete_button"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
                 android:layout_gravity="center"
-                android:text="@string/download"
+                android:text="@string/delete"
                 android:textColor="@color/white"
                 android:fontFamily="@font/eulyoo1945_semibold"
-                app:backgroundTint="@color/brown"
+                app:backgroundTint="@color/red"
                 app:cornerRadius="10dp" />
 
         </LinearLayout>

@@ -40,4 +40,7 @@ public interface ApiInterface {
 
     @GET("gift")
     Call<GiftData> getGift(@Query("gift_seq") int gift_seq);
+
+    @DELETE("gift")
+    Call<String> deleteGiftCard(@Query("gift_seq") int gift_seq);
 }
