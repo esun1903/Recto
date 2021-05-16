@@ -15,13 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Api("GiftController")
 @RestController
@@ -54,13 +48,25 @@ public class GiftController {
 
     @ApiOperation(value = "선물 등록", notes = "선물 정보를 등록한다.", response = Gift.class)
     @PostMapping
-    public ResponseEntity<String> sendGift(@RequestBody @ApiParam(value = "선물 정보", required = true) Gift gift)
+    public ResponseEntity<String> registerGift(@RequestBody @ApiParam(value = "선물 정보", required = true) Gift gift)
             throws Exception {
         logger.info("sendGift - 호출");
 
-        if (giftService.sendGift(gift)) {
+        if (giftService.registerGift(gift)) {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
+        return new ResponseEntity<>(FAIL, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "선물 삭제", notes = "선물 정보를 삭제한다.", response = Photo.class)
+    @DeleteMapping
+    public ResponseEntity<String> deleteGift(@RequestParam("gift_seq") int gift_seq) throws Exception {
+        logger.info("deleteGift - 호출");
+
+        if (giftService.deleteGift(gift_seq)) {
+            return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+        }
+
         return new ResponseEntity<>(FAIL, HttpStatus.OK);
     }
 
