@@ -9,17 +9,18 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface GiftMapper {
 
-	@Insert("Insert INTO gift ( photo_seq, gift_from, gift_date, photo_url, gift_to) \n"
-			+ "VALUES ( #{Gift.photo_seq},#{Gift.gift_from},now(),#{Gift.photo_url},#{Gift.gift_to})")
+	@Insert("Insert INTO gift ( photo_seq, gift_from, gift_date, gift_to) \n"
+			+ "VALUES ( #{Gift.photo_seq},#{Gift.gift_from},now(),#{Gift.gift_to})")
 	@Options(useGeneratedKeys = true)
 	public int registerGift(@Param("Gift") Gift Gift);
 
-	@Select("SELECT * FROM gift WHERE gift_seq = #{gift_seq}")
+	@Select("SELECT * FROM photo, gift WHERE photo.photo_seq = gift.photo_seq and gift_seq = #{gift_seq}")
 	public Gift getGift(@Param("gift_seq") int gift_seq);
 	
-	@Select("SELECT * FROM gift WHERE gift_to = #{gift_to} order by gift_seq desc")
+	@Select("SELECT * FROM photo, gift WHERE photo.photo_seq = gift.photo_seq and gift_to = #{gift_to} order by gift_seq desc")
 	public List<Gift> getGiftList(@Param("gift_to") String gift_to);
 
 	@Delete("delete from gift where gift_seq = #{gift_seq}")
 	public int deleteGift(@Param("gift_seq") int gift_seq);
+
 }

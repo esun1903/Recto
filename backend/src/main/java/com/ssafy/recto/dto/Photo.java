@@ -48,7 +48,6 @@ public class Photo {
     @ApiModelProperty(value = "공개/비공개")
     public boolean publication;
 
-
     public MultipartFile getPhoto_str() {
         return photo_str;
     }
