@@ -45,7 +45,6 @@ public class ProfileFragmentMine extends Fragment {
     private GridLayoutManager mGridLayoutManager;
     private SharedPreferences sharedPreferences;
     String userId;
-
     int[] seq;
     int[] design_num;
 

@@ -20,6 +20,12 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
@@ -45,6 +51,8 @@ public class ProfileFragmentGiftDetail2 extends Fragment {
     Button delete_button;
     private View view;
     private Context mContext;
+    private FirebaseAuth mFirebaseAuth;        // Firebase 인증 처리
+    private DatabaseReference mDatabaseRef;   // 실시간 데이터베이스
     int seq;
 
     @Override
@@ -86,6 +94,8 @@ public class ProfileFragmentGiftDetail2 extends Fragment {
         gift_photo_card_list_btn = view.findViewById(R.id.gift_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
         delete_button = view.findViewById(R.id.delete_button);
+
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("recto"); // realtime DB에서 정보 가져오기
 
         // 목록보기 버튼
         gift_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
@@ -174,8 +184,22 @@ public class ProfileFragmentGiftDetail2 extends Fragment {
                 photo_id = response.body().getPhoto_id();
                 phrase = response.body().getPhrase();
 
-                // 보낸 사람 아이디 넣어주기
-                from_id.setText("from." + from);
+                DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(from).child("nickname");
+                UserNickname.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String from_nickname = snapshot.getValue(String.class);
+                        Log.e("보낸 사람 닉네임 확인", from_nickname);
+
+                        // 보낸 사람 아이디 넣어주기
+                        from_id.setText("from." + from_nickname);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
                 // 카드 아이디 넣어주기
                 card_id.setText(photo_id);
@@ -183,6 +207,7 @@ public class ProfileFragmentGiftDetail2 extends Fragment {
                 // 문구 넣어주기
                 tv_phrases.setText(phrase);
 
+                // 카드 이미지 넣어주기
                 Glide.with(getContext()).load(photo_url).into(giftImageView);
             }
 

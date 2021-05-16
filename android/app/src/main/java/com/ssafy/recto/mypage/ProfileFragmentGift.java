@@ -1,6 +1,8 @@
 package com.ssafy.recto.mypage;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,15 +38,15 @@ public class ProfileFragmentGift extends Fragment {
     RecyclerView recyclerView;
     MainActivity mainActivity;
     ProfileFragmentGiftAdapter profileFragmentGiftAdapter;
-
-    private View view;
-    private GridLayoutManager mGridLayoutManager;
-
     ApiInterface api;
     List<GiftData> photoGifts = new ArrayList<>();
-
+    private View view;
+    private GridLayoutManager mGridLayoutManager;
+    private SharedPreferences sharedPreferences;
+    String userId;
     int[] seq;
     int[] design_num;
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -70,6 +72,14 @@ public class ProfileFragmentGift extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.profile_fragment_gift, container, false);
         api = HttpClient.getRetrofit().create( ApiInterface.class );
+
+        // Shared Preferences 초기화
+        sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+
+        // user_uid 받아오기
+        userId = sharedPreferences.getString("userUid", "");
+        Log.e("유저 아이디 확인", userId);
+
         try {
             requestGet();
         } catch (ParseException e) {
@@ -117,7 +127,7 @@ public class ProfileFragmentGift extends Fragment {
     }
 
     public void requestGet()  throws ParseException {
-        Call<List<GiftData>> call = api.getGiftList("1");
+        Call<List<GiftData>> call = api.getGiftList(userId);
 
         call.enqueue(new Callback<List<GiftData>>() {
             @Override
