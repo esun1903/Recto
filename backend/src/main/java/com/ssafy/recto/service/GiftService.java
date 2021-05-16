@@ -3,6 +3,7 @@ package com.ssafy.recto.service;
 
 
 import com.ssafy.recto.dto.Gift;
+import com.ssafy.recto.mapper.PhotoMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class GiftService {
         this.sqlSession = sqlSession;
     }
 
-    public boolean sendGift(Gift gift){
-        return sqlSession.getMapper(GiftMapper.class).sendGift(gift) == 1;
+    public boolean registerGift(Gift gift){
+        return sqlSession.getMapper(GiftMapper.class).registerGift(gift) == 1;
     }
 
     public Gift getGift(int gift_seq) throws Exception{
@@ -32,4 +33,7 @@ public class GiftService {
         return sqlSession.getMapper(GiftMapper.class).getGiftList(gift_to);
     }
 
+    public boolean deleteGift(int gift_seq) throws Exception {
+        return sqlSession.getMapper(GiftMapper.class).deleteGift(gift_seq) == 1 ;
+    }
 }
