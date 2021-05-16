@@ -183,8 +183,8 @@ public class HomeFragment extends Fragment {
                 design_num = new int[response.body().size()];
 
                 photoCards.clear();
-                // 메인 화면에 카드 다섯장만 노출
-                for (int i = 0; i < 5; i++) {
+                Log.e("카드뷰 수", String.valueOf(response.body().size()));
+                for (int i = 0; i < response.body().size(); i++) {
                     uid = response.body().get(i).getUser_uid();
                     publication = response.body().get(i).isPublication();
                     design = response.body().get(i).getDesign();
@@ -197,6 +197,11 @@ public class HomeFragment extends Fragment {
                     photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
+                }
+                // 유저가 제작한 포토카드가 5장 미만인 경우, (5 - 제작한 카드 수)만큼 빈 슬롯을 노출
+                for (int i = 0; i < 5 - response.body().size(); i++) {
+                    String photo_url = "https://project-recto.s3.ap-northeast-2.amazonaws.com/slot.png";
+                    photoCards.add(new CardData(photo_url));
                 }
 
                 adapter = new MyAdapter(getActivity(), photoCards);

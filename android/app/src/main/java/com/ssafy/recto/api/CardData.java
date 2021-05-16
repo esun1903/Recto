@@ -79,4 +79,8 @@ public class CardData {
         this.photo_date = photo_date;
         this.photo_pwd = photo_pwd;
     }
+
+    public CardData(String photo_url) {
+        this.photo_url = photo_url;
+    }
 }
