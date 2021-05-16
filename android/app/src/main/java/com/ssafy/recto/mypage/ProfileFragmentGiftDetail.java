@@ -2,6 +2,7 @@ package com.ssafy.recto.mypage;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,13 +37,14 @@ public class ProfileFragmentGiftDetail extends Fragment {
     ApiInterface api;
     TextView from_id;
     TextView card_id;
-    int seq;
     MainActivity mainActivity;
     ImageView giftImageView;
     ImageView info_dialog;
     Button gift_photo_card_list_btn;
+    Button delete_button;
     private View view;
     private Context mContext;
+    int seq;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -80,7 +83,9 @@ public class ProfileFragmentGiftDetail extends Fragment {
         giftImageView = view.findViewById(R.id.card_image_detail);
         gift_photo_card_list_btn = view.findViewById(R.id.gift_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
+        delete_button = view.findViewById(R.id.delete_button);
 
+        // 목록보기 버튼
         gift_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +93,7 @@ public class ProfileFragmentGiftDetail extends Fragment {
             }
         });
 
+        // 다이얼로그
         info_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +101,55 @@ public class ProfileFragmentGiftDetail extends Fragment {
                 ad.setIcon(R.drawable.question);
                 ad.setTitle("Information");
                 ad.setMessage("다운로드를 누르면 카드를 저장할 수 있습니다.");
+                ad.show();
+            }
+        });
+
+        // 삭제 버튼 눌렀을 때 다이얼로그
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
+                ad.setTitle("Delete card");
+                ad.setMessage("선물 받은 카드를 삭제하시겠습니까?");
+
+                // 삭제 버튼
+                ad.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 카드 삭제 api
+                        try {
+                            Call<String> call = api.deleteGiftCard(seq);
+                            call.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    Log.e("success", "yeeeeee :>" + response);
+                                    Toast.makeText(getContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
+                                    mainActivity.setFragment("profile");
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+                                    Log.e("nooooo", "failed :<" + t);
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        // 다이얼로그 닫기
+                        dialog.dismiss();
+                    }
+                });
+
+                // 취소 버튼
+                ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 다이얼로그 닫기
+                        dialog.dismiss();
+                    }
+                });
+
                 ad.show();
             }
         });
