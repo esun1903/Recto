@@ -66,6 +66,9 @@ public class CreateFragment_5_WriteInfo_pron extends Fragment {
         cmonth = calendar.get(Calendar.MONTH);
         cday = calendar.get(Calendar.DAY_OF_MONTH);
 
+        tv_date.setText("");
+        et_password.setText("");
+
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

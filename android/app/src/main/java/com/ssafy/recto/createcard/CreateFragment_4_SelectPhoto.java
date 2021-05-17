@@ -82,20 +82,20 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
                     Toast.makeText(getActivity(), "사진을 업로드 해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    Boolean cardPublic = myApp.getCardPublic();
                     Integer cardDesign = myApp.getCardDesign();
-                    String cardPassword = myApp.getCardPassword();
-                    boolean cardPublic = "".equals(cardPassword);
 
-                    if (!cardPublic && (cardDesign == 1)) {
+                    if (cardPublic && (cardDesign == 1)) {
                         mainActivity.setFragment("create_writeinfo_puon");
-                    } else if (!cardPublic && (cardDesign == 2)) {
-                        mainActivity.setFragment("create_writeinfo_puph");
-                    } else if (cardPublic && (cardDesign == 1)) {
-                        mainActivity.setFragment("create_writeinfo_pron");
                     } else if (cardPublic && (cardDesign == 2)) {
+                        mainActivity.setFragment("create_writeinfo_puph");
+                    } else if (!cardPublic && (cardDesign == 1)) {
+                        mainActivity.setFragment("create_writeinfo_pron");
+                    } else if (!cardPublic && (cardDesign == 2)) {
                         mainActivity.setFragment("create_writeinfo_prph");
                     }
                 }
+
             }
         });
 

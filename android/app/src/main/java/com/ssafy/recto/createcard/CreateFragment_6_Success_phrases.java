@@ -55,6 +55,7 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     private TextView tv_date;
     private TextView tv_phrases;
 
+    private Boolean cardPublic;
     private Integer cardDesign;
     private String cardVideo;
     private String cardPhoto;
@@ -85,6 +86,7 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         view = inflater.inflate(R.layout.create_fragment_6_success_phrases, container, false);
         sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
 
+        cardPublic = myApp.getCardPublic();
         cardDesign = myApp.getCardDesign();
         cardVideo = myApp.getCardVideo();
         cardPhrases = myApp.getCardPhrases();
@@ -113,13 +115,13 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!cardPublic && (cardDesign == 1)) {
+                if (cardPublic && (cardDesign == 1)) {
                     mainActivity.setFragment("create_writeinfo_puon");
-                } else if (!cardPublic && (cardDesign == 2)) {
-                    mainActivity.setFragment("create_writeinfo_puph");
-                } else if (cardPublic && (cardDesign == 1)) {
-                    mainActivity.setFragment("create_writeinfo_pron");
                 } else if (cardPublic && (cardDesign == 2)) {
+                    mainActivity.setFragment("create_writeinfo_puph");
+                } else if (!cardPublic && (cardDesign == 1)) {
+                    mainActivity.setFragment("create_writeinfo_pron");
+                } else if (!cardPublic && (cardDesign == 2)) {
                     mainActivity.setFragment("create_writeinfo_prph");
                 }
             }

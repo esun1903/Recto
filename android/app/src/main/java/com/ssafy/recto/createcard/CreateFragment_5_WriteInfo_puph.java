@@ -66,6 +66,9 @@ public class CreateFragment_5_WriteInfo_puph extends Fragment {
         cmonth = calendar.get(Calendar.MONTH);
         cday = calendar.get(Calendar.DAY_OF_MONTH);
 
+        et_text.setText("");
+        tv_date.setText("");
+
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

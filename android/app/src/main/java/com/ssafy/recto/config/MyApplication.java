@@ -5,6 +5,7 @@ import android.app.Application;
 import lombok.SneakyThrows;
 
 public class MyApplication extends Application {
+    private Boolean cardPublic;
     private Integer cardDesign;
     private String cardVideo;
     private String cardPhoto;
@@ -12,6 +13,14 @@ public class MyApplication extends Application {
     private String cardDate;
     private String cardDateNum;
     private String cardPassword;
+
+    public Boolean getCardPublic() {
+        return cardPublic;
+    }
+
+    public void setCardPublic(Boolean cardPublic) {
+        this.cardPublic = cardPublic;
+    }
 
     public Integer getCardDesign() {
         return cardDesign;
