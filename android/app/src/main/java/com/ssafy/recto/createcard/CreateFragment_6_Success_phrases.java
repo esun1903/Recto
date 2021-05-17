@@ -23,8 +23,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
+import com.bumptech.glide.Glide;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
@@ -64,6 +67,9 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     private String cardDateNum;
     private String cardPassword;
 
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -88,6 +94,7 @@ public class CreateFragment_6_Success_phrases extends Fragment {
 
         cardPublic = myApp.getCardPublic();
         cardDesign = myApp.getCardDesign();
+        cardPhoto = myApp.getCardPhoto();
         cardVideo = myApp.getCardVideo();
         cardPhrases = myApp.getCardPhrases();
         cardDate = myApp.getCardDate();
@@ -107,7 +114,7 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         try {
             String imgpath = getActivity().getCacheDir() + "/photo";   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
-            iv_photo.setImageBitmap(bm);
+            Glide.with(getContext()).load(Uri.parse(cardPhoto)).into(iv_photo);
         } catch (Exception e) {
             Toast.makeText(getContext(), "사진 로드 실패", Toast.LENGTH_SHORT).show();
         }
@@ -130,9 +137,14 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fm = getActivity().getSupportFragmentManager();
+                ft = fm.beginTransaction();
                 try {
                     requestPost();
                     Toast.makeText(getContext(), "포토카드 생성에 성공하셨습니다:>", Toast.LENGTH_SHORT).show();
+                    for(int i = 1; i < fm.getBackStackEntryCount(); ++i) {
+                        fm.popBackStack();
+                    }
                     mainActivity.setFragment("home");
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -154,7 +166,6 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         RequestBody videoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file2);
         MultipartBody.Part videoPart = MultipartBody.Part.createFormData("video", file2.getName(), videoBody);
 
-        cardPhoto = myApp.getCardPhoto();
         Uri imageUri = Uri.parse(cardPhoto);
         String str = getRealPathFromUri(imageUri);
         File file = new File(str);
