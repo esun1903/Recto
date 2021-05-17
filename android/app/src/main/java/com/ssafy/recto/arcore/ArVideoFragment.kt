@@ -1,6 +1,7 @@
 package com.ssafy.recto.arcore
 
 import android.animation.ValueAnimator
+import android.app.AlertDialog
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.RectF
@@ -8,6 +9,8 @@ import android.media.MediaMetadataRetriever
 import android.media.MediaMetadataRetriever.*
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +53,18 @@ open class ArVideoFragment : ArFragment() {
         planeDiscoveryController.setInstructionView(null) //평면 탐색 UX
         arSceneView.planeRenderer.isEnabled = false //평면 렌더러 활성화 여부 (ARCore는 표면을 감지 할 때 나타나는 하얀 점)
         arSceneView.isLightEstimationEnabled = false
+
+//        // 나중에 비밀번호 입력창 넣을 다이얼로그
+//        // 지금은 delay로 해뒀는데 나중에 딱 인식했을 때 비밀번호 존재하면 넘어가도록~!
+//        // 그리고 다이얼로그 안에 input 추가하고 비밀번호 확인시키게~~~
+//        // 확인 버튼 만들어서 비밀번호 맞으면 토스트 띄우고 영상보여주고 틀리면 토스트로 다시 입력하라 하면 될 듯 (이건 원하는대로~)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            Toast.makeText(requireContext(), "다이얼로그", Toast.LENGTH_LONG).show()
+//            var builder = AlertDialog.Builder(requireContext())
+//            builder.setTitle("비밀번호 입력")
+//            builder.setMessage("비밀번호를 입력하세요.")
+//            builder.show()
+//        }, 8000)
 
         initializeSession()
         createArScene()

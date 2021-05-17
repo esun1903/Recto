@@ -51,8 +51,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="2dp"
-                        android:src="@drawable/lock"
-                        android:contentDescription="@string/lock" />
+                        android:src="@drawable/gift"
+                        android:contentDescription="@string/gift" />
 
                     <TextView
                         android:id="@+id/gift_photo_card_text"
