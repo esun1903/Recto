@@ -8,13 +8,6 @@ data class GiftVO(
         var gift_from: String? = "",
         var photo_seq: Int? = 0,
         var gift_to: String? = ""
-//        ,var photo_id: String? = "",
-//        var photo_url: String? = "",
-//        var video_url: String? = "",
-//        var phrase: String? = "",
-//        var photo_pwd: String? = "",
-//        var design: Int? = 0,
-//        var publication: Boolean? = false
 ){
 
     constructor(gift_from: String?, photo_seq: Int?, gift_to: String?) : this() {

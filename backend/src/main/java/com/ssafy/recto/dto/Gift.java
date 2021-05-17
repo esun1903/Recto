@@ -43,7 +43,4 @@ public class Gift {
     @ApiModelProperty(value = "포토카드 디자인")
     public int design;
 
-    @ApiModelProperty(value = "공개/비공개")
-    public boolean publication;
-
 }

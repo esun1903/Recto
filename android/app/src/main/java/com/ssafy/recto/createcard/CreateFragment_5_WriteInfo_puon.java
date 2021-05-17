@@ -77,7 +77,7 @@ public class CreateFragment_5_WriteInfo_puon extends Fragment {
                     Toast.makeText(getActivity(), "빠진 항목이 없는지 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    myApp.setCardPhrases("null");
+                    myApp.setCardPhrases("");
                     myApp.setCardDate(String.valueOf(tv_date.getText()));
                     String y = String.valueOf(cyear);
                     String m = String.valueOf(cmonth);
@@ -89,7 +89,7 @@ public class CreateFragment_5_WriteInfo_puon extends Fragment {
                         d = "0" + cday;
                     }
                     myApp.setCardDateNum(y + m + d);
-                    myApp.setCardPassword("null");
+                    myApp.setCardPassword("");
                     mainActivity.setFragment("create_success_onlyphoto");
                 }
             }

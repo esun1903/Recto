@@ -83,7 +83,7 @@ public class CreateFragment_5_WriteInfo_pron extends Fragment {
                     Toast.makeText(getActivity(), "비밀번호는 4자리 숫자로 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    myApp.setCardPhrases("null");
+                    myApp.setCardPhrases("");
                     myApp.setCardDate(String.valueOf(tv_date.getText()));
                     String y = String.valueOf(cyear);
                     String m = String.valueOf(cmonth);

@@ -225,8 +225,7 @@ public class ProfileFragmentMineDetail extends Fragment {
             @Override
             public void onResponse(Call<CardData> call, Response<CardData> response) {
                 Log.d("카드 정보 가져오기", String.valueOf(response.body()));
-                String uid, id, video, photo, phrase, date, pwd, url;
-                boolean publication;
+                String uid, id, video, photo, phrase, date, pwd, url;\
                 int photo_seq, design;
 
                 date = response.body().getPhoto_date();

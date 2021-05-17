@@ -12,6 +12,5 @@ data class PhotoVO (
         var video_url : String = "",
         var phrase : String = "",
         var photo_pwd : String = "",
-        var design : Int = 0,
-        var publication : Boolean = false
+        var design : Int = 0
 )

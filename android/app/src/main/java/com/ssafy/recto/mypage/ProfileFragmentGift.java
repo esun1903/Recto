@@ -134,7 +134,6 @@ public class ProfileFragmentGift extends Fragment {
             public void onResponse(Call<List<GiftData>> call, Response<List<GiftData>> response) {
                 String from, to, photo_id, photo_url, video_url, phrase, photo_pwd;
                 int photo, design, gift_seq;
-                boolean publication;
                 seq = new int[response.body().size()];
                 design_num = new int[response.body().size()];
 
@@ -149,9 +148,8 @@ public class ProfileFragmentGift extends Fragment {
                     phrase = response.body().get(i).getPhrase();
                     photo_pwd = response.body().get(i).getPhoto_pwd();
                     design = response.body().get(i).getDesign();
-                    publication = response.body().get(i).isPublication();
 
-                    photoGifts.add(new GiftData(from, photo, to, photo_id, photo_url, video_url, phrase, photo_pwd, design, publication));
+                    photoGifts.add(new GiftData(from, photo, to, photo_id, photo_url, video_url, phrase, photo_pwd, design));
                     Log.e("photo_seq", String.valueOf(response.body().get(i).getGift_seq()));
                     seq[i] = response.body().get(i).getGift_seq();
                     design_num[i] = design;

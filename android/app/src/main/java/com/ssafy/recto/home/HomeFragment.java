@@ -185,7 +185,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CardData>> call, Response<List<CardData>> response) {
                 String uid, video, photo, phrase, date, pwd;
-                boolean publication;
                 int design;
                 seq = new int[response.body().size()];
                 design_num = new int[response.body().size()];
@@ -195,7 +194,6 @@ public class HomeFragment extends Fragment {
                 Log.e("카드뷰 수", String.valueOf(response.body().size()));
                 for (int i = 0; i < response.body().size(); i++) {
                     uid = response.body().get(i).getUser_uid();
-                    publication = response.body().get(i).isPublication();
                     design = response.body().get(i).getDesign();
                     video = response.body().get(i).getVideo_url();
                     photo = response.body().get(i).getPhoto_url();
@@ -203,7 +201,7 @@ public class HomeFragment extends Fragment {
                     date = response.body().get(i).getPhoto_date();
                     pwd = response.body().get(i).getPhoto_pwd();
 
-                    photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
+                    photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
                 }
@@ -261,7 +259,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CardData>> call, Response<List<CardData>> response) {
                 String uid, video, photo, phrase, date, pwd;
-                boolean publication;
                 int design;
                 seq = new int[response.body().size()];
                 design_num = new int[response.body().size()];
@@ -270,7 +267,6 @@ public class HomeFragment extends Fragment {
                 // 메인 화면에 카드 다섯장만 노출
                 for (int i = 0; i < 5; i++) {
                     uid = response.body().get(i).getUser_uid();
-                    publication = response.body().get(i).isPublication();
                     design = response.body().get(i).getDesign();
                     video = response.body().get(i).getVideo_url();
                     photo = response.body().get(i).getPhoto_url();
@@ -278,7 +274,7 @@ public class HomeFragment extends Fragment {
                     date = response.body().get(i).getPhoto_date();
                     pwd = response.body().get(i).getPhoto_pwd();
 
-                    photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
+                    photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
 //                    Log.e("photo_seq", String.valueOf(response.body().get(i).getPhoto_seq()));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
