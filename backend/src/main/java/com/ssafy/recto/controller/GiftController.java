@@ -46,13 +46,13 @@ public class GiftController {
         return new ResponseEntity<Gift>( giftService.getGift(gift_seq), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "선물 등록", notes = "선물 정보를 등록한다.", response = Gift.class)
+    @ApiOperation(value = "선물 저장", notes = "선물 정보를 저장한다.", response = Gift.class)
     @PostMapping
-    public ResponseEntity<String> registerGift(@RequestBody @ApiParam(value = "선물 정보", required = true) Gift gift)
+    public ResponseEntity<String> saveGift(@RequestBody @ApiParam(value = "선물 정보", required = true) Gift gift)
             throws Exception {
-        logger.info("sendGift - 호출");
+        logger.info("saveGift - 호출");
 
-        if (giftService.registerGift(gift)) {
+        if (giftService.saveGift(gift)) {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(FAIL, HttpStatus.OK);

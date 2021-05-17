@@ -1,5 +1,7 @@
 package com.ssafy.recto.api;
 
+import com.ssafy.recto.arcore.GiftVO;
+
 import java.util.List;
 import java.util.Map;
 

@@ -71,7 +71,7 @@ public class PhotoController {
     }
 
     @ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
-    @RequestMapping(method = RequestMethod.POST, consumes = "multipart/form-data")
+    @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<String> insertPhoto(@RequestParam(value = "user_uid", required = false) String user_uid,
                                               @RequestParam(value = "publication", required = false) Boolean publication,
                                               @RequestParam(value = "design", required = false) int design,
