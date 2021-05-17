@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
@@ -213,7 +214,14 @@ public class ProfileFragmentMineDetail extends Fragment {
                     }
                 });
 
-                ad.show();
+                AlertDialog alertAd = ad.create();
+                alertAd.show();
+
+                Button yes_btn = alertAd.getButton(DialogInterface.BUTTON_POSITIVE);
+                yes_btn.setTextColor(Color.RED);
+
+                Button no_btn = alertAd.getButton(DialogInterface.BUTTON_NEGATIVE);
+                no_btn.setTextColor(Color.GRAY);
             }
         });
 

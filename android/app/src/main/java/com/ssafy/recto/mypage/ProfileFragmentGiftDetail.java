@@ -3,6 +3,7 @@ package com.ssafy.recto.mypage;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -160,7 +161,14 @@ public class ProfileFragmentGiftDetail extends Fragment {
                     }
                 });
 
-                ad.show();
+                AlertDialog alertAd = ad.create();
+                alertAd.show();
+
+                Button yes_btn = alertAd.getButton(DialogInterface.BUTTON_POSITIVE);
+                yes_btn.setTextColor(Color.RED);
+
+                Button no_btn = alertAd.getButton(DialogInterface.BUTTON_NEGATIVE);
+                no_btn.setTextColor(Color.GRAY);
             }
         });
 
