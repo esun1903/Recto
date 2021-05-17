@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         // 구글 로그인 연동
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.server_client_id1)) // 서버와 연결되는 부분
                 .requestEmail()
                 .build();
 
