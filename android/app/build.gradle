@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-basement:17.4.0'
 
     // Firebase - Google 로그인
-    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics' // Firebase 앱 분석
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1' // Firebase 인증 2
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
