@@ -109,6 +109,7 @@ public class ProfileFragmentGift extends Fragment {
                     ProfileFragmentGiftDetail profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
                     profileFragmentGiftDetail.setArguments(bundle);
                     transaction.replace(R.id.main_frame, profileFragmentGiftDetail);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 } else {
                     // 상세 페이지로 gift_seq 값 (sep[pos]) 보내주기
@@ -118,6 +119,7 @@ public class ProfileFragmentGift extends Fragment {
                     ProfileFragmentGiftDetail2 profileFragmentGiftDetail2 = new ProfileFragmentGiftDetail2();
                     profileFragmentGiftDetail2.setArguments(bundle);
                     transaction.replace(R.id.main_frame, profileFragmentGiftDetail2);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 }
             }

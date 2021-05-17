@@ -110,6 +110,7 @@ public class ProfileFragmentMine extends Fragment {
                     ProfileFragmentMineDetail profileFragmentMineDetail = new ProfileFragmentMineDetail();
                     profileFragmentMineDetail.setArguments(bundle);
                     transaction.replace(R.id.main_frame, profileFragmentMineDetail);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 } else {
                     // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
@@ -119,6 +120,7 @@ public class ProfileFragmentMine extends Fragment {
                     ProfileFragmentMineDetail2 profileFragmentMineDetail2 = new ProfileFragmentMineDetail2();
                     profileFragmentMineDetail2.setArguments(bundle);
                     transaction.replace(R.id.main_frame, profileFragmentMineDetail2);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 }
 

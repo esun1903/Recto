@@ -99,6 +99,7 @@ public class PublicFragment extends Fragment{
                     PublicFragmentCardDetail publicFragmentCardDetail = new PublicFragmentCardDetail();
                     publicFragmentCardDetail.setArguments(bundle);
                     transaction.replace(R.id.main_frame, publicFragmentCardDetail);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 } else {
                     // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
@@ -108,6 +109,7 @@ public class PublicFragment extends Fragment{
                     PublicFragmentCardDetail2 publicFragmentCardDetail2 = new PublicFragmentCardDetail2();
                     publicFragmentCardDetail2.setArguments(bundle);
                     transaction.replace(R.id.main_frame, publicFragmentCardDetail2);
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 }
                 // 밑에 코드 지우고 위에서 해줘야 seq값이 전달 됨
