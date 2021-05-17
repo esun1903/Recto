@@ -45,9 +45,6 @@ public class Photo {
     @ApiModelProperty(value = "포토카드 디자인")
     public int design;
 
-    @ApiModelProperty(value = "공개/비공개")
-    public boolean publication;
-
     public MultipartFile getPhoto_str() {
         return photo_str;
     }
@@ -136,14 +133,7 @@ public class Photo {
         this.design = design;
     }
 
-    public boolean isPublication() {
-        return publication;
-    }
-
-    public void setPublication(boolean publication) {
-    }
-
-    public Photo(String user_uid,   String video_url, String photo_url,String phrase, String photo_pwd, int design, boolean publication) {
+    public Photo(String user_uid,   String video_url, String photo_url,String phrase, String photo_pwd, int design) {
 
         this.user_uid = user_uid;
         this.photo_url = photo_url;
@@ -151,13 +141,12 @@ public class Photo {
         this.phrase = phrase;
         this.photo_pwd = photo_pwd;
         this.design = design;
-        this.publication = publication;
     }
 
     public Photo() {
     }
 
-    public Photo(int photo_seq, String user_uid, String photo_id, String photo_date,  String photo_url, String video_url, String phrase, String photo_pwd, int design, boolean publication) {
+    public Photo(int photo_seq, String user_uid, String photo_id, String photo_date,  String photo_url, String video_url, String phrase, String photo_pwd, int design) {
         this.photo_seq = photo_seq;
         this.user_uid = user_uid;
         this.photo_id = photo_id;
@@ -167,6 +156,5 @@ public class Photo {
         this.phrase = phrase;
         this.photo_pwd = photo_pwd;
         this.design = design;
-        this.publication = publication;
     }
 }

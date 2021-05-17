@@ -73,7 +73,6 @@ public class PhotoController {
     @ApiOperation(value = "포토카드 정보 등록", notes = "포토카드 정보를 등록한다.", response = Photo.class)
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<String> insertPhoto(@RequestParam(value = "user_uid", required = false) String user_uid,
-                                              @RequestParam(value = "publication", required = false) Boolean publication,
                                               @RequestParam(value = "design", required = false) int design,
                                               @RequestParam(value = "video", required = false) MultipartFile video,
                                               @RequestParam(value = "photo", required = false) MultipartFile photo,
@@ -100,7 +99,7 @@ public class PhotoController {
         phrase = phrase.substring(1,phrase.length()-1);
         photo_pwd = photo_pwd.substring(1,photo_pwd.length()-1);
 
-        Photo photo2 = new Photo(user_uid, videoUrl, photoUrl, phrase, photo_pwd, design, publication);
+        Photo photo2 = new Photo(user_uid, videoUrl, photoUrl, phrase, photo_pwd, design);
         if (photoService.insertPhoto(photo2, date)) {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }

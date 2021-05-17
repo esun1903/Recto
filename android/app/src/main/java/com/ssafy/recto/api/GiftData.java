@@ -38,11 +38,8 @@ public class GiftData {
     @SerializedName("design")
     @Expose
     private int design;
-    @SerializedName("publication")
-    @Expose
-    private boolean publication;
 
-    public GiftData(String gift_from, int photo_seq, String gift_to, String photo_id, String photo_url, String video_url, String phrase, String photo_pwd, int design, boolean publication) {
+    public GiftData(String gift_from, int photo_seq, String gift_to, String photo_id, String photo_url, String video_url, String phrase, String photo_pwd, int design) {
         this.gift_from = gift_from;
         this.photo_seq = photo_seq;
         this.gift_to = gift_to;
@@ -52,6 +49,5 @@ public class GiftData {
         this.phrase = phrase;
         this.photo_pwd = photo_pwd;
         this.design = design;
-        this.publication = publication;
     }
 }

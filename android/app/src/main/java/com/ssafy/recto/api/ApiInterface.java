@@ -35,7 +35,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("photo")
-    Call<String> requestCreateCard(@Part("user_uid") String user_uid, @Part("publication") boolean publication, @Part("design") int design, @Part  MultipartBody.Part video, @Part  MultipartBody.Part photo ,@Part("phrase") String phrase, @Part("photo_date") String photo_date, @Part("photo_pwd") String photo_pwd);
+    Call<String> requestCreateCard(@Part("user_uid") String user_uid, @Part("design") int design, @Part  MultipartBody.Part video, @Part  MultipartBody.Part photo ,@Part("phrase") String phrase, @Part("photo_date") String photo_date, @Part("photo_pwd") String photo_pwd);
 
     @DELETE("photo")
     Call<String> deleteCard(@Query("photo_seq") int photo_seq);
