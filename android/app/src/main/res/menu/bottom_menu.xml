@@ -11,7 +11,7 @@
         android:id="@+id/nav_create"
         android:enabled="true"
         android:icon="@drawable/nav_create"
-        android:title="카드 등록" />
+        android:title="카드 제작" />
 
     <item
         android:id="@+id/nav_scan"

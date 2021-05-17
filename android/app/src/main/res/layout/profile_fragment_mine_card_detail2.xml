@@ -47,11 +47,12 @@
 
                     <!-- private or public -->
                     <ImageView
+                        android:id="@+id/lock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="2dp"
-                        android:src="@drawable/lock"
+                        android:src="@drawable/lock_open"
                         android:contentDescription="@string/lock" />
 
                     <TextView

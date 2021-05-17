@@ -54,6 +54,7 @@ public class ProfileFragmentMineDetail2 extends Fragment {
     MainActivity mainActivity;
     ImageView cardImageView;
     ImageView info_dialog;
+    ImageView lock;
     Button mine_photo_card_list_btn;
     TextView tv_phrases;
     TextView card_id;
@@ -106,6 +107,7 @@ public class ProfileFragmentMineDetail2 extends Fragment {
         info_dialog = view.findViewById(R.id.info_dialog);
         download_button = view.findViewById(R.id.download_button);
         delete_button = view.findViewById(R.id.delete_button);
+        lock = view.findViewById(R.id.lock);
 
         // 목록보기 버튼
         mine_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
@@ -232,6 +234,7 @@ public class ProfileFragmentMineDetail2 extends Fragment {
                 date = response.body().getPhoto_date();
                 id = response.body().getPhoto_id();
                 phrase = response.body().getPhrase();
+                pwd = response.body().getPhoto_pwd();
 
                 // 날짜 넣어주기
                 card_date.setText(date);
@@ -247,6 +250,13 @@ public class ProfileFragmentMineDetail2 extends Fragment {
 
                 // 이미지 불러오기
                 Glide.with(getContext()).load(photo_url).into(cardImageView);
+
+                // 비밀번호 있으면 잠긴 좌물쇠로 이미지 교체
+                if (pwd.equals("")) {
+                    lock.setImageResource(R.drawable.lock_open);
+                } else{
+                    lock.setImageResource(R.drawable.lock);
+                }
             }
 
             @Override
