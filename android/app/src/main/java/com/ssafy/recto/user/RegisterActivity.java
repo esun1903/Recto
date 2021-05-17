@@ -42,6 +42,19 @@ public class RegisterActivity extends AppCompatActivity {
         return returnValue;
     }
 
+    // 비밀번호 유효성 체크
+    public static boolean passwordValidate(String password) {
+        boolean returnValue = false;
+        // 최소 8자리, 최소 하나의 문자와 하나의 숫자 포함
+        String val = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+        Pattern p = Pattern.compile(val);
+        Matcher m = p.matcher(password);
+        if(m.matches()){
+            returnValue = true;
+        }
+        return returnValue;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +98,13 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                // 비밀번호 확인을 입력하지 않은 경우
+                // 비밀번호 조건을 만족하지 못하는 경우
+                if (!passwordValidate(strPwd)) {
+                    Toast.makeText(RegisterActivity.this,"비밀번호는 최소 8자리, 문자와 숫자를 최소 하나씩 포함해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+               // 비밀번호 확인을 입력하지 않은 경우
                 if (strConfirmPwd.equals("")) {
                     Toast.makeText(RegisterActivity.this,"비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();
                     return;
@@ -131,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish(); // 현재 액티비티 파괴
                         }
-                        // 회원가입 실패 - 이미 동일한 계정이 존재하는 경우
+                        // 회원가입 실패 - 이미 동일한 계정이 존재하는 경우 등
                         else {
                             Toast.makeText(RegisterActivity.this, "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
                         }
