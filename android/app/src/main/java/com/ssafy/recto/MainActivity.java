@@ -2,14 +2,17 @@ package com.ssafy.recto;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -91,7 +94,14 @@ public class MainActivity extends AppCompatActivity {
         iv_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment("information");
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_frame);
+                if(fragment instanceof InfoFragment) {
+                    onBackPressed();
+                }
+                else {
+                    setFragment("information");
+                    ft.addToBackStack(null);
+                }
             }
         });
         iv_recto = findViewById(R.id.iv_recto);
@@ -119,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.nav_home:
                         setFragment("home");
+                        ft.addToBackStack(null);
                         break;
                     case R.id.nav_create:
                         try {
@@ -126,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                             UserAccount account = new UserAccount();
                             String UserUid = account.setIdToken(firebaseUser.getUid());
                             setFragment("create_selectopen");
+                            ft.addToBackStack(null);
                         } catch (Exception e) {
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
@@ -137,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_public:
                         setFragment("public");
+                        ft.addToBackStack(null);
                         break;
                     case R.id.nav_profile:
                         try {
@@ -144,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                             UserAccount account = new UserAccount();
                             String UserUid = account.setIdToken(firebaseUser.getUid());
                             setFragment("profile");
+                            ft.addToBackStack(null);
                         } catch (Exception e) {
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
@@ -187,90 +201,112 @@ public class MainActivity extends AppCompatActivity {
         switch (str) {
             case "home":
                 ft.replace(R.id.main_frame, homeFragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_selectopen":
                 ft.replace(R.id.main_frame, createFragment1SelectOpen);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_selectdesign":
                 ft.replace(R.id.main_frame, createFragment2SelectDesign);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_selectvideo":
                 ft.replace(R.id.main_frame, createFragment3SelectVideo);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_selectphoto":
                 ft.replace(R.id.main_frame, createFragment4SelectPhoto);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_writeinfo_prph":
                 ft.replace(R.id.main_frame, createFragment5WriteInfoPrph);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_writeinfo_pron":
                 ft.replace(R.id.main_frame, createFragment5WriteInfoPron);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_writeinfo_puph":
                 ft.replace(R.id.main_frame, createFragment5WriteInfoPuph);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_writeinfo_puon":
                 ft.replace(R.id.main_frame, createFragment5WriteInfoPuon);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_success_onlyphoto":
                 ft.replace(R.id.main_frame, createFragment6SuccessOnlyPhoto);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "create_success_phrases":
                 ft.replace(R.id.main_frame, createFragment6SuccessPhrases);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "public":
                 ft.replace(R.id.main_frame, publicFragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "public_card_detail":
                 ft.replace(R.id.main_frame, publicFragmentCardDetail);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "public_card_detail2":
                 ft.replace(R.id.main_frame, publicFragmentCardDetail2);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "profile":
                 ft.replace(R.id.main_frame, profileFragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "profile_mine":
                 ft.replace(R.id.main_frame, profileFragmentMine);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "profile_mine_detail":
                 ft.replace(R.id.main_frame, profileFragmentMineDetail);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "profile_mine_detail2":
                 ft.replace(R.id.main_frame, profileFragmentMineDetail2);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "profile_gift":
                 ft.replace(R.id.main_frame, profileFragmentGift);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "profile_gift_detail":
                 ft.replace(R.id.main_frame, profileFragmentGiftDetail);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "profile_gift_detail2":
                 ft.replace(R.id.main_frame, profileFragmentGiftDetail2);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
             case "information":
                 ft.replace(R.id.main_frame, infoFragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
         }
