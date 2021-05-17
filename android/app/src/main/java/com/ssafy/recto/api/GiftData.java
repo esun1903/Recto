@@ -17,9 +17,6 @@ public class GiftData {
     @SerializedName("photo_seq")
     @Expose
     private int photo_seq;
-    @SerializedName("gift_date")
-    @Expose
-    private String gift_date;
     @SerializedName("gift_to")
     @Expose
     private String gift_to;

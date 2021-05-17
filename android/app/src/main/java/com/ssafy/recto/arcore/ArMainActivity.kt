@@ -4,12 +4,10 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.ssafy.recto.R
 import retrofit2.Call
@@ -41,32 +39,46 @@ class ArMainActivity : AppCompatActivity() {
         }
 
 
-//        val gson = GsonBuilder().setLenient().create();
-//        val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
-//                .addConverterFactory(GsonConverterFactory.create(gson))
-//                .build();
-//        val service = retrofit.create(PhotoService::class.java);
+        val gson = GsonBuilder().setLenient().create();
+        val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        val service = retrofit.create(PhotoService::class.java);
+        var gift = GiftVO()
 
         //getPhoto
-//        service.getPhoto("210509001")?.enqueue(object : Callback<PhotoVO> {
-//            override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
-//                Log.i("fail.TT", t.toString())
-//            }
-//            override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
-//                Log.d("Response :: ", response?.body().toString())
-//            }
-//        })
-        
-        //insertPhoto
-//        val photo = PhotoVO(101, 1, "500000015", "20200203", "/photo", "/video", "galinjisunda", "2580", 1, false);
-//        service.insertPhoto(photo)?.enqueue(object : Callback<String> {
-//            override fun onFailure(call: Call<String>?, t: Throwable?) {
-//                Log.i("fail.TT", t.toString())
-//            }
-//            override fun onResponse(call: Call<String>, response: Response<String>) {
-//                Log.d("Response :: ", response?.body().toString())
-//            }
-//        })
+        service.getPhoto("204228419")?.enqueue(object : Callback<PhotoVO> {
+            override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
+                Log.i("fail.TT", t.toString())
+            }
+            override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
+                Log.d("Response :: ", response?.body().toString())
+                var gift_from = response.body()?.user_seq
+                var photo_seq = response.body()?.photo_seq
+                var gift_to = "GGRXTUnHCqZZQP27XKxxRkgdjtR2"
+                var photo_id = response.body()?.photo_id
+                var photo_url = response.body()?.photo_url
+                var video_url = response.body()?.video_url
+                var phrase = response.body()?.phrase
+                var photo_pwd = response.body()?.photo_pwd
+                var design = response.body()?.design
+                var publication = response.body()?.publication
+
+                gift = GiftVO(gift_from, photo_seq, gift_to, photo_id, photo_url, video_url, phrase, photo_pwd, design, publication)
+                Log.d("gift1", gift.toString())
+            }
+        })
+
+        //saveGift
+        service.saveGift(gift)?.enqueue(object : Callback<String> {
+            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                Log.i("fail.TT", t.toString())
+            }
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                Log.d("Response :: ", response?.body().toString())
+                Log.d("gift2", gift.toString())
+            }
+        })
 
         //getPhotoList
 //        service.getPhotoList(1)?.enqueue(object : Callback<List<PhotoVO>> {

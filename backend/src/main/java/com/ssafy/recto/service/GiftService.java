@@ -21,8 +21,8 @@ public class GiftService {
         this.sqlSession = sqlSession;
     }
 
-    public boolean registerGift(Gift gift){
-        return sqlSession.getMapper(GiftMapper.class).registerGift(gift) == 1;
+    public boolean saveGift(Gift gift){
+        return sqlSession.getMapper(GiftMapper.class).saveGift(gift) == 1;
     }
 
     public Gift getGift(int gift_seq) throws Exception{
