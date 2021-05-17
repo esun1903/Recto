@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="13"
-        android:hint="Password"
+        android:hint="Password (최소 8자리)"
         android:inputType="textPassword"
         android:fontFamily="@font/eulyoo1945_semibold"
         app:layout_constraintEnd_toEndOf="@+id/et_email"

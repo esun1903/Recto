@@ -92,7 +92,7 @@ public class CreateFragment_5_WriteInfo_puph extends Fragment {
                         d = "0" + cday;
                     }
                     myApp.setCardDateNum(y + m + d);
-                    myApp.setCardPassword("null");
+                    myApp.setCardPassword("");
                     mainActivity.setFragment("create_success_phrases");
                 }
             }

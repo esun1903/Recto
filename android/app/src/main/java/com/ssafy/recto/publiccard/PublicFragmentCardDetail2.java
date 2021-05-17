@@ -173,7 +173,6 @@ public class PublicFragmentCardDetail2 extends Fragment {
             public void onResponse(Call<CardData> call, Response<CardData> response) {
                 Log.d("카드 정보 가져오기", String.valueOf(response.body()));
                 String uid, id, video, photo, phrase, date, pwd, url;
-                boolean publication;
                 int photo_seq, design;
 
                 id = response.body().getPhoto_id();

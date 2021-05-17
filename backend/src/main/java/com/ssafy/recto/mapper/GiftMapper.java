@@ -9,10 +9,10 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface GiftMapper {
 
-	@Insert("Insert INTO gift ( photo_seq, gift_from, gift_date, gift_to) \n"
-			+ "VALUES ( #{Gift.photo_seq},#{Gift.gift_from},now(),#{Gift.gift_to})")
+	@Insert("Insert INTO gift ( photo_seq, gift_from, gift_to) \n"
+			+ "VALUES ( #{Gift.photo_seq},#{Gift.gift_from},#{Gift.gift_to})")
 	@Options(useGeneratedKeys = true)
-	public int registerGift(@Param("Gift") Gift Gift);
+	public int saveGift(@Param("Gift") Gift Gift);
 
 	@Select("SELECT * FROM photo, gift WHERE photo.photo_seq = gift.photo_seq and gift_seq = #{gift_seq}")
 	public Gift getGift(@Param("gift_seq") int gift_seq);

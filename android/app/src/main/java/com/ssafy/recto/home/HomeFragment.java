@@ -30,6 +30,8 @@ import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.CardData;
 import com.ssafy.recto.api.HttpClient;
 import com.ssafy.recto.mypage.ProfileFragmentMineAdapter;
+import com.ssafy.recto.mypage.ProfileFragmentMineDetail;
+import com.ssafy.recto.mypage.ProfileFragmentMineDetail2;
 import com.ssafy.recto.publiccard.PublicFragmentCardDetail;
 import com.ssafy.recto.publiccard.PublicFragmentCardDetail2;
 import com.ssafy.recto.publiccard.PublicFragmentMyAdapter;
@@ -60,6 +62,7 @@ public class HomeFragment extends Fragment {
 
     int[] seq;
     int[] design_num;
+    int size;
 
     @Override
     public void onAttach(Context context) {
@@ -107,32 +110,6 @@ public class HomeFragment extends Fragment {
         MyListDecoration decoration = new MyListDecoration();
         listview.addItemDecoration(decoration);
 
-        MyAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int pos) {
-//                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
-
-                if (design_num[pos] == 1) {
-                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
-                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
-                    bundle.putInt("seq", seq[pos]);
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    PublicFragmentCardDetail publicFragmentCardDetail = new PublicFragmentCardDetail();
-                    publicFragmentCardDetail.setArguments(bundle);
-                    transaction.replace(R.id.main_frame, publicFragmentCardDetail);
-                    transaction.commit();
-                } else {
-                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
-                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
-                    bundle.putInt("seq", seq[pos]);
-                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    PublicFragmentCardDetail2 publicFragmentCardDetail2 = new PublicFragmentCardDetail2();
-                    publicFragmentCardDetail2.setArguments(bundle);
-                    transaction.replace(R.id.main_frame, publicFragmentCardDetail2);
-                    transaction.commit();
-                }
-            }
-        });
 
         // 로그인 사용자
         if (current != null) {
@@ -169,24 +146,54 @@ public class HomeFragment extends Fragment {
 
     // 로그인 사용자 - 메인 화면 카드뷰
     public void requestGet1() throws ParseException {
+        // 어댑터 설정
+        MyAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+//                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
+                // 슬롯 클릭 시 카드 제작 메뉴로 이동
+                if (size <= pos) {
+                    mainActivity.setFragment("create_selectopen");
+                }
+                else if (design_num[pos] == 1) {
+                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    ProfileFragmentMineDetail profileFragmentMineDetail = new ProfileFragmentMineDetail();
+                    profileFragmentMineDetail.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, profileFragmentMineDetail);
+                    transaction.commit();
+                } else if (design_num[pos] == 2) {
+                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    ProfileFragmentMineDetail2 profileFragmentMineDetail2 = new ProfileFragmentMineDetail2();
+                    profileFragmentMineDetail2.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, profileFragmentMineDetail2);
+                    transaction.commit();
+                }
+            }
+        });
+
         // 해당 user가 제작한 카드 불러오기
         String userUid = sharedPreferences.getString("userUid", "");
-        Call<List<CardData>> call = api.getMineCard(userUid);
+        Call<List<CardData>> call = api.getMainCard(userUid);
 
         call.enqueue(new Callback<List<CardData>>() {
             @Override
             public void onResponse(Call<List<CardData>> call, Response<List<CardData>> response) {
                 String uid, video, photo, phrase, date, pwd;
-                boolean publication;
                 int design;
                 seq = new int[response.body().size()];
                 design_num = new int[response.body().size()];
+                size = response.body().size();
 
                 photoCards.clear();
                 Log.e("카드뷰 수", String.valueOf(response.body().size()));
                 for (int i = 0; i < response.body().size(); i++) {
                     uid = response.body().get(i).getUser_uid();
-                    publication = response.body().get(i).isPublication();
                     design = response.body().get(i).getDesign();
                     video = response.body().get(i).getVideo_url();
                     photo = response.body().get(i).getPhoto_url();
@@ -194,7 +201,7 @@ public class HomeFragment extends Fragment {
                     date = response.body().get(i).getPhoto_date();
                     pwd = response.body().get(i).getPhoto_pwd();
 
-                    photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
+                    photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
                 }
@@ -218,13 +225,40 @@ public class HomeFragment extends Fragment {
 
     // 비 로그인 사용자 - 메인 화면 카드뷰
     public void requestGet2() throws ParseException {
+        // 어댑터 설정
+        MyAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+//                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
+
+                if (design_num[pos] == 1) {
+                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    PublicFragmentCardDetail publicFragmentCardDetail = new PublicFragmentCardDetail();
+                    publicFragmentCardDetail.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, publicFragmentCardDetail);
+                    transaction.commit();
+                } else {
+                    // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
+                    Bundle bundle = new Bundle(); // 데이터를 담을 번들
+                    bundle.putInt("seq", seq[pos]);
+                    FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    PublicFragmentCardDetail2 publicFragmentCardDetail2 = new PublicFragmentCardDetail2();
+                    publicFragmentCardDetail2.setArguments(bundle);
+                    transaction.replace(R.id.main_frame, publicFragmentCardDetail2);
+                    transaction.commit();
+                }
+            }
+        });
+
         Call<List<CardData>> call = api.getPublicCard();
 
         call.enqueue(new Callback<List<CardData>>() {
             @Override
             public void onResponse(Call<List<CardData>> call, Response<List<CardData>> response) {
                 String uid, video, photo, phrase, date, pwd;
-                boolean publication;
                 int design;
                 seq = new int[response.body().size()];
                 design_num = new int[response.body().size()];
@@ -233,7 +267,6 @@ public class HomeFragment extends Fragment {
                 // 메인 화면에 카드 다섯장만 노출
                 for (int i = 0; i < 5; i++) {
                     uid = response.body().get(i).getUser_uid();
-                    publication = response.body().get(i).isPublication();
                     design = response.body().get(i).getDesign();
                     video = response.body().get(i).getVideo_url();
                     photo = response.body().get(i).getPhoto_url();
@@ -241,7 +274,7 @@ public class HomeFragment extends Fragment {
                     date = response.body().get(i).getPhoto_date();
                     pwd = response.body().get(i).getPhoto_pwd();
 
-                    photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
+                    photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
 //                    Log.e("photo_seq", String.valueOf(response.body().get(i).getPhoto_seq()));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;

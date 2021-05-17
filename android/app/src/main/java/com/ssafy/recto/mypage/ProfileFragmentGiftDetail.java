@@ -175,7 +175,6 @@ public class ProfileFragmentGiftDetail extends Fragment {
             public void onResponse(Call<GiftData> call, Response<GiftData> response) {
                 String from, to, photo_id, photo_url, video_url, phrase, photo_pwd;
                 int photo, design, gift_seq;
-                boolean publication;
 
                 from = response.body().getGift_from();
                 photo_url = response.body().getPhoto_url();

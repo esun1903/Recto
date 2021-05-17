@@ -22,9 +22,6 @@ public class Gift {
     @ApiModelProperty(value = "사진 seq")
     private int photo_seq;
 
-    @ApiModelProperty(value = "선물한 날짜")
-    private LocalDate gift_date;
-
     @ApiModelProperty(value = "수신인 seq")
     private String gift_to;
 
@@ -45,8 +42,5 @@ public class Gift {
 
     @ApiModelProperty(value = "포토카드 디자인")
     public int design;
-
-    @ApiModelProperty(value = "공개/비공개")
-    public boolean publication;
 
 }

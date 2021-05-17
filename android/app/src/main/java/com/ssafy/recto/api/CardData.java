@@ -22,10 +22,6 @@ public class CardData {
     @Expose
     String photo_id;
 
-    @SerializedName("publication")
-    @Expose
-    boolean publication;
-
     @SerializedName("design")
     @Expose
     int design;
@@ -58,9 +54,8 @@ public class CardData {
     @Expose
     String photo_pwd;
 
-    public CardData(String user_uid, boolean publication, int design, String video_url, String photo_url, String phrase, String photo_date, String photo_pwd) {
+    public CardData(String user_uid, int design, String video_url, String photo_url, String phrase, String photo_date, String photo_pwd) {
         this.user_uid = user_uid;
-        this.publication = publication;
         this.design = design;
         this.video_url = video_url;
         this.photo_url = photo_url;
@@ -69,9 +64,8 @@ public class CardData {
         this.photo_pwd = photo_pwd;
     }
 
-    public CardData(String user_uid, boolean publication, int design, MultipartBody.Part video_str, MultipartBody.Part photo_str, String phrase, String photo_date, String photo_pwd) {
+    public CardData(String user_uid, int design, MultipartBody.Part video_str, MultipartBody.Part photo_str, String phrase, String photo_date, String photo_pwd) {
         this.user_uid = user_uid;
-        this.publication = publication;
         this.design = design;
         this.video_str = video_str;
         this.photo_str = photo_str;

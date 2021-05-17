@@ -125,7 +125,6 @@ public class PublicFragment extends Fragment{
             @Override
             public void onResponse(Call<List<CardData>> call, Response<List<CardData>> response) {
                 String uid, video, photo, phrase, date, pwd;
-                boolean publication;
                 int design;
                 seq = new int[response.body().size()];
                 design_num = new int[response.body().size()];
@@ -133,7 +132,6 @@ public class PublicFragment extends Fragment{
                 photoCards.clear();
                 for (int i = 0; i < response.body().size(); i++) {
                     uid = response.body().get(i).getUser_uid();
-                    publication = response.body().get(i).isPublication();
                     design = response.body().get(i).getDesign();
                     video = response.body().get(i).getVideo_url();
                     photo = response.body().get(i).getPhoto_url();
@@ -141,7 +139,7 @@ public class PublicFragment extends Fragment{
                     date = response.body().get(i).getPhoto_date();
                     pwd = response.body().get(i).getPhoto_pwd();
 
-                    photoCards.add(new CardData(uid, publication, design, video, photo, phrase, date, pwd));
+                    photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
                     Log.e("photo_seq", String.valueOf(response.body().get(i).getPhoto_seq()));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
