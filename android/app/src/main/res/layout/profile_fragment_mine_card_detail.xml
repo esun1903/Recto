@@ -113,12 +113,12 @@
                     app:srcCompat="@drawable/card_image" />
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="bottom"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginVertical="18dp"
-                    android:src="@drawable/card_logo"
+                    android:src="@drawable/card_logo_big"
                     android:contentDescription="@string/card_logo" />
 
                 <TextView
