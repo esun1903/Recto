@@ -56,7 +56,6 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
     private ImageView iv_photo;
     private TextView tv_date;
 
-    private Boolean cardPublic;
     private Integer cardDesign;
     private String cardVideo;
     private String cardPhoto;
@@ -88,13 +87,13 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         view = inflater.inflate(R.layout.create_fragment_6_success_onlyphoto, container, false);
         sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
 
-        cardPublic = myApp.getCardPublic();
         cardDesign = myApp.getCardDesign();
         cardVideo = myApp.getCardVideo();
         cardPhrases = myApp.getCardPhrases();
         cardDate = myApp.getCardDate();
         cardDateNum = myApp.getCardDateNum();
         cardPassword = myApp.getCardPassword();
+        boolean cardPublic = "".equals(cardPassword);;
 
         btn_previous = view.findViewById(R.id.btn_previous);
         btn_next = view.findViewById(R.id.btn_next);
@@ -115,13 +114,13 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cardPublic && (cardDesign == 1)) {
+                if (!cardPublic && (cardDesign == 1)) {
                     mainActivity.setFragment("create_writeinfo_puon");
-                } else if (cardPublic && (cardDesign == 2)) {
-                    mainActivity.setFragment("create_writeinfo_puph");
-                } else if (!cardPublic && (cardDesign == 1)) {
-                    mainActivity.setFragment("create_writeinfo_pron");
                 } else if (!cardPublic && (cardDesign == 2)) {
+                    mainActivity.setFragment("create_writeinfo_puph");
+                } else if (cardPublic && (cardDesign == 1)) {
+                    mainActivity.setFragment("create_writeinfo_pron");
+                } else if (cardPublic && (cardDesign == 2)) {
                     mainActivity.setFragment("create_writeinfo_prph");
                 }
             }
@@ -163,7 +162,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         RequestBody photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo", file.getName(), photoBody);
 
-        Call<String> call = api.requestCreateCard(userUid, cardPublic, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
+        Call<String> call = api.requestCreateCard(userUid, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
