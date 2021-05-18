@@ -36,8 +36,8 @@
             android:layout_height="50dp"
             android:fontFamily="@font/eulyoo1945_semibold"
             android:hint="@string/date"
-            android:textSize="20sp"
-            android:padding="10dp"
+            android:textSize="15sp"
+            android:padding="15dp"
             android:gravity="center_horizontal" />
 
         <TextView
@@ -59,7 +59,8 @@
             android:inputType="numberPassword"
             android:importantForAutofill="no"
             android:hint="@string/password"
-            android:gravity="center_horizontal"  />
+            android:gravity="center_horizontal"
+            android:textSize="13sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
