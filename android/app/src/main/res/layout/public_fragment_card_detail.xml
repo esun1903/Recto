@@ -89,25 +89,25 @@
 
                 <ImageView
                     android:id="@+id/iv_success"
-                    android:layout_width="183dp"
-                    android:layout_height="288dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:contentDescription="@string/public_card"
-                    android:src="@drawable/card_layout" />
+                    android:src="@drawable/card_layout_sm" />
 
                 <ImageView
                     android:id="@+id/card_image_detail"
-                    android:layout_width="183dp"
-                    android:layout_height="243dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:contentDescription="@string/photo_card"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/card_image" />
+                    app:srcCompat="@drawable/card_image_sm" />
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="20dp"
                     android:layout_gravity="bottom"
                     android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="18dp"
+                    android:layout_marginVertical="14dp"
                     android:src="@drawable/card_logo_big"
                     android:contentDescription="@string/card_logo" />
 
@@ -117,7 +117,7 @@
                     android:layout_height="15dp"
                     android:layout_gravity="right|bottom"
                     android:layout_marginHorizontal="7dp"
-                    android:layout_marginVertical="16dp"
+                    android:layout_marginVertical="12dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="10dp" />
