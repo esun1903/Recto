@@ -35,10 +35,11 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/eulyoo1945_semibold"
-            android:inputType="text"
-            android:importantForAutofill="no"
+            android:gravity="center_horizontal"
             android:hint="@string/text"
-            android:gravity="center_horizontal" />
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textSize="13sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,10 +56,10 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:fontFamily="@font/eulyoo1945_semibold"
+            android:gravity="center_horizontal"
             android:hint="@string/date"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:gravity="center_horizontal" />
+            android:padding="15dp"
+            android:textSize="15sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

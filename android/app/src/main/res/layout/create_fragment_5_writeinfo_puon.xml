@@ -36,8 +36,8 @@
             android:layout_height="50dp"
             android:fontFamily="@font/eulyoo1945_semibold"
             android:hint="@string/date"
-            android:textSize="20sp"
-            android:padding="10dp"
+            android:textSize="15sp"
+            android:padding="15dp"
             android:gravity="center_horizontal" />
 
         <LinearLayout
