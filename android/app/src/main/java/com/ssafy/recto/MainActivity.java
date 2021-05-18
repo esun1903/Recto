@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.ssafy.recto.arcore.ArMainActivity;
+import com.ssafy.recto.arcore.OcrActivity;
 import com.ssafy.recto.config.MyApplication;
 import com.ssafy.recto.createcard.CreateFragment_1_SelectOpen;
 import com.ssafy.recto.createcard.CreateFragment_2_SelectDesign;
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.nav_scan:
-                        Intent intentScan = new Intent(MainActivity.this, ArMainActivity.class);
+                        Intent intentScan = new Intent(MainActivity.this, OcrActivity.class);
                         startActivity(intentScan);
                         break;
                     case R.id.nav_public:

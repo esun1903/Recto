@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'com.google.ar.sceneform.plugin'
 }
 
 android {
@@ -78,6 +80,8 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    implementation 'com.google.android.gms:play-services-vision:15.0.1'
 }
 
 apply plugin: 'com.google.ar.sceneform.plugin'
