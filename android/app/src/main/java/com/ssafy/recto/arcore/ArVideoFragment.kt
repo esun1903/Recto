@@ -2,6 +2,8 @@ package com.ssafy.recto.arcore
 
 import android.animation.ValueAnimator
 import android.app.AlertDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.RectF
@@ -30,7 +32,13 @@ import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
+import com.google.gson.GsonBuilder
 import com.ssafy.recto.R
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.net.URL
 
@@ -41,6 +49,7 @@ open class ArVideoFragment : ArFragment() {
     private lateinit var videoRenderable: ModelRenderable //sfb파일을 renderable로 변환
     private lateinit var videoAnchorNode: VideoAnchorNode //이미지 및 비디오 차원, 비디오 회전 및 배율 유형
     private var activeAugmentedImage: AugmentedImage? = null //이미지를 처음 감지하여 물리적 크기를 추정하지 못해도 증강 이미지를 반환
+    private var videoUrl : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +58,56 @@ open class ArVideoFragment : ArFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? { //layout을 inflate하는 곳, view 객체를 얻어서 초기화
         val view = super.onCreateView(inflater, container, savedInstanceState)
+
+        val gson = GsonBuilder().setLenient().create();
+        val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        val service = retrofit.create(PhotoService::class.java);
+
+        var sharedPreferences: SharedPreferences? = null
+        sharedPreferences = this.context?.getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
+        val userUid: String? = sharedPreferences?.getString("userUid", "")
+
+        val bundle = arguments
+        val photo_code = bundle?.getString("photoCode")
+        if (photo_code != null) {
+
+            //getPhoto
+            service.getPhoto(photo_code)?.enqueue(object : Callback<PhotoVO> {
+                override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
+                    Log.i("fail.TT", t.toString())
+                }
+
+                override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
+                        Log.d("Response :: ", response?.body().toString())
+                    var user_uid = response.body()!!.user_uid
+                    var photo_seq = response.body()!!.photo_seq
+                    videoUrl = response.body()!!.video_url
+                    if (!user_uid.equals(userUid) && photo_seq > 30) { //포토카드 제작자와 로그인된 사용자가 다르고 photo_seq가 31이상(public 아닐 경우)
+                        var gift_from = user_uid
+                        var photo_seq = response.body()?.photo_seq
+                        var gift_to = userUid
+
+                        var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
+
+                        //saveGift
+                        service.saveGift(gift)?.enqueue(object : Callback<String> {
+                            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                                Log.i("fail.TT", t.toString())
+                            }
+
+                            override fun onResponse(call: Call<String>, response: Response<String>) {
+                                Log.d("Response :: ", response?.body().toString())
+                            }
+                        })
+                    }
+                    else{
+                        Log.d("포토카드 제작자와", "로그인된 사용자가 같거나 public 카드입니다")
+                    }
+                }
+            })
+        }
 
         planeDiscoveryController.hide() //planeDiscoveryController는 평면 탐색 표시를 관리
         planeDiscoveryController.setInstructionView(null) //평면 탐색 UX

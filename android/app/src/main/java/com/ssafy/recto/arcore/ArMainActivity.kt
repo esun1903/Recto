@@ -30,8 +30,18 @@ class ArMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scancard_ar)
 
+        var intent = getIntent()
+        var photoCode = intent.getStringExtra("photoCode")
+
         if (openGlVersion.toDouble() >= MIN_OPEN_GL_VERSION) {
-            supportFragmentManager.inTransaction { replace(R.id.fragmentContainer, ArVideoFragment())}
+            val bundle = Bundle()
+            bundle.putString("photoCode", photoCode)
+            val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+            val arVideoFragment = ArVideoFragment()
+            arVideoFragment.arguments = bundle
+            transaction.replace(R.id.fragmentContainer, arVideoFragment)
+            transaction.commit()
+//            supportFragmentManager.inTransaction { replace(R.id.fragmentContainer, ArVideoFragment())}
         } else {
             AlertDialog.Builder(this)
                     .setTitle("Device is not supported")
@@ -39,58 +49,6 @@ class ArMainActivity : AppCompatActivity() {
                     .setPositiveButton(android.R.string.ok) { _, _ -> finish() }
                     .show()
         }
-
-        val gson = GsonBuilder().setLenient().create();
-        val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        val service = retrofit.create(PhotoService::class.java);
-
-//        var sharedPreferences: SharedPreferences? = null
-//        sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE)
-//        val userUid: String? = sharedPreferences?.getString("userUid", "")
-
-//        //getPhoto
-//        service.getPhoto("204228419")?.enqueue(object : Callback<PhotoVO> {
-//            override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
-//                Log.i("fail.TT", t.toString())
-//            }
-
-//            override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
-//                Log.d("Response :: ", response?.body().toString())
-//                var gift_from = response.body()?.user_uid
-//                var photo_seq = response.body()?.photo_seq
-//                var gift_to = userUid
-//
-//                var gift = GiftVO(gift_from, photo_seq, gift_to)
-//
-//                //saveGift
-//                service.saveGift(gift)?.enqueue(object : Callback<String> {
-//                    override fun onFailure(call: Call<String>?, t: Throwable?) {
-//                        Log.i("fail.TT", t.toString())
-//                    }
-//
-//                    override fun onResponse(call: Call<String>, response: Response<String>) {
-//                        Log.d("Response :: ", response?.body().toString())
-//                    }
-//                })
-//            }
-//        })
-
-        //getPhotoList
-
-//        service.getPhotoList(1)?.enqueue(object : Callback<List<PhotoVO>> {
-//            override fun onFailure(call: Call<List<PhotoVO>>?, t: Throwable?) {
-//                Log.i("fail.TT", t.toString())
-//            }
-//            override fun onResponse(call: Call<List<PhotoVO>>, response: Response<List<PhotoVO>>) {
-//                Log.d("Response :: ", response?.body().toString())
-//                var data : List<PhotoVO>? = response?.body()
-//                for ( i in data!!){
-//                    Log.i("data" , i.toString())
-//                }
-//            }
-//        })
 
     }
 
