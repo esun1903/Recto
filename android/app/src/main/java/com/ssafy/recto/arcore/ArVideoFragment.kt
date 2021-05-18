@@ -20,8 +20,8 @@ import android.widget.Toast
 import androidx.core.animation.doOnStart
 import androidx.core.graphics.rotationMatrix
 import androidx.core.graphics.transform
-import java.io.IOException
-
+import com.google.android.gms.vision.CameraSource
+import com.google.android.gms.vision.text.TextRecognizer
 import com.google.ar.core.AugmentedImage
 import com.google.ar.core.AugmentedImageDatabase
 import com.google.ar.core.Config
@@ -31,6 +31,8 @@ import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.ssafy.recto.R
+import java.io.IOException
+import java.net.URL
 
 open class ArVideoFragment : ArFragment() {
 
@@ -38,7 +40,6 @@ open class ArVideoFragment : ArFragment() {
     private lateinit var externalTexture: ExternalTexture //surfaceTexture
     private lateinit var videoRenderable: ModelRenderable //sfb파일을 renderable로 변환
     private lateinit var videoAnchorNode: VideoAnchorNode //이미지 및 비디오 차원, 비디오 회전 및 배율 유형
-
     private var activeAugmentedImage: AugmentedImage? = null //이미지를 처음 감지하여 물리적 크기를 추정하지 못해도 증강 이미지를 반환
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,7 +83,15 @@ open class ArVideoFragment : ArFragment() {
         fun setupAugmentedImageDatabase(config: Config, session: Session): Boolean {
             //이미지 추적 활성화 - 세션 중에 ARCore는 카메라 이미지의 특징점을 이미지 데이터베이스의 특징점과 일치시켜 이미지를 찾는다.
             try {
+//                URL -> Bitmap으로 바꿔서 때려박기. 이거 작동은 하는데 `---` 이거 있어서 더 나은 코드 찾아봐야할 것 같아요 :>
+//                이거 바꾸는 건 많으니까 ~!~! 일단 동작한다는 것만 확인했3
+//                밑에 // 풀면 됩니다잉
+//                var image_task = URLtoBitmapTask().apply {
+//                    url = URL("https://s3.ap-northeast-2.amazonaws.com/project-recto/2d2d6dfa1ce94d57b92e7fce94cd5a10.jpg")
+//                }
+//                var bitmap: Bitmap = image_task.execute().get()
                 config.augmentedImageDatabase = AugmentedImageDatabase(session).also { db ->
+//                    db.addImage(TEST_VIDEO_1, bitmap)
                     db.addImage(TEST_VIDEO_1, loadAugmentedImageBitmap(TEST_IMAGE_1))
                     db.addImage(TEST_VIDEO_2, loadAugmentedImageBitmap(TEST_IMAGE_2))
                     db.addImage(TEST_VIDEO_3, loadAugmentedImageBitmap(TEST_IMAGE_3))
@@ -150,7 +159,6 @@ open class ArVideoFragment : ArFragment() {
      */
     override fun onUpdate(frameTime: FrameTime) { //AR 시스템의 상태 및 변경 사항을 캡처
         val frame = arSceneView.arFrame ?: return //프레임당 상태
-
         val updatedAugmentedImages = frame.getUpdatedTrackables(AugmentedImage::class.java) //변경된 특정 유형의 추적 파일을 반환
 
         // If current active augmented image isn't tracked anymore and video playback is started - pause video playback
@@ -246,6 +254,10 @@ open class ArVideoFragment : ArFragment() {
 
                     mediaPlayer.reset()
                     mediaPlayer.setDataSource(descriptor)
+                    // 여기 이렇게 주소를 때려박아버린다!
+//                    mediaPlayer.setDataSource("https://s3.ap-northeast-2.amazonaws.com/project-recto/b7374d2c9233472e847efc4519a9d767.mp4")
+//                    mediaPlayer.prepare()
+//                    mediaPlayer.start()
                 }.also {
                     mediaPlayer.isLooping = true
                     mediaPlayer.prepare()

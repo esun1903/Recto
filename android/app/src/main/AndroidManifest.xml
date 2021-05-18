@@ -25,6 +25,9 @@
         android:networkSecurityConfig="@xml/network_security_config">
         <!-- "AR Required" app, requires "Google Play Services for AR" (ARCore)
         to be installed, as the app does not include any non-AR features. -->
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="ocr" />
         <meta-data android:name="com.google.ar.core" android:value="required" />
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".user.LoginActivity" />
@@ -35,6 +38,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".arcore.ArMainActivity" />
+        <activity android:name=".arcore.OcrActivity" />
         <activity android:name=".MainActivity" />
     </application>
 
