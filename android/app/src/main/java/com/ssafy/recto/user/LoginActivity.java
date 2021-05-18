@@ -71,6 +71,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 String strEmail = mEtEmail.getText().toString();
                 String strPwd = mEtPwd.getText().toString();
 
+                // 이메일을 입력하지 않은 경우
+                if (strEmail.equals("")) {
+                    Toast.makeText(LoginActivity.this,"이메일을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 비밀번호를 입력하지 않은 경우
+                if (strPwd.equals("")) {
+                    Toast.makeText(LoginActivity.this,"비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 mFirebaseAuth.signInWithEmailAndPassword(strEmail, strPwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
