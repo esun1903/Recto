@@ -201,14 +201,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Log.e("닉네임 확인", checkNickname);
 
                             // Database에 구글 로그인 사용자 관련 정보 insert
-                            if (String.valueOf(mDatabaseRef.child("UserAccount").child(idToken)) == null) {
-                                Log.e("구글 로그인", "최초 사용자");
-                                mDatabaseRef.child("UserAccount").child(idToken).child("emailId").setValue(emailId);
-                                mDatabaseRef.child("UserAccount").child(idToken).child("idToken").setValue(idToken);
-                                mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(nickname);
-                            } else {
-                                Log.e("구글 로그인", "기존 사용자");
-                            }
+                            mDatabaseRef.child("UserAccount").child(idToken).child("emailId").setValue(emailId);
+                            mDatabaseRef.child("UserAccount").child(idToken).child("idToken").setValue(idToken);
+                            mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(nickname);
 
                             // 성공 토스트 메시지 출력
                             Toast.makeText(LoginActivity.this, "구글 로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
