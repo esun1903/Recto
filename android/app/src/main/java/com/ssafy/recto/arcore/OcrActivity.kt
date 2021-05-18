@@ -17,15 +17,22 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
+import com.google.gson.GsonBuilder
 import com.ssafy.recto.R
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_ocr.*
+import kotlinx.android.synthetic.main.activity_scancard_ocr.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class OcrActivity : AppCompatActivity() {
 
     private val MY_PERMISSIONS_REQUEST_CAMERA: Int = 101
     private lateinit var mCameraSource: CameraSource
     private lateinit var textRecognizer: TextRecognizer
+    private var photoCode : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,19 +96,43 @@ class OcrActivity : AppCompatActivity() {
                             if (item.value.length == 9) {
                                 stringBuilder.append(item.value)
                                 stringBuilder.append("\n")
-                                val number = stringBuilder.toString()
+                                photoCode = item.value
                                 tv.text = stringBuilder.toString()
                             }
                         }
                     }
                 }
 
+                val gson = GsonBuilder().setLenient().create();
+                val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+                val service = retrofit.create(PhotoService::class.java);
+                Log.d("photocode", photoCode)
+                //getPhoto
+                service.getPhoto(photoCode)?.enqueue(object : Callback<PhotoVO> {
+                    override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
+                        Log.i("fail.TT", t.toString())
+                    }
+
+                    override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
+                        Log.d("Response :: ", response?.body().toString())
+                        val photoPwd = response.body()?.photo_pwd
+                        if (photoPwd != null) {
+                            Log.d("photopassword", photoPwd)
+                        }
+                        else{
+                            Log.d("photopassword", "없음")
+                        }
+                    }
+                })
             }
         })
     }
 
     fun change(view: View){
         var intent = Intent(this, ArMainActivity::class.java)
+        intent.putExtra("photoCode", photoCode)
         startActivity(intent)
     }
 
