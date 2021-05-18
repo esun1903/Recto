@@ -83,6 +83,7 @@
                 android:id="@+id/from_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/eulyoo1945_semibold"
                 android:gravity="center_horizontal"
                 android:text=""
@@ -100,27 +101,27 @@
                     android:id="@+id/iv_success"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/private_card"
-                    android:src="@drawable/card_layout_sm" />
+                    android:contentDescription="@string/gift_card"
+                    android:src="@drawable/card_layout_mdi" />
 
                 <ImageView
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="20dp"
-                    android:layout_marginHorizontal="14dp"
-                    android:layout_marginVertical="8dp"
+                    android:layout_marginHorizontal="17dp"
+                    android:layout_marginVertical="13dp"
                     android:src="@drawable/card_logo_big"
                     android:contentDescription="@string/card_logo" />
 
                 <TextView
                     android:id="@+id/card_id"
-                    android:layout_width="55dp"
+                    android:layout_width="60dp"
                     android:layout_height="15dp"
                     android:text=""
-                    android:textSize="10dp"
+                    android:textSize="11dp"
                     android:textColor="@color/black"
                     android:layout_gravity="end"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="16dp"/>
+                    android:layout_marginHorizontal="17dp"
+                    android:layout_marginVertical="21dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -131,12 +132,12 @@
 
                     <ImageView
                         android:id="@+id/card_image_detail"
-                        android:layout_width="152dp"
-                        android:layout_height="203dp"
+                        android:layout_width="180dp"
+                        android:layout_height="250dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="7dp"
+                        android:layout_marginBottom="10dp"
                         android:contentDescription="@string/photo_card"
-                        android:src="@drawable/card_image_sm"
+                        android:src="@drawable/card_image_mdi"
                         android:scaleType="centerCrop"/>
 
                     <TextView
@@ -145,6 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/black"
+                        android:textSize="16dp"
                         android:fontFamily="@font/kyobo_handwriting"
                         android:layout_marginBottom="15dp" />
 
@@ -156,7 +158,7 @@
                 android:id="@+id/delete_button"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:layout_margin="5dp"
+                android:layout_margin="15dp"
                 android:layout_gravity="center"
                 android:text="@string/delete"
                 android:textColor="@color/white"

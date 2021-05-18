@@ -47,4 +47,6 @@
     <string name="server_client_id1">148360455436-191no0dmnda6brjnrcas0mj4mgq05a5d.apps.googleusercontent.com</string>
     <string name="server_client_id2">148360455436-u5pcjjbpq2u1pbgcna11eu3880bgf182.apps.googleusercontent.com</string>
     <string name="server_client_id3">148360455436-bs0iml8g15f4brkml6l9qi2m10pb33tm.apps.googleusercontent.com</string>
+    <string name="mine_card">mine_card</string>
+    <string name="gift_card">gift_card</string>
 </resources>
