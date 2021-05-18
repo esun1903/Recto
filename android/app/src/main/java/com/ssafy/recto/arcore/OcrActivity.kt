@@ -1,14 +1,17 @@
 package com.ssafy.recto.arcore
 
 import android.Manifest
+import android.app.AlertDialog
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
-import android.widget.TextView
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -26,6 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.android.synthetic.main.popup_scancard_pwd.*
 
 class OcrActivity : AppCompatActivity() {
 
@@ -128,12 +132,38 @@ class OcrActivity : AppCompatActivity() {
                 })
             }
         })
+
+        btn.setOnClickListener {
+            showPopup()
+        }
     }
 
     fun change(view: View){
         var intent = Intent(this, ArMainActivity::class.java)
         intent.putExtra("photoCode", photoCode)
         startActivity(intent)
+    }
+
+    private fun showPopup() {
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val view = inflater.inflate(R.layout.popup_scancard_pwd, null)
+
+        val alertDialog = AlertDialog.Builder(this@OcrActivity)
+                .create()
+
+        alertDialog.setView(view)
+        alertDialog.show()
+
+        val btn_cancel = view.findViewById<Button>(R.id.btn_cancel)
+        btn_cancel.setOnClickListener {
+            alertDialog.dismiss()
+        }
+
+        val btn_confirm = view.findViewById<Button>(R.id.btn_confirm)
+        btn_confirm.setOnClickListener {
+            var intent = Intent(this, ArMainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun String.isNumber() : Boolean {

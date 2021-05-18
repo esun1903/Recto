@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/eulyoo1945_regular"
+        android:labelFor="@+id/et_password"
+        android:text="비밀번호 4자리를 입력해주세요"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/eulyoo1945_semibold"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:importantForAutofill="no"
+        android:inputType="numberPassword"
+        android:textSize="15sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="20dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eulyoo1945_semibold"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/brown"
+            android:radius="20dp"
+            app:cornerRadius="10dp"
+            android:layout_marginRight="20dp" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eulyoo1945_semibold"
+            android:text="Confirm"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/brown"
+            android:radius="20dp"
+            app:cornerRadius="10dp"
+            android:layout_marginLeft="20dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
