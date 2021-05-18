@@ -88,17 +88,17 @@
 
                 <ImageView
                     android:id="@+id/iv_success"
-                    android:layout_width="183dp"
-                    android:layout_height="288dp"
-                    android:contentDescription="@string/private_card"
-                    android:src="@drawable/card_layout" />
-
-                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/private_card"
+                    android:src="@drawable/card_layout_sm" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="20dp"
                     android:layout_marginHorizontal="14dp"
-                    android:layout_marginVertical="13dp"
-                    android:src="@drawable/card_logo"
+                    android:layout_marginVertical="8dp"
+                    android:src="@drawable/card_logo_big"
                     android:contentDescription="@string/card_logo" />
 
                 <TextView
@@ -110,7 +110,7 @@
                     android:textColor="@color/black"
                     android:layout_gravity="end"
                     android:layout_marginHorizontal="12dp"
-                    android:layout_marginVertical="18dp"/>
+                    android:layout_marginVertical="16dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -124,9 +124,9 @@
                         android:layout_width="152dp"
                         android:layout_height="203dp"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
+                        android:layout_marginBottom="7dp"
                         android:contentDescription="@string/photo_card"
-                        android:src="@drawable/card_image"
+                        android:src="@drawable/card_image_sm"
                         android:scaleType="centerCrop"/>
 
                     <TextView

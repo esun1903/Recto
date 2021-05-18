@@ -260,7 +260,7 @@ public class ProfileFragmentMineDetail2 extends Fragment {
                 Glide.with(getContext()).load(photo_url).into(cardImageView);
 
                 // 비밀번호 있으면 잠긴 좌물쇠로 이미지 교체
-                if (pwd.equals("")) {
+                if ("".equals(pwd)) {
                     lock.setImageResource(R.drawable.lock_open);
                 } else{
                     lock.setImageResource(R.drawable.lock);
