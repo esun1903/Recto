@@ -81,9 +81,10 @@ open class ArVideoFragment : ArFragment() {
 
                 override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
                         Log.d("Response :: ", response?.body().toString())
-                    var user_uid = response.body()?.user_uid
+                    var user_uid = response.body()!!.user_uid
+                    var photo_seq = response.body()!!.photo_seq
                     videoUrl = response.body()!!.video_url
-                    if (!user_uid.equals(userUid)) { //포토카드 제작자와 로그인된 사용자가 다르면
+                    if (!user_uid.equals(userUid) && photo_seq > 30) { //포토카드 제작자와 로그인된 사용자가 다르고 photo_seq가 31이상(public 아닐 경우)
                         var gift_from = user_uid
                         var photo_seq = response.body()?.photo_seq
                         var gift_to = userUid
@@ -102,7 +103,7 @@ open class ArVideoFragment : ArFragment() {
                         })
                     }
                     else{
-                        Log.d("포토카드 제작자와", "로그인된 사용자가 같음")
+                        Log.d("포토카드 제작자와", "로그인된 사용자가 같거나 public 카드입니다")
                     }
                 }
             })
