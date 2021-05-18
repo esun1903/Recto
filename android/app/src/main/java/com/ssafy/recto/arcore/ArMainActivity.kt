@@ -28,7 +28,7 @@ class ArMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_ar)
+        setContentView(R.layout.activity_scancard_ar)
 
         if (openGlVersion.toDouble() >= MIN_OPEN_GL_VERSION) {
             supportFragmentManager.inTransaction { replace(R.id.fragmentContainer, ArVideoFragment()) }
