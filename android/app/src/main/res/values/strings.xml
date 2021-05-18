@@ -49,4 +49,7 @@
     <string name="server_client_id3">148360455436-bs0iml8g15f4brkml6l9qi2m10pb33tm.apps.googleusercontent.com</string>
     <string name="mine_card">mine_card</string>
     <string name="gift_card">gift_card</string>
+    <string name="retry">retry</string>
+    <string name="next">next</string>
+    <string name="numberConfirm">가 맞습니까?</string>
 </resources>

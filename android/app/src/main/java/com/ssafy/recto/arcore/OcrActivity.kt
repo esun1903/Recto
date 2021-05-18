@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -30,34 +31,34 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlinx.android.synthetic.main.popup_scancard_pwd.*
+import java.lang.Thread.sleep
 
 class OcrActivity : AppCompatActivity() {
 
     private val MY_PERMISSIONS_REQUEST_CAMERA: Int = 101
     private lateinit var mCameraSource: CameraSource
     private lateinit var textRecognizer: TextRecognizer
-    private var photoCode : String = ""
+    private var photoCode: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scancard_ocr)
-
         requestForPermission()
 
         textRecognizer = TextRecognizer.Builder(this).build()
         if (!textRecognizer.isOperational) {
             Toast.makeText(this, "Dependencies are not loaded yet...please try after few moment!!", Toast.LENGTH_SHORT)
-                .show()
+                    .show()
             Log.e("MainActivity", "Dependencies are downloading....try after few moment")
             return
         }
 
         mCameraSource = CameraSource.Builder(applicationContext, textRecognizer)
-            .setFacing(CameraSource.CAMERA_FACING_BACK)
-            .setRequestedPreviewSize(1280, 1024)
-            .setAutoFocusEnabled(true)
-            .setRequestedFps(2.0f)
-            .build()
+                .setFacing(CameraSource.CAMERA_FACING_BACK)
+                .setRequestedPreviewSize(1280, 1024)
+                .setAutoFocusEnabled(true)
+                .setRequestedFps(2.0f)
+                .build()
 
         surface_camera_preview.holder.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceDestroyed(holder: SurfaceHolder) {
@@ -124,8 +125,7 @@ class OcrActivity : AppCompatActivity() {
                         val photoPwd = response.body()?.photo_pwd
                         if (photoPwd != null) {
                             Log.d("photopassword", photoPwd)
-                        }
-                        else{
+                        } else {
                             Log.d("photopassword", "없음")
                         }
                     }
@@ -133,12 +133,12 @@ class OcrActivity : AppCompatActivity() {
             }
         })
 
-        btn.setOnClickListener {
+        next_button.setOnClickListener {
             showPopup()
         }
     }
 
-    fun change(view: View){
+    fun change(view: View) {
         var intent = Intent(this, ArMainActivity::class.java)
         intent.putExtra("photoCode", photoCode)
         startActivity(intent)
@@ -165,14 +165,18 @@ class OcrActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    fun retry(view: View) {
+        tv.setText("~ 인식 중 ~")
+        sleep(3000)
+    }
 
-    fun String.isNumber() : Boolean {
+    fun String.isNumber(): Boolean {
 
-        var i =0
+        var i = 0
         while (i < this.length) {
-            if (!('0'<= this[i] && this[i] <= '9'))
+            if (!('0' <= this[i] && this[i] <= '9'))
                 return false
-            i+=1
+            i += 1
         }
 
         return true
@@ -184,7 +188,7 @@ class OcrActivity : AppCompatActivity() {
                         this@OcrActivity,
                         Manifest.permission.CAMERA
                 )
-            != PackageManager.PERMISSION_GRANTED
+                != PackageManager.PERMISSION_GRANTED
         ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                             this@OcrActivity,
@@ -214,5 +218,6 @@ class OcrActivity : AppCompatActivity() {
     fun toast(text: String) {
         Toast.makeText(this@OcrActivity, text, Toast.LENGTH_SHORT).show()
     }
+
 
 }
