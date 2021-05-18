@@ -23,8 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.loader.content.CursorLoader;
 
 import com.bumptech.glide.Glide;
@@ -66,9 +64,6 @@ public class CreateFragment_6_Success_phrases extends Fragment {
     private String cardDate;
     private String cardDateNum;
     private String cardPassword;
-
-    private FragmentManager fm;
-    private FragmentTransaction ft;
 
     @Override
     public void onAttach(Context context) {
@@ -137,14 +132,9 @@ public class CreateFragment_6_Success_phrases extends Fragment {
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fm = getActivity().getSupportFragmentManager();
-                ft = fm.beginTransaction();
                 try {
                     requestPost();
                     Toast.makeText(getContext(), "포토카드 생성에 성공하셨습니다:>", Toast.LENGTH_SHORT).show();
-                    for(int i = 1; i < fm.getBackStackEntryCount(); ++i) {
-                        fm.popBackStack();
-                    }
                     mainActivity.setFragment("home");
                 } catch (ParseException e) {
                     e.printStackTrace();
