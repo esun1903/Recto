@@ -31,7 +31,7 @@ class ArMainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main_ar)
 
         if (openGlVersion.toDouble() >= MIN_OPEN_GL_VERSION) {
-            supportFragmentManager.inTransaction { replace(R.id.fragmentContainer, ArVideoFragment()) }
+            supportFragmentManager.inTransaction { replace(R.id.fragmentContainer, ArVideoFragment())}
         } else {
             AlertDialog.Builder(this)
                     .setTitle("Device is not supported")
