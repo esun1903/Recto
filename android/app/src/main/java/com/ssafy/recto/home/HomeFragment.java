@@ -1,10 +1,5 @@
 package com.ssafy.recto.home;
 
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,14 +8,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,13 +27,10 @@ import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.CardData;
 import com.ssafy.recto.api.HttpClient;
-import com.ssafy.recto.mypage.ProfileFragmentMineAdapter;
 import com.ssafy.recto.mypage.ProfileFragmentMineDetail;
 import com.ssafy.recto.mypage.ProfileFragmentMineDetail2;
 import com.ssafy.recto.publiccard.PublicFragmentCardDetail;
 import com.ssafy.recto.publiccard.PublicFragmentCardDetail2;
-import com.ssafy.recto.publiccard.PublicFragmentMyAdapter;
-import com.ssafy.recto.user.UserAccount;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -150,7 +145,6 @@ public class HomeFragment extends Fragment {
         MyAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-//                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
                 // 슬롯 클릭 시 카드 제작 메뉴로 이동
                 if (size <= pos) {
                     mainActivity.setFragment("create_selectopen");
@@ -229,7 +223,6 @@ public class HomeFragment extends Fragment {
         MyAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-//                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
 
                 if (design_num[pos] == 1) {
                     // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
@@ -275,7 +268,6 @@ public class HomeFragment extends Fragment {
                     pwd = response.body().get(i).getPhoto_pwd();
 
                     photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
-//                    Log.e("photo_seq", String.valueOf(response.body().get(i).getPhoto_seq()));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
                 }

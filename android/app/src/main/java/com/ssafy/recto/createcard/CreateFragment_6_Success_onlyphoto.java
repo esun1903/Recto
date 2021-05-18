@@ -90,6 +90,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
 
         cardPublic = myApp.getCardPublic();
         cardDesign = myApp.getCardDesign();
+        cardPhoto = myApp.getCardPhoto();
         cardVideo = myApp.getCardVideo();
         cardPhrases = myApp.getCardPhrases();
         cardDate = myApp.getCardDate();
@@ -106,8 +107,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         try {
             String imgpath = getActivity().getCacheDir() + "/photo";   // 내부 저장소에 저장되어 있는 이미지 경로
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
-//            iv_photo.setImageBitmap(bm);
-            Glide.with(getContext()).load(imgpath).into(iv_photo);
+            Glide.with(getContext()).load(Uri.parse(cardPhoto)).into(iv_photo);
         } catch (Exception e) {
             Toast.makeText(getContext(), "사진 로드 실패", Toast.LENGTH_SHORT).show();
         }
@@ -155,7 +155,6 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
         RequestBody videoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file2);
         MultipartBody.Part videoPart = MultipartBody.Part.createFormData("video", file2.getName(), videoBody);
 
-        cardPhoto = myApp.getCardPhoto();
         Uri imageUri = Uri.parse(cardPhoto);
         String str = getRealPathFromUri(imageUri);
         File file = new File(str);
