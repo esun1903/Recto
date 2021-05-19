@@ -46,10 +46,10 @@ public class GiftController {
         return new ResponseEntity<Gift>( giftService.getGift(gift_seq), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "선물 id로 검색", notes = "선물 id로 검색", response = Gift.class)
+    @ApiOperation(value = "선물 id로 검색", notes = "선물 id로 검색", response = String.class)
     @GetMapping("/{photo_id}")
     public ResponseEntity<String> checkGift(
-            @RequestParam(value= "photo_id") String photo_id, @RequestParam(value= "user_uid") String user_uid) throws Exception {
+            @PathVariable(value= "photo_id") String photo_id, @RequestParam(value= "user_uid") String user_uid) throws Exception {
         logger.info("checkGift - 호출");
         if (giftService.checkGift(photo_id, user_uid)){
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class GiftController {
         return new ResponseEntity<>(FAIL, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "선물 저장", notes = "선물 정보를 저장한다.", response = Gift.class)
+    @ApiOperation(value = "선물 저장", notes = "선물 정보를 저장한다.", response = String.class)
     @PostMapping
     public ResponseEntity<String> saveGift(@RequestBody @ApiParam(value = "선물 정보", required = true) Gift gift)
             throws Exception {
@@ -69,7 +69,7 @@ public class GiftController {
         return new ResponseEntity<>(FAIL, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "선물 삭제", notes = "선물 정보를 삭제한다.", response = Gift.class)
+    @ApiOperation(value = "선물 삭제", notes = "선물 정보를 삭제한다.", response = String.class)
     @DeleteMapping
     public ResponseEntity<String> deleteGift(@RequestParam("gift_seq") int gift_seq) throws Exception {
         logger.info("deleteGift - 호출");
