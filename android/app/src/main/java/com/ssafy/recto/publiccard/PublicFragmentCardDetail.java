@@ -86,7 +86,6 @@ public class PublicFragmentCardDetail extends Fragment {
         if (bundle != null) {
             seq = bundle.getInt("seq");
         }
-        Log.d("seq 값을 가져올까", String.valueOf(seq));
 
         try {
             requestGet();
@@ -176,7 +175,6 @@ public class PublicFragmentCardDetail extends Fragment {
 
                 // 이미지 넣어주기
                 photo_url = response.body().getPhoto_url();
-                Log.d("photo url", photo_url);
 
                 // 아이디 넣어주기
                 card_id.setText(id);

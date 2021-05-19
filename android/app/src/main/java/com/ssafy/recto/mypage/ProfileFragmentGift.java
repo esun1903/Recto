@@ -78,7 +78,6 @@ public class ProfileFragmentGift extends Fragment {
 
         // user_uid 받아오기
         userId = sharedPreferences.getString("userUid", "");
-        Log.e("유저 아이디 확인", userId);
 
         try {
             requestGet();
@@ -99,8 +98,7 @@ public class ProfileFragmentGift extends Fragment {
             @Override
             public void onItemClick(View v, int pos)
             {
-                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
-
+                // 확장형1 문구형2
                 if (design_num[pos] == 1) {
                     // 상세 페이지로 gift_seq 값 (sep[pos]) 보내주기
                     Bundle bundle = new Bundle(); // 데이터를 담을 번들
@@ -152,7 +150,6 @@ public class ProfileFragmentGift extends Fragment {
                     design = response.body().get(i).getDesign();
 
                     photoGifts.add(new GiftData(from, photo, to, photo_id, photo_url, video_url, phrase, photo_pwd, design));
-                    Log.e("photo_seq", String.valueOf(response.body().get(i).getGift_seq()));
                     seq[i] = response.body().get(i).getGift_seq();
                     design_num[i] = design;
                 }

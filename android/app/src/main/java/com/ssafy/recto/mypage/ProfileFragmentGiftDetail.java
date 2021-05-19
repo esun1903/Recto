@@ -134,7 +134,6 @@ public class ProfileFragmentGiftDetail extends Fragment {
                             call.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    Log.e("success", "yeeeeee :>" + response);
                                     Toast.makeText(getContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
                                     mainActivity.setFragment("profile");
                                 }
@@ -193,7 +192,6 @@ public class ProfileFragmentGiftDetail extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String from_nickname = snapshot.getValue(String.class);
-                        Log.e("보낸 사람 닉네임 확인", from_nickname);
 
                         // 보낸 사람 아이디 넣어주기
                         from_id.setText("from." + from_nickname);

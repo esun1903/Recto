@@ -92,7 +92,6 @@ public class ProfileFragmentMineDetail extends Fragment {
         if (bundle != null) {
             seq = bundle.getInt("seq");
         }
-        Log.d("seq 값을 가져올까", String.valueOf(seq));
 
         try {
             requestGet();
@@ -173,7 +172,6 @@ public class ProfileFragmentMineDetail extends Fragment {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
-//                ad.setIcon(R.drawable.question);
                 ad.setTitle("Delete card");
                 ad.setMessage("카드를 삭제하시겠습니까?");
 
@@ -187,7 +185,6 @@ public class ProfileFragmentMineDetail extends Fragment {
                             call.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    Log.e("success", "yeeeeee :>" + response);
                                     Toast.makeText(getContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
                                     mainActivity.setFragment("profile");
                                 }

@@ -76,7 +76,6 @@ public class PublicFragmentMyAdapter extends RecyclerView.Adapter<PublicFragment
                     }
                 }
             });
-            Log.d("어댑터", photoCards.toString());
         }
     }
 }
