@@ -38,12 +38,23 @@ public class GiftController {
         return giftService.getGiftList(gift_to);
     }
 
-    @ApiOperation(value = "선물 seq로 검색", notes = "선물 seq로 검색", response = Photo.class)
+    @ApiOperation(value = "선물 seq로 검색", notes = "선물 seq로 검색", response = Gift.class)
     @GetMapping
     public ResponseEntity<Gift> getGift(
             @RequestParam(value= "gift_seq") int gift_seq) throws Exception {
         logger.info("getGift - 호출");
         return new ResponseEntity<Gift>( giftService.getGift(gift_seq), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "선물 id로 검색", notes = "선물 id로 검색", response = Gift.class)
+    @GetMapping("/{photo_id}")
+    public ResponseEntity<String> checkGift(
+            @RequestParam(value= "photo_id") String photo_id) throws Exception {
+        logger.info("checkGift - 호출");
+        if (giftService.checkGift(photo_id)) {
+            return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(FAIL, HttpStatus.OK);
     }
 
     @ApiOperation(value = "선물 저장", notes = "선물 정보를 저장한다.", response = Gift.class)
@@ -58,7 +69,7 @@ public class GiftController {
         return new ResponseEntity<>(FAIL, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "선물 삭제", notes = "선물 정보를 삭제한다.", response = Photo.class)
+    @ApiOperation(value = "선물 삭제", notes = "선물 정보를 삭제한다.", response = Gift.class)
     @DeleteMapping
     public ResponseEntity<String> deleteGift(@RequestParam("gift_seq") int gift_seq) throws Exception {
         logger.info("deleteGift - 호출");
