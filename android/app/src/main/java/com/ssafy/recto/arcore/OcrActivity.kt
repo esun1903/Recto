@@ -130,12 +130,13 @@ class OcrActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
                     Log.d("Response :: ", response?.body().toString())
                     val photoPwd = response.body()?.photo_pwd
-                    if (photoPwd != null) {
-                        Log.d("photopassword", photoPwd) // 비밀번호가 있다면?
-                        showPopup(photoPwd.toString())
-                    } else {
+                    if (photoPwd == null || "".equals(photoPwd) || "null".equals(photoPwd)) {
                         Log.d("photopassword", "없음") //비밀번호가 없으면?
                         change()
+                      } else {
+                        Log.d("photopassword", photoPwd.toString()) // 비밀번호가 있다면?
+                        showPopup(photoPwd.toString())
+
                     }
                 }
             })
@@ -143,6 +144,7 @@ class OcrActivity : AppCompatActivity() {
     }
 
     fun change() {
+        mCameraSource.stop()
         var intent = Intent(this, ArMainActivity::class.java)
         intent.putExtra("photoCode", photoCode)
         startActivity(intent)
