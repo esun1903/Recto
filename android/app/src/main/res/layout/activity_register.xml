@@ -72,16 +72,27 @@
         app:layout_constraintStart_toStartOf="@+id/et_confirmpwd"
         app:layout_constraintTop_toBottomOf="@+id/et_confirmpwd" />
 
+    <CheckBox
+        android:id="@+id/chk_privacy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="개인정보처리방침에 동의합니다. (필수)"
+        android:fontFamily="@font/eulyoo1945_semibold"
+        app:layout_constraintEnd_toEndOf="@+id/et_nickname"
+        app:layout_constraintStart_toStartOf="@+id/et_nickname"
+        app:layout_constraintTop_toBottomOf="@+id/et_nickname" />
+
     <Button
         android:id="@+id/btn_register"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Register"
-        android:fontFamily="@font/eulyoo1945_semibold"
-        android:textColor="@color/white"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@color/brown"
-        app:layout_constraintEnd_toEndOf="@+id/et_nickname"
-        app:layout_constraintStart_toStartOf="@+id/et_nickname"
-        app:layout_constraintTop_toBottomOf="@+id/et_nickname" />
+        android:fontFamily="@font/eulyoo1945_semibold"
+        android:text="Register"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/chk_privacy"
+        app:layout_constraintStart_toStartOf="@+id/chk_privacy"
+        app:layout_constraintTop_toBottomOf="@+id/chk_privacy" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth;        // Firebase 인증 처리
     private DatabaseReference mDatabaseRef;   // 실시간 데이터베이스
     private EditText mEtEmail, mEtPwd, mEtConfirmPwd, mEtNickname;     // 회원가입 입력 필드
+    private CheckBox chk_privacy;            // 개인정보처리방침 동의 버튼
     private Button mBtnRegister;            // 회원가입 버튼
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -72,12 +76,36 @@ public class RegisterActivity extends AppCompatActivity {
         mEtPwd = findViewById(R.id.et_pwd);
         mEtConfirmPwd = findViewById(R.id.et_confirmpwd);
         mEtNickname = findViewById(R.id.et_nickname);
+        chk_privacy = findViewById(R.id.chk_privacy);
         mBtnRegister = findViewById(R.id.btn_register);
 
         // Shared Preferences 초기화
         sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
         //sharedPreferences를 제어할 editor를 선언
         editor = sharedPreferences.edit();
+
+        chk_privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chk_privacy.isChecked()) {
+                    Log.e("동의", "했다");
+                    // 다이얼로그
+                    AlertDialog.Builder ad = new AlertDialog.Builder(RegisterActivity.this);
+                    ad.setIcon(R.drawable.recto_logo);
+                    ad.setTitle("개인정보처리방침");
+                    ad.setMessage(getString(R.string.privacy_text));
+
+                    // 닫기 버튼
+                    ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    ad.show();
+                }
+            }
+        });
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +157,12 @@ public class RegisterActivity extends AppCompatActivity {
                 // 닉네임을 입력하지 않은 경우
                 if (strNickmame.equals("")) {
                     Toast.makeText(RegisterActivity.this,"닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 개인정보처리방침에 동의하지 않은 경우
+                if (!chk_privacy.isChecked()) {
+                    Toast.makeText(RegisterActivity.this,"개인정보처리방침에 동의해주세요.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
