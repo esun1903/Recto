@@ -92,15 +92,15 @@ open class ArVideoFragment : ArFragment() {
                         var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
 
                         //saveGift
-                        service.saveGift(gift)?.enqueue(object : Callback<String> {
-                            override fun onFailure(call: Call<String>?, t: Throwable?) {
-                                Log.i("fail.TT", t.toString())
-                            }
-
-                            override fun onResponse(call: Call<String>, response: Response<String>) {
-                                Log.d("Response :: ", response?.body().toString())
-                            }
-                        })
+//                        service.saveGift(gift)?.enqueue(object : Callback<String> {
+//                            override fun onFailure(call: Call<String>?, t: Throwable?) {
+//                                Log.i("fail.TT", t.toString())
+//                            }
+//
+//                            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                                Log.d("Response :: ", response?.body().toString())
+//                            }
+//                        })
                     }
                     else{
                         Log.d("포토카드 제작자와", "로그인된 사용자가 같거나 public 카드입니다")
@@ -300,11 +300,11 @@ open class ArVideoFragment : ArFragment() {
                     videoRenderable.material.setBoolean(MATERIAL_VIDEO_CROP, VIDEO_CROP_ENABLED)
 
                     mediaPlayer.reset()
-//                    mediaPlayer.setDataSource(descriptor)
+                    mediaPlayer.setDataSource(videoUrl)
                     // 여기 이렇게 주소를 때려박아버린다!
-                    mediaPlayer.setDataSource("https://project-recto.s3.ap-northeast-2.amazonaws.com/210401142.mp4")
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
+//                    mediaPlayer.setDataSource("https://project-recto.s3.ap-northeast-2.amazonaws.com/210401142.mp4")
+//                    mediaPlayer.prepare()
+//                    mediaPlayer.start()
                 }.also {
                     mediaPlayer.isLooping = true
                     mediaPlayer.prepare()

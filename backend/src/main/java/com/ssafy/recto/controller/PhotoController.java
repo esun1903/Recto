@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -79,6 +80,18 @@ public class PhotoController {
                                               @RequestParam(value = "phrase", required = false) String phrase,
                                               @RequestParam(value = "photo_date", required = false) String photo_date,
                                               @RequestParam("photo_pwd") String photo_pwd) throws Exception {
+
+
+
+
+        MultipartFile filetest = video;
+//        AudioAttributes audio =  new  AudioAttributes ();
+//        audio.setCodec ( " aac " );
+//        // 여기서 64kbit / s는 64000입니다.
+//        audio.setBitRate ( 64000 );
+//        audio.setChannels ( 2 );
+//        audio.setSamplingRate ( 44100 );
+
         String videoUrl = "";
         String photoUrl = "";
         String year = photo_date.substring(1, 5);
