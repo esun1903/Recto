@@ -78,7 +78,6 @@ public class ProfileFragment extends Fragment {
 
         // Greeting 문구
         String nickname = sharedPreferences.getString("nickname", "RECTO 유저");
-        Log.e("프로필 닉네임 확인", nickname);
         tv_hello = view.findViewById(R.id.tv_hello);
         tv_hello.setText(nickname + "님, 반갑습니다.");
 
