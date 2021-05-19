@@ -71,7 +71,7 @@ open class ArVideoFragment : ArFragment() {
 
         val bundle = arguments
         val photo_code = bundle?.getString("photoCode")
-            //getPhoto
+        //getPhoto
         if (photo_code != null) {
             service.getPhoto(photo_code)?.enqueue(object : Callback<PhotoVO> {
                 override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
@@ -97,18 +97,24 @@ open class ArVideoFragment : ArFragment() {
                                 }
 
                                 override fun onResponse(call: Call<String>, response: Response<String>) {
-                                    Log.d("Response :: ", response?.body().toString())
+                                    Log.d("Response 중복 체크 :: ", response?.body().toString())
+                                    var result = response?.body().toString()
                                     var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
-                                    //saveGift
-                                    service.saveGift(gift)?.enqueue(object : Callback<String> {
-                                        override fun onFailure(call: Call<String>?, t: Throwable?) {
-                                            Log.i("fail.TT", t.toString())
-                                        }
+                                    if(result.equals("success")) {
+                                        //saveGift
+                                        service.saveGift(gift)?.enqueue(object : Callback<String> {
+                                            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                                                Log.i("fail.TT", t.toString())
+                                            }
 
-                                        override fun onResponse(call: Call<String>, response: Response<String>) {
-                                            Log.d("Response :: ", response?.body().toString())
-                                        }
-                                    })
+                                            override fun onResponse(call: Call<String>, response: Response<String>) {
+                                                Log.d("Response :: 선물 성공", response?.body().toString())
+                                            }
+                                        })
+                                    }
+                                    else{
+                                        Log.d("이미 선물받은", "카드입니다")
+                                    }
                                 }
                             })
                         }
