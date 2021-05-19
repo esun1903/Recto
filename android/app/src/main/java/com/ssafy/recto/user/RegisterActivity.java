@@ -88,14 +88,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (chk_privacy.isChecked()) {
-                    Log.e("동의", "했다");
-                    // 다이얼로그
+                    // 개인정보처리방침 다이얼로그
                     AlertDialog.Builder ad = new AlertDialog.Builder(RegisterActivity.this);
                     ad.setIcon(R.drawable.recto_logo);
                     ad.setTitle("개인정보처리방침");
                     ad.setMessage(getString(R.string.privacy_text));
 
-                    // 닫기 버튼
+                    // 다이얼로그 확인 버튼
                     ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
