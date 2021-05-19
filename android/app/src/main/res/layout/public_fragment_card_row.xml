@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cardCornerRadius="10dp"
-        android:foreground="?android:attr/selectableItemBackground"
         android:focusable="true"
         android:clickable="true">
 

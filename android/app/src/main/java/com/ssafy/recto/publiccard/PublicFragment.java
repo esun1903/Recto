@@ -88,9 +88,7 @@ public class PublicFragment extends Fragment{
             @Override
             public void onItemClick(View v, int pos)
             {
-//                Log.d("포토 시퀀스 값", String.valueOf(seq[pos]));
-                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
-
+                // 확장형1 문구형2
                 if (design_num[pos] == 1) {
                     // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
                     Bundle bundle = new Bundle(); // 데이터를 담을 번들
@@ -112,8 +110,6 @@ public class PublicFragment extends Fragment{
                     transaction.addToBackStack(null);
                     transaction.commit();
                 }
-                // 밑에 코드 지우고 위에서 해줘야 seq값이 전달 됨
-//                mainActivity.setFragment("public_card_detail");
             }
         });
 
@@ -142,7 +138,6 @@ public class PublicFragment extends Fragment{
                     pwd = response.body().get(i).getPhoto_pwd();
 
                     photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
-                    Log.e("photo_seq", String.valueOf(response.body().get(i).getPhoto_seq()));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
                 }

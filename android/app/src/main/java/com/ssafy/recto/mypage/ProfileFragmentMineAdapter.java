@@ -20,7 +20,6 @@ import java.util.List;
 public class ProfileFragmentMineAdapter extends RecyclerView.Adapter<ProfileFragmentMineAdapter.MyViewHolder> {
 
     List<CardData> photoCards = new ArrayList<>();
-//    int[] images;
     Context context;
     private static OnItemClickListener iListener = null;
 
@@ -74,7 +73,6 @@ public class ProfileFragmentMineAdapter extends RecyclerView.Adapter<ProfileFrag
                     }
                 }
             });
-            Log.d("어댑터", photoCards.toString());
         }
     }
 }

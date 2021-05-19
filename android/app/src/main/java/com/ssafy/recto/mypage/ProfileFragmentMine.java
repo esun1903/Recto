@@ -79,7 +79,6 @@ public class ProfileFragmentMine extends Fragment {
 
         // user_uid 받아오기
         userId = sharedPreferences.getString("userUid", "");
-        Log.e("유저 아이디 확인", userId);
 
         try {
             requestGet();
@@ -100,8 +99,7 @@ public class ProfileFragmentMine extends Fragment {
             @Override
             public void onItemClick(View v, int pos)
             {
-                Log.d("확장형1 문구형2", String.valueOf(design_num[pos]));
-
+                // 확장형1 문구형2
                 if (design_num[pos] == 1) {
                     // 상세 페이지로 photo_seq 값 (sep[pos]) 보내주기
                     Bundle bundle = new Bundle(); // 데이터를 담을 번들
@@ -123,9 +121,6 @@ public class ProfileFragmentMine extends Fragment {
                     transaction.addToBackStack(null);
                     transaction.commit();
                 }
-
-                // 밑에 코드 지우고 위에서 해줘야 seq값이 전달 됨
-//                mainActivity.setFragment("profile_mine_detail");
             }
         });
 
@@ -154,7 +149,6 @@ public class ProfileFragmentMine extends Fragment {
                     pwd = response.body().get(i).getPhoto_pwd();
 
                     photoCards.add(new CardData(uid, design, video, photo, phrase, date, pwd));
-//                    Log.d("api 잘 불러오나", String.valueOf(response.body().get(i)));
                     seq[i] = response.body().get(i).getPhoto_seq();
                     design_num[i] = design;
                 }

@@ -87,7 +87,6 @@ public class PublicFragmentCardDetail2 extends Fragment {
         if (bundle != null) {
             seq = bundle.getInt("seq");
         }
-        Log.d("seq 값을 가져올까", String.valueOf(seq));
 
         try {
             requestGet();
@@ -149,7 +148,6 @@ public class PublicFragmentCardDetail2 extends Fragment {
                     fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".jpeg");
                     captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/RECTO" + day.format(date) + ".JPEG")));
-//                    mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,Uri.parse("file://"+Environment.getExternalStorageDirectory()+"/RECTO")));
                     Toast.makeText(getContext(), "저장완료", Toast.LENGTH_SHORT).show();
                     fos.flush();
                     fos.close();
