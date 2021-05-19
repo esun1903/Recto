@@ -29,8 +29,8 @@ public class GiftService {
         return sqlSession.getMapper(GiftMapper.class).getGift(gift_seq);
     }
 
-    public boolean checkGift(String photo_id) throws Exception{
-        return sqlSession.getMapper(GiftMapper.class).checkGift(photo_id) == 0;
+    public boolean checkGift(String photo_id, String user_uid) throws Exception{
+        return sqlSession.getMapper(GiftMapper.class).checkGift(photo_id, user_uid) == 0;
     }
 
     public List<Gift> getGiftList(String gift_to) throws Exception{

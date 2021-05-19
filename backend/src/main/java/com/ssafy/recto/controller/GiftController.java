@@ -49,9 +49,9 @@ public class GiftController {
     @ApiOperation(value = "선물 id로 검색", notes = "선물 id로 검색", response = Gift.class)
     @GetMapping("/{photo_id}")
     public ResponseEntity<String> checkGift(
-            @RequestParam(value= "photo_id") String photo_id) throws Exception {
+            @RequestParam(value= "photo_id") String photo_id, @RequestParam(value= "user_uid") String user_uid) throws Exception {
         logger.info("checkGift - 호출");
-        if (giftService.checkGift(photo_id)) {
+        if (giftService.checkGift(photo_id, user_uid)){
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(FAIL, HttpStatus.OK);

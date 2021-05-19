@@ -17,8 +17,8 @@ public interface GiftMapper {
 	@Select("SELECT * FROM photo, gift WHERE photo.photo_seq = gift.photo_seq and gift_seq = #{gift_seq}")
 	public Gift getGift(@Param("gift_seq") int gift_seq);
 
-	@Select("SELECT count(*) FROM photo, gift WHERE photo.photo_seq = gift.photo_seq and photo_id = #{photo_id}")
-	public int checkGift(@Param("photo_id") String photo_id);
+	@Select("SELECT count(*) FROM photo, gift WHERE photo.photo_seq = gift.photo_seq and photo_id like #{photo_id} and gift_to like #{user_uid}")
+	public int checkGift(@Param("photo_id") String photo_id, @Param("user_uid") String user_uid);
 	
 	@Select("SELECT * FROM photo, gift WHERE photo.photo_seq = gift.photo_seq and gift_to = #{gift_to} order by gift_seq desc")
 	public List<Gift> getGiftList(@Param("gift_to") String gift_to);

@@ -11,6 +11,9 @@ interface PhotoService {
     @GET("photo/{photo_id}")
     fun getPhoto(@Path("photo_id") photo_id: String) : Call<PhotoVO>
 
+    @GET("gift/{photo_id}")
+    fun checkPhoto(@Path("photo_id") photo_id: String, @Query("user_uid") user_uid: String) : Call<String>
+
     @POST("gift")
     fun saveGift(@Body gift: GiftVO): Call<String>
 }
