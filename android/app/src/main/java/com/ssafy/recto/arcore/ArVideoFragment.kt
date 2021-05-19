@@ -300,11 +300,11 @@ open class ArVideoFragment : ArFragment() {
                     videoRenderable.material.setBoolean(MATERIAL_VIDEO_CROP, VIDEO_CROP_ENABLED)
 
                     mediaPlayer.reset()
-                    mediaPlayer.setDataSource(descriptor)
+//                    mediaPlayer.setDataSource(descriptor)
                     // 여기 이렇게 주소를 때려박아버린다!
-//                    mediaPlayer.setDataSource("https://s3.ap-northeast-2.amazonaws.com/project-recto/b7374d2c9233472e847efc4519a9d767.mp4")
-//                    mediaPlayer.prepare()
-//                    mediaPlayer.start()
+                    mediaPlayer.setDataSource("https://project-recto.s3.ap-northeast-2.amazonaws.com/210401142.mp4")
+                    mediaPlayer.prepare()
+                    mediaPlayer.start()
                 }.also {
                     mediaPlayer.isLooping = true
                     mediaPlayer.prepare()

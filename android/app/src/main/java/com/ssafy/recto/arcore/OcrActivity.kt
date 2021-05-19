@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -108,43 +108,47 @@ class OcrActivity : AppCompatActivity() {
                     }
                 }
 
-                val gson = GsonBuilder().setLenient().create();
-                val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
-                        .addConverterFactory(GsonConverterFactory.create(gson))
-                        .build();
-                val service = retrofit.create(PhotoService::class.java);
-                Log.d("photocode", photoCode)
-                //getPhoto
-                service.getPhoto(photoCode)?.enqueue(object : Callback<PhotoVO> {
-                    override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
-                        Log.i("fail.TT", t.toString())
-                    }
 
-                    override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
-                        Log.d("Response :: ", response?.body().toString())
-                        val photoPwd = response.body()?.photo_pwd
-                        if (photoPwd != null) {
-                            Log.d("photopassword", photoPwd)
-                        } else {
-                            Log.d("photopassword", "없음")
-                        }
-                    }
-                })
             }
         })
 
         next_button.setOnClickListener {
-            showPopup()
+
+            //비밀번호 유무를 체크해주기
+            val gson = GsonBuilder().setLenient().create();
+            val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            val service = retrofit.create(PhotoService::class.java);
+            Log.d("photocode", photoCode)
+            //getPhoto
+            service.getPhoto(photoCode)?.enqueue(object : Callback<PhotoVO> {
+                override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
+                    Log.i("fail.TT", t.toString())
+                }
+
+                override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
+                    Log.d("Response :: ", response?.body().toString())
+                    val photoPwd = response.body()?.photo_pwd
+                    if (photoPwd != null) {
+                        Log.d("photopassword", photoPwd) // 비밀번호가 있다면?
+                        showPopup(photoPwd.toString())
+                    } else {
+                        Log.d("photopassword", "없음") //비밀번호가 없으면?
+                        change()
+                    }
+                }
+            })
         }
     }
 
-    fun change(view: View) {
+    fun change() {
         var intent = Intent(this, ArMainActivity::class.java)
         intent.putExtra("photoCode", photoCode)
         startActivity(intent)
     }
 
-    private fun showPopup() {
+    private fun showPopup(photoPwd: String) {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.popup_scancard_pwd, null)
 
@@ -159,10 +163,19 @@ class OcrActivity : AppCompatActivity() {
             alertDialog.dismiss()
         }
 
+
         val btn_confirm = view.findViewById<Button>(R.id.btn_confirm)
         btn_confirm.setOnClickListener {
-            var intent = Intent(this, ArMainActivity::class.java)
-            startActivity(intent)
+            val password = view.findViewById<EditText>(R.id.et_password)
+
+            if(password.getText().toString().equals(photoPwd)){
+                change()
+            }
+            else {
+                toast("비밀번호가 틀렸습니다. 다시 입력해주세요.")
+                password.setText("")
+            }
+
         }
     }
     fun retry(view: View) {
