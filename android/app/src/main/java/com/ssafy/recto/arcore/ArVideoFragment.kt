@@ -82,12 +82,12 @@ open class ArVideoFragment : ArFragment() {
                     Log.d("Response :: ", response?.body().toString())
                     var user_uid = response.body()!!.user_uid
                     var photo_seq = response.body()!!.photo_seq
+                    var photo_id = response.body()!!.photo_id
                     videoUrl = response.body()!!.video_url
                     if (!user_uid.equals(userUid) && photo_seq > 30) { //포토카드 제작자와 로그인된 사용자가 다르고 photo_seq가 31이상(public 아닐 경우)
                         var gift_from = user_uid
                         var photo_seq = response.body()?.photo_seq
                         var gift_to = userUid
-                        var photo_id = response.body()!!.photo_id
                         Log.d("photoid 입니다", photo_id)
 
                         if (gift_to != null) {
@@ -99,16 +99,16 @@ open class ArVideoFragment : ArFragment() {
                                 override fun onResponse(call: Call<String>, response: Response<String>) {
                                     Log.d("Response :: ", response?.body().toString())
                                     var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
-                                                //saveGift
-                                                service.saveGift(gift)?.enqueue(object : Callback<String> {
-                                                    override fun onFailure(call: Call<String>?, t: Throwable?) {
-                                                        Log.i("fail.TT", t.toString())
-                                                    }
+                                    //saveGift
+                                    service.saveGift(gift)?.enqueue(object : Callback<String> {
+                                        override fun onFailure(call: Call<String>?, t: Throwable?) {
+                                            Log.i("fail.TT", t.toString())
+                                        }
 
-                                                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                                                        Log.d("Response :: ", response?.body().toString())
-                                                    }
-                                                })
+                                        override fun onResponse(call: Call<String>, response: Response<String>) {
+                                            Log.d("Response :: ", response?.body().toString())
+                                        }
+                                    })
                                 }
                             })
                         }
