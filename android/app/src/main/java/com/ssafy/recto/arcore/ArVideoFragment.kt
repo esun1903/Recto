@@ -71,16 +71,15 @@ open class ArVideoFragment : ArFragment() {
 
         val bundle = arguments
         val photo_code = bundle?.getString("photoCode")
-        if (photo_code != null) {
-
             //getPhoto
+        if (photo_code != null) {
             service.getPhoto(photo_code)?.enqueue(object : Callback<PhotoVO> {
                 override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
                     Log.i("fail.TT", t.toString())
                 }
 
                 override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
-                        Log.d("Response :: ", response?.body().toString())
+                    Log.d("Response :: ", response?.body().toString())
                     var user_uid = response.body()!!.user_uid
                     var photo_seq = response.body()!!.photo_seq
                     videoUrl = response.body()!!.video_url
@@ -88,21 +87,33 @@ open class ArVideoFragment : ArFragment() {
                         var gift_from = user_uid
                         var photo_seq = response.body()?.photo_seq
                         var gift_to = userUid
+                        var photo_id = response.body()!!.photo_id
+                        Log.d("photoid 입니다", photo_id)
 
-                        var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
+                        if (gift_to != null) {
+                            service.checkPhoto(photo_id, gift_to)?.enqueue(object : Callback<String>{
+                                override fun onFailure(call: Call<String>, t: Throwable) {
+                                    Log.i("fail", t.toString())
+                                }
 
-                        //saveGift
-//                        service.saveGift(gift)?.enqueue(object : Callback<String> {
-//                            override fun onFailure(call: Call<String>?, t: Throwable?) {
-//                                Log.i("fail.TT", t.toString())
-//                            }
-//
-//                            override fun onResponse(call: Call<String>, response: Response<String>) {
-//                                Log.d("Response :: ", response?.body().toString())
-//                            }
-//                        })
-                    }
-                    else{
+                                override fun onResponse(call: Call<String>, response: Response<String>) {
+                                    Log.d("Response :: ", response?.body().toString())
+                                    var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
+                                                //saveGift
+                                                service.saveGift(gift)?.enqueue(object : Callback<String> {
+                                                    override fun onFailure(call: Call<String>?, t: Throwable?) {
+                                                        Log.i("fail.TT", t.toString())
+                                                    }
+
+                                                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                                                        Log.d("Response :: ", response?.body().toString())
+                                                    }
+                                                })
+                                }
+                            })
+                        }
+
+                    } else{
                         Log.d("포토카드 제작자와", "로그인된 사용자가 같거나 public 카드입니다")
                     }
                 }
