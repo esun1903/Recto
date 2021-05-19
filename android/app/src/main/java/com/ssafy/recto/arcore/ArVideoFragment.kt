@@ -1,7 +1,6 @@
 package com.ssafy.recto.arcore
 
 import android.animation.ValueAnimator
-import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
@@ -10,9 +9,9 @@ import android.graphics.RectF
 import android.media.MediaMetadataRetriever
 import android.media.MediaMetadataRetriever.*
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +21,6 @@ import android.widget.Toast
 import androidx.core.animation.doOnStart
 import androidx.core.graphics.rotationMatrix
 import androidx.core.graphics.transform
-import com.google.android.gms.vision.CameraSource
-import com.google.android.gms.vision.text.TextRecognizer
 import com.google.ar.core.AugmentedImage
 import com.google.ar.core.AugmentedImageDatabase
 import com.google.ar.core.Config
@@ -39,6 +36,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 import java.io.IOException
 import java.net.URL
 
@@ -50,6 +48,7 @@ open class ArVideoFragment : ArFragment() {
     private lateinit var videoAnchorNode: VideoAnchorNode //이미지 및 비디오 차원, 비디오 회전 및 배율 유형
     private var activeAugmentedImage: AugmentedImage? = null //이미지를 처음 감지하여 물리적 크기를 추정하지 못해도 증강 이미지를 반환
     private var videoUrl : String = ""
+    private var photoUrl : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,10 +79,12 @@ open class ArVideoFragment : ArFragment() {
                 }
 
                 override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
-                        Log.d("Response :: ", response?.body().toString())
+                    Log.d("Response :: ", response?.body().toString())
                     var user_uid = response.body()!!.user_uid
                     var photo_seq = response.body()!!.photo_seq
                     videoUrl = response.body()!!.video_url
+                    photoUrl = response.body()!!.photo_url
+
                     if (!user_uid.equals(userUid) && photo_seq > 30) { //포토카드 제작자와 로그인된 사용자가 다르고 photo_seq가 31이상(public 아닐 경우)
                         var gift_from = user_uid
                         var photo_seq = response.body()?.photo_seq
@@ -92,17 +93,16 @@ open class ArVideoFragment : ArFragment() {
                         var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
 
                         //saveGift
-//                        service.saveGift(gift)?.enqueue(object : Callback<String> {
-//                            override fun onFailure(call: Call<String>?, t: Throwable?) {
-//                                Log.i("fail.TT", t.toString())
-//                            }
-//
-//                            override fun onResponse(call: Call<String>, response: Response<String>) {
-//                                Log.d("Response :: ", response?.body().toString())
-//                            }
-//                        })
-                    }
-                    else{
+                        service.saveGift(gift)?.enqueue(object : Callback<String> {
+                            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                                Log.i("fail.TT", t.toString())
+                            }
+
+                            override fun onResponse(call: Call<String>, response: Response<String>) {
+                                Log.d("Response :: ", response?.body().toString())
+                            }
+                        })
+                    } else {
                         Log.d("포토카드 제작자와", "로그인된 사용자가 같거나 public 카드입니다")
                     }
                 }
@@ -133,15 +133,12 @@ open class ArVideoFragment : ArFragment() {
 //                URL -> Bitmap으로 바꿔서 때려박기. 이거 작동은 하는데 `---` 이거 있어서 더 나은 코드 찾아봐야할 것 같아요 :>
 //                이거 바꾸는 건 많으니까 ~!~! 일단 동작한다는 것만 확인했3
 //                밑에 // 풀면 됩니다잉
-//                var image_task = URLtoBitmapTask().apply {
-//                    url = URL("https://s3.ap-northeast-2.amazonaws.com/project-recto/2d2d6dfa1ce94d57b92e7fce94cd5a10.jpg")
-//                }
-//                var bitmap: Bitmap = image_task.execute().get()
+                var image_task = URLtoBitmapTask().apply {
+                    url = URL(photoUrl)
+                }
+                var bitmap: Bitmap = image_task.execute().get()
                 config.augmentedImageDatabase = AugmentedImageDatabase(session).also { db ->
-//                    db.addImage(TEST_VIDEO_1, bitmap)
-                    db.addImage(TEST_VIDEO_1, loadAugmentedImageBitmap(TEST_IMAGE_1))
-                    db.addImage(TEST_VIDEO_2, loadAugmentedImageBitmap(TEST_IMAGE_2))
-                    db.addImage(TEST_VIDEO_3, loadAugmentedImageBitmap(TEST_IMAGE_3))
+                    db.addImage(videoUrl, bitmap)
                 } //안드로이드 비트맵에서 증강 이미지 데이터베이스에 알 수 없는 물리적 크기의 단일 명명된 이미지를 추가한다.
                 return true
             } catch (e: IllegalArgumentException) {
@@ -264,8 +261,11 @@ open class ArVideoFragment : ArFragment() {
 
     private fun playbackArVideo(augmentedImage: AugmentedImage) {
         Log.d(TAG, "playbackVideo = ${augmentedImage.name}")
-
-        requireContext().assets.openFd(augmentedImage.name) //해당하는 이름을 가진 동영상 가져오기
+        val file: File = File(Environment.getExternalStorageDirectory(), "read.me")
+        val uri: Uri = Uri.fromFile(file)
+        val auxFile: File = File(uri.toString())
+//        assertEquals(file.absolutePath, auxFile.absolutePath)
+        requireContext().assets.openFd(augmentedImage.name) //해당하는 이름을 가진 동영상 가져오기 (지금 여기서 assets에 없고
                 .use { descriptor ->
 
                     val metadataRetriever = MediaMetadataRetriever()
@@ -299,12 +299,15 @@ open class ArVideoFragment : ArFragment() {
                     videoRenderable.material.setFloat2(MATERIAL_VIDEO_SIZE, videoWidth, videoHeight)
                     videoRenderable.material.setBoolean(MATERIAL_VIDEO_CROP, VIDEO_CROP_ENABLED)
 
-                    mediaPlayer.reset()
-                    mediaPlayer.setDataSource(videoUrl)
+
+
                     // 여기 이렇게 주소를 때려박아버린다!
 //                    mediaPlayer.setDataSource("https://project-recto.s3.ap-northeast-2.amazonaws.com/210401142.mp4")
 //                    mediaPlayer.prepare()
 //                    mediaPlayer.start()
+                    mediaPlayer.reset()
+                    mediaPlayer.setDataSource(videoUrl)
+
                 }.also {
                     mediaPlayer.isLooping = true
                     mediaPlayer.prepare()

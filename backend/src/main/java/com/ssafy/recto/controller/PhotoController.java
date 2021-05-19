@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -84,13 +85,12 @@ public class PhotoController {
 
 
 
-        MultipartFile filetest = video;
-//        AudioAttributes audio =  new  AudioAttributes ();
-//        audio.setCodec ( " aac " );
-//        // 여기서 64kbit / s는 64000입니다.
-//        audio.setBitRate ( 64000 );
-//        audio.setChannels ( 2 );
-//        audio.setSamplingRate ( 44100 );
+//        File source = new File (video);
+//        FileOutputStream fileOutputStream = new FileOutputStream (source);
+//        byte [] bytes = video.getInputStream().readAllBytes();
+//        fileOutputStream.write (bytes);
+//        fileOutputStream.flush ();
+//        fileOutputStream.close ();
 
         String videoUrl = "";
         String photoUrl = "";
