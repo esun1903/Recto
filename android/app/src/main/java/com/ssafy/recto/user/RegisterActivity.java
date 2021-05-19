@@ -3,7 +3,9 @@ package com.ssafy.recto.user;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 
 import java.util.regex.Matcher;
@@ -29,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;   // 실시간 데이터베이스
     private EditText mEtEmail, mEtPwd, mEtConfirmPwd, mEtNickname;     // 회원가입 입력 필드
     private Button mBtnRegister;            // 회원가입 버튼
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     // 이메일 형식 체크
     public static boolean isEmail(String email){
@@ -68,6 +73,11 @@ public class RegisterActivity extends AppCompatActivity {
         mEtConfirmPwd = findViewById(R.id.et_confirmpwd);
         mEtNickname = findViewById(R.id.et_nickname);
         mBtnRegister = findViewById(R.id.btn_register);
+
+        // Shared Preferences 초기화
+        sharedPreferences = getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
+        //sharedPreferences를 제어할 editor를 선언
+        editor = sharedPreferences.edit();
 
         mBtnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,11 +152,17 @@ public class RegisterActivity extends AppCompatActivity {
                             // setValue: Database에 insert (삽입)
                             mDatabaseRef.child("UserAccount").child(firebaseUser.getUid()).setValue(account);
 
+                            // Shared Preferences에 emailID, idToken, 닉네임 저장
+                            editor.putString("emailId", firebaseUser.getEmail());
+                            editor.putString("userUid", firebaseUser.getUid());
+                            editor.putString("nickname", strNickmame);
+                            editor.apply();
+
                             // 성공 토스트 메시지 출력
                             Toast.makeText(RegisterActivity.this, "RECTO의 회원이 되신 걸 환영합니다!", Toast.LENGTH_SHORT).show();
 
-                            // 회원가입 성공 시 로그인 화면으로 이동
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            // 회원가입 성공 시 자동 로그인 - 메인 화면으로 이동
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish(); // 현재 액티비티 파괴
                         }

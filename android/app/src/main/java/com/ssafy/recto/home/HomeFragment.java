@@ -53,7 +53,6 @@ public class HomeFragment extends Fragment {
     private TextView tv_id;
     private View upline;
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     int[] seq;
     int[] design_num;
@@ -88,8 +87,6 @@ public class HomeFragment extends Fragment {
         FirebaseUser current = mFirebaseAuth.getCurrentUser();
         // Shared Preferences 초기화
         sharedPreferences = this.getActivity().getSharedPreferences("sharedPreferences", Activity.MODE_PRIVATE);
-        //sharedPreferences를 제어할 editor를 선언
-        editor = sharedPreferences.edit();
 
         // api 연결
         api = HttpClient.getRetrofit().create( ApiInterface.class );
@@ -110,7 +107,6 @@ public class HomeFragment extends Fragment {
         if (current != null) {
             // 메인 화면 문구
             String nickname = sharedPreferences.getString("nickname", "RECTO의 유저");
-//            Log.e("홈 닉네임 확인", nickname);
             tv_id = view.findViewById(R.id.tv_id);
             tv_id.setText(nickname + "님의 Moment");
 
