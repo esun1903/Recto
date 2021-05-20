@@ -31,17 +31,16 @@ class ArMainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_scancard_ar)
 
         var intent = getIntent()
-        var photoCode = intent.getStringExtra("photoCode")
+        var photoCard = intent.getSerializableExtra("photoCard")
 
         if (openGlVersion.toDouble() >= MIN_OPEN_GL_VERSION) {
             val bundle = Bundle()
-            bundle.putString("photoCode", photoCode)
+            bundle.putSerializable("photoCard", photoCard)
             val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
             val arVideoFragment = ArVideoFragment()
             arVideoFragment.arguments = bundle
             transaction.replace(R.id.fragmentContainer, arVideoFragment)
             transaction.commit()
-//            supportFragmentManager.inTransaction { replace(R.id.fragmentContainer, ArVideoFragment())}
         } else {
             AlertDialog.Builder(this)
                     .setTitle("Device is not supported")
