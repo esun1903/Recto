@@ -4,13 +4,11 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.RectF
 import android.media.ExifInterface
 import android.media.MediaMetadataRetriever
 import android.media.MediaMetadataRetriever.*
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,7 +34,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.File
 import java.io.IOException
 import java.net.URL
 
@@ -81,38 +78,33 @@ open class ArVideoFragment : ArFragment() {
             if (!user_uid.equals(userUid) && photo_seq > 30) { //포토카드 제작자와 로그인된 사용자가 다르고 photo_seq가 31이상(public 아닐 경우)
                 var gift_from = user_uid
                 var gift_to = userUid
-                if (photo_id != null) {
-                    Log.d("photoid 입니다", photo_id)
-                }
 
-                if (gift_to != null) {
-                    if (photo_id != null) {
-                        service.checkPhoto(photo_id, gift_to)?.enqueue(object : Callback<String>{
-                            override fun onFailure(call: Call<String>, t: Throwable) {
-                                Log.i("fail", t.toString())
+                if (gift_to != null && photo_id != null) {
+                    service.checkPhoto(photo_id, gift_to)?.enqueue(object : Callback<String>{
+                        override fun onFailure(call: Call<String>, t: Throwable) {
+                            Log.i("fail", t.toString())
+                        }
+
+                        override fun onResponse(call: Call<String>, response: Response<String>) {
+                            Log.d("Response 중복 체크 :: ", response?.body().toString())
+                            var result = response?.body().toString()
+                            var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
+                            if(result.equals("success")) {
+                                //saveGift
+                                service.saveGift(gift)?.enqueue(object : Callback<String> {
+                                    override fun onFailure(call: Call<String>?, t: Throwable?) {
+                                        Log.i("fail.TT", t.toString())
+                                    }
+
+                                    override fun onResponse(call: Call<String>, response: Response<String>) {
+                                        Log.d("Response :: 선물 성공", response?.body().toString())
+                                    }
+                                })
+                            } else{
+                                Log.d("이미 선물받은", "카드입니다")
                             }
-
-                            override fun onResponse(call: Call<String>, response: Response<String>) {
-                                Log.d("Response 중복 체크 :: ", response?.body().toString())
-                                var result = response?.body().toString()
-                                var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
-                                if(result.equals("success")) {
-                                    //saveGift
-                                    service.saveGift(gift)?.enqueue(object : Callback<String> {
-                                        override fun onFailure(call: Call<String>?, t: Throwable?) {
-                                            Log.i("fail.TT", t.toString())
-                                        }
-
-                                        override fun onResponse(call: Call<String>, response: Response<String>) {
-                                            Log.d("Response :: 선물 성공", response?.body().toString())
-                                        }
-                                    })
-                                } else{
-                                    Log.d("이미 선물받은", "카드입니다")
-                                }
-                            }
-                        })
-                    }
+                        }
+                    })
                 }
 
             } else{
@@ -132,9 +124,6 @@ open class ArVideoFragment : ArFragment() {
     }
 
     override fun getSessionConfiguration(session: Session): Config { //https://developers.google.com/ar/develop/java/augmented-images/guide#java_2
-
-        fun loadAugmentedImageBitmap(imageName: String): Bitmap =
-                requireContext().assets.open(imageName).use { return BitmapFactory.decodeStream(it) }
         //이미지 데이터베이스 만들기 - 저장된 이미지 데이터베이스로드
         //입력 스트림을 비트맵으로 디코딩
 
@@ -145,8 +134,10 @@ open class ArVideoFragment : ArFragment() {
                     url = URL(photoUrl)
                 }
                 var bitmap: Bitmap = image_task.execute().get()
+                var video = videoUrl.substring(videoUrl.lastIndexOf('/') + 1, videoUrl.length);
+
                 config.augmentedImageDatabase = AugmentedImageDatabase(session).also { db ->
-                    db.addImage(TEST_VIDEO_1, bitmap)
+                    db.addImage(video, bitmap)
                 } //안드로이드 비트맵에서 증강 이미지 데이터베이스에 알 수 없는 물리적 크기의 단일 명명된 이미지를 추가한다.
                 return true
             } catch (e: IllegalArgumentException) {
@@ -270,48 +261,38 @@ open class ArVideoFragment : ArFragment() {
     private fun playbackArVideo(augmentedImage: AugmentedImage) {
         Log.d(TAG, "playbackVideo = ${augmentedImage.name}")
 
-        requireContext().assets.openFd(augmentedImage.name) //해당하는 이름을 가진 동영상 가져오기 (지금 여기서 assets에 없고
-                .use { descriptor ->
+        val metadataRetriever = MediaMetadataRetriever()
+        metadataRetriever.setDataSource(videoUrl)
 
-                    val metadataRetriever = MediaMetadataRetriever()
-                    metadataRetriever.setDataSource(
-                            descriptor.fileDescriptor,
-                            descriptor.startOffset,
-                            descriptor.length
-                    )
+        val videoWidth = metadataRetriever.extractMetadata(METADATA_KEY_VIDEO_WIDTH)?.toFloatOrNull()
+                ?: 0f
+        val videoHeight = metadataRetriever.extractMetadata(METADATA_KEY_VIDEO_HEIGHT)?.toFloatOrNull()
+                ?: 0f
+        val videoRotation = metadataRetriever.extractMetadata(METADATA_KEY_VIDEO_ROTATION)?.toFloatOrNull()
+                ?: 0f
 
-                    val videoWidth = metadataRetriever.extractMetadata(METADATA_KEY_VIDEO_WIDTH)?.toFloatOrNull()
-                            ?: 0f
-                    val videoHeight = metadataRetriever.extractMetadata(METADATA_KEY_VIDEO_HEIGHT)?.toFloatOrNull()
-                            ?: 0f
-                    val videoRotation = metadataRetriever.extractMetadata(METADATA_KEY_VIDEO_ROTATION)?.toFloatOrNull()
-                            ?: 0f
+        // Account for video rotation, so that scale logic math works properly
+        val imageSize = RectF(0f, 0f, augmentedImage.extentX, augmentedImage.extentZ)
+                .transform(rotationMatrix(videoRotation))
 
-                    // Account for video rotation, so that scale logic math works properly
-                    val imageSize = RectF(0f, 0f, augmentedImage.extentX, augmentedImage.extentZ)
-                            .transform(rotationMatrix(videoRotation))
+        val videoScaleType = VideoScaleType.CenterCrop
 
-                    val videoScaleType = VideoScaleType.CenterCrop
+        videoAnchorNode.setVideoProperties(
+                videoWidth = videoWidth, videoHeight = videoHeight, videoRotation = videoRotation,
+                imageWidth = imageSize.width(), imageHeight = imageSize.height(),
+                videoScaleType = videoScaleType
+        )
 
-                    videoAnchorNode.setVideoProperties(
-                            videoWidth = videoWidth, videoHeight = videoHeight, videoRotation = videoRotation,
-                            imageWidth = imageSize.width(), imageHeight = imageSize.height(),
-                            videoScaleType = videoScaleType
-                    )
+        // Update the material parameters
+        videoRenderable.material.setFloat2(MATERIAL_IMAGE_SIZE, imageSize.width(), imageSize.height())
+        videoRenderable.material.setFloat2(MATERIAL_VIDEO_SIZE, videoWidth, videoHeight)
+        videoRenderable.material.setBoolean(MATERIAL_VIDEO_CROP, VIDEO_CROP_ENABLED)
 
-                    // Update the material parameters
-                    videoRenderable.material.setFloat2(MATERIAL_IMAGE_SIZE, imageSize.width(), imageSize.height())
-                    videoRenderable.material.setFloat2(MATERIAL_VIDEO_SIZE, videoWidth, videoHeight)
-                    videoRenderable.material.setBoolean(MATERIAL_VIDEO_CROP, VIDEO_CROP_ENABLED)
-
-                    mediaPlayer.reset()
-                    mediaPlayer.setDataSource(videoUrl)
-
-                }.also {
-                    mediaPlayer.isLooping = true
-                    mediaPlayer.prepare()
-                    mediaPlayer.start()
-                }
+        mediaPlayer.reset()
+        mediaPlayer.setDataSource(videoUrl)
+        mediaPlayer.isLooping = true
+        mediaPlayer.prepare()
+        mediaPlayer.start()
 
         videoAnchorNode.anchor?.detach()
         videoAnchorNode.anchor = augmentedImage.createAnchor(augmentedImage.centerPose)
@@ -348,8 +329,6 @@ open class ArVideoFragment : ArFragment() {
 
     companion object {
         private const val TAG = "ArVideoFragment"
-
-        private const val TEST_VIDEO_1 = "test_video_1.mp4"
 
         private const val VIDEO_CROP_ENABLED = true
 
