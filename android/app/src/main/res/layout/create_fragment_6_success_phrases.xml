@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="67dp"
+        tools:layout_editor_absoluteY="-142dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,20 +33,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/eulyoo1945_regular"
-            android:text="@string/photocard_success"
             android:gravity="center"
+            android:text="@string/photocard_success"
             android:textColor="@color/black"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:fontFamily="@font/eulyoo1945_semibold"
             android:text="@string/tempdate"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:layout_margin="10dp"/>
+            android:textSize="15sp" />
 
         <FrameLayout
             android:id="@+id/FrameLayout01"
@@ -72,8 +75,8 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:contentDescription="@string/private_card"
-                    android:src="@drawable/success_card_phrases"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/success_card_phrases" />
 
                 <TextView
                     android:id="@+id/tv_phrases"
@@ -117,7 +120,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/eulyoo1945_semibold"
-                android:text="@string/next_btn"
+                android:text="accept"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/brown"
                 app:cornerRadius="10dp" />
