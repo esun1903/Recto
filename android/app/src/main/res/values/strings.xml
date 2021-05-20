@@ -33,9 +33,9 @@
     <string name="iv_recto">iv_recto</string>
     <string name="iv_info">iv_info</string>
     <string name="a204">A204 가린지선다</string>
-    <string name="iv_web">Website : www.recto.co.kr</string>
+    <string name="iv_web">Website : http://home.recto.kr</string>
     <string name="iv_developers">김현지, 박예린, 신가영, 최다애, 최은선</string>
-    <string name="iv_contact">Contact us : 010 - xxxx - xxxx</string>
+    <string name="iv_contact">Contact us : eun.developer@gmail.com</string>
     <string name="you_made_it">you made it!</string>
     <string name="someone_gave_you">someone gave you!</string>
     <string name="lock">lock</string>
