@@ -55,23 +55,6 @@
   transition: 800ms ease all;
 }
 
-@font-face {
-  font-family: "nexa_boldregular";
-  font-weight: bold;
-  font-style: normal;
-  src: url("../fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.eot");
-  src: url("../fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.eot?#iefix")
-      format("embedded-opentype"),
-    url("../fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff2")
-      format("woff2"),
-    url("../fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.woff")
-      format("woff"),
-    url("../fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.ttf")
-      format("truetype"),
-    url("../fonts/nexa_boldfree_macroman/Nexa_Free_Bold-webfont.svg#nexa_boldregular")
-      format("svg");
-}
-
 *,
 *::after,
 *::before {
@@ -86,7 +69,6 @@ body {
   --background-color-3: #202692;
   --link-color: #03b9f1;
   --link-hover-color: #fff;
-  font-family: "Roboto Mono", monospace;
   font-weight: 500;
   color: #fff;
   color: var(--text-color);
@@ -269,7 +251,6 @@ a:focus {
 
 .content__title {
   grid-area: title;
-  font-family: "nexa_boldregular", sans-serif;
   letter-spacing: -0.025em;
   font-size: 9em;
   line-height: 160px;
@@ -296,7 +277,7 @@ a:focus {
   z-index: 10;
   padding: 0 1em;
   cursor: default;
-  width: 330px;
+  width: 340px;
   color: #594939;
 }
 
