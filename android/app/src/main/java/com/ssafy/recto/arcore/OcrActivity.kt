@@ -31,6 +31,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlinx.android.synthetic.main.popup_scancard_pwd.*
+import java.io.Serializable
 import java.lang.Thread.sleep
 
 class OcrActivity : AppCompatActivity() {
@@ -39,6 +40,7 @@ class OcrActivity : AppCompatActivity() {
     private lateinit var mCameraSource: CameraSource
     private lateinit var textRecognizer: TextRecognizer
     private var photoCode: String = ""
+    private var photoCard = PhotoVO()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,13 +132,22 @@ class OcrActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
                     Log.d("Response :: ", response?.body().toString())
                     val photoPwd = response.body()?.photo_pwd
+                    val d = response.body()?.design
+                    val pd = response.body()?.photo_date
+                    val pi = response.body()?.photo_id
+                    val ps = response.body()?.photo_seq
+                    val pu = response.body()?.photo_url
+                    val vu = response.body()?.video_url
+                    val uu = response.body()?.user_uid
+                    val p = response.body()?.phrase
+                    photoCard = PhotoVO(ps,uu,pi,pd,pu,vu,p,photoPwd,d)
+
                     if (photoPwd == null || "".equals(photoPwd) || "null".equals(photoPwd)) {
                         Log.d("photopassword", "없음") //비밀번호가 없으면?
                         change()
                       } else {
                         Log.d("photopassword", photoPwd.toString()) // 비밀번호가 있다면?
                         showPopup(photoPwd.toString())
-
                     }
                 }
             })
@@ -146,7 +157,7 @@ class OcrActivity : AppCompatActivity() {
     fun change() {
         mCameraSource.stop()
         var intent = Intent(this, ArMainActivity::class.java)
-        intent.putExtra("photoCode", photoCode)
+        intent.putExtra("photoCard", photoCard as Serializable)
         startActivity(intent)
     }
 
