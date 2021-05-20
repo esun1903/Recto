@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.RectF
-import android.media.ExifInterface
 import android.media.MediaMetadataRetriever
 import android.media.MediaMetadataRetriever.*
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,6 +27,8 @@ import com.google.ar.sceneform.FrameTime
 import com.google.ar.sceneform.rendering.ExternalTexture
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.gson.GsonBuilder
 import com.ssafy.recto.R
 import retrofit2.Call
@@ -36,6 +38,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 import java.net.URL
+
 
 open class ArVideoFragment : ArFragment() {
 
@@ -61,6 +64,10 @@ open class ArVideoFragment : ArFragment() {
                 .build();
         val service = retrofit.create(PhotoService::class.java);
 
+        // User 관련
+        val mFirebaseAuth = FirebaseAuth.getInstance()
+        val currentUser: FirebaseUser? = mFirebaseAuth.getCurrentUser()
+
         var sharedPreferences: SharedPreferences? = null
         sharedPreferences = this.context?.getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
         val userUid: String? = sharedPreferences?.getString("userUid", "")
@@ -74,13 +81,13 @@ open class ArVideoFragment : ArFragment() {
         val photo_seq = photoCard.photo_seq
         val photo_id = photoCard.photo_id
 
-        if (photo_seq != null) {
+        if (currentUser != null && photo_seq != null) {
             if (!user_uid.equals(userUid) && photo_seq > 30) { //포토카드 제작자와 로그인된 사용자가 다르고 photo_seq가 31이상(public 아닐 경우)
                 var gift_from = user_uid
                 var gift_to = userUid
 
                 if (gift_to != null && photo_id != null) {
-                    service.checkPhoto(photo_id, gift_to)?.enqueue(object : Callback<String>{
+                    service.checkPhoto(photo_id, gift_to)?.enqueue(object : Callback<String> {
                         override fun onFailure(call: Call<String>, t: Throwable) {
                             Log.i("fail", t.toString())
                         }
@@ -89,7 +96,7 @@ open class ArVideoFragment : ArFragment() {
                             Log.d("Response 중복 체크 :: ", response?.body().toString())
                             var result = response?.body().toString()
                             var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
-                            if(result.equals("success")) {
+                            if (result.equals("success")) {
                                 //saveGift
                                 service.saveGift(gift)?.enqueue(object : Callback<String> {
                                     override fun onFailure(call: Call<String>?, t: Throwable?) {
@@ -100,7 +107,7 @@ open class ArVideoFragment : ArFragment() {
                                         Log.d("Response :: 선물 성공", response?.body().toString())
                                     }
                                 })
-                            } else{
+                            } else {
                                 Log.d("이미 선물받은", "카드입니다")
                             }
                         }
@@ -262,7 +269,7 @@ open class ArVideoFragment : ArFragment() {
         Log.d(TAG, "playbackVideo = ${augmentedImage.name}")
 
         val metadataRetriever = MediaMetadataRetriever()
-        metadataRetriever.setDataSource(videoUrl)
+        metadataRetriever.setDataSource(videoUrl, HashMap<String, String>())
 
         val videoWidth = metadataRetriever.extractMetadata(METADATA_KEY_VIDEO_WIDTH)?.toFloatOrNull()
                 ?: 0f
