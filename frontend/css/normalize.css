@@ -25,7 +25,6 @@ audio:not([controls]) {
   display: none;
 }
 html {
-  font-family: sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -66,7 +65,6 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, serif;
   font-size: 1em;
 }
 pre {
@@ -113,7 +111,6 @@ button,
 input,
 select,
 textarea {
-  font-family: inherit;
   font-size: 100%;
   margin: 0;
 }
