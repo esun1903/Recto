@@ -99,13 +99,13 @@
             <Button
                 android:id="@+id/btn_next"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginRight="25dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/eulyoo1945_semibold"
-                android:text="@string/next_btn"
+                android:text="accept"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/brown"
                 app:cornerRadius="10dp" />
