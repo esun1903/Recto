@@ -51,6 +51,7 @@
     <string name="gift_card">gift_card</string>
     <string name="retry">retry</string>
     <string name="next">next</string>
+    <string name="back">Exit</string>
     <string name="numberConfirm">가 맞습니까?</string>
     <string name="public_text">무료 제공 포토카드를 즐기세요!</string>
     <string name="privacy_text"><![CDATA[<가린지선다>(\'http://www.recto.kr/\' 이하 \'RECTO\')은(는) 「개인정보 보호법」 제30조에 따라 정부주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.\n
