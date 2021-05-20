@@ -3,14 +3,17 @@ package com.ssafy.recto.arcore
 import android.app.ActivityManager
 import android.app.PendingIntent.getActivity
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.gson.GsonBuilder
+import com.ssafy.recto.MainActivity
 import com.ssafy.recto.R
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,6 +60,11 @@ class ArMainActivity : AppCompatActivity() {
 
     companion object {
         private const val MIN_OPEN_GL_VERSION = 3.0
+    }
+
+    fun back(view: View) {
+        val nextIntent = Intent(this, MainActivity::class.java)
+        startActivity(nextIntent)
     }
 
 }

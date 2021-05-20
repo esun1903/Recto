@@ -22,6 +22,7 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import com.google.gson.GsonBuilder
+import com.ssafy.recto.MainActivity
 import com.ssafy.recto.R
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_scancard_ocr.*
@@ -244,6 +245,12 @@ class OcrActivity : AppCompatActivity() {
     fun toast(text: String) {
         Toast.makeText(this@OcrActivity, text, Toast.LENGTH_SHORT).show()
     }
+
+    fun back_main(view: View) {
+        val nextIntent = Intent(this, MainActivity::class.java)
+        startActivity(nextIntent)
+    }
+
 
 
 }
