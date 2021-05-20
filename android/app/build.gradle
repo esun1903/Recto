@@ -90,8 +90,3 @@ repositories {
     mavenCentral()
     google()
 }
-
-sceneform.asset('sampledata/augmented_video_model.obj',
-        'sampledata/augmented_video_material.mat',
-        'sampledata/augmented_video_model.sfa',
-        'src/main/res/raw/augmented_video_model')
