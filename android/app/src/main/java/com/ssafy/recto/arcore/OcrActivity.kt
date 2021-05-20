@@ -143,10 +143,12 @@ class OcrActivity : AppCompatActivity() {
                     val p = response.body()?.phrase
                     photoCard = PhotoVO(ps,uu,pi,pd,pu,vu,p,photoPwd,d)
 
-                    if (photoPwd == null || "".equals(photoPwd) || "null".equals(photoPwd)) {
+                    if (pi == null || "".equals(pi) || "null".equals(pi)) {
+                        toast("포토카드를 다시 인식해주세요")
+                    } else if (photoPwd == null || "".equals(photoPwd) || "null".equals(photoPwd)) {
                         Log.d("photopassword", "없음") //비밀번호가 없으면?
                         change()
-                      } else {
+                    } else {
                         Log.d("photopassword", photoPwd.toString()) // 비밀번호가 있다면?
                         showPopup(photoPwd.toString())
                     }
