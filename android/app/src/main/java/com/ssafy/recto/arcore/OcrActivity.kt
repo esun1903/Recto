@@ -46,7 +46,6 @@ class OcrActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scancard_ocr)
-        requestForPermission()
 
         textRecognizer = TextRecognizer.Builder(this).build()
         if (!textRecognizer.isOperational) {
@@ -74,7 +73,6 @@ class OcrActivity : AppCompatActivity() {
                     if (isCameraPermissionGranted()) {
                         mCameraSource.start(surface_camera_preview.holder)
                     } else {
-                        requestForPermission()
                     }
                 } catch (e: Exception) {
                     toast("Error:" + e.message)
@@ -209,32 +207,6 @@ class OcrActivity : AppCompatActivity() {
         }
 
         return true
-    }
-
-    private fun requestForPermission() {
-
-        if (ContextCompat.checkSelfPermission(
-                        this@OcrActivity,
-                        Manifest.permission.CAMERA
-                )
-                != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                            this@OcrActivity,
-                            Manifest.permission.CAMERA
-                    )
-            ) {
-            } else {
-                ActivityCompat.requestPermissions(
-                        this@OcrActivity,
-                        arrayOf(
-                                Manifest.permission.CAMERA
-                        ),
-                        MY_PERMISSIONS_REQUEST_CAMERA
-                )
-            }
-        } else {
-        }
     }
 
     private fun isCameraPermissionGranted(): Boolean {
