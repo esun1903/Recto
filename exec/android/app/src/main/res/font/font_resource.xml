@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 을유1945 Regular -->
+    <font
+        android:font="@font/eulyoo1945_regular" />
+
+    <!-- 을유1945 Semi Bold -->
+    <font
+        android:font="@font/eulyoo1945_semibold" />
+
+    <!-- 제주 명조 -->
+    <font
+        android:font="@font/jeju_myeongjo" />
+
+
+    <!-- 문구형 전용 폰트 -->
+    <!-- 나눔 손글씨: 배은혜체 -->
+    <font
+        android:font="@font/baeeunhye_nanum" />
+
+    <!-- 나눔 손글씨: 또박또박 -->
+    <font
+        android:font="@font/ddobak_nanum" />
+
+    <!-- 나눔 손글씨: 하나손글씨 -->
+    <font
+        android:font="@font/hanason_nanum" />
+
+    <!-- 나눔 손글씨: 중학생 -->
+    <font
+        android:font="@font/junghaksaeng_nanum" />
+
+    <!-- 나눔 손글씨: 느릿느릿체 -->
+    <font
+        android:font="@font/neulit_nanum" />
+
+    <!-- 교보 손글씨 -->
+    <font
+        android:font="@font/kyobo_handwriting" />
+
+</font-family>
