@@ -1,10 +1,8 @@
 package com.ssafy.recto.controller;
 
 import com.ssafy.recto.dto.Photo;
-import com.ssafy.recto.dto.User;
 import com.ssafy.recto.service.PhotoService;
 import com.ssafy.recto.service.S3FileUploadService;
-import com.ssafy.recto.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
