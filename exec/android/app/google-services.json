@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "148360455436",
+    "firebase_url": "https://recto-58a1f-default-rtdb.firebaseio.com",
+    "project_id": "recto-58a1f",
+    "storage_bucket": "recto-58a1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148360455436:android:7ba9b19cd33bb5551e5529",
+        "android_client_info": {
+          "package_name": "com.ssafy.recto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148360455436-dplqrpahmcmcf4qi4518j6tc1f8jml7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssafy.recto",
+            "certificate_hash": "cc1931460c640ee091372ddc4e000f226d9dd526"
+          }
+        },
+        {
+          "client_id": "148360455436-so27dnkv0rnc5ina9cdgev82dug9gdmp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssafy.recto",
+            "certificate_hash": "0d3ff718124e04119f18edd9bafe5a2de9df3223"
+          }
+        },
+        {
+          "client_id": "148360455436-bs0iml8g15f4brkml6l9qi2m10pb33tm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBX5rRapWeb2moFhJFw1pI2Kel1ZmSXCSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148360455436-191no0dmnda6brjnrcas0mj4mgq05a5d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

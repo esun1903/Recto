@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 프로필 -->
+        <RelativeLayout
+            android:id="@+id/linearLayoutPublicProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- 카메라 이미지 -->
+            <ImageView
+                android:id="@+id/iv_publicProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/profile"
+                android:src="@drawable/recto_red_lens" />
+
+            <!-- 자료실 설명 멘트 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@+id/iv_publicProfile"
+                android:layout_toRightOf="@+id/iv_publicProfile"
+                android:text="@string/public_text"
+                android:textSize="20sp"
+                android:textColor="@color/brown"
+                android:fontFamily="@font/jeju_myeongjo"
+                tools:ignore="RelativeOverlap" />
+
+        </RelativeLayout>
+
+        <!-- for free -->
+        <TextView
+            android:id="@+id/forFree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/for_free"
+            android:textSize="20sp"
+            android:fontFamily="@font/eulyoo1945_semibold"
+            app:layout_constraintStart_toStartOf="@+id/linearLayoutPublicProfile"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutPublicProfile"
+            tools:ignore="MissingConstraints" />
+
+        <!-- 구분선 -->
+        <View
+            android:id="@+id/forFree_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/brown"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintStart_toStartOf="@+id/forFree"
+            app:layout_constraintTop_toBottomOf="@+id/forFree"/>
+
+
+        <!-- 카드 목록 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/public_fragment_card_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/forFree_line" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

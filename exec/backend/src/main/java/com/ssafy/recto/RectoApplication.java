@@ -1,0 +1,13 @@
+package com.ssafy.recto;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class RectoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(RectoApplication.class, args);
+    }
+
+}

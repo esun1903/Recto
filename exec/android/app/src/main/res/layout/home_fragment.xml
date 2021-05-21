@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/brown"
+        android:textSize="20sp"
+        android:fontFamily="@font/jeju_myeongjo" />
+
+    <View
+        android:id="@+id/upline"
+        android:layout_width="280dp"
+        android:layout_height="2dp"
+        android:background="@color/brown"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"/>
+
+    <View
+        android:layout_width="280dp"
+        android:layout_height="2dp"
+        android:background="@color/brown"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="horizontal"
+        android:layout_marginTop="35dp" />
+
+</LinearLayout>

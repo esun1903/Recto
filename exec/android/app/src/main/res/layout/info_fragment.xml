@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_recto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/recto_logo"
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="154dp"
+            android:layout_margin="30sp"
+            android:contentDescription="@string/iv_recto" />
+
+        <View
+            android:id="@+id/forFree_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/brown"
+            app:layout_constraintStart_toStartOf="@+id/forFree"
+            app:layout_constraintTop_toBottomOf="@+id/forFree" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eulyoo1945_regular"
+            android:text="@string/a204"
+            android:textColor="@color/brown"
+            android:textSize="20sp"
+            android:layout_margin="10sp"/>
+
+        <View
+            android:id="@+id/forFree_line2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="15dp"
+            android:background="@color/brown"
+            app:layout_constraintStart_toStartOf="@+id/forFree"
+            app:layout_constraintTop_toBottomOf="@+id/forFree"
+            android:layout_marginBottom="30sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp">
+
+            <ImageView
+                android:id="@+id/iv_developer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/info_developer"
+                tools:layout_editor_absoluteX="108dp"
+                tools:layout_editor_absoluteY="426dp"
+                android:contentDescription="@string/iv_developers"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/tv_developer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eulyoo1945_regular"
+                android:text="@string/iv_developers"
+                android:textColor="@color/brown"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp">
+
+            <ImageView
+                android:id="@+id/iv_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/info_contact"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="528dp"
+                android:contentDescription="@string/iv_contact"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/tv_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eulyoo1945_regular"
+                android:text="@string/iv_contact"
+                android:textColor="@color/brown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp">
+
+            <ImageView
+                android:id="@+id/iv_web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/info_web"
+                tools:layout_editor_absoluteX="188dp"
+                tools:layout_editor_absoluteY="405dp"
+                android:contentDescription="@string/iv_web"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/tv_web"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/eulyoo1945_regular"
+                android:text="@string/iv_web"
+                android:textColor="@color/brown" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
