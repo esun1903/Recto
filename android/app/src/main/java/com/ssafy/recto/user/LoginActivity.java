@@ -1,18 +1,17 @@
 package com.ssafy.recto.user;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -96,14 +95,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             editor.putString("emailId", emailId);
                             editor.apply();
                             String checkEmail = sharedPreferences.getString("emailId", "");
-                            Log.e("이메일 확인", checkEmail);
 
                             // Shared Preferences에 idToken 저장
                             String userUid = account.setIdToken(firebaseUser.getUid()); // 로그인한 유저의 고유 Uid 가져오기
                             editor.putString("userUid", userUid);
                             editor.apply();
                             String checkUid = sharedPreferences.getString("userUid", "");
-                            Log.e("Uid 확인", checkUid);
 
                             // Shared Preferences에 닉네임 저장
                             DatabaseReference UserNickname = mDatabaseRef.child("UserAccount").child(userUid).child("nickname");
@@ -114,7 +111,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                     editor.putString("nickname", nickname);
                                     editor.apply();
                                     String checkNickname = sharedPreferences.getString("nickname", "");
-                                    Log.e("닉네임 확인", checkNickname);
 
                                     // 로그인 성공 시 메인으로 이동
                                     if (nickname != null) {
@@ -195,7 +191,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             editor.putString("emailId", emailId);
                             editor.apply();
                             String checkEmail = sharedPreferences.getString("emailId", "");
-                            Log.e("구글 이메일 확인", checkEmail);
 
                             // Shared Preferences에 idToken 저장
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
@@ -203,14 +198,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             editor.putString("userUid", idToken);
                             editor.apply();
                             String checkUid = sharedPreferences.getString("userUid", "");
-                            Log.e("Uid 확인", checkUid);
 
                             // Shared Preferences에 구글 닉네임 저장
                             String nickname = account.getDisplayName();
                             editor.putString("nickname", nickname);
                             editor.apply();
                             String checkNickname = sharedPreferences.getString("nickname", "");
-                            Log.e("닉네임 확인", checkNickname);
 
                             // Database에 구글 로그인 사용자 관련 정보 insert
                             mDatabaseRef.child("UserAccount").child(idToken).child("emailId").setValue(emailId);
@@ -218,7 +211,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             mDatabaseRef.child("UserAccount").child(idToken).child("nickname").setValue(nickname);
 
                             // 성공 토스트 메시지 출력
-                            Toast.makeText(LoginActivity.this, "구글 로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "구글 로그인에 성공했습니다.", Toast.LENGTH_SHORT).show();
 
                             // 메인 화면으로 이동
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

@@ -66,7 +66,7 @@ public class CreateFragment_3_SelectVideo extends Fragment {
             @Override
             public void onClick(View v) {
                 if (fileUri == null) {
-                    Toast.makeText(getActivity(), "동영상을 업로드해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "영상을 등록해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     mainActivity.setFragment("create_selectphoto");
@@ -100,7 +100,6 @@ public class CreateFragment_3_SelectVideo extends Fragment {
                 e.printStackTrace();
             }
         } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
-            Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
         }
     }
 }

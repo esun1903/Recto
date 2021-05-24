@@ -76,7 +76,7 @@ public class CreateFragment_5_WriteInfo_puon extends Fragment {
             @Override
             public void onClick(View v) {
                 if (String.valueOf(tv_date.getText()).equals("")) {
-                    Toast.makeText(getActivity(), "빠진 항목이 없는지 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "빠진 항목이 없는지 다시 한번 확인해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     myApp.setCardPhrases("");

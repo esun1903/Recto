@@ -75,7 +75,7 @@ public class CreateFragment_1_SelectOpen extends Fragment {
         btn_previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "첫 페이지 입니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "첫 페이지입니다.", Toast.LENGTH_SHORT).show();
             }
         });
 

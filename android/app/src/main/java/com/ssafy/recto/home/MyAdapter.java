@@ -1,20 +1,17 @@
 package com.ssafy.recto.home;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.CardData;
-import com.ssafy.recto.publiccard.PublicFragmentMyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +80,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     }
                 }
             });
-            Log.d("어댑터", photoCards.toString());
         }
     }
 }

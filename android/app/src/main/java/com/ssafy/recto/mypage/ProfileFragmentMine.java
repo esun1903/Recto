@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,6 @@ import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.CardData;
 import com.ssafy.recto.api.HttpClient;
-import com.ssafy.recto.publiccard.PublicFragmentCardDetail;
-import com.ssafy.recto.publiccard.PublicFragmentCardDetail2;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -161,7 +158,6 @@ public class ProfileFragmentMine extends Fragment {
 
             @Override
             public void onFailure(Call<List<CardData>> call, Throwable t) {
-                Log.e("nooooo", "failed :<" + t.toString());
             }
         });
     }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.RequestManager;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
@@ -162,7 +160,6 @@ public class ProfileFragmentGift extends Fragment {
 
             @Override
             public void onFailure(Call<List<GiftData>> call, Throwable t) {
-                Log.e("nooooo", "failed :<" + t.toString());
             }
         });
     }
