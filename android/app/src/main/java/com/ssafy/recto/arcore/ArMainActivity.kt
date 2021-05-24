@@ -1,25 +1,16 @@
 package com.ssafy.recto.arcore
 
 import android.app.ActivityManager
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.google.gson.GsonBuilder
 import com.ssafy.recto.MainActivity
 import com.ssafy.recto.R
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class ArMainActivity : AppCompatActivity() {
 

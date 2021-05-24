@@ -3,7 +3,6 @@ package com.ssafy.recto.publiccard;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.ssafy.recto.MainActivity;
 import com.ssafy.recto.R;
 import com.ssafy.recto.api.ApiInterface;
 import com.ssafy.recto.api.CardData;
 import com.ssafy.recto.api.HttpClient;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -150,7 +147,6 @@ public class PublicFragment extends Fragment{
 
             @Override
             public void onFailure(Call<List<CardData>> call, Throwable t) {
-                Log.e("nooooo", "failed :<" + t.toString());
             }
         });
     }

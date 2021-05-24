@@ -145,7 +145,7 @@ public class ProfileFragmentMineDetail extends Fragment {
                     fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".jpeg");
                     captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/RECTO" + day.format(date) + ".JPEG")));
-                    Toast.makeText(getContext(), "저장완료", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     fos.flush();
                     fos.close();
                     capture.destroyDrawingCache();
@@ -175,13 +175,12 @@ public class ProfileFragmentMineDetail extends Fragment {
                             call.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    Toast.makeText(getContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                     mainActivity.setFragment("profile");
                                 }
 
                                 @Override
                                 public void onFailure(Call<String> call, Throwable t) {
-                                    Log.e("nooooo", "failed :<" + t);
                                 }
                             });
                         } catch (Exception e) {
@@ -251,7 +250,6 @@ public class ProfileFragmentMineDetail extends Fragment {
 
             @Override
             public void onFailure(Call<CardData> call, Throwable t) {
-                Log.e("nooooo", "failed :<" + t.toString());
             }
         });
     }

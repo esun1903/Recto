@@ -71,7 +71,7 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
             @Override
             public void onClick(View v) {
                 if (bm == null){
-                    Toast.makeText(getActivity(), "사진을 업로드 해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "사진을 등록해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Boolean cardPublic = myApp.getCardPublic();
@@ -118,7 +118,6 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
                 e.printStackTrace();
             }
         } else if(requestCode == 101 && resultCode == getActivity().RESULT_CANCELED){
-            Toast.makeText(getActivity(),"취소", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -129,9 +128,7 @@ public class CreateFragment_4_SelectPhoto extends Fragment {
             FileOutputStream out = new FileOutputStream(tempFile);
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.close();
-            Toast.makeText(getContext(), "파일 저장 성공", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getContext(), "파일 저장 실패", Toast.LENGTH_SHORT).show();
         }
     }
 }
