@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
@@ -68,7 +69,6 @@ class OcrActivity : AppCompatActivity() {
                 try {
                     if (isCameraPermissionGranted()) {
                         mCameraSource.start(surface_camera_preview.holder)
-                        toast("포토카드의 숫자코드가 인식되면 NEXT 버튼을 눌러주세요.")
                     } else {
                     }
                 } catch (e: Exception) {
