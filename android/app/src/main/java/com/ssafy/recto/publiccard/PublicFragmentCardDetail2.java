@@ -1,6 +1,8 @@
 package com.ssafy.recto.publiccard;
 
 import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +10,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +38,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import lombok.SneakyThrows;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -117,37 +124,56 @@ public class PublicFragmentCardDetail2 extends Fragment {
 
         // 버튼 눌렀을 때 카드 갤러리에 저장하기
         download_button.setOnClickListener(new View.OnClickListener() {
+            @SneakyThrows
             @Override
             public void onClick(View v) {
 
-                String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/RECTO";
+//                String path = getContext().getExternalFilesDir(null).getPath() + "/RECTO";
                 final FrameLayout capture = view.findViewById(R.id.card_frameLayout);
 
-                File file = new File(path);
-                if (!file.exists()) {
-                    file.mkdirs();
-                    Toast.makeText(getContext(), "폴더가 생성되었습니다.", Toast.LENGTH_SHORT).show();
-                }
+//                Log.d("1path", path);
+//
+//                File file = new File(path);
+//                if (!file.exists()) {
+//                    file.mkdirs();
+//                    Toast.makeText(getContext(), "폴더가 생성되었습니다.", Toast.LENGTH_SHORT).show();
+//                }
 
                 SimpleDateFormat day = new SimpleDateFormat("yyyyMMddmmss");
                 Date date = new Date();
                 capture.buildDrawingCache();
                 Bitmap captureview = capture.getDrawingCache();
 
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".jpeg");
-                    captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                    mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/RECTO" + day.format(date) + ".JPEG")));
-                    Toast.makeText(getContext(), "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show();
-                    fos.flush();
-                    fos.close();
-                    capture.destroyDrawingCache();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DISPLAY_NAME, "RECTO" + day.format(date));
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+                values.put(MediaStore.Images.Media.RELATIVE_PATH, "DCIM/RECTO");
+
+                ContentResolver contentResolver = getContext().getContentResolver();
+                Uri collection = MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+                Uri content = contentResolver.insert(collection, values);
+                ParcelFileDescriptor pdf = contentResolver.openFileDescriptor(content, "w", null);
+
+                FileOutputStream fos = new FileOutputStream(pdf.getFileDescriptor());
+                captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                Toast.makeText(getContext(), "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                fos.flush();
+                fos.close();
+                capture.destroyDrawingCache();
+
+//                try {
+//                    fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".jpeg");
+//                    captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+//                    mainActivity.sendBroadcast(new Intent(Intent.ACTION_OPEN_DOCUMENT, Uri.parse("file://" + path + "/RECTO" + day.format(date) + ".JPEG")));
+//                    Toast.makeText(getContext(), "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show();
+//                    fos.flush();
+//                    fos.close();
+//                    capture.destroyDrawingCache();
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
         });
 
