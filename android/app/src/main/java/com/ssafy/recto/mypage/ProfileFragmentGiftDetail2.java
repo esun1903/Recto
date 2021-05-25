@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,13 +135,12 @@ public class ProfileFragmentGiftDetail2 extends Fragment {
                             call.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    Toast.makeText(getContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                     mainActivity.setFragment("profile");
                                 }
 
                                 @Override
                                 public void onFailure(Call<String> call, Throwable t) {
-                                    Log.e("nooooo", "failed :<" + t);
                                 }
                             });
                         } catch (Exception e) {
@@ -218,7 +216,6 @@ public class ProfileFragmentGiftDetail2 extends Fragment {
 
             @Override
             public void onFailure(Call<GiftData> call, Throwable t) {
-                Log.e("nooooo", "failed :<" + t.toString());
             }
         });
     }

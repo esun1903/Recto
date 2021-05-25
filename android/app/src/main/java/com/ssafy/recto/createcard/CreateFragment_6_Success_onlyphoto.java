@@ -109,7 +109,6 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
             Bitmap bm = BitmapFactory.decodeFile(imgpath);
             Glide.with(getContext()).load(Uri.parse(cardPhoto)).into(iv_photo);
         } catch (Exception e) {
-            Toast.makeText(getContext(), "사진 로드 실패", Toast.LENGTH_SHORT).show();
         }
 
         btn_previous.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +131,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
             public void onClick(View v) {
                 try {
                     requestPost();
-                    Toast.makeText(getContext(), "포토카드 생성에 성공하셨습니다:>", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "포토카드 생성에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                     mainActivity.setFragment("home");
                 } catch (ParseException | IOException e) {
                     e.printStackTrace();

@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
@@ -15,7 +14,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
@@ -49,9 +47,7 @@ class OcrActivity : AppCompatActivity() {
 
         textRecognizer = TextRecognizer.Builder(this).build()
         if (!textRecognizer.isOperational) {
-            Toast.makeText(this, "Dependencies are not loaded yet...please try after few moment!!", Toast.LENGTH_SHORT)
-                    .show()
-            Log.e("MainActivity", "Dependencies are downloading....try after few moment")
+            toast("처음부터 다시 시도해주세요.")
             return
         }
 
@@ -72,10 +68,10 @@ class OcrActivity : AppCompatActivity() {
                 try {
                     if (isCameraPermissionGranted()) {
                         mCameraSource.start(surface_camera_preview.holder)
+                        toast("포토카드의 숫자코드가 인식되면 NEXT 버튼을 눌러주세요.")
                     } else {
                     }
                 } catch (e: Exception) {
-                    toast("Error:" + e.message)
                 }
             }
 
@@ -187,7 +183,7 @@ class OcrActivity : AppCompatActivity() {
                 change()
             }
             else {
-                toast("비밀번호가 틀렸습니다. 다시 입력해주세요.")
+                toast("비밀번호가 틀렸습니다.")
                 password.setText("")
             }
 
@@ -225,7 +221,5 @@ class OcrActivity : AppCompatActivity() {
         val nextIntent = Intent(this, MainActivity::class.java)
         startActivity(nextIntent)
     }
-
-
 
 }

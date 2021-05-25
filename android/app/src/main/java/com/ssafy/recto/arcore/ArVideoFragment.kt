@@ -8,9 +8,7 @@ import android.graphics.RectF
 import android.media.MediaMetadataRetriever
 import android.media.MediaMetadataRetriever.*
 import android.media.MediaPlayer
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,6 +79,8 @@ open class ArVideoFragment : ArFragment() {
         val photo_seq = photoCard.photo_seq
         val photo_id = photoCard.photo_id
 
+        toast("포토카드를 좌우로 천천히 움직이면서 인식해주세요. 카메라가 흐리게 나올 경우 구글 ARcore를 삭제한 뒤 RECTO에 다시 접속해주세요.")
+
         if (currentUser != null && photo_seq != null) {
             if (!user_uid.equals(userUid) && photo_seq > 30) { //포토카드 제작자와 로그인된 사용자가 다르고 photo_seq가 31이상(public 아닐 경우)
                 var gift_from = user_uid
@@ -89,33 +89,28 @@ open class ArVideoFragment : ArFragment() {
                 if (gift_to != null && photo_id != null) {
                     service.checkPhoto(photo_id, gift_to)?.enqueue(object : Callback<String> {
                         override fun onFailure(call: Call<String>, t: Throwable) {
-                            Log.i("fail", t.toString())
                         }
 
                         override fun onResponse(call: Call<String>, response: Response<String>) {
-                            Log.d("Response 중복 체크 :: ", response?.body().toString())
                             var result = response?.body().toString()
                             var gift = GiftVO(gift_from, photo_seq, gift_to) //받은 선물로 저장
                             if (result.equals("success")) {
                                 //saveGift
                                 service.saveGift(gift)?.enqueue(object : Callback<String> {
                                     override fun onFailure(call: Call<String>?, t: Throwable?) {
-                                        Log.i("fail.TT", t.toString())
                                     }
 
                                     override fun onResponse(call: Call<String>, response: Response<String>) {
-                                        Log.d("Response :: 선물 성공", response?.body().toString())
+                                        toast("선물받은 카드로 등록되었습니다.")
                                     }
                                 })
                             } else {
-                                Log.d("이미 선물받은", "카드입니다")
                             }
                         }
                     })
                 }
 
             } else{
-                Log.d("포토카드 제작자와", "로그인된 사용자가 같거나 public 카드입니다")
             }
         }
 
@@ -148,9 +143,7 @@ open class ArVideoFragment : ArFragment() {
                 } //안드로이드 비트맵에서 증강 이미지 데이터베이스에 알 수 없는 물리적 크기의 단일 명명된 이미지를 추가한다.
                 return true
             } catch (e: IllegalArgumentException) {
-                Log.e(TAG, "Could not add bitmap to augmented image database", e)
             } catch (e: IOException) {
-                Log.e(TAG, "IO exception loading augmented image bitmap.", e)
             }
             return false
         }
@@ -162,7 +155,7 @@ open class ArVideoFragment : ArFragment() {
             //카메라 포커스 모드 - 사진 또는 비디오를 캡처하는 동안 AUTO를 사용한다. 최적의 AR추적을 위해 자동 포커스 동작이 더 이상 필요하지 않은 경우 기본 포커스 모드로 되돌린다.
 
             if (!setupAugmentedImageDatabase(it, session)) {
-                Toast.makeText(requireContext(), "Could not setup augmented image database", Toast.LENGTH_LONG).show()
+                toast("처음부터 다시 시도해주세요.")
             }
         }
     }
@@ -186,7 +179,6 @@ open class ArVideoFragment : ArFragment() {
                     renderable.material.setExternalTexture("videoTexture", externalTexture)
                 }
                 .exceptionally { throwable ->
-                    Log.e(TAG, "Could not create ModelRenderable", throwable)
                     return@exceptionally null
                 }
 
@@ -241,7 +233,6 @@ open class ArVideoFragment : ArFragment() {
             try {
                 playbackArVideo(augmentedImage)
             } catch (e: Exception) {
-                Log.e(TAG, "Could not play video [${augmentedImage.name}]", e)
             }
         }
     }
@@ -266,8 +257,6 @@ open class ArVideoFragment : ArFragment() {
     }
 
     private fun playbackArVideo(augmentedImage: AugmentedImage) {
-        Log.d(TAG, "playbackVideo = ${augmentedImage.name}")
-
         val metadataRetriever = MediaMetadataRetriever()
         metadataRetriever.setDataSource(videoUrl, HashMap<String, String>())
 
@@ -343,5 +332,9 @@ open class ArVideoFragment : ArFragment() {
         private const val MATERIAL_VIDEO_SIZE = "videoSize"
         private const val MATERIAL_VIDEO_CROP = "videoCropEnabled"
         private const val MATERIAL_VIDEO_ALPHA = "videoAlpha"
+    }
+
+    fun toast(text: String) {
+        Toast.makeText(activity, text, Toast.LENGTH_LONG).show()
     }
 }

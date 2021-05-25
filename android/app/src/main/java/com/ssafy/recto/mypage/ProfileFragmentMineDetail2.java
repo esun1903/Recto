@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -148,7 +147,7 @@ public class ProfileFragmentMineDetail2 extends Fragment {
                     fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".jpeg");
                     captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
                     mainActivity.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/RECTO" + day.format(date) + ".JPEG")));
-                    Toast.makeText(getContext(), "저장완료", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                     fos.flush();
                     fos.close();
                     capture.destroyDrawingCache();
@@ -178,13 +177,12 @@ public class ProfileFragmentMineDetail2 extends Fragment {
                             call.enqueue(new Callback<String>() {
                                 @Override
                                 public void onResponse(Call<String> call, Response<String> response) {
-                                    Toast.makeText(getContext(), "삭제 완료", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), "삭제가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                     mainActivity.setFragment("profile");
                                 }
 
                                 @Override
                                 public void onFailure(Call<String> call, Throwable t) {
-                                    Log.e("nooooo", "failed :<" + t);
                                 }
                             });
                         } catch (Exception e) {
@@ -224,7 +222,6 @@ public class ProfileFragmentMineDetail2 extends Fragment {
         call.enqueue(new Callback<CardData>() {
             @Override
             public void onResponse(Call<CardData> call, Response<CardData> response) {
-                Log.d("카드 정보 가져오기", String.valueOf(response.body()));
                 String uid, id, video, photo, phrase, date, pwd, url;
                 int photo_seq, design;
 
@@ -258,7 +255,6 @@ public class ProfileFragmentMineDetail2 extends Fragment {
 
             @Override
             public void onFailure(Call<CardData> call, Throwable t) {
-                Log.e("nooooo", "failed :<" + t.toString());
             }
         });
     }
