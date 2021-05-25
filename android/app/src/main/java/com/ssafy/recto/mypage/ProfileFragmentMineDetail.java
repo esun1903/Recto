@@ -51,7 +51,7 @@ public class ProfileFragmentMineDetail extends Fragment {
     ImageView cardImageView;
     ImageView info_dialog;
     ImageView lock;
-    Button mine_photo_card_list_btn;
+    ImageView mine_photo_card_list_btn;
     TextView card_id;
     TextView card_date;
     Button download_button;
