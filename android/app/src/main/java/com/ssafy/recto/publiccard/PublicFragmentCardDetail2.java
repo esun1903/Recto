@@ -135,25 +135,24 @@ public class PublicFragmentCardDetail2 extends Fragment {
 
                 SimpleDateFormat day = new SimpleDateFormat("yyyyMMddmmss");
                 Date date = new Date();
-
                 capture.buildDrawingCache();
                 Bitmap captureview = capture.getDrawingCache();
-
-                String path = Environment.DIRECTORY_DCIM + "/RECTO";
-                File dir = new File(path);
-                if (!dir.exists()){
-                    dir.mkdir();
-                }
 
                 FileOutputStream fos;
                 if(isLegacy) {
                     try {
+                        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/RECTO";
+                        File file = new File(path);
+                        if (!file.exists()){
+                            file.mkdir();
+                        }
+
                         fos = new FileOutputStream(path + "/RECTO" + day.format(date) + ".JPEG");
                         captureview.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        MediaScanner.newInstance(getContext()).mediaScanning(path + "/RECTO" + day.format(date) + ".JPEG");
+                        Toast.makeText(getContext(), "저장이 완료되었습니다", Toast.LENGTH_SHORT).show();
                         fos.flush();
                         fos.close();
-                        MediaScanner.newInstance(getContext()).mediaScanning(path + "/RECTO" + day.format(date) + ".JPEG");
-                        Toast.makeText(getContext(), "저장완료", Toast.LENGTH_SHORT).show();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -161,6 +160,12 @@ public class PublicFragmentCardDetail2 extends Fragment {
                     }
                 }
                 else {
+                    String path = Environment.DIRECTORY_DCIM + "/RECTO";
+                    File file = new File(path);
+                    if (!file.exists()){
+                        file.mkdir();
+                    }
+
                     ContentValues values = new ContentValues();
                     values.put(MediaStore.Images.Media.RELATIVE_PATH, path);
                     values.put(MediaStore.Images.Media.DISPLAY_NAME, "RECTO" + day.format(date));
