@@ -1,6 +1,7 @@
 package com.ssafy.recto.arcore
 
 import android.animation.ValueAnimator
+import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Bitmap
@@ -13,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
+import android.widget.Button
 import android.widget.Toast
 import androidx.core.animation.doOnStart
 import androidx.core.graphics.rotationMatrix
@@ -77,8 +79,6 @@ open class ArVideoFragment : ArFragment() {
         user_uid = photoCard.user_uid.toString()
         photo_seq = photoCard.photo_seq
         photo_id = photoCard.photo_id.toString()
-
-        toast("포토카드를 좌우로 천천히 움직이면서 인식해주세요.")
 
         planeDiscoveryController.hide() //planeDiscoveryController는 평면 탐색 표시를 관리
         planeDiscoveryController.setInstructionView(null) //평면 탐색 UX
