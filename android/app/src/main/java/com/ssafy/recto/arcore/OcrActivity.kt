@@ -189,6 +189,7 @@ class OcrActivity : AppCompatActivity() {
 
         }
     }
+
     fun retry(view: View) {
         tv.setText("~ 인식 중 ~")
         sleep(2000)
