@@ -40,7 +40,7 @@ class OcrActivity : AppCompatActivity() {
     private val MY_PERMISSIONS_REQUEST_CAMERA: Int = 101
     private lateinit var mCameraSource: CameraSource
     private lateinit var textRecognizer: TextRecognizer
-    private var photoCode: String = ""
+    private var photoCode: String? = null
     private var photoCard = PhotoVO()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,57 +101,58 @@ class OcrActivity : AppCompatActivity() {
                         if (item.value.isNumber()) {
                             if (item.value.length == 9) {
                                 stringBuilder.append(item.value)
-                                stringBuilder.append("\n")
                                 photoCode = item.value
                                 tv.text = stringBuilder.toString()
+                                break
                             }
                         }
                     }
                 }
-
 
             }
         })
 
         next_button.setOnClickListener {
 
-            //비밀번호 유무를 체크해주기
-            val gson = GsonBuilder().setLenient().create();
-            val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-            val service = retrofit.create(PhotoService::class.java);
-            Log.d("photocode", photoCode)
-            //getPhoto
-            service.getPhoto(photoCode)?.enqueue(object : Callback<PhotoVO> {
-                override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
-                    Log.i("fail.TT", t.toString())
-                }
+                val gson = GsonBuilder().setLenient().create();
+                val retrofit = Retrofit.Builder().baseUrl("http://k4a204.p.ssafy.io:8080/recto/")
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+                val service = retrofit.create(PhotoService::class.java);
 
-                override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
-                    Log.d("Response :: ", response?.body().toString())
-                    val photoPwd = response.body()?.photo_pwd
-                    val d = response.body()?.design
-                    val pd = response.body()?.photo_date
-                    val pi = response.body()?.photo_id
-                    val ps = response.body()?.photo_seq
-                    val pu = response.body()?.photo_url
-                    val vu = response.body()?.video_url
-                    val uu = response.body()?.user_uid
-                    val p = response.body()?.phrase
-                    photoCard = PhotoVO(ps,uu,pi,pd,pu,vu,p,photoPwd,d)
-
-                    if (pi == null || "".equals(pi) || "null".equals(pi)) {
-                        toast("포토카드를 다시 인식해주세요")
-                    } else if (photoPwd == null || "".equals(photoPwd) || "null".equals(photoPwd)) {
-                        Log.d("photopassword", "없음") //비밀번호가 없으면?
-                        change()
-                    } else {
-                        Log.d("photopassword", photoPwd.toString()) // 비밀번호가 있다면?
-                        showPopup(photoPwd.toString())
+            if (photoCode != null) {
+                //getPhoto
+                service.getPhoto(photoCode!!)?.enqueue(object : Callback<PhotoVO> {
+                    override fun onFailure(call: Call<PhotoVO>?, t: Throwable?) {
+                        Log.i("fail.TT", t.toString())
+                        toast("잘못된 코드입니다. 다시 인식해주세요.")
                     }
-                }
-            })
+
+                    override fun onResponse(call: Call<PhotoVO>, response: Response<PhotoVO>) {
+                        Log.d("Response :: ", response?.body().toString())
+
+                        val photoPwd = response.body()?.photo_pwd
+                        val d = response.body()?.design
+                        val pd = response.body()?.photo_date
+                        val pi = response.body()?.photo_id
+                        val ps = response.body()?.photo_seq
+                        val pu = response.body()?.photo_url
+                        val vu = response.body()?.video_url
+                        val uu = response.body()?.user_uid
+                        val p = response.body()?.phrase
+                        photoCard = PhotoVO(ps, uu, pi, pd, pu, vu, p, photoPwd, d)
+
+                        if (photoPwd == null || "".equals(photoPwd) || "null".equals(photoPwd)) {
+                            change()
+                        } else {
+                            showPopup(photoPwd.toString())
+                        }
+                    }
+                })
+            }
+            else{
+                toast("코드는 총 9자리입니다. 다시 인식해주세요.")
+            }
         }
     }
 
@@ -194,7 +195,7 @@ class OcrActivity : AppCompatActivity() {
     }
     fun retry(view: View) {
         tv.setText("~ 인식 중 ~")
-        sleep(3000)
+        sleep(2000)
     }
 
     fun String.isNumber(): Boolean {

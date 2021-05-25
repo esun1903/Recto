@@ -48,7 +48,7 @@ public class ProfileFragmentGiftDetail2 extends Fragment {
     MainActivity mainActivity;
     ImageView giftImageView;
     ImageView info_dialog;
-    Button gift_photo_card_list_btn;
+    ImageView gift_photo_card_list_btn;
     Button delete_button;
     private View view;
     private Context mContext;

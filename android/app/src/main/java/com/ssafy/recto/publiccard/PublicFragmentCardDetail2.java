@@ -48,7 +48,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
     MainActivity mainActivity;
     ImageView cardImageView;
     ImageView info_dialog;
-    Button free_photo_card_list_btn;
+    ImageView free_photo_card_list_btn;
     TextView tv_phrases;
     TextView card_id;
     Button download_button;
