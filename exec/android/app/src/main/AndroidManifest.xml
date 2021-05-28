@@ -20,8 +20,8 @@
         android:roundIcon="@mipmap/ic_recto"
         android:supportsRtl="true"
         android:name=".config.MyApplication"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:requestLegacyExternalStorage="true"
         android:networkSecurityConfig="@xml/network_security_config">
         <!-- "AR Required" app, requires "Google Play Services for AR" (ARCore)
         to be installed, as the app does not include any non-AR features. -->

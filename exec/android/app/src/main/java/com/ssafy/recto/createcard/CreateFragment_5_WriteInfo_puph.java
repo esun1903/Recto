@@ -80,10 +80,10 @@ public class CreateFragment_5_WriteInfo_puph extends Fragment {
             @Override
             public void onClick(View v) {
                 if (String.valueOf(et_text.getText()).equals("") || String.valueOf(tv_date.getText()).equals("")) {
-                    Toast.makeText(getActivity(), "빠진 항목이 없는지 다시 한번 확인해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "빠진 항목이 없는지 다시 한번 확인해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else if (String.valueOf(et_text.getText()).length() > 13) {
-                    Toast.makeText(getActivity(), "문구는 띄어쓰기 포함 13자 이내로 작성해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "문구는 띄어쓰기 포함 13자 이내로 작성해주세요.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     myApp.setCardPhrases(String.valueOf(et_text.getText()));

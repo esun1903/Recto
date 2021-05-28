@@ -26,17 +26,17 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <!-- list button -->
-                <Button
+                <ImageView
                     android:id="@+id/free_photo_card_list_btn"
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:fontFamily="@font/eulyoo1945_semibold"
-                    android:text="@string/list"
                     android:textColor="@color/white"
+                    android:fontFamily="@font/eulyoo1945_semibold"
                     app:backgroundTint="@color/brown"
                     app:cornerRadius="10dp"
-                    tools:ignore="RelativeOverlap" />
+                    tools:ignore="RelativeOverlap"
+                    android:src="@drawable/back"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

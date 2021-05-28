@@ -224,7 +224,7 @@ a:focus {
   grid-template-areas:
     "... title title title"
     "author ... desc desc"
-    "author ... link link";
+    "author ... link link2";
 }
 
 .content--related {
@@ -297,6 +297,20 @@ a:focus {
   padding: 0 1em 0.15em;
   color: #594939;
   vertical-align: middle;
+  margin-right: 5%;
+  border-radius: 10px;
+}
+
+.content__link2 {
+  pointer-events: auto;
+  grid-area: link2;
+  align-self: end;
+  justify-self: start;
+  z-index: 10;
+  padding: 0;
+  background-color: transparent;
+  vertical-align: middle;
+  margin-left: 5%;
 }
 
 .content__info {
@@ -309,7 +323,8 @@ a:focus {
 }
 
 .content__related-img {
-  max-width: 50%;
+  width: 85%;
+  max-width: 900px;
   opacity: 0.8;
   transition: opacity 0.3s;
 }
@@ -532,9 +547,11 @@ a:focus {
     transform: scale3d(0.6, 0.6, 1);
   }
   .content__author,
-  .content__desc,
-  .content__link {
+  .content__desc {
     font-size: 1.35em;
+  }
+  .content__link {
+    font-size: 1em;
   }
 }
 
