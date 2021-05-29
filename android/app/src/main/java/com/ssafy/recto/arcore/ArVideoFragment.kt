@@ -105,7 +105,7 @@ open class ArVideoFragment : ArFragment() {
                 var video = videoUrl.substring(videoUrl.lastIndexOf('/') + 1, videoUrl.length);
 
                 config.augmentedImageDatabase = AugmentedImageDatabase(session).also { db ->
-                    db.addImage(video, bitmap)
+                    db.addImage(video, bitmap, 0.045F) //widthInMeters:0.045F
                 } //안드로이드 비트맵에서 증강 이미지 데이터베이스에 알 수 없는 물리적 크기의 단일 명명된 이미지를 추가한다.
                 return true
             } catch (e: IllegalArgumentException) {
