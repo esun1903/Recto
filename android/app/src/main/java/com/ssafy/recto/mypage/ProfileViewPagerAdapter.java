@@ -36,9 +36,9 @@ public class ProfileViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return "you made it!";
+                return "당신의 Moment";
             case 1:
-                return "someone gave you!";
+                return "선물받은 Moment";
             default:
                 return null;
         }
