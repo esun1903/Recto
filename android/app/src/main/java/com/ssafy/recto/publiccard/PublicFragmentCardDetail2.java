@@ -60,7 +60,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
     ImageView free_photo_card_list_btn;
     TextView tv_phrases;
     TextView card_id;
-    Button download_button;
+    Button download_button, cart_button;
     private View view;
     private Context mContext;
     int seq;
@@ -104,6 +104,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
         free_photo_card_list_btn = view.findViewById(R.id.free_photo_card_list_btn);
         info_dialog = view.findViewById(R.id.info_dialog);
         download_button = view.findViewById(R.id.download_button);
+        cart_button = view.findViewById(R.id.cart_button);
 
         // 목록보기 버튼
         free_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
@@ -188,6 +189,14 @@ public class PublicFragmentCardDetail2 extends Fragment {
                 }
                 capture.destroyDrawingCache();
 
+            }
+        });
+
+        // ADD TO CART 버튼 눌렀을 때
+        cart_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "포토카드가 장바구니에 담겼습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
