@@ -27,6 +27,7 @@
                 android:layout_centerVertical="true" />
 
             <ImageView
+                android:id="@+id/cart_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -35,20 +36,12 @@
                 android:layout_marginRight="45dp"/>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/cart_count"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
                 android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/round"
+                app:srcCompat="@drawable/empty"
                 android:layout_marginRight="40dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="43dp"
-                android:text="3"
-                android:textSize="8dp"
-                android:textColor="@color/white"/>
 
             <ImageView
                 android:id="@+id/iv_info"

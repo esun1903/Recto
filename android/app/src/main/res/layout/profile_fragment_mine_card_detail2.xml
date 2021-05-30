@@ -184,7 +184,7 @@
                     android:text="ADD TO CART"
                     android:textColor="@color/white"
                     android:fontFamily="@font/eulyoo1945_semibold"
-                    app:backgroundTint="@color/red"
+                    app:backgroundTint="@color/brown"
                     app:cornerRadius="10dp" />
 
             </LinearLayout>
