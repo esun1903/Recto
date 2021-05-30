@@ -80,16 +80,6 @@ public class PhotoController {
                                               @RequestParam(value = "photo_date", required = false) String photo_date,
                                               @RequestParam("photo_pwd") String photo_pwd) throws Exception {
 
-
-
-
-//        File source = new File (video);
-//        FileOutputStream fileOutputStream = new FileOutputStream (source);
-//        byte [] bytes = video.getInputStream().readAllBytes();
-//        fileOutputStream.write (bytes);
-//        fileOutputStream.flush ();
-//        fileOutputStream.close ();
-
         String videoUrl = "";
         String photoUrl = "";
         String year = photo_date.substring(1, 5);
@@ -97,8 +87,9 @@ public class PhotoController {
         String day = photo_date.substring(7, 9);
         String sum = year + "-" + month + "-" + day;
         System.out.println(sum);
-        LocalDate date = LocalDate.parse(sum, DateTimeFormatter.ISO_DATE);
 
+        LocalDate date = LocalDate.parse(sum, DateTimeFormatter.ISO_DATE);
+        System.out.println(date);
         try {
             videoUrl = fileUploadService.upload(video);
             photoUrl = fileUploadService.upload(photo);

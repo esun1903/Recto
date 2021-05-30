@@ -160,7 +160,7 @@ public class CreateFragment_6_Success_onlyphoto extends Fragment {
 
         RequestBody photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part photoPart = MultipartBody.Part.createFormData("photo", file.getName(), photoBody);
-
+        
         Call<String> call = api.requestCreateCard(userUid, cardDesign, videoPart, photoPart, cardPhrases, cardDateNum, cardPassword);
         call.enqueue(new Callback<String>() {
             @Override
