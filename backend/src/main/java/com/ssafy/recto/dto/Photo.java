@@ -133,7 +133,7 @@ public class Photo {
         this.design = design;
     }
 
-    public Photo(String user_uid,   String video_url, String photo_url,String phrase, String photo_pwd, int design) {
+    public Photo(String user_uid,   String video_url, String photo_date, String photo_url,String phrase, String photo_pwd, int design) {
 
         this.user_uid = user_uid;
         this.photo_url = photo_url;
@@ -141,6 +141,7 @@ public class Photo {
         this.phrase = phrase;
         this.photo_pwd = photo_pwd;
         this.design = design;
+        this.photo_date = photo_date;
     }
 
     public Photo() {

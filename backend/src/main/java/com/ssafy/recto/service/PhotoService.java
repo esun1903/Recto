@@ -36,11 +36,11 @@ public class PhotoService {
 		int count = sqlSession.getMapper(PhotoMapper.class).allPhoto(str);
 
 		if(count<9){
-			photo.photo_id = str + "00"+Integer.toString(count+1);
+			photo.photo_id = str + "00"+ Integer.toString(count+1);
 		}else if(9<=count&& count<98){
-			photo.photo_id = str + "0"+Integer.toString(count+1);
+			photo.photo_id = str + "0"+ Integer.toString(count+1);
 		}else if(99<=count&& count<999){
-			photo.photo_id = str +Integer.toString(count+1);
+			photo.photo_id = str + Integer.toString(count+1);
 		}
 
 		return sqlSession.getMapper(PhotoMapper.class).insertPhoto(photo,date) == 1;
