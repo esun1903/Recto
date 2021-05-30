@@ -82,12 +82,14 @@ public class PhotoController {
 
         String videoUrl = "";
         String photoUrl = "";
+        System.out.println(photo_date);
         String year = photo_date.substring(1, 5);
         String month = photo_date.substring(5, 7);
         String day = photo_date.substring(7, 9);
         String sum = year + "-" + month + "-" + day;
         System.out.println(sum);
 
+        String str2 = year+month+year;
         LocalDate date = LocalDate.parse(sum, DateTimeFormatter.ISO_DATE);
         System.out.println(date);
         try {
@@ -101,7 +103,7 @@ public class PhotoController {
         phrase = phrase.substring(1,phrase.length()-1);
         photo_pwd = photo_pwd.substring(1,photo_pwd.length()-1);
 
-        Photo photo2 = new Photo(user_uid, videoUrl, photoUrl, phrase, photo_pwd, design);
+        Photo photo2 = new Photo(user_uid, videoUrl,photo_date, photoUrl, phrase, photo_pwd, design);
         if (photoService.insertPhoto(photo2, date)) {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
