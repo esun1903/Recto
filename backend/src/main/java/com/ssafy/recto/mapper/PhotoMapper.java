@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.*;
 public interface PhotoMapper {
 
     @Insert("Insert INTO photo (  user_uid, photo_id, photo_date, photo_url, video_url, phrase, photo_pwd, design) \n"
-            + "VALUES ( #{photo.user_uid},#{photo.photo_id},#{date},#{photo.photo_url},#{photo.video_url},#{photo.phrase}," +
+            + "VALUES ( #{photo.user_uid},#{photo.photo_id}, now() , #{photo.photo_url}, #{photo.video_url},#{photo.phrase}," +
             " #{photo.photo_pwd},#{photo.design})")
     @Options(useGeneratedKeys = true)
     public int insertPhoto(@Param("photo") Photo photo, @Param("date") LocalDate date);
