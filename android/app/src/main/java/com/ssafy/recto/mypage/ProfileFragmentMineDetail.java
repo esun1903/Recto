@@ -64,6 +64,7 @@ public class ProfileFragmentMineDetail extends Fragment {
     Button download_button;
     ImageView delete_button;
     Button cart_button;
+    ImageView cart_count;
     private View view;
     private Context mContext;
     int seq;
@@ -110,6 +111,7 @@ public class ProfileFragmentMineDetail extends Fragment {
         delete_button = view.findViewById(R.id.delete_button);
         cart_button = view.findViewById(R.id.cart_button);
         lock = view.findViewById(R.id.lock);
+        cart_count = mainActivity.findViewById(R.id.cart_count);
 
         // 목록보기 버튼
         mine_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
@@ -244,6 +246,7 @@ public class ProfileFragmentMineDetail extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "포토카드가 장바구니에 담겼습니다.", Toast.LENGTH_SHORT).show();
+                cart_count.setImageResource(R.drawable.round);
             }
         });
 

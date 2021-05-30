@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,8 +30,10 @@ import com.ssafy.recto.createcard.CreateFragment_5_WriteInfo_puon;
 import com.ssafy.recto.createcard.CreateFragment_5_WriteInfo_puph;
 import com.ssafy.recto.createcard.CreateFragment_6_Success_onlyphoto;
 import com.ssafy.recto.createcard.CreateFragment_6_Success_phrases;
+import com.ssafy.recto.home.CartFragment;
 import com.ssafy.recto.home.HomeFragment;
 import com.ssafy.recto.home.InfoFragment;
+import com.ssafy.recto.home.OrderSuccessFragment;
 import com.ssafy.recto.mypage.ProfileFragment;
 import com.ssafy.recto.mypage.ProfileFragmentGift;
 import com.ssafy.recto.mypage.ProfileFragmentGiftDetail;
@@ -75,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
     private ProfileFragmentGiftDetail2 profileFragmentGiftDetail2;
     private InfoFragment infoFragment;
     private FirebaseAuth mFirebaseAuth;
+    private CartFragment cartFragment;
+    private OrderSuccessFragment orderSuccessFragment;
+    private ImageView cart_btn;
+//    private Button cart_button;
+//    private ImageView cart_count;
     MyApplication myApplication;
 
     @Override
@@ -110,6 +118,23 @@ public class MainActivity extends AppCompatActivity {
                 setFragment("home");
             }
         });
+
+        cart_btn = findViewById(R.id.cart_btn);
+        cart_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment("cart");
+            }
+        });
+
+//        cart_button = findViewById(R.id.cart_button);
+//        cart_count = findViewById(R.id.cart_count);
+//        cart_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                cart_count.setImageResource(R.drawable.round);
+//            }
+//        });
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -178,6 +203,8 @@ public class MainActivity extends AppCompatActivity {
         profileFragmentGiftDetail = new ProfileFragmentGiftDetail();
         profileFragmentGiftDetail2 = new ProfileFragmentGiftDetail2();
         infoFragment = new InfoFragment();
+        cartFragment = new CartFragment();
+        orderSuccessFragment = new OrderSuccessFragment();
 
         setFragment("home");
     }
@@ -286,6 +313,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "information":
                 ft.replace(R.id.main_frame, infoFragment);
+                ft.commit();
+                break;
+            case "cart":
+                ft.replace(R.id.main_frame, cartFragment);
+                ft.commit();
+                break;
+            case "order":
+                ft.replace(R.id.main_frame, orderSuccessFragment);
                 ft.commit();
                 break;
         }

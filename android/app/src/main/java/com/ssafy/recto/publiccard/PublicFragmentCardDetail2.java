@@ -61,6 +61,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
     TextView tv_phrases;
     TextView card_id;
     Button download_button, cart_button;
+    ImageView cart_count;
     private View view;
     private Context mContext;
     int seq;
@@ -105,6 +106,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
         info_dialog = view.findViewById(R.id.info_dialog);
         download_button = view.findViewById(R.id.download_button);
         cart_button = view.findViewById(R.id.cart_button);
+        cart_count = mainActivity.findViewById(R.id.cart_count);
 
         // 목록보기 버튼
         free_photo_card_list_btn.setOnClickListener(new View.OnClickListener() {
@@ -197,6 +199,7 @@ public class PublicFragmentCardDetail2 extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "포토카드가 장바구니에 담겼습니다.", Toast.LENGTH_SHORT).show();
+                cart_count.setImageResource(R.drawable.round);
             }
         });
 
