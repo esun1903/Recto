@@ -66,17 +66,15 @@
 
                 </LinearLayout>
 
-                <!-- information (dialog) -->
                 <ImageView
-                    android:id="@+id/info_dialog"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/delete_button"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/question"
-                    android:contentDescription="@string/question" />
+                    android:src="@drawable/trash" />
 
             </RelativeLayout>
 
@@ -178,12 +176,12 @@
                     app:cornerRadius="10dp" />
 
                 <Button
-                    android:id="@+id/delete_button"
+                    android:id="@+id/cart_button"
                     android:layout_width="120dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="25dp"
-                    android:text="@string/delete"
+                    android:text="ADD TO CART"
                     android:textColor="@color/white"
                     android:fontFamily="@font/eulyoo1945_semibold"
                     app:backgroundTint="@color/red"

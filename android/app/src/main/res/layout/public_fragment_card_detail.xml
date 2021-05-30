@@ -125,17 +125,40 @@
             </FrameLayout>
 
 
-            <Button
-                android:id="@+id/download_button"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:fontFamily="@font/eulyoo1945_semibold"
-                android:text="@string/download"
-                android:textColor="@color/white"
-                app:backgroundTint="@color/brown"
-                app:cornerRadius="10dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/download_button"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="25dp"
+                    android:text="@string/download"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/eulyoo1945_semibold"
+                    app:backgroundTint="@color/brown"
+                    app:cornerRadius="10dp" />
+
+                <Button
+                    android:id="@+id/cart_button"
+                    android:layout_width="120dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="25dp"
+                    android:text="ADD TO CART"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/eulyoo1945_semibold"
+                    app:backgroundTint="@color/red"
+                    app:cornerRadius="10dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -62,7 +62,8 @@ public class ProfileFragmentMineDetail2 extends Fragment {
     TextView card_id;
     TextView card_date;
     Button download_button;
-    Button delete_button;
+    ImageView delete_button;
+    Button cart_button;
     private View view;
     private Context mContext;
     int seq;
@@ -108,6 +109,7 @@ public class ProfileFragmentMineDetail2 extends Fragment {
         info_dialog = view.findViewById(R.id.info_dialog);
         download_button = view.findViewById(R.id.download_button);
         delete_button = view.findViewById(R.id.delete_button);
+        cart_button = view.findViewById(R.id.cart_button);
         lock = view.findViewById(R.id.lock);
 
         // 목록보기 버튼
@@ -115,18 +117,6 @@ public class ProfileFragmentMineDetail2 extends Fragment {
             @Override
             public void onClick(View v) {
                 mainActivity.setFragment("profile");
-            }
-        });
-
-        // 다이얼로그
-        info_dialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder ad = new AlertDialog.Builder(getContext());
-                ad.setIcon(R.drawable.question);
-                ad.setTitle("Information");
-                ad.setMessage("다운로드를 누르면 카드를 저장할 수 있습니다.");
-                ad.show();
             }
         });
 
@@ -247,6 +237,14 @@ public class ProfileFragmentMineDetail2 extends Fragment {
 
                 Button no_btn = alertAd.getButton(DialogInterface.BUTTON_NEGATIVE);
                 no_btn.setTextColor(Color.GRAY);
+            }
+        });
+
+        // ADD TO CART 버튼 눌렀을 때
+        cart_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "포토카드가 장바구니에 담겼습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
