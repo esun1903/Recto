@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/eulyoo1945_semibold"
+            android:gravity="center"
+            android:text="황보렉토님의 장바구니"
+            android:textSize="20dp"
+            android:textColor="@color/brown"
+            android:layout_alignParentTop="true"
+            android:layout_marginVertical="40dp"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginVertical="100dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/cart_image"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/order_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="20dp"
+            android:fontFamily="@font/eulyoo1945_semibold"
+            android:text="총 1장 500원 제작 신청하기"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:layout_alignParentBottom="true"
+            app:backgroundTint="@color/brown"
+            app:cornerRadius="10dp" />
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
