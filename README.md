@@ -1,4 +1,3 @@
-
 # 🤳 RECTO (RECord your moment in phoTO) 
 ![RECTO](https://i.imgur.com/zWTrjIc.png)
 
@@ -81,7 +80,9 @@
 ### 🎞UCC
 ---
 [YouTube - RECTO UCC 영상 보러가기](https://youtu.be/VdVEbeXGlbk)
+<br>
 [YouTube - RECTO 시연 영상 보러가기](https://youtu.be/7mLLfbH1-f4)
+<br>
 <br>
 
 ### 🌱와이어프레임
