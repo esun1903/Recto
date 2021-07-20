@@ -1,4 +1,4 @@
-# 🤳 RECTO (RECord your moment in phoTO) 
+## 🤳 RECTO (RECord your moment in phoTO) 
 ![RECTO](https://i.imgur.com/zWTrjIc.png)
 
 ### ❓Recto 서비스란?
