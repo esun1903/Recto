@@ -27,6 +27,13 @@
 |신가영 | FE, 🔧 안드로이드 앱 기획 및 개발, Jira 담당자, UCC |[@rkdud5253](https://github.com/rkdud5253)|
 |최다애 | BE, AR, 🐻 안드로이드 앱 기획 및 개발 |  [@DAAECHOI](https://github.com/DAAECHOI)   |
 
+### 🎞UCC
+---
+[YouTube - RECTO UCC 영상 보러가기](https://youtu.be/VdVEbeXGlbk)
+<br>
+[YouTube - RECTO 시연 영상 보러가기](https://youtu.be/7mLLfbH1-f4)
+<br>
+<br>
 
 
 ## 📑 목차
@@ -78,15 +85,6 @@
 ![RECTO3](https://i.imgur.com/DZLNWCO.png)
 
 <br>
-
-### 🎞UCC
----
-[YouTube - RECTO UCC 영상 보러가기](https://youtu.be/VdVEbeXGlbk)
-<br>
-[YouTube - RECTO 시연 영상 보러가기](https://youtu.be/7mLLfbH1-f4)
-<br>
-<br>
-
 ### 🌱와이어프레임
 ---
 ![와이어프레임](https://i.imgur.com/GyW0c85.png)
