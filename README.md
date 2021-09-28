@@ -85,10 +85,12 @@
 ![RECTO3](https://i.imgur.com/DZLNWCO.png)
 
 <br>
-### 🌱와이어프레임
----
+
+###  🌱와이어프레임
 ![와이어프레임](https://i.imgur.com/GyW0c85.png)
+<br>
 [Figma - RECTO 와이어프레임 보러가기](https://www.figma.com/file/UgeCtS5c4S3Cr1uAkOTlIZ/RECTO?node-id=0%3A1)
+
 
 <br>
 
